@@ -1,0 +1,95 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-sphinx-update-pot
+
+on:
+  schedule:
+    - cron: '0 8 1,15 * *'  # Runs at 08:00 on day 1 and 15 of the month in UTC zone
+  workflow_dispatch:
+    inputs:
+      TYPE:
+        description: 'Set TYPE input'
+        required: true
+        type: choice
+        default: 'matrix'
+        options:
+          - 'single'
+          - 'matrix'
+      VERSION:
+        description: 'Set VERSION input (for single type)'
+        required: true
+        type: string
+        default: 'git-master'
+      LANGUAGE:
+        description: 'Set LANGUAGE input (for single type)'
+        required: true
+        type: string
+        default: 'all'
+      UPDATE_MODE:
+        description: 'Set UPDATE_MODE input'
+        required: true
+        type: choice
+        default: 'COMPARE'
+        options:
+          - 'COMPARE'
+          - 'ALWAYS'
+          - 'NEVER'
+
+jobs:
+  get-matrix:
+    if: (github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix') ||
+        (github.event_name == 'schedule')
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.rvm.outputs.VERSION }}
+    steps:
+      - name: Checkout to '${{ github.ref }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Read VERSION from matrix.json
+        id: rvm
+        run: |
+          FILTER=".include | map(.VERSION)"
+          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION:"
+          echo "$VERSION" | jq "."
+
+  matrix:
+    needs: get-matrix
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
+        ( github.event_name == 'schedule' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
+      cancel-in-progress: true
+    strategy:
+      matrix: 
+        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        LANGUAGE: [ 'all' ]
+      fail-fast: false
+    uses: ./.github/workflows/use-sphinx-update-pot.yml
+    with:
+      VERSION: ${{ matrix.VERSION }}
+      LANGUAGE: ${{ matrix.LANGUAGE }}
+      UPDATE_MODE: ${{ inputs.UPDATE_MODE || 'COMPARE' }}
+      CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
+      ENABLE_JOB: true
+      CREATE_PR: true
+
+  single:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/use-sphinx-update-pot.yml
+    with:
+      VERSION: ${{ inputs.VERSION }}
+      LANGUAGE: ${{ inputs.LANGUAGE }}
+      UPDATE_MODE: ${{ inputs.UPDATE_MODE }}
+      CALLER_JOB: 'single'
+      ENABLE_JOB: true
+      CREATE_PR: true

@@ -1,0 +1,84 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+cmake_minimum_required(VERSION 3.23)
+get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
+set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
+set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
+message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
+
+
+set(CMAKE_MODULE_PATH 
+    "${PROJ_CMAKE_MODULES_DIR}"
+    "${PROJ_CMAKE_MODULES_DIR}/common")
+include(JsonUtils)
+include(LogUtils)
+
+
+if(CMAKE_HOST_WIN32)
+    execute_process(
+        COMMAND net session 
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+        # It's adiministrator privileges
+    else()
+        find_program(SUDO_COMMAND gsudo)
+        if(NOT SUDO_COMMAND)
+            message(FATAL_ERROR "Failed to find gsudo.")
+        endif()
+    endif()
+else()
+    set(SUDO_COMMAND "")
+endif()
+
+
+file(READ "${LANGUAGES_JSON_PATH}" LANGUAGES_JSON_CNT)
+if(NOT LANGUAGE STREQUAL "all")
+    set(LANGUAGES_LIST "${LANGUAGE}")
+endif()
+remove_cmake_message_indent()
+message("")
+foreach(_LANGUAGE ${LANGUAGES_LIST})
+    get_json_value_by_dot_notation(
+        IN_JSON_OBJECT    "${LANGUAGES_JSON_CNT}"
+        IN_DOT_NOTATION   ".${_LANGUAGE}.readthedocs"
+        OUT_JSON_VALUE    _LANGUAGE_READTHEDOCS)
+    if(NOT "${_LANGUAGE}" STREQUAL "${_LANGUAGE_READTHEDOCS}")
+        message("Creating symlink '${_LANGUAGE_READTHEDOCS}' for directory '${_LANGUAGE}'...")
+        if (NOT EXISTS "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
+            message(FATAL_ERROR "'${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}' doesn't exist.")
+        endif()
+        execute_process(
+            COMMAND ${SUDO_COMMAND}
+                    ${CMAKE_COMMAND} -E create_symlink
+                    ${_LANGUAGE}                # original directory
+                    ${_LANGUAGE_READTHEDOCS}    # symbolic link
+            WORKING_DIRECTORY ${PROJ_L10N_VERSION_LOCALE_DIR}
+            RESULT_VARIABLE RES_VAR
+            OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+        if(RES_VAR EQUAL 0)
+        else()
+            message("")
+            message("---------- RES ----------")
+            message("")
+            message("${RES_VAR}")
+            message("")
+            message("---------- OUT ----------")
+            message("")
+            message("${OUT_VAR}")
+            message("")
+            message("---------- ERR ----------")
+            message("")
+            message("${ERR_VAR}")
+            message("")
+            message("-------------------------")
+            message("")
+            message(FATAL_ERROR "Fatal error occurred.")
+        endif()
+    endif()
+endforeach()
+message("")
+restore_cmake_message_indent()

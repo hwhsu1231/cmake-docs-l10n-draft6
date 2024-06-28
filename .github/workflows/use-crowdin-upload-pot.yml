@@ -1,0 +1,124 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: use-crowdin-upload-pot
+
+on:
+  workflow_call:
+    inputs:
+      CHECKOUT:
+        type: string
+        required: true
+      VERSION:
+        type: string
+        required: true
+      ENABLE_JOB:
+        type: boolean
+        required: true
+
+jobs:
+  crowdin-upload-pot:
+    #  Don't run on forked repos.
+    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Contexts, Inputs, and Secrets
+        shell: bash
+        run: |
+          echo "[Contexts]"
+          echo "github.job = ${{ github.job }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event.action = ${{ github.event.action }}"
+          echo "github.event.number = ${{ github.event.number }}"
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "[Inputs]"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.VERSION = ${{ inputs.VERSION }}"
+          echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "[Secrets]"
+          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
+          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
+
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          submodules: true
+
+      - name: Set up Environment Variables
+        shell: bash
+        run: |
+          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Check whether '${{ inputs.VERSION }}' version should be uploaded to Crowdin
+        shell: bash
+        run: |
+          VERSION="${{ inputs.VERSION }}"
+          FILTER=".include | map(select(.COMPENDIUM_VERSION == null)) | .[].VERSION"
+          OUTPUT=$(jq -r "$FILTER" .github/workflows/matrix.json)
+          readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
+          VERSION_FOUND=false
+          for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
+            if [ "$VERSION" == "$CROWDIN_BRANCH" ]; then
+              VERSION_FOUND=true
+              break
+            fi
+          done
+          echo "VERSION_FOUND: $VERSION_FOUND"
+          if [[ $VERSION_FOUND == "true" ]]; then
+            echo "'${{ inputs.VERSION }}' version should be uploaded to Crowdin."
+          else
+            echo "'${{ inputs.VERSION }}' version should NOT be uploaded to Crowdin."
+            exit 1
+          fi
+
+      - name: Get Other Fields from matrix.json
+        id: gofm
+        shell: bash
+        run: |
+          get_keys() {
+            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+          }
+          declare -A VERSION_FILTERS
+          for KEY in $(get_keys); do
+            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+          done
+          for KEY in "${!VERSION_FILTERS[@]}"; do
+            FILTER="${VERSION_FILTERS[$KEY]}"
+            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            if [ "$VALUE" = "null" ]; then VALUE=""; fi
+            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}: $VALUE"
+          done
+
+      - name: Install CMake 3.23
+        uses: jwlawson/actions-setup-cmake@v2.0
+        with:
+          cmake-version: '3.23'
+
+      - name: Install Gettext
+        shell: bash
+        run: |
+          sudo apt-get install gettext && xgettext --version
+
+      - name: Install Crowdin CLI
+        shell: bash
+        run: |
+          npm install -g @crowdin/cli && crowdin --version
+
+      - name: Configure with 'all' preset for '${{ inputs.VERSION }}' version
+        shell: bash
+        run: |
+          cmake \
+            --preset all \
+            -D VERSION=${{ inputs.VERSION }} \
+            -D AUTO_DEPEND=OFF
+
+      - name: Build with 'crowdin_upload_pot' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/all \
+            --target crowdin_upload_pot

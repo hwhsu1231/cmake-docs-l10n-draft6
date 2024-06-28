@@ -1,0 +1,89 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-gettext-compend-po
+
+on:
+  schedule:
+    - cron: '0 4 1,15 * *'  # Runs at 04:00 on day 1 and 15 of the month in UTC zone
+  workflow_dispatch:
+    inputs:
+      TYPE:
+        description: 'Set TYPE input'
+        required: true
+        type: choice
+        default: 'matrix'
+        options:
+          - 'matrix'
+          - 'single'
+      VERSION:
+        description: 'Set VERSION input (for single type)'
+        required: true
+        type: string
+        default: 'v3.0'
+      LANGUAGE:
+        description: 'Set LANGUAGE input (for single type)'
+        required: true
+        type: string
+        default: 'all'
+
+jobs:
+  get-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.rvm.outputs.VERSION }}
+      LANGUAGE: ${{ steps.rll.outputs.LANGUAGE }}
+    steps:
+      - name: Checkout to '${{ github.ref }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Read VERSION from matrix.json
+        id: rvm
+        run: |
+          FILTER=".include | map(select(.COMPENDIUM_VERSION != null) | .VERSION)"
+          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION:"
+          echo "$VERSION" | jq "."
+      - name: Read LANGUAGE from languages.json
+        id: rll
+        run: |
+          LANGUAGE=$(jq -c "keys" languages.json)
+          echo "LANGUAGE=$LANGUAGE" >> $GITHUB_OUTPUT
+          echo "LANGUAGE:"
+          echo "$LANGUAGE" | jq "."
+
+  matrix:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
+    needs: get-matrix
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        LANGUAGE: [ 'all' ]
+      fail-fast: false
+    uses: ./.github/workflows/use-gettext-compend-po.yml
+    with:
+      CHECKOUT: ${{ github.ref }}
+      VERSION: ${{ matrix.VERSION }}
+      LANGUAGE: ${{ matrix.LANGUAGE }}
+      CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
+      ENABLE_JOB: true
+
+  single:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.VERSION }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/use-gettext-compend-po.yml
+    with:
+      CHECKOUT: ${{ github.ref }}
+      VERSION: ${{ inputs.VERSION }}
+      LANGUAGE: ${{ inputs.LANGUAGE }}
+      CALLER_JOB: 'single'
+      ENABLE_JOB: true

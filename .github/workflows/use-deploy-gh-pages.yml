@@ -1,0 +1,167 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: use-deploy-gh-pages
+
+on:
+  workflow_call:
+    inputs:
+      CHECKOUT:
+        type: string
+        required: true
+      VERSION:
+        type: string
+        required: true
+      LANGUAGE:
+        type: string
+        required: true
+      UPDATE_MODE:
+        type: string
+        required: true
+      CALLER_JOB:
+        type: string
+        required: true
+      ENABLE_JOB:
+        type: boolean
+        required: true
+      DEPLOY_HTML:
+        type: boolean
+        required: true
+
+jobs:
+  deploy-gh-pages:
+    #  Don't run on forked repos.
+    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Contexts, Inputs, and Secrets
+        shell: bash
+        run: |
+          echo "[Contexts]"
+          echo "github.job = ${{ github.job }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event.action = ${{ github.event.action }}"
+          echo "github.event.number = ${{ github.event.number }}"
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "[Inputs]"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.VERSION = ${{ inputs.VERSION }}"
+          echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
+          echo "inputs.UPDATE_MODE = ${{ inputs.UPDATE_MODE }}"
+          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
+          echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inputs.DEPLOY_HTML = ${{ inputs.DEPLOY_HTML }}"
+          echo "[Secrets]"
+          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
+          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+
+      - name: Get the GitHub App's Token
+        id: ggat
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          token: ${{ steps.ggat.outputs.token }}
+          submodules: true
+
+      - name: Get Other Fields from matrix.json
+        id: gofm
+        shell: bash
+        run: |
+          get_keys() {
+            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+          }
+          declare -A VERSION_FILTERS
+          for KEY in $(get_keys); do
+            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+          done
+          for KEY in "${!VERSION_FILTERS[@]}"; do
+            FILTER="${VERSION_FILTERS[$KEY]}"
+            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            if [ "$VALUE" = "null" ]; then VALUE=""; fi
+            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}: $VALUE"
+          done
+
+      - name: Install CMake 3.23
+        uses: jwlawson/actions-setup-cmake@v2.0
+        with:
+          cmake-version: '3.23'
+
+      - name: Install Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.7'
+
+      - name: Install Gettext
+        shell: bash
+        run: |
+          sudo apt-get install gettext && xgettext --version
+
+      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+        shell: bash
+        run: |
+          cmake \
+            --preset ${{ inputs.LANGUAGE }} \
+            -D VERSION=${{ inputs.VERSION }} \
+            -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
+            -D AUTO_DEPEND=OFF
+
+      - name: Build with 'prepare_git_repo' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target prepare_git_repo
+
+      - name: Build with 'conda_requirements' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target conda_requirements
+
+      - name: Build with 'sphinx_update_pot' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target sphinx_update_pot
+
+      - name: Build with 'gettext_update_po' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target gettext_update_po
+
+      - name: Build with 'sphinx_build_docs' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target sphinx_build_docs
+
+      - name: Set up mutex for 'gh-pages' branch
+        if: inputs.DEPLOY_HTML
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: mutex/gh-pages
+          repo-token: ${{ steps.ggat.outputs.token }}
+
+      - name: Deploy to 'gh-pages' branch
+        if: inputs.DEPLOY_HTML
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ steps.ggat.outputs.token }}
+          branch: gh-pages
+          folder: ./out/html
+          single-commit: true
+          target-folder: .
+          clean: false

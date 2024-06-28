@@ -1,0 +1,40 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-crowdin-document
+
+on:
+  push:
+    branches: 
+      - 'source'
+    paths:
+      - 'docs/ACKNOWLEDGEMENTS.md'
+      - 'docs/CONTRIBUTING.md'
+      - 'docs/MAINTAINING.md'
+      - 'README.md'
+  schedule:
+    - cron: '0 0 1,15 * *'  # Runs at 00:00 on day 1 and 15 of the month in UTC zone
+  workflow_dispatch:
+    # inputs:
+    #   LANGUAGE:
+    #     description: 'Set LANGUAGE input'
+    #     required: true
+    #     type: string
+    #     default: 'all'
+
+jobs:
+  single:
+    if: ( github.event_name == 'push' ) ||
+        ( github.event_name == 'schedule' ) ||
+        ( github.event_name == 'workflow_dispatch' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/use-crowdin-document.yml
+    with:
+      CHECKOUT: ${{ github.ref }}
+      VERSION: 'repo'
+      LANGUAGE: 'all'
+      CALLER_JOB: 'single'
+      ENABLE_JOB: true

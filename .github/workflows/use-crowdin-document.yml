@@ -1,0 +1,188 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: use-crowdin-document
+
+on:
+  workflow_call:
+    inputs:
+      CHECKOUT:
+        type: string
+        required: true
+      VERSION:
+        type: string
+        required: true
+      LANGUAGE:
+        type: string
+        required: true
+      CALLER_JOB:
+        type: string
+        required: true
+      ENABLE_JOB:
+        type: boolean
+        required: true
+
+jobs:
+  crowdin-document:
+    #  Don't run on forked repos.
+    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Contexts, Inputs, and Secrets
+        shell: bash
+        run: |
+          echo "[Contexts]"
+          echo "github.job = ${{ github.job }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event.action = ${{ github.event.action }}"
+          echo "github.event.number = ${{ github.event.number }}"
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "[Inputs]"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.VERSION = ${{ inputs.VERSION }}"
+          echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
+          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
+          echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "[Secrets]"
+          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
+          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
+
+      - name: Get the GitHub App's Token
+        uses: tibdex/github-app-token@v2
+        id: ggat
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          token: ${{ steps.ggat.outputs.token }}
+          fetch-depth: 0
+
+      - name: Set up Environment Variables
+        shell: bash
+        run: |
+          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Install Crowdin CLI
+        shell: bash
+        run: |
+          npm install -g @crowdin/cli && crowdin --version
+
+      - name: Set LANGUAGE_ARGS variable in GITHUB_OUTPUT
+        id: slago
+        shell: bash
+        run: |
+          if [[ "${{ inputs.LANGUAGE }}" == "all" ]]; then
+            LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
+          else
+            LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
+          fi
+          echo "LANGUAGES: ${LANGUAGES[@]}"
+          LANGUAGE_ARGS=""
+          for LANGUAGE in "${LANGUAGES[@]}"; do
+            if [[ -z $LANGUAGE_ARGS ]]; then
+              LANGUAGE_ARGS="--language $LANGUAGE"
+            else
+              LANGUAGE_ARGS="$LANGUAGE_ARGS --language $LANGUAGE"
+            fi
+          done
+          echo "LANGUAGE_ARGS=$LANGUAGE_ARGS" >> $GITHUB_OUTPUT
+
+      - name: Upload docs to the '${{ inputs.VERSION }}' branch in Crowdin
+        continue-on-error: true
+        shell: bash
+        run: |
+          crowdin upload sources \
+            --branch ${{ inputs.VERSION }} \
+            --no-progress
+
+      #
+      # If the '${{ inputs.VERSION }}' is not 'repo', then it will:
+      # Delete the '${{ inputs.VERSION }}' branch in Crowdin.
+      #
+
+      - name: Delete the '${{ inputs.VERSION }}' branch in Crowdin
+        if: inputs.VERSION != 'repo'
+        shell: bash
+        run: |
+          crowdin branch delete ${{ inputs.VERSION }}
+
+      #
+      # If the '${{ inputs.VERSION }}' is not 'repo', then it will:
+      # 1. Download docs from the '${{ inputs.VERSION }}' branch in Crowdin.
+      # 2. Get the Translated/Proofread Progress.
+      # 3. Get the Current Job's ID.
+      # 4. Commit the Changes.
+      #
+
+      - name: Download docs from the '${{ inputs.VERSION }}' branch in Crowdin
+        if: inputs.VERSION == 'repo'
+        shell: bash
+        run: |
+          crowdin download \
+            ${{ steps.slago.outputs.LANGUAGE_ARGS }} \
+            --branch ${{ inputs.VERSION }} \
+            --export-only-approved \
+            --no-progress \
+            --verbose
+
+      - name: Get the Translated/Proofread Progress
+        id: gtpp
+        if: inputs.VERSION == 'repo'
+        shell: bash
+        run: |
+          CROWDIN_YML_PATH=$(pwd)/crowdin.yml
+          CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
+          PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
+          delimiter="$(openssl rand -hex 8)"
+          echo "PROGRESS_OUTPUT<<$delimiter"  >> $GITHUB_OUTPUT
+          echo "$PROGRESS_OUTPUT"             >> $GITHUB_OUTPUT
+          echo "$delimiter"                   >> $GITHUB_OUTPUT
+          echo "PROGRESS_OUTPUT:"
+          echo "$PROGRESS_OUTPUT"
+
+      - name: Get the Current Job's ID
+        id: gcji
+        if: inputs.VERSION == 'repo'
+        uses: Tiryoh/gha-jobid-action@v1
+        with:
+          github_token: ${{ steps.ggat.outputs.token }}
+          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
+          per_page: 100
+
+      - name: Set up mutex for '${{ github.ref_name }}' branch
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: mutex/${{ github.ref_name }}
+          repo-token: ${{ steps.ggat.outputs.token }}
+
+      - name: Add and Commit Changes
+        id: acc
+        uses: EndBug/add-and-commit@v9
+        with:
+          cwd: '.'
+          add: '.'
+          pull: '--rebase --autostash'
+          author_name: docs-l10n[bot]
+          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
+          message: |
+            tr(repo): Download Document Translations from Crowdin
+
+            ${{ steps.gtpp.outputs.PROGRESS_OUTPUT }}
+
+            Created by GitHub Workflows:
+            - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
+
+      - name: Check Outputs of the Commit
+        if: steps.acc.outputs.committed == 'true'
+        shell: bash
+        run: |
+          echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
+          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"

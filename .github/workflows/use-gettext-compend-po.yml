@@ -1,0 +1,154 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: use-gettext-compend-po
+
+on:
+  workflow_call:
+    inputs:
+      CHECKOUT:
+        type: string
+        required: true
+      VERSION:
+        type: string
+        required: true
+      LANGUAGE:
+        type: string
+        required: true
+      CALLER_JOB:
+        type: string
+        required: true
+      ENABLE_JOB:
+        type: boolean
+        required: true
+
+jobs:
+  gettext-compend-po:
+    #  Don't run on forked repos.
+    if: (inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Contexts, Inputs, and Secrets
+        shell: bash
+        run: |
+          echo "[Contexts]"
+          echo "github.job = ${{ github.job }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event.action = ${{ github.event.action }}"
+          echo "github.event.number = ${{ github.event.number }}"
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "[Inputs]"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.VERSION = ${{ inputs.VERSION }}"
+          echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
+          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
+          echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "[Secrets]"
+          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
+          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+
+      - name: Get the GitHub App's Token
+        uses: tibdex/github-app-token@v2
+        id: ggat
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          token: ${{ steps.ggat.outputs.token }}
+          submodules: true
+          fetch-depth: 0
+
+      - name: Get Other Fields from matrix.json
+        id: gofm
+        shell: bash
+        run: |
+          get_keys() {
+            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+          }
+          declare -A VERSION_FILTERS
+          for KEY in $(get_keys); do
+            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+          done
+          for KEY in "${!VERSION_FILTERS[@]}"; do
+            FILTER="${VERSION_FILTERS[$KEY]}"
+            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            if [ "$VALUE" = "null" ]; then VALUE=""; fi
+            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}: $VALUE"
+          done
+
+      - name: Install CMake 3.23
+        uses: jwlawson/actions-setup-cmake@v2.0
+        with:
+          cmake-version: '3.23'
+
+      - name: Install Gettext
+        shell: bash
+        run: |
+          sudo apt-get install gettext && xgettext --version
+
+      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+        shell: bash
+        run: |
+          cmake \
+            --preset ${{ inputs.LANGUAGE }} \
+            -D VERSION=${{ inputs.VERSION }} \
+            -D COMPENDIUM_VERSION=${{ steps.gofm.outputs.COMPENDIUM_VERSION }} \
+            -D AUTO_DEPEND=OFF
+
+      - name: Build with 'gettext_compend_po' target
+        shell: bash
+        run: |
+          cmake \
+            --build out/build/${{ inputs.LANGUAGE }} \
+            --target gettext_compend_po
+
+      - name: Get the Current Job's ID
+        id: gcji
+        uses: Tiryoh/gha-jobid-action@v1
+        with:
+          github_token: ${{ steps.ggat.outputs.token }}
+          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
+          per_page: 100
+
+      - name: Check Outputs of the Current Job's ID
+        shell: bash
+        run: |
+          echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
+          echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
+
+      - name: Set up mutex for 'l10n' branch
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: mutex/l10n
+          repo-token: ${{ steps.ggat.outputs.token }}
+
+      # https://stackoverflow.com/a/74071223/16265240
+      - name: Add and Commit Changes
+        id: acc
+        uses: EndBug/add-and-commit@v9
+        with:
+          cwd: './l10n'
+          add: './${{ inputs.VERSION }}'
+          pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
+          author_name: docs-l10n[bot]
+          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
+          message: |
+            tr(${{ inputs.VERSION }}): Merge po from Compendium of '${{ steps.gofm.outputs.COMPENDIUM_VERSION }}'
+
+            Created by GitHub Workflows:
+            - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
+
+      - name: Check Outputs of the Commit
+        if: steps.acc.outputs.committed == 'true'
+        shell: bash
+        run: |
+          echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
+          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"

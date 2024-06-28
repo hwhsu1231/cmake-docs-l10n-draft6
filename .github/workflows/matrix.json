@@ -1,0 +1,164 @@
+{
+  "include": [
+    {
+      "VERSION": "git-master",
+      "COMPENDIUM_VERSION": null,
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "latest",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.29",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.28",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.27",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.26",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.25",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.24",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.23",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.22",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.21",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.20",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.19",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.18",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.17",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.16",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.15",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.14",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.13",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.12",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.11",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.10",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.9",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.8",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.7",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.6",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.5",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.4",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.3",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.2",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.1",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    },
+    {
+      "VERSION": "v3.0",
+      "COMPENDIUM_VERSION": "git-master",
+      "PYTHON_EXACT_VERSION": null
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-gettext-update-po
+
+on:
+  # # Triggers the workflow when a pull request modifying any file in the 'l10n' branch.
+  # pull_request:
+  #   types: 
+  #     - 'closed'
+  #   branches: 
+  #     - 'l10n'
+  repository_dispatch:
+    types: 
+      - pr-merged
+  # Allows for the workflow to be manually started through the GitHub UI
+  workflow_dispatch:
+    inputs:
+      TYPE:
+        description: 'Set TYPE input'
+        required: true
+        type: choice
+        default: 'matrix'
+        options:
+          - 'matrix'
+          - 'single'
+      VERSION:
+        description: 'Set VERSION input (for single type)'
+        required: true
+        type: string
+        default: 'git-master'
+      LANGUAGE:
+        description: 'Set LANGUAGE input (for single type)'
+        required: true
+        type: string
+        default: 'all'
+      UPDATE_MODE:
+        description: 'Set UPDATE_MODE input'
+        required: true
+        type: choice
+        default: 'COMPARE'
+        options:
+          - 'COMPARE'
+          - 'ALWAYS'
+          - 'NEVER'
+
+jobs:
+  pr-merged:
+    if: ( github.event_name == 'repository_dispatch' && 
+          github.event.action == 'pr-merged' &&
+          github.event.client_payload.GETTEXT == 'true' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.client_payload.VERSION }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/use-gettext-update-po.yml
+    with:
+      CHECKOUT: 'refs/heads/source'
+      VERSION: ${{ github.event.client_payload.VERSION }}
+      LANGUAGE: 'all'
+      UPDATE_MODE: 'ALWAYS'
+      CALLER_JOB: 'pr-merged'
+      ENABLE_JOB: true
+
+  get-matrix:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.rvm.outputs.VERSION }}
+    steps:
+      - name: Checkout to '${{ github.ref }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Read VERSION from matrix.json
+        id: rvm
+        run: |
+          FILTER=".include | map(.VERSION)"
+          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION:"
+          echo "$VERSION" | jq "."
+
+  matrix:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
+    needs: get-matrix
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
+      cancel-in-progress: true
+    strategy:
+      matrix: 
+        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        LANGUAGE: [ 'all' ]
+      fail-fast: false
+    uses: ./.github/workflows/use-gettext-update-po.yml
+    with:
+      CHECKOUT: ${{ github.ref }}
+      VERSION: ${{ matrix.VERSION }}
+      LANGUAGE: ${{ matrix.LANGUAGE }}
+      UPDATE_MODE: ${{ inputs.UPDATE_MODE || 'COMPARE' }}
+      CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
+      ENABLE_JOB: true
+
+  single:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/use-gettext-update-po.yml
+    with:
+      CHECKOUT: ${{ github.ref }}
+      VERSION: ${{ inputs.VERSION }}
+      LANGUAGE: ${{ inputs.LANGUAGE }}
+      UPDATE_MODE: ${{ inputs.UPDATE_MODE }}
+      CALLER_JOB: 'single'
+      ENABLE_JOB: true
