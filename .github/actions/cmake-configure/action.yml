@@ -134,9 +134,10 @@ runs:
       run: |
         set CMAKE_ARGS=${{ steps.cmake-args.outputs.CMAKE_ARGS }}
 
-        echo "CMake arguments:"
-        for %%a in (%CMAKE_ARGS%) do echo %%a
+        # echo "CMake arguments:"
+        # for %%a in (%CMAKE_ARGS%) do echo %%a
 
+        echo "cmake %CMAKE_ARGS%"
         cmake %CMAKE_ARGS%
 
     - name: Configure the Project (Linux)
@@ -145,10 +146,10 @@ runs:
       run: |
         CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
 
-        echo "CMake arguments:"
-        for arg in "${CMAKE_ARGS[@]}"; do
-          echo "$arg"
-        done
+        # echo "CMake arguments:"
+        # for arg in "${CMAKE_ARGS[@]}"; do
+        #   echo "$arg"
+        # done
 
         echo "cmake ${CMAKE_ARGS[@]}"
         cmake ${CMAKE_ARGS[@]}
