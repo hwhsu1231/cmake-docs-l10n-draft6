@@ -1,0 +1,91 @@
+name: cmake-configure
+
+description: Configure the project with CMake
+
+inputs:
+  source-directory:     # required
+    required: false
+    description: ''
+    default: '[default]'
+  preset-name:          # required
+    required: false
+    description: ''
+    default: '[default]'
+  cache-language:       # required
+    required: false
+    description: ''
+    default: '[default]'
+  cache-version:        # required
+    required: false
+    description: ''
+    default: '[default]'
+  cache-update-mode:    # required
+    required: false
+    description: ''
+    default: '[default]'
+  cache-install-mode:   # required
+    required: false
+    description: ''
+    default: '[default]'
+  cache-auto-depend:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-remove-redundant:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-compend-version:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-exact-version-git:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-exact-version-python:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-exact-version-gettext:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-exact-version-crowdin:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-gettext-wrap-width:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-gettext-additional-targets:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-sphinx-builder:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-sphinx-console-locale:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-sphinx-verbose-level:
+    required: false
+    description: ''
+    default: '[default]'
+  cache-sphinx-job-number:
+    required: false
+    description: ''
+    default: '[default]'
+
+runs:
+  using: composite
+  steps:
+      - name: Print Inputs
+        shell: bash
+        run: |
+          echo << EOF
+          ${{ toJSON(fromJSON(github.event.inputs)) }}
+          EOF

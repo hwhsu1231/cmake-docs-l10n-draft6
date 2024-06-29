@@ -1,0 +1,19 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-crowdin-document
+
+on:
+  push:
+    branches: 
+      - 'source'
+    paths:
+      - '.github/actions/cmake-configure/action.yml'
+  workflow_dispatch:
+
+jobs:
+  single:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure the project with CMake
+        uses: ./.github/actions/cmake-configure
