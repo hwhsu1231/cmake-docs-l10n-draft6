@@ -108,7 +108,7 @@ runs:
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
         # echo "inputs_compact:"
         # echo "$inputs_compact"
-        echo "$inputs_compact" | jq -c 'keys[]'
+        echo "$inputs_compact" | jq -r 'keys[]'
       # run: |
       #     delimiter="$(openssl rand -hex 8)"
       #     echo 'inputs_compact<<$delimiter'     >> $GITHUB_ENV
