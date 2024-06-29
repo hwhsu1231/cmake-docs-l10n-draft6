@@ -140,7 +140,7 @@ runs:
 
     - name: Configure the Project (Linux)
       if: ${{ runner.os == 'Linux' }}
-      shell: cmd
+      shell: bash
       run: |
         CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
 
