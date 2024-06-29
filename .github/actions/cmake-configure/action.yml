@@ -117,7 +117,7 @@ runs:
             echo "key is \"source-directory\"."
           elif [[ "$key" == "preset-name" ]]; then
             echo "key is \"preset-name\"."
-          elif [[ "$key" == cache-* ]]
+          elif [[ "$key" == "cache-*" ]]; then
             echo "key is \"cache-*\"."
           else
             echo "key is other."
