@@ -87,11 +87,11 @@ runs:
       shell: bash
       run: |
         echo "Inputs:"
-        echo "Source Directory: ${{ github.event.inputs.source-directory }}"
-        echo "Preset Name: ${{ github.event.inputs.preset-name }}"
-        echo "Cache Language: ${{ github.event.inputs.cache-language }}"
+        echo "Source Directory: ${{ inputs.source-directory }}"
+        echo "Preset Name: ${{ inputs.preset-name }}"
+        echo "Cache Language: ${{ inputs.cache-language }}"
 
     - name: Print All Inputs JSON
       shell: bash
       run: |
-        echo "${{ toJSON(github.event.inputs) }}"
+        echo "${{ toJSON(inputs) }}"
