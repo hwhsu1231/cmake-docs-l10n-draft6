@@ -34,11 +34,11 @@ inputs:
   cache-remove-redundant:
     required: false
     description: ''
-    default: '[default]'
+    default: 'ON'
   cache-compend-version:
     required: false
     description: ''
-    default: '[default]'
+    default: 'git-master'
   cache-exact-version-git:
     required: false
     description: ''
@@ -58,7 +58,7 @@ inputs:
   cache-gettext-wrap-width:
     required: false
     description: ''
-    default: '[default]'
+    default: '79'
   cache-gettext-additional-targets:
     required: false
     description: ''
@@ -106,10 +106,7 @@ runs:
       #   done
       run: |
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        # echo "$inputs_compact"
         inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
-        # echo "inputs_keys:"
-        # echo "$inputs_keys"
         for key in $inputs_keys; do
           value=$(echo "$inputs_compact" | jq -r --arg key "${key}" '.[$key]')
           echo "(key, value) = ($key, $value)"
@@ -117,18 +114,18 @@ runs:
             echo "key is \"source-directory\"."
           elif [[ "$key" == "preset-name" ]]; then
             echo "key is \"preset-name\"."
-          elif [[ "$key" == cache-* ]]; then
+          elif [[ "$key" =~ ^cache- ]]; then
             echo "key is \"cache-*\"."
+            if [ "$value" != "[default]" ]; then
+              # Convert cache-xxx-yyy-zzz to -DXXX_YYY_ZZZ= format
+              # cmake_args+=("-D$(echo "$key" | sed 's/^cache-//'):${value}")
+              cmake_args+=("-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}")
+              # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/')"
+              echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
+            fi
           else
             echo "key is other."
           fi
-          # if [ "$value" != "[default]" ]; then
-          #   # Convert cache-xxx-yyy to -DXXX=yyy format
-          #   # cmake_args+=("-D$(echo "$key" | sed 's/^cache-//'):${value}")
-          #   cmake_args+=("-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}")
-          #   # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/')"
-          #   echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
-          # fi
         done
       # run: |
       #     delimiter="$(openssl rand -hex 8)"
