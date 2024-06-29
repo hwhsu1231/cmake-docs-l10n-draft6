@@ -106,4 +106,4 @@ runs:
       #   # # Run cmake with constructed arguments
       #   # echo "cmake ${cmake_args[@]}"
       run: |
-        echo ${{ toJSON(inputs) }} | jq -c
+        echo '${{ toJSON(inputs) }}' | jq -c
