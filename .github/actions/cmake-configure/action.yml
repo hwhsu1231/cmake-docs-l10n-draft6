@@ -83,13 +83,15 @@ inputs:
 runs:
   using: composite
   steps:
-      - name: Print Inputs
-        shell: bash
-        # run: |
-        #   echo << EOF
-        #   ${{ toJSON(fromJSON(github.event.inputs)) }}
-        #   EOF
-        # run: |
-        #   echo "${{ toJSON(fromJSON(github.event.inputs)) }}"
-        run: |
-          echo "${{ toJSON(github.event.inputs) }}"
+    - name: Print Inputs
+      shell: bash
+      run: |
+        echo "Inputs:"
+        echo "Source Directory: ${{ github.event.inputs.source-directory }}"
+        echo "Preset Name: ${{ github.event.inputs.preset-name }}"
+        echo "Cache Language: ${{ github.event.inputs.cache-language }}"
+
+    - name: Print All Inputs JSON
+      shell: bash
+      run: |
+        echo "${{ toJSON(github.event.inputs) }}"
