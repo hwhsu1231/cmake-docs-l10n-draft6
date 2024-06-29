@@ -115,18 +115,20 @@ runs:
             echo "key is \"source-directory\"."
           elif [[ "$key" == "preset-name" ]]; then
             echo "key is \"preset-name\"."
-            cmake_args+=("--preset ${value}")
+            cmake_arg="--preset ${value}"
           elif [[ "$key" =~ ^cache- ]]; then
             echo "key is \"cache-*\"."
             if [ "$value" != "[default]" ]; then
               # Convert cache-xxx-yyy-zzz to -DXXX_YYY_ZZZ= format
               cmake_args+=("-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}")
               # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/')"
-              echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
+              # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
             fi
           else
             echo "key is other."
           fi
+          echo "cmake_arg: ${cmake_arg}"
+          cmake_args+=($cmake_arg)
         done
       # run: |
       #     delimiter="$(openssl rand -hex 8)"
