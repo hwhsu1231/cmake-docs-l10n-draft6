@@ -6,11 +6,11 @@ inputs:
   source-directory:     # required
     required: false
     description: ''
-    default: '[default]'
+    default: '${{ github.repository }}'
   preset-name:          # required
     required: false
     description: ''
-    default: '[default]'
+    default: 'all'
   cache-language:       # required
     required: false
     description: ''
@@ -22,11 +22,11 @@ inputs:
   cache-update-mode:    # required
     required: false
     description: ''
-    default: '[default]'
+    default: 'ON'
   cache-install-mode:   # required
     required: false
     description: ''
-    default: '[default]'
+    default: 'OFF'
   cache-auto-depend:
     required: false
     description: ''
