@@ -108,6 +108,8 @@ runs:
         # set -x
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
         inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
+        echo "inputs_keys:"
+        echo "$inputs_keys"
         cmake_args=()
         for key in $inputs_keys; do
           value=$(echo "$inputs_compact" | jq -r --arg key "${key}" '.[$key]')
