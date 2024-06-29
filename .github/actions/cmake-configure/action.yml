@@ -88,6 +88,8 @@ runs:
       run: |
         echo '[Inputs]'
         echo '${{ toJSON(inputs) }}'
+        echo '[GitHub]'
+        echo '${{ toJSON(github) }}'
 
     # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
     #   shell: bash
