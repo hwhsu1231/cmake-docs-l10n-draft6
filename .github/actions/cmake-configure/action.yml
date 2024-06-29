@@ -101,9 +101,17 @@ runs:
       #   for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
       #     echo "var: $var"
       #   done
+      # run: |
+      #   inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
+      #   echo $inputs_compact
       run: |
-        inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
-        echo $inputs_compact
+          delimiter="$(openssl rand -hex 8)"
+          echo 'inputs_compact<<$delimiter'       >> $GITHUB_ENV
+          echo '${{ fromJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
+          echo '$delimiter'                       >> $GITHUB_ENV
+          echo 'inpus_compact:'
+          echo '$inpus_compact'
+
 
       #   # # Run cmake with constructed arguments
       #   # echo "cmake ${cmake_args[@]}"
