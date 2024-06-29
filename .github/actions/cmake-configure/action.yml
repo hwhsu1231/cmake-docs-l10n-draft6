@@ -99,7 +99,7 @@ runs:
       run: |
         # cmake_args=()
 
-        for var in $(echo "${{ toJSON(inputs) }}" | jq -r 'keys[]'); do
+        for var in $(echo "${{ fromJSON(inputs) }}" | jq -r 'keys[]'); do
           echo "var: $var"
         done
 
