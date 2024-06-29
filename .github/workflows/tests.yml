@@ -15,5 +15,11 @@ jobs:
   single:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout to '${{ github.ref }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          submodules: true
+
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
