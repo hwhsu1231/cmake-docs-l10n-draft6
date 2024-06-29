@@ -86,36 +86,35 @@ runs:
     - name: Print All Inputs JSON
       shell: bash
       run: |
-        echo "${{ toJSON(inputs) }}"
+        echo '[Inputs]'
+        echo '${{ toJSON(inputs) }}'
 
-    - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-      shell: bash
-      # run: |
-      #   cmake \
-      #     --preset ${{ inputs.LANGUAGE }} \
-      #     -D VERSION=${{ inputs.VERSION }} \
-      #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-      #     -D AUTO_DEPEND=OFF
-      # run: |
-      #   # cmake_args=()
-      #   for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
-      #     echo "var: $var"
-      #   done
-      # run: |
-      #   inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
-      #   echo $inputs_compact
-      # run: |
-      #     delimiter="$(openssl rand -hex 8)"
-      #     echo 'inputs_compact<<$delimiter'       >> $GITHUB_ENV
-      #     echo '${{ fromJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
-      #     echo '$delimiter'                       >> $GITHUB_ENV
-      #     echo 'inpus_compact:'
-      #     echo '$inpus_compact'
-      run: |
-        echo '${{ fromJSON(inputs) }}' | jq -c
-
-
-      #   # # Run cmake with constructed arguments
-      #   # echo "cmake ${cmake_args[@]}"
-      # run: |
-      #   echo '${{ toJSON(inputs) }}' | jq -c
+    # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+    #   shell: bash
+    #   # run: |
+    #   #   cmake \
+    #   #     --preset ${{ inputs.LANGUAGE }} \
+    #   #     -D VERSION=${{ inputs.VERSION }} \
+    #   #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
+    #   #     -D AUTO_DEPEND=OFF
+    #   # run: |
+    #   #   # cmake_args=()
+    #   #   for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
+    #   #     echo "var: $var"
+    #   #   done
+    #   # run: |
+    #   #   inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
+    #   #   echo $inputs_compact
+    #   # run: |
+    #   #     delimiter="$(openssl rand -hex 8)"
+    #   #     echo 'inputs_compact<<$delimiter'       >> $GITHUB_ENV
+    #   #     echo '${{ fromJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
+    #   #     echo '$delimiter'                       >> $GITHUB_ENV
+    #   #     echo 'inpus_compact:'
+    #   #     echo '$inpus_compact'
+    #   run: |
+    #     echo '${{ fromJSON(inputs) }}' | jq -c
+    #   #   # # Run cmake with constructed arguments
+    #   #   # echo "cmake ${cmake_args[@]}"
+    #   # run: |
+    #   #   echo '${{ toJSON(inputs) }}' | jq -c
