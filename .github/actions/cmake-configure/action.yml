@@ -91,6 +91,11 @@ runs:
     #     echo '[GitHub]'
     #     echo '${{ toJSON(github) }}'
 
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        auto-activate-base: false
+
     - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
       shell: bash
       # run: |
