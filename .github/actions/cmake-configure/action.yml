@@ -106,6 +106,8 @@ runs:
       #   done
       run: |
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
+        echo 'inputs_compact:'
+        echo '$inputs_compact'
         inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
         echo 'inputs_keys:'
         echo '$inputs_keys'
