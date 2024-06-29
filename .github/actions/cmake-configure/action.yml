@@ -111,6 +111,7 @@ runs:
         for key in $inputs_keys; do
           value=$(echo "$inputs_compact" | jq -r --arg key "${key}" '.[$key]')
           # echo "(key, value) = ($key, $value)"
+          cmake_arg=""
           if [[   "$key" == "source-directory" ]]; then
             echo "key is \"source-directory\"."
           elif [[ "$key" == "preset-name" ]]; then
@@ -120,7 +121,7 @@ runs:
             echo "key is \"cache-*\"."
             if [ "$value" != "[default]" ]; then
               # Convert cache-xxx-yyy-zzz to -DXXX_YYY_ZZZ= format
-              cmake_args+=("-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}")
+              cmake_arg="-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
               # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/')"
               # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
             fi
