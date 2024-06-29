@@ -13,7 +13,8 @@ on:
 
 jobs:
   single:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
@@ -21,13 +22,13 @@ jobs:
           ref: ${{ github.ref }}
           submodules: true
 
-      - name: Check whether CMake is installed
-        run: |
-          which cmake && cmake --version
+      # - name: Check whether CMake is installed
+      #   run: |
+      #     which cmake && cmake --version
 
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
 
-      - name: Check whether CMake is installed
-        run: |
-          which cmake && cmake --version
+      # - name: Check whether CMake is installed
+      #   run: |
+      #     which cmake && cmake --version
