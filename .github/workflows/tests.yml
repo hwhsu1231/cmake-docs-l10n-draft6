@@ -21,9 +21,9 @@ jobs:
           ref: ${{ github.ref }}
           submodules: true
 
-      - name: Check whether Conda is installed
+      - name: Check whether CMake is installed
         run: |
-          which conda
+          which cmake
 
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
