@@ -103,7 +103,11 @@ runs:
       id: cmake-args
       run: |
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c | tr -d '\r\n')
+        echo "INPUTS_JSON:"
+        echo "$INPUTS_JSON"
         INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
+        echo "INPUTS_KEYS:"
+        echo "$INPUTS_KEYS"
         CMAKE_ARGS=()
         for KEY in $INPUTS_KEYS; do
           VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
