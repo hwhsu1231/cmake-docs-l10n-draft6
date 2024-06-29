@@ -89,5 +89,7 @@ runs:
         #   echo << EOF
         #   ${{ toJSON(fromJSON(github.event.inputs)) }}
         #   EOF
+        # run: |
+        #   echo "${{ toJSON(fromJSON(github.event.inputs)) }}"
         run: |
-          echo "${{ toJSON(fromJSON(github.event.inputs)) }}"
+          echo "${{ github.event.inputs }}"
