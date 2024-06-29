@@ -96,12 +96,14 @@ runs:
       #     -D VERSION=${{ inputs.VERSION }} \
       #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
       #     -D AUTO_DEPEND=OFF
+      # run: |
+      #   # cmake_args=()
+      #   for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
+      #     echo "var: $var"
+      #   done
       run: |
-        # cmake_args=()
-
-        for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
-          echo "var: $var"
-        done
+        inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
+        echo $inputs_compact
 
       #   # # Run cmake with constructed arguments
       #   # echo "cmake ${cmake_args[@]}"
