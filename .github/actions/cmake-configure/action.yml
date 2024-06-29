@@ -113,7 +113,7 @@ runs:
           echo '${{ toJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
           echo '$delimiter'                     >> $GITHUB_ENV
           echo 'inpus_compact:'
-          echo '$inpus_compact'
+          echo '${{ env.inpus_compact }}'
       # run: |
       #   echo '${{ toJSON(inputs) }}' | jq -c
       #   # # Run cmake with constructed arguments
