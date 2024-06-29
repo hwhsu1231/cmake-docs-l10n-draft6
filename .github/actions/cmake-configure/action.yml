@@ -113,12 +113,12 @@ runs:
           value=$(echo "$inputs_compact" | jq -r --arg key "${key}" '.[$key]')
           cmake_arg=""
           if [[   "$key" == "source-directory" ]]; then
-            cmake_arg="-S ${value}"
+            cmake_arg="-S=${value}"
           elif [[ "$key" == "preset-name" ]]; then
-            cmake_arg="--preset ${value}"
+            cmake_arg="--preset=${value}"
           elif [[ "$key" =~ ^cache- ]]; then
             if [ "$value" != "[default]" ]; then
-              cmake_arg="-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
+              cmake_arg="-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
             fi
           else
             echo "key is other."
