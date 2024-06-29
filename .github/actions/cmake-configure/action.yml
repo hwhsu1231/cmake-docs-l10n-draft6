@@ -104,13 +104,15 @@ runs:
       # run: |
       #   inputs_compact=$(echo '${{ fromJSON(inputs) }}' | jq -r -c 'keys[]')
       #   echo $inputs_compact
+      # run: |
+      #     delimiter="$(openssl rand -hex 8)"
+      #     echo 'inputs_compact<<$delimiter'       >> $GITHUB_ENV
+      #     echo '${{ fromJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
+      #     echo '$delimiter'                       >> $GITHUB_ENV
+      #     echo 'inpus_compact:'
+      #     echo '$inpus_compact'
       run: |
-          delimiter="$(openssl rand -hex 8)"
-          echo 'inputs_compact<<$delimiter'       >> $GITHUB_ENV
-          echo '${{ fromJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
-          echo '$delimiter'                       >> $GITHUB_ENV
-          echo 'inpus_compact:'
-          echo '$inpus_compact'
+        echo '${{ fromJSON(inputs) }}' | jq -c
 
 
       #   # # Run cmake with constructed arguments
