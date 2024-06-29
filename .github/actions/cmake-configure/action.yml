@@ -105,7 +105,7 @@ runs:
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c | tr -d '\r\n')
         echo "INPUTS_JSON:"
         echo "$INPUTS_JSON"
-        INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
+        INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]' | tr -d '\r\n')
         echo "INPUTS_KEYS:"
         echo "$INPUTS_KEYS"
         CMAKE_ARGS=()
