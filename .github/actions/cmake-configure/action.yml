@@ -25,11 +25,11 @@ inputs:
   cache-update-mode:    # required
     required: false
     description: ''
-    default: 'ON'
+    default: 'NEVER'
   cache-install-mode:   # required
     required: false
     description: ''
-    default: 'OFF'
+    default: 'COMPARE'
   cache-auto-depend:
     required: false
     description: ''
@@ -125,7 +125,8 @@ runs:
         # for ARG in "${CMAKE_ARGS[@]}"; do
         #   echo "$ARG"
         # done
-        echo "::set-output name=CMAKE_ARGS::${CMAKE_ARGS[@]}"
+        # echo "::set-output name=CMAKE_ARGS::${CMAKE_ARGS[@]}"
+        echo "CMAKE_ARGS=${CMAKE_ARGS[@]}" >> $GITHUB_OUTPUT
 
     - name: Configure the Project (Windows)
       if: ${{ runner.os == 'Windows' }}
@@ -149,5 +150,5 @@ runs:
           echo "$arg"
         done
 
-        cmake "${CMAKE_ARGS[@]}"
+        echo "cmake ${CMAKE_ARGS[@]}"
 
