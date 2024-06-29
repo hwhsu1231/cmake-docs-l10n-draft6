@@ -114,19 +114,18 @@ runs:
           # echo "(key, value) = ($key, $value)"
           cmake_arg=""
           if [[   "$key" == "source-directory" ]]; then
-            # echo "key is \"source-directory\"."
+            echo "key is \"source-directory\"."
           elif [[ "$key" == "preset-name" ]]; then
-            # echo "key is \"preset-name\"."
+            echo "key is \"preset-name\"."
             cmake_arg="--preset ${value}"
           elif [[ "$key" =~ ^cache- ]]; then
-            # echo "key is \"cache-*\"."
+            echo "key is \"cache-*\"."
             if [ "$value" != "[default]" ]; then
               # Convert cache-xxx-yyy-zzz to -DXXX_YYY_ZZZ= format
               cmake_arg="-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
             fi
           else
-            # echo "key is other."
-            :
+            echo "key is other."
           fi
           echo "cmake_arg: ${cmake_arg}"
           cmake_args+=($cmake_arg)
