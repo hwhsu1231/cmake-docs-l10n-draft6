@@ -23,11 +23,11 @@ jobs:
 
       - name: Check whether CMake is installed
         run: |
-          which cmake
+          which cmake && cmake --version
 
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
 
-      - name: Check whether Conda is installed
+      - name: Check whether CMake is installed
         run: |
-          which conda
+          which cmake && cmake --version

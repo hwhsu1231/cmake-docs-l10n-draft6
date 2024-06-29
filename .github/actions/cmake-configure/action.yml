@@ -91,10 +91,10 @@ runs:
     #     echo '[GitHub]'
     #     echo '${{ toJSON(github) }}'
 
-    - uses: conda-incubator/setup-miniconda@v3
-      with:
-        auto-update-conda: true
-        auto-activate-base: false
+      - name: Install CMake 3.15
+        uses: jwlawson/actions-setup-cmake@v2.0
+        with:
+          cmake-version: '3.15'
 
     - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
       shell: bash
