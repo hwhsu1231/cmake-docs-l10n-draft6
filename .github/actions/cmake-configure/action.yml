@@ -83,13 +83,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Print All Inputs JSON
-      shell: bash
-      run: |
-        echo '[Inputs]'
-        echo '${{ toJSON(inputs) }}'
-        echo '[GitHub]'
-        echo '${{ toJSON(github) }}'
+    # - name: Print All Inputs JSON
+    #   shell: bash
+    #   run: |
+    #     echo '[Inputs]'
+    #     echo '${{ toJSON(inputs) }}'
+    #     echo '[GitHub]'
+    #     echo '${{ toJSON(github) }}'
 
     - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
       shell: bash
