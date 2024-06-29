@@ -85,7 +85,9 @@ runs:
   steps:
       - name: Print Inputs
         shell: bash
+        # run: |
+        #   echo << EOF
+        #   ${{ toJSON(fromJSON(github.event.inputs)) }}
+        #   EOF
         run: |
-          echo << EOF
-          ${{ toJSON(fromJSON(github.event.inputs)) }}
-          EOF
+          echo "${{ toJSON(fromJSON(github.event.inputs)) }}"
