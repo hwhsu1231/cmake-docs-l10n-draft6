@@ -97,7 +97,7 @@ runs:
       #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
       #     -D AUTO_DEPEND=OFF
       run: |
-        cmake_args=()
+        # cmake_args=()
 
         echo "${{ toJSON(inputs) }}" | jq -r 'keys[]'
 
