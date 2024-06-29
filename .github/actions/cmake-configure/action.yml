@@ -133,7 +133,7 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
-        echo  Configure the project...
+        echo    Configure the project...
         set   CMAKE_ARGS=${{ steps.cmake-args.outputs.CMAKE_ARGS }}
         echo.
         echo  cmake %CMAKE_ARGS%
