@@ -99,8 +99,8 @@ runs:
       with:
         cmake-version: '3.15'
 
-    - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-      shell: bash
+    - shell: bash
+      id: cmake-args
       run: |
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
         INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
@@ -121,7 +121,33 @@ runs:
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
         done
-        echo "Printing CMAKE_ARGS:"
-        for ARG in "${CMAKE_ARGS[@]}"; do
-          echo "$ARG"
+        # echo "Printing CMAKE_ARGS:"
+        # for ARG in "${CMAKE_ARGS[@]}"; do
+        #   echo "$ARG"
+        # done
+        echo "::set-output name=CMAKE_ARGS::${CMAKE_ARGS[@]}"
+
+    - name: Configure the Project (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        set CMAKE_ARGS=${{ steps.cmake-args.outputs.CMAKE_ARGS }}
+
+        echo "CMake arguments:"
+        for %%a in (%CMAKE_ARGS%) do echo %%a
+
+        cmake %CMAKE_ARGS%
+
+    - name: Configure the Project (Linux)
+      if: ${{ runner.os == 'Linux' }}
+      shell: cmd
+      run: |
+        CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
+
+        echo "CMake arguments:"
+        for arg in "${CMAKE_ARGS[@]}"; do
+          echo "$arg"
         done
+
+        cmake "${CMAKE_ARGS[@]}"
+
