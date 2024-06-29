@@ -106,9 +106,9 @@ runs:
       #   done
       run: |
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
+        inputs_keys=$(echo '$inputs_compact' | jq -r 'keys[]')
         for var in $inputs_keys; do
-          value=$(echo "$inputs_compact" | jq -r ".$var")
+          value=$(echo '$inputs_compact' | jq -r ".$var")
           if [ "$value" != "[default]" ]; then
             # Convert cache-xxx-yyy to -DXXX=yyy format
             # cmake_args+=("-D$(echo "$var" | sed 's/^cache-//'):${value}")
