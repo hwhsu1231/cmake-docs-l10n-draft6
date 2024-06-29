@@ -106,9 +106,10 @@ runs:
       #   done
       run: |
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        # echo "inputs_compact:"
-        # echo "$inputs_compact"
-        echo "$inputs_compact" | jq -r 'keys[]'
+        inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
+        for var in $inputs_keys; do
+          echo "var: $var"
+        done
       # run: |
       #     delimiter="$(openssl rand -hex 8)"
       #     echo 'inputs_compact<<$delimiter'     >> $GITHUB_ENV
