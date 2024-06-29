@@ -3,6 +3,9 @@ name: cmake-configure
 description: Configure the project with CMake
 
 inputs:
+  cmake-version:
+    required: true
+    description: ''
   source-directory:     # required
     required: false
     description: ''
@@ -98,53 +101,27 @@ runs:
 
     - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
       shell: bash
-      # run: |
-      #   cmake \
-      #     --preset ${{ inputs.LANGUAGE }} \
-      #     -D VERSION=${{ inputs.VERSION }} \
-      #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-      #     -D AUTO_DEPEND=OFF
-      # run: |
-      #   # cmake_args=()
-      #   for var in $(echo '${{ fromJSON(inputs) }}' | jq -r 'keys[]'); do
-      #     echo "var: $var"
-      #   done
       run: |
-        # set -x
-        inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        inputs_keys=$(echo "$inputs_compact" | jq -r 'keys[]')
-        cmake_args=()
-        for key in $inputs_keys; do
-          value=$(echo "$inputs_compact" | jq -r --arg key "${key}" '.[$key]')
-          cmake_arg=""
-          if [[   "$key" == "source-directory" ]]; then
-            cmake_arg="-S=${value}"
-          elif [[ "$key" == "preset-name" ]]; then
-            cmake_arg="--preset=${value}"
-          elif [[ "$key" =~ ^cache- ]]; then
-            if [ "$value" != "[default]" ]; then
-              cmake_arg="-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
+        INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
+        INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
+        CMAKE_ARGS=()
+        for KEY in $INPUTS_KEYS; do
+          VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
+          CMAKE_ARG=""
+          if   [[ "${KEY}" == "source-directory" ]]; then
+            CMAKE_ARG="-S=${VALUE}"
+          elif [[ "${KEY}" == "preset-name" ]]; then
+            CMAKE_ARG="--preset=${VALUE}"
+          elif [[ "${KEY}" =~ ^cache- ]]; then
+            if [[ "$VALUE" != "[default]" ]]; then
+              CMAKE_ARG="-D$(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${VALUE}"
             fi
           else
-            echo "key is other."
+            echo "KEY is other."
           fi
-          # echo "cmake_arg: ${cmake_arg}"
-          cmake_args+=($cmake_arg)
+          CMAKE_ARGS+=($CMAKE_ARG)
         done
-        echo "Printing cmake_args:"
-        for arg in "${cmake_args[@]}"; do
-          echo "$arg"
+        echo "Printing CMAKE_ARGS:"
+        for ARG in "${CMAKE_ARGS[@]}"; do
+          echo "$ARG"
         done
-      # run: |
-      #     delimiter="$(openssl rand -hex 8)"
-      #     echo 'inputs_compact<<$delimiter'     >> $GITHUB_ENV
-      #     echo '${{ toJSON(inputs) }}' | jq -c  >> $GITHUB_ENV
-      #     echo '$delimiter'                     >> $GITHUB_ENV
-      #     echo 'inpus_compact:'
-      #     echo '${{ env.inpus_compact }}'
-      # run: |
-      #   echo '${{ toJSON(inputs) }}' | jq -c
-      #   # # Run cmake with constructed arguments
-      #   # echo "cmake ${cmake_args[@]}"
-      # run: |
-      #   echo '${{ toJSON(inputs) }}' | jq -c
