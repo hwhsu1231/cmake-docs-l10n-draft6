@@ -121,36 +121,23 @@ runs:
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
         done
-        # echo "Printing CMAKE_ARGS:"
-        # for ARG in "${CMAKE_ARGS[@]}"; do
-        #   echo "$ARG"
-        # done
-        # echo "::set-output name=CMAKE_ARGS::${CMAKE_ARGS[@]}"
         echo "CMAKE_ARGS=${CMAKE_ARGS[@]}" >> $GITHUB_OUTPUT
 
-    - name: Configure the Project (Windows)
+    - name: Configure the project (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
+        echo "Configure the project"
         set CMAKE_ARGS=${{ steps.cmake-args.outputs.CMAKE_ARGS }}
-
-        # echo "CMake arguments:"
-        # for %%a in (%CMAKE_ARGS%) do echo %%a
-
         echo "cmake %CMAKE_ARGS%"
         cmake %CMAKE_ARGS%
 
-    - name: Configure the Project (Linux)
+    - name: Configure the project (Linux)
       if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |
+        echo "Configure the project"
         CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
-
-        # echo "CMake arguments:"
-        # for arg in "${CMAKE_ARGS[@]}"; do
-        #   echo "$arg"
-        # done
-
         echo "cmake ${CMAKE_ARGS[@]}"
         echo ""
         cmake ${CMAKE_ARGS[@]}
