@@ -99,14 +99,16 @@ runs:
       run: |
         cmake_args=()
 
-        # Loop through each input and conditionally add to cmake_args
-        for var in $(echo "${{ toJSON(inputs) }}" | jq -r 'keys[]'); do
-          value=$(echo "${{ toJSON(inputs) }}" | jq -r ".$var")
-          if [ "$value" != "[default]" ]; then
-            # Convert cache-xxx-yyy to -DXXX=yyy format
-            cmake_args+=("-D$(echo "$var" | sed 's/^cache-//'):${value}")
-          fi
-        done
+        echo "${{ toJSON(inputs) }}" | jq -r 'keys[]'
 
-        # Run cmake with constructed arguments
-        echo "cmake ${cmake_args[@]}"
+        # # Loop through each input and conditionally add to cmake_args
+        # for var in $(echo "${{ toJSON(inputs) }}" | jq -r 'keys[]'); do
+        #   value=$(echo "${{ toJSON(inputs) }}" | jq -r ".$var")
+        #   if [ "$value" != "[default]" ]; then
+        #     # Convert cache-xxx-yyy to -DXXX=yyy format
+        #     cmake_args+=("-D$(echo "$var" | sed 's/^cache-//'):${value}")
+        #   fi
+        # done
+
+        # # Run cmake with constructed arguments
+        # echo "cmake ${cmake_args[@]}"
