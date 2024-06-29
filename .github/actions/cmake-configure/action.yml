@@ -107,6 +107,7 @@ runs:
         CMAKE_ARGS=()
         for KEY in $INPUTS_KEYS; do
           VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
+          echo "(KEY, VALUE) = ($KEY, $VALUE)"
           CMAKE_ARG=""
           if   [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
