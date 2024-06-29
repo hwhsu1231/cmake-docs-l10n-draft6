@@ -112,7 +112,7 @@ runs:
         # echo "$inputs_keys"
         for key in $inputs_keys; do
           # echo "key: $key"
-          value=$(echo "$inputs_compact" | jq -r '.$key')
+          value=$(echo "$inputs_compact" | jq -r ".$key")
           echo "value: $value"
           # if [ "$value" != "[default]" ]; then
           #   # Convert cache-xxx-yyy to -DXXX=yyy format
