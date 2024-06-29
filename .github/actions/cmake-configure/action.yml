@@ -94,10 +94,10 @@ runs:
     #     echo '[GitHub]'
     #     echo '${{ toJSON(github) }}'
 
-    - name: Install CMake 3.15
+    - name: Install CMake 3.23
       uses: jwlawson/actions-setup-cmake@v2.0
       with:
-        cmake-version: '3.15'
+        cmake-version: '3.23'
 
     - shell: bash
       id: cmake-args
