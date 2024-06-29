@@ -151,4 +151,5 @@ runs:
         done
 
         echo "cmake ${CMAKE_ARGS[@]}"
+        cmake ${CMAKE_ARGS[@]}
 
