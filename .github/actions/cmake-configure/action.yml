@@ -92,4 +92,4 @@ runs:
         # run: |
         #   echo "${{ toJSON(fromJSON(github.event.inputs)) }}"
         run: |
-          echo "${{ github.event.inputs }}"
+          echo "${{ toJSON(github.event.inputs) }}"
