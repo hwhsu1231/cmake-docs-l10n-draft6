@@ -115,7 +115,7 @@ runs:
       #     echo 'inpus_compact:'
       #     echo '$inpus_compact'
       run: |
-        echo '${{ fromJSON(inputs) }}' | jq -c
+        echo '${{ toJSON(inputs) }}' | jq -c
       #   # # Run cmake with constructed arguments
       #   # echo "cmake ${cmake_args[@]}"
       # run: |
