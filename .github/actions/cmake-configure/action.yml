@@ -6,7 +6,7 @@ inputs:
   source-directory:     # required
     required: false
     description: ''
-    default: '${{ github.repository }}'
+    default: '${{ github.workspace }}'
   preset-name:          # required
     required: false
     description: ''
@@ -66,7 +66,7 @@ inputs:
   cache-sphinx-builder:
     required: false
     description: ''
-    default: '[default]'
+    default: 'html'
   cache-sphinx-console-locale:
     required: false
     description: ''
@@ -118,7 +118,6 @@ runs:
           elif [[ "$key" == "preset-name" ]]; then
             cmake_arg="--preset ${value}"
           elif [[ "$key" =~ ^cache- ]]; then
-            echo "key is \"cache-*\"."
             if [ "$value" != "[default]" ]; then
               # Convert cache-xxx-yyy-zzz to -DXXX_YYY_ZZZ= format
               cmake_arg="-D $(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
