@@ -106,19 +106,20 @@ runs:
       #   done
       run: |
         inputs_compact=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        inputs_keys=$(echo '$inputs_compact' | jq -r 'keys[]')
-        for var in $inputs_keys; do
-          value=$(echo '$inputs_compact' | jq -r ".$var")
-          if [ "$value" != "[default]" ]; then
-            # Convert cache-xxx-yyy to -DXXX=yyy format
-            # cmake_args+=("-D$(echo "$var" | sed 's/^cache-//'):${value}")
-            # cmake_args+=("-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}")
+        echo $inputs_compact
+        # inputs_keys=$(echo '$inputs_compact' | jq -r 'keys[]')
+        # for var in $inputs_keys; do
+        #   value=$(echo '$inputs_compact' | jq -r ".$var")
+        #   if [ "$value" != "[default]" ]; then
+        #     # Convert cache-xxx-yyy to -DXXX=yyy format
+        #     # cmake_args+=("-D$(echo "$var" | sed 's/^cache-//'):${value}")
+        #     # cmake_args+=("-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}")
 
-            echo "-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/')"
+        #     echo "-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/')"
 
-            # echo "-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}"
-          fi
-        done
+        #     # echo "-D$(echo "$var" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}"
+        #   fi
+        # done
       # run: |
       #     delimiter="$(openssl rand -hex 8)"
       #     echo 'inputs_compact<<$delimiter'     >> $GITHUB_ENV
