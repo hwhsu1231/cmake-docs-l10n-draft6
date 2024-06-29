@@ -117,9 +117,9 @@ runs:
           if [ "$value" != "[default]" ]; then
             # Convert cache-xxx-yyy to -DXXX=yyy format
             # cmake_args+=("-D$(echo "$key" | sed 's/^cache-//'):${value}")
-            cmake_args+=("-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}")
+            cmake_args+=("-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}")
             # echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/')"
-            echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g'):${value}"
+            echo "-D$(echo "$key" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${value}"
           fi
         done
       # run: |
