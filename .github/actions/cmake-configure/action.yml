@@ -108,7 +108,7 @@ runs:
         for KEY in $INPUTS_KEYS; do
           KEY=$(echo "${KEY}" | tr -d '\r\n') # Remove the possible newline (for Windows Bash)
           VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
-          # echo "(KEY, VALUE) = ($KEY, $VALUE)"
+          echo "(KEY, VALUE) = ($KEY, $VALUE)"
           CMAKE_ARG=""
           if [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
@@ -117,6 +117,7 @@ runs:
           elif [[ "${KEY}" =~ ^cache- ]]; then
             if [[ "$VALUE" != "[default]" ]]; then
               CMAKE_ARG="-D$(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${VALUE}"
+              echo "xxx: $(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/')"
             fi
           # else
           #   echo "KEY is other."
