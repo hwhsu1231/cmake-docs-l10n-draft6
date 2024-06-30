@@ -5,13 +5,13 @@ description: Build the project with CMake
 inputs:
   source-directory:   # required
     required: true
-    description: ''
+    description: 'Source directory of the CMake Project.'
   language:           # required
     required: true
-    description: ''
+    description: 'Configure Preset Name.'
   target:             # required
     required: true
-    description: ''
+    description: 'CMake Build Target'
 
 runs:
   using: composite
