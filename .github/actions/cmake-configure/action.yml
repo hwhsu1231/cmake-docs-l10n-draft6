@@ -136,8 +136,8 @@ runs:
         echo.
         cmake %CMAKE_ARGS%
 
-    - name: Configure the project (Linux)
-      if: ${{ runner.os == 'Linux' }}
+    - name: Configure the project (Linux/macOS)
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
       run: |
         echo "Configure the project..."
@@ -146,4 +146,3 @@ runs:
         echo "cmake ${CMAKE_ARGS[@]}"
         echo ""
         cmake ${CMAKE_ARGS[@]}
-
