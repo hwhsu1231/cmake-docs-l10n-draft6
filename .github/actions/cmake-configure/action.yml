@@ -103,18 +103,14 @@ runs:
       id: cmake-args
       run: |
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
-        echo "INPUTS_JSON:"
-        echo "$INPUTS_JSON"
         INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
-        echo "INPUTS_KEYS:"
-        echo "$INPUTS_KEYS"
         CMAKE_ARGS=()
         for KEY in $INPUTS_KEYS; do
-          KEY=$(echo "${KEY}" | tr -d '\r\n')   # Remove the possible newline (for Windows)
+          KEY=$(echo "${KEY}" | tr -d '\r\n') # Remove the possible newline (for Windows Bash)
           VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
-          echo "(KEY, VALUE) = ($KEY, $VALUE)"
+          # echo "(KEY, VALUE) = ($KEY, $VALUE)"
           CMAKE_ARG=""
-          if   [[ "${KEY}" == "source-directory" ]]; then
+          if [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
           elif [[ "${KEY}" == "preset-name" ]]; then
             CMAKE_ARG="--preset=${VALUE}"
@@ -123,7 +119,7 @@ runs:
               CMAKE_ARG="-D$(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${VALUE}"
             fi
           else
-            echo "KEY is other."
+            # echo "KEY is other."
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
         done
