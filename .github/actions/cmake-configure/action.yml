@@ -116,8 +116,6 @@ runs:
             CMAKE_ARG="--preset=${VALUE}"
           elif [[ "${KEY}" =~ ^cache- ]]; then
             if [[ "$VALUE" != "[default]" ]]; then
-              # CMAKE_ARG="-D$(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${VALUE}"
-              # echo "xxx: $(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/')"
               CACHE_NAME=$(echo "${KEY}" | sed 's/^cache-//' | tr '[:lower:]' '[:upper:]' | sed 's/-/_/g')
               CACHE_VALUE=${VALUE}
               CMAKE_ARG="-D${CACHE_NAME}=${CACHE_VALUE}"
