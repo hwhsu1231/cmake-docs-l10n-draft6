@@ -44,3 +44,13 @@ jobs:
       # - name: Check whether CMake is installed
       #   run: |
       #     which cmake && cmake --version
+
+      - name: Check whether Node.js is installed (for Windows)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          where node && node --version
+
+      - name: Check whether Node.js is installed (for Linux/macOS)
+        if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+        run: |
+          which node && node --version
