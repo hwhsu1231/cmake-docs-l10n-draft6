@@ -22,9 +22,9 @@ runs:
       run: |
         echo Building the project...
         echo.
-        echo cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.target }}
+        echo cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target ${{ inputs.target }}
         echo.
-        cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.target }}
+        cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target ${{ inputs.target }}
 
     - name: Build the project (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
@@ -32,6 +32,6 @@ runs:
       run: |
         echo "building the project..."
         echo ""
-        echo "cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.target }}"
+        echo "cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target ${{ inputs.target }}"
         echo ""
-        cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.target }}
+        cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target ${{ inputs.target }}
