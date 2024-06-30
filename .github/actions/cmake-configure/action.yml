@@ -3,30 +3,27 @@ name: cmake-configure
 description: Configure the project with CMake
 
 inputs:
-  cmake-version:
-    required: true
-    description: 'latest'
-  source-directory:     # required
+  source-directory:
     required: false
     description: ''
     default: '${{ github.workspace }}'
-  preset-name:          # required
+  preset-name:
     required: false
     description: ''
     default: 'all'
-  cache-language:       # required
+  cache-language:
     required: false
     description: ''
     default: '[default]'
-  cache-version:        # required
+  cache-version:
     required: false
     description: ''
     default: '[default]'
-  cache-update-mode:    # required
+  cache-update-mode:
     required: false
     description: ''
     default: '[default]'
-  cache-install-mode:   # required
+  cache-install-mode:
     required: false
     description: ''
     default: '[default]'
@@ -86,19 +83,6 @@ inputs:
 runs:
   using: composite
   steps:
-    # - name: Print All Inputs JSON
-    #   shell: bash
-    #   run: |
-    #     echo '[Inputs]'
-    #     echo '${{ toJSON(inputs) }}'
-    #     echo '[GitHub]'
-    #     echo '${{ toJSON(github) }}'
-
-    - name: Setup CMake ${{ inputs.cmake-version }}
-      uses: jwlawson/actions-setup-cmake@v2.0
-      with:
-        cmake-version: '${{ inputs.cmake-version }}'
-
     - name: Get CMAKE_ARGS by Inputs
       shell: bash
       id: cmake-args
