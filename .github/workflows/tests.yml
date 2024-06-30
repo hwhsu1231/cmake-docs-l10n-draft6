@@ -47,12 +47,12 @@ jobs:
 
       - name: Check whether Node.js is installed (for Windows)
         if: ${{ runner.os == 'Windows' }}
+        shell: cmd
         run: |
-          where node
-          node --version
+          where node && node --version
 
       - name: Check whether Node.js is installed (for Linux/macOS)
         if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+        shell: bash
         run: |
-          which node
-          node --version
+          which node && node --version
