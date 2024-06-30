@@ -3,81 +3,74 @@ name: cmake-configure
 description: Configure the project with CMake
 
 inputs:
-  source-directory:
-    required: false
+  source-directory:     # required
+    required: true
     description: ''
-    default: '${{ github.workspace }}'
-  preset-name:
-    required: false
-    description: ''
-    default: 'all'
-  cache-language:
-    required: false
-    description: ''
-    default: '[default]'
-  cache-version:
-    required: false
-    description: ''
-    default: '[default]'
+  language:             # required
+    required: true
+    description: 'Value passed to LANGUAGE cache (Configure Preset Name).'
+  version:              # required
+    required: true
+    description: 'Value passed to VERSION cache.'
   cache-update-mode:
     required: false
-    description: ''
+    description: 'Value passed to UPDATE_MODE cache.'
     default: '[default]'
   cache-install-mode:
     required: false
-    description: ''
+    description: 'Value passed to INSTALL_MODE cache.'
     default: '[default]'
   cache-auto-depend:
     required: false
-    description: ''
+    description: 'Value passed to AUTO_DEPEND cache.'
     default: '[default]'
   cache-remove-redundant:
     required: false
-    description: ''
+    description: 'Value passed to REMOVE_REDUNDANT cache.'
     default: '[default]'
   cache-compend-version:
     required: false
-    description: ''
+    description: 'Value passed to COMPEND_VERSION cache.'
     default: '[default]'
   cache-git-exact-version:
     required: false
-    description: ''
+    description: 'Value passed to GIT_EXACT_VERSION cache.'
     default: '[default]'
   cache-python-exact-version:
     required: false
-    description: ''
+    description: 'Value passed to PYTHON_EXACT_VERSION cache.'
     default: '[default]'
   cache-gettext-exact-version:
     required: false
-    description: ''
+    description: 'Value passed to GETTEXT_EXACT_VERSION cache.'
     default: '[default]'
   cache-crowdin-exact-version:
     required: false
-    description: ''
+    description: 'Value passed to CROWDIN_EXACT_VERSION cache.'
     default: '[default]'
   cache-gettext-wrap-width:
     required: false
-    description: ''
+    description: 'Value passed to GETTEXT_WRAP_WIDTH cache.'
     default: '[default]'
   cache-gettext-additional-targets:
     required: false
-    description: ''
+    description: 'Value passed to GETTEXT_ADDITIONAL_TARGETS cache.'
     default: '[default]'
   cache-sphinx-builder:
     required: false
-    description: ''
+    description: 'Value passed to SPHINX_BUILDER cache.'
     default: '[default]'
   cache-sphinx-console-locale:
     required: false
-    description: ''
+    description: 'Value passed to SPHINX_CONSOLE_LOCALE cache.'
     default: '[default]'
   cache-sphinx-verbose-level:
     required: false
-    description: ''
+    description: 'Value passed to SPHINX_VERBOSE_LEVEL cache.'
     default: '[default]'
   cache-sphinx-job-number:
     required: false
-    description: ''
+    description: 'Value passed to GETTEXT_JOB_NUMBER cache.'
     default: '[default]'
 
 runs:
@@ -97,8 +90,10 @@ runs:
           CMAKE_ARG=""
           if [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
-          elif [[ "${KEY}" == "preset-name" ]]; then
+          elif [[ "${KEY}" == "language" ]]; then
             CMAKE_ARG="--preset=${VALUE}"
+          elif [[ "${KEY}" == "version" ]]; then
+            CMAKE_ARG="-DVERSION=${VALUE}"
           elif [[ "${KEY}" =~ ^cache- ]]; then
             if [[ "${VALUE}" != "[default]" ]]; then
               # Convert lowercase to uppercase by tr since BSD-sed cannot support '\U'. (for macOS bash)

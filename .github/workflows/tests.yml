@@ -39,7 +39,9 @@ jobs:
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
         with:
-          cache-sphinx-job-number: 3
+          source-directory: '${{ github.workspace }}'
+          language: 'all'
+          version: 'git-master'
 
       # - name: Check whether CMake is installed
       #   run: |
