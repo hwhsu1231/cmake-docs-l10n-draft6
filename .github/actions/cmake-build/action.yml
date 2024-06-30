@@ -3,13 +3,13 @@ name: cmake-build
 description: Build the project with CMake
 
 inputs:
-  source-directory:
+  source-directory:   # required
     required: true
     description: ''
-  language:
+  language:           # required
     required: true
     description: ''
-  build-target:       # required
+  target:             # required
     required: true
     description: ''
 
@@ -22,9 +22,9 @@ runs:
       run: |
         echo Building the project...
         echo.
-        echo cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.build-target }}
+        echo cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.target }}
         echo.
-        cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.build-target }}
+        cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.target }}
 
     - name: Build the project (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
@@ -32,6 +32,6 @@ runs:
       run: |
         echo "building the project..."
         echo ""
-        echo "cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.build-target }}"
+        echo "cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.target }}"
         echo ""
-        cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.build-target }}
+        cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.target }}
