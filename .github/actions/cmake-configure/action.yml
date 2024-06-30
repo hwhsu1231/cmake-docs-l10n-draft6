@@ -118,8 +118,8 @@ runs:
             if [[ "$VALUE" != "[default]" ]]; then
               CMAKE_ARG="-D$(echo "${KEY}" | sed 's/^cache-\(.*\)/\U\1/' | sed 's/-/_/g')=${VALUE}"
             fi
-          else
-            # echo "KEY is other."
+          # else
+          #   echo "KEY is other."
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
         done
