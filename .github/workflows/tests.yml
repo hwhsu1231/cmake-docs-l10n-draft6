@@ -33,6 +33,8 @@ jobs:
 
       - name: Configure the project with CMake
         uses: ./.github/actions/cmake-configure
+        with:
+          cache-sphinx-job-number: 3
 
       # - name: Check whether CMake is installed
       #   run: |
