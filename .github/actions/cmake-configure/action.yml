@@ -25,11 +25,11 @@ inputs:
   cache-update-mode:    # required
     required: false
     description: ''
-    default: 'NEVER'
+    default: '[default]'
   cache-install-mode:   # required
     required: false
     description: ''
-    default: 'COMPARE'
+    default: '[default]'
   cache-auto-depend:
     required: false
     description: ''
@@ -37,11 +37,11 @@ inputs:
   cache-remove-redundant:
     required: false
     description: ''
-    default: 'ON'
+    default: '[default]'
   cache-compend-version:
     required: false
     description: ''
-    default: 'git-master'
+    default: '[default]'
   cache-git-exact-version:
     required: false
     description: ''
@@ -61,7 +61,7 @@ inputs:
   cache-gettext-wrap-width:
     required: false
     description: ''
-    default: '79'
+    default: '[default]'
   cache-gettext-additional-targets:
     required: false
     description: ''
@@ -69,7 +69,7 @@ inputs:
   cache-sphinx-builder:
     required: false
     description: ''
-    default: 'html'
+    default: '[default]'
   cache-sphinx-console-locale:
     required: false
     description: ''
@@ -94,19 +94,20 @@ runs:
     #     echo '[GitHub]'
     #     echo '${{ toJSON(github) }}'
 
-    - name: Install CMake 3.23
+    - name: Setup CMake 3.23
       uses: jwlawson/actions-setup-cmake@v2.0
       with:
         cmake-version: '3.23'
 
-    - shell: bash
+    - name: Get CMAKE_ARGS by Inputs
+      shell: bash
       id: cmake-args
       run: |
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
         INPUTS_KEYS=$(echo "$INPUTS_JSON" | jq -r 'keys[]')
         CMAKE_ARGS=()
         for KEY in $INPUTS_KEYS; do
-          # Remove the possible newline in KEY. (for Windows Bash)
+          # Remove the possible newline in KEY by tr. (for Windows Bash)
           KEY=$(echo "${KEY}" | tr -d '\r\n')
           VALUE=$(echo "$INPUTS_JSON" | jq -r --arg key "${KEY}" '.[$key]')
           CMAKE_ARG=""
