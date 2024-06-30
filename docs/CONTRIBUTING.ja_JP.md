@@ -63,7 +63,7 @@ Translation order:
 1. First complete the translation for the Crowdin version, then consider translating the Gettext version.
 2. Translate the Gettext version from the highest to the lowest version (because CI/CD will automatically merge translations from higher versions to lower ones).
 
-You can view the file at <code>.github/workflows/matrix.json</code>. In this file, the versions where <code>COMPENDIUM_VERSION</code> is empty are designated as Crowdin versions, whereas the versions where <code>COMPENDIUM_VERSION</code> is not empty are recognized as Gettext versions.
+You can view the file at <code>.github/workflows/matrix.json</code>. In this file, the versions where <code>COMPEND_VERSION</code> is empty are designated as Crowdin versions, whereas the versions where <code>COMPEND_VERSION</code> is not empty are recognized as Gettext versions.
 
 <h3 id="">For Crowdin Versions</h3>
 
