@@ -5,7 +5,7 @@ description: Configure the project with CMake
 inputs:
   cmake-version:
     required: true
-    description: ''
+    description: 'latest'
   source-directory:     # required
     required: false
     description: ''
@@ -94,10 +94,10 @@ runs:
     #     echo '[GitHub]'
     #     echo '${{ toJSON(github) }}'
 
-    - name: Setup CMake 3.23
+    - name: Setup CMake ${{ inputs.cmake-version }}
       uses: jwlawson/actions-setup-cmake@v2.0
       with:
-        cmake-version: '3.23'
+        cmake-version: '${{ inputs.cmake-version }}'
 
     - name: Get CMAKE_ARGS by Inputs
       shell: bash
@@ -131,8 +131,8 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
-        echo Configure the project...
         set CMAKE_ARGS=${{ steps.cmake-args.outputs.CMAKE_ARGS }}
+        echo configuring the project...
         echo.
         echo cmake %CMAKE_ARGS%
         echo.
@@ -142,8 +142,8 @@ runs:
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
       run: |
-        echo "Configure the project..."
         CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
+        echo "configuring the project..."
         echo ""
         echo "cmake ${CMAKE_ARGS[@]}"
         echo ""
