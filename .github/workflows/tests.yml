@@ -36,12 +36,19 @@ jobs:
       #   run: |
       #     which cmake && cmake --version
 
-      - name: Configure the project with CMake
+      - name: Configure the project
         uses: ./.github/actions/cmake-configure
         with:
           source-directory: '${{ github.workspace }}'
           language: 'all'
           version: 'git-master'
+
+      - name: Build the 'prepare_git_repo' target
+        uses: ./.github/actions/cmake-build
+        with:
+          source-directory: '${{ github.workspace }}'
+          language: 'all'
+          target: 'prepare_git_repo'
 
       # - name: Check whether CMake is installed
       #   run: |

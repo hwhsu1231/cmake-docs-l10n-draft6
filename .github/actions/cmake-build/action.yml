@@ -1,0 +1,37 @@
+name: cmake-build
+
+description: Build the project with CMake
+
+inputs:
+  source-directory:
+    required: true
+    description: ''
+  language:
+    required: true
+    description: ''
+  build-target:       # required
+    required: true
+    description: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Build the project (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        echo Building the project...
+        echo.
+        echo cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.build-target }}
+        echo.
+        cmake --build=${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target=${{ inputs.build-target }}
+
+    - name: Build the project (Linux/macOS)
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+      shell: bash
+      run: |
+        echo "building the project..."
+        echo ""
+        echo "cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.build-target }}"
+        echo ""
+        cmake --build=${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target=${{ inputs.build-target }}
