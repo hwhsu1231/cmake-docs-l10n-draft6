@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'windows-lateset', 'ubuntu-latest' ]
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
