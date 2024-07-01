@@ -550,16 +550,16 @@ set(SCRIPT_MODE_CACHE
   Fundamental targets.
 #]====================]
 
-add_custom_target(prepare_git_repo
+add_custom_target(prepare_repositories
     COMMAND ${CMAKE_COMMAND}
             ${SCRIPT_MODE_CACHE} 
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/prepare_git_repo.cmake
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/prepare_repositories.cmake
     VERBATIM)
 
-add_custom_target(conda_requirements
+add_custom_target(install_requirements
     COMMAND ${CMAKE_COMMAND}
             ${SCRIPT_MODE_CACHE} 
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/conda_requirements.cmake
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/install_requirements.cmake
     VERBATIM)
 
 add_custom_target(sphinx_update_pot
@@ -615,8 +615,8 @@ add_custom_target(readthedocs_symlinks
     VERBATIM)
 
 if(AUTO_DEPEND)
-    add_dependencies(conda_requirements prepare_git_repo)
-    add_dependencies(sphinx_update_pot  conda_requirements)
-    add_dependencies(gettext_update_po  sphinx_update_pot)
-    add_dependencies(sphinx_build_docs  gettext_update_po)
+    add_dependencies(install_requirements   prepare_repositories)
+    add_dependencies(sphinx_update_pot      install_requirements)
+    add_dependencies(gettext_update_po      sphinx_update_pot)
+    add_dependencies(sphinx_build_docs      gettext_update_po)
 endif()

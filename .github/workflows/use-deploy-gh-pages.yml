@@ -113,19 +113,19 @@ jobs:
             -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
             -D AUTO_DEPEND=OFF
 
-      - name: Build with 'prepare_git_repo' target
+      - name: Build with 'prepare_repositories' target
         shell: bash
         run: |
           cmake \
             --build out/build/${{ inputs.LANGUAGE }} \
-            --target prepare_git_repo
+            --target prepare_repositories
 
-      - name: Build with 'conda_requirements' target
+      - name: Build with 'install_requirements' target
         shell: bash
         run: |
           cmake \
             --build out/build/${{ inputs.LANGUAGE }} \
-            --target conda_requirements
+            --target install_requirements
 
       - name: Build with 'sphinx_update_pot' target
         shell: bash
