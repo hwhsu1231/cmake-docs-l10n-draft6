@@ -15,8 +15,8 @@ find_package(Gettext  MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
 include(LogUtils)
 
 
-if (COMPENDIUM_VERSION STREQUAL VERSION OR
-    COMPENDIUM_VERSION STREQUAL "")
+if (COMPEND_VERSION STREQUAL VERSION OR
+    COMPEND_VERSION STREQUAL "")
     message(STATUS "No need to merge translations from compendium.")
     return()
 endif()
@@ -26,7 +26,7 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGES_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGES_LIST})
-    set(SRC_VERSION         "${COMPENDIUM_VERSION}")
+    set(SRC_VERSION         "${COMPEND_VERSION}")
     set(SRC_LOCALE_PO_DIR   "${PROJ_L10N_DIR}/${SRC_VERSION}/locale/${_LANGUAGE}/LC_MESSAGES")
     set(SRC_COMPEND_PO_FILE "${PROJ_L10N_DIR}/${SRC_VERSION}/.compend/${_LANGUAGE}.po")
     set(DST_VERSION         "${VERSION}")
@@ -44,7 +44,7 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
     restore_cmake_message_indent()
 
 
-    message(STATUS "Running 'msgcat' command to concatenate translations of '${COMPENDIUM_VERSION}' version for '${_LANGUAGE}' language...")
+    message(STATUS "Running 'msgcat' command to concatenate translations of '${COMPEND_VERSION}' version for '${_LANGUAGE}' language...")
     get_filename_component(SRC_COMPENDIUM_PO_DIR "${SRC_COMPEND_PO_FILE}" DIRECTORY)
     file(MAKE_DIRECTORY "${SRC_COMPENDIUM_PO_DIR}")
     file(GLOB_RECURSE SRC_LOCALE_PO_FILES "${SRC_LOCALE_PO_DIR}/*.po")
@@ -89,7 +89,7 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
     restore_cmake_message_indent()
 
 
-    message(STATUS "Running 'msgmerge' command to merge translations from '${COMPENDIUM_VERSION}' version...")
+    message(STATUS "Running 'msgmerge' command to merge translations from '${COMPEND_VERSION}' version...")
     file(GLOB_RECURSE DST_LOCALE_PO_FILES "${DST_LOCALE_PO_DIR}/*.po")
     remove_cmake_message_indent()
     message("")

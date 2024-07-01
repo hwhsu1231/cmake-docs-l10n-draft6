@@ -31,9 +31,7 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
     set(NUM_OF_MSGID_TOTAL 0)       # Number     of total       msgid entries
     set(PCT_OF_MSGID_TRANSLATED 0)  # Percentage of translated  msgid entries
 
-    # set(PO_DIR "${PROJ_L10N_VERSION_PO_DIR}/${_LANGUAGE}")
-    set(PO_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
-    file(GLOB_RECURSE PO_FILES "${PO_DIR}/*.po")
+    file(GLOB_RECURSE PO_FILES "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}/*.po")
     if(NOT PO_FILES)
         message(FATAL_ERROR "PO_FILES is empty!")
     endif()

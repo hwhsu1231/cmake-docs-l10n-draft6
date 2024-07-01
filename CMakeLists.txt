@@ -17,11 +17,6 @@ set(VERSION "git-master"
     CACHE STRING "Current version for the CMake documentation.")
     # Possible values are "git-master", "latest", and "v3.x".
 
-set(BUILDER "html"
-    CACHE STRING "Builder for the Sphinx documentation system.")
-    # Possible values are "html".
-    # See https://www.sphinx-doc.org/en/master/usage/builders/index.html for details.
-
 set(UPDATE_MODE "NEVER"
     CACHE STRING "Mode of updating .pot/.po files.")
     # Possible values are "NEVER", "COMPARE", and "ALWAYS".
@@ -56,6 +51,9 @@ set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft5"
 set(GIT_EXACT_VERSION ""
     CACHE STRING "Exact version for calling find_package(Git).")
 
+set(CONDA_EXACT_VERSION ""
+    CACHE STRING "Exact version for calling find_package(Conda).")
+
 set(PYTHON_EXACT_VERSION ""
     CACHE STRING "Exact version for calling find_package(Python).")
 
@@ -65,22 +63,34 @@ set(GETTEXT_EXACT_VERSION ""
 set(CROWDIN_EXACT_VERSION ""
     CACHE STRING "Exact version for calling find_package(Crowdin).")
 
-set(COMPENDIUM_VERSION "git-master"
+set(COMPEND_VERSION "git-master"
     CACHE STRING "Version of compendium that the current version merges translations from.")
 
-set(CONSOLE_LOCALE "en_US.UTF-8"
+set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
     CACHE STRING "Locale setting for the console.")
+
+set(CMAKE_JOB_NUMBER "1"
+    CACHE STRING "")
+    # See https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j for details.
 
 set(GETTEXT_WRAP_WIDTH 79
     CACHE STRING "Gettext wrap width for .pot/.po files.")
 
-set(SPHINX_ADDITIONAL_TARGETS "index,literal-block"
+set(GETTEXT_ADDITIONAL_TARGETS "index,literal-block"
     CACHE STRING "Gettext additional targets for building the Sphinx documentation system.")
+    # Possible values are "index", "literal-block", "doctest-block", "raw", and "image".
+    # A comma-separated list
     # See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-gettext_additional_targets for details.
+
+set(SPHINX_BUILDER "html"
+    CACHE STRING "Builder for the Sphinx documentation system.")
+    # Possible values are "html".
+    # See https://www.sphinx-doc.org/en/master/usage/builders/index.html for details.
 
 set(SPHINX_VERBOSE_LEVEL "1"
     CACHE STRING "")
     # Possible values are "0", "1", "2", and "3".
+    # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-v for details.
 
 set(SPHINX_JOB_NUMBER "1"
     CACHE STRING "")
@@ -96,14 +106,14 @@ set(PROJ_BINARY_DIR                 "${PROJECT_BINARY_DIR}")
 set(PROJ_CMAKE_MODULES_DIR          "${PROJ_SOURCE_DIR}/cmake/modules")
 set(PROJ_CMAKE_SCRIPTS_DIR          "${PROJ_SOURCE_DIR}/cmake/scripts")
 set(PROJ_CMAKE_TEMPLATES_DIR        "${PROJ_SOURCE_DIR}/cmake/templates")
-set(PROJ_VENV_DIR                   "${PROJ_SOURCE_DIR}/.conda")
+set(PROJ_VENV_DIR                   "${PROJ_SOURCE_DIR}/.venv")
 set(PROJ_OUT_DIR                    "${PROJ_SOURCE_DIR}/out")
 set(PROJ_OUT_REPO_DIR               "${PROJ_OUT_DIR}/repo")
 set(PROJ_OUT_REPO_SPHINX_DIR        "${PROJ_OUT_REPO_DIR}/Utilities/Sphinx")
 set(PROJ_OUT_REPO_DOCS_CONFIG_DIR   "${PROJ_OUT_REPO_DIR}/Help")
 set(PROJ_OUT_REPO_DOCS_SOURCE_DIR   "${PROJ_OUT_REPO_DIR}/Help")
 set(PROJ_OUT_REPO_DOCS_LOCALE_DIR   "${PROJ_OUT_REPO_DIR}/Help/locale")
-set(PROJ_OUT_BUILDER_DIR            "${PROJ_OUT_DIR}/${BUILDER}")
+set(PROJ_OUT_BUILDER_DIR            "${PROJ_OUT_DIR}/${SPHINX_BUILDER}")
 set(PROJ_L10N_DIR                   "${PROJ_SOURCE_DIR}/l10n")
 set(PROJ_L10N_VERSION_DIR           "${PROJ_L10N_DIR}/${VERSION}")
 set(PROJ_L10N_VERSION_LOCALE_DIR    "${PROJ_L10N_VERSION_DIR}/locale")
@@ -214,6 +224,15 @@ endif()
 set(FIND_PACKAGE_GIT_ARGS
     ${GIT_EXACT_VERSION_ARGS})
 
+set(FIND_PACKAGE_CONDA_ARGS)
+if(CONDA_EXACT_VERSION)
+    set(CONDA_EXACT_VERSION_ARGS ${CONDA_EXACT_VERSION} EXACT)
+else()
+    set(CONDA_EXACT_VERSION_ARGS)
+endif()
+set(FIND_PACKAGE_CONDA_ARGS
+    ${CONDA_EXACT_VERSION_ARGS})
+
 set(FIND_PACKAGE_PYTHON_ARGS)
 if(PYTHON_EXACT_VERSION)
     set(PYTHON_EXACT_VERSION_ARGS ${PYTHON_EXACT_VERSION} EXACT)
@@ -228,7 +247,7 @@ set(FIND_PACKAGE_GETTEXT_ARGS)
 set(FIND_PACKAGE_CROWDIN_ARGS)
 
 find_package(Git      MODULE QUIET ${FIND_PACKAGE_GIT_ARGS})
-find_package(Python   MODULE QUIET ${FIND_PACKAGE_PYTHON_ARGS})
+find_package(Conda    MODULE QUIET ${FIND_PACKAGE_CONDA_ARGS})
 find_package(Gettext  MODULE QUIET ${FIND_PACKAGE_GETTEXT_ARGS})
 find_package(Crowdin  MODULE QUIET ${FIND_PACKAGE_CROWDIN_ARGS})
 
@@ -381,7 +400,6 @@ configure_file(
 message(STATUS "---------- Cache Variables ----------")
 message(STATUS "VERSION                       = ${VERSION}")
 message(STATUS "LANGUAGE                      = ${LANGUAGE}")
-message(STATUS "BUILDER                       = ${BUILDER}")
 message(STATUS "UPDATE_MODE                   = ${UPDATE_MODE}")
 message(STATUS "INSTALL_MODE                  = ${INSTALL_MODE}")
 message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
@@ -389,13 +407,15 @@ message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
 message(STATUS "GIT_EXACT_VERSION             = ${GIT_EXACT_VERSION}")
+message(STATUS "CONDA_EXACT_VERSION           = ${CONDA_EXACT_VERSION}")
 message(STATUS "PYTHON_EXACT_VERSION          = ${PYTHON_EXACT_VERSION}")
 message(STATUS "GETTEXT_EXACT_VERSION         = ${GETTEXT_EXACT_VERSION}")
 message(STATUS "CROWDIN_EXACT_VERSION         = ${CROWDIN_EXACT_VERSION}")
-message(STATUS "COMPENDIUM_VERSION            = ${COMPENDIUM_VERSION}")
-message(STATUS "CONSOLE_LOCALE                = ${CONSOLE_LOCALE}")
+message(STATUS "COMPEND_VERSION               = ${COMPEND_VERSION}")
 message(STATUS "GETTEXT_WRAP_WIDTH            = ${GETTEXT_WRAP_WIDTH}")
-message(STATUS "SPHINX_ADDITIONAL_TARGETS    = ${SPHINX_ADDITIONAL_TARGETS}")
+message(STATUS "GETTEXT_ADDITIONAL_TARGETS    = ${GETTEXT_ADDITIONAL_TARGETS}")
+message(STATUS "SPHINX_BUILDER                = ${SPHINX_BUILDER}")
+message(STATUS "SPHINX_CONSOLE_LOCALE         = ${SPHINX_CONSOLE_LOCALE}")
 message(STATUS "SPHINX_VERBOSE_LEVEL          = ${SPHINX_VERBOSE_LEVEL}")
 message(STATUS "SPHINX_JOB_NUMBER             = ${SPHINX_JOB_NUMBER}")
 message(STATUS "---------- Directory-Related Variables ----------")
@@ -430,6 +450,7 @@ message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
 message(STATUS "TAG_PATTERN                   = ${TAG_PATTERN}")
 message(STATUS "FIND_PACKAGE_GIT_ARGS         = ${FIND_PACKAGE_GIT_ARGS}")
+message(STATUS "FIND_PACKAGE_CONDA_ARGS       = ${FIND_PACKAGE_CONDA_ARGS}")
 message(STATUS "FIND_PACKAGE_PYTHON_ARGS      = ${FIND_PACKAGE_PYTHON_ARGS}")
 message(STATUS "FIND_PACKAGE_GETTEXT_ARGS     = ${FIND_PACKAGE_GETTEXT_ARGS}")
 message(STATUS "FIND_PACKAGE_CROWDIN_ARGS     = ${FIND_PACKAGE_CROWDIN_ARGS}")
@@ -457,6 +478,7 @@ message(STATUS "----------------------------------------")
 
 string(REPLACE ";" "\\\\;" LANGUAGES_LIST "${LANGUAGES_LIST}")
 string(REPLACE ";" "\\\\;" FIND_PACKAGE_GIT_ARGS "${FIND_PACKAGE_GIT_ARGS}")
+string(REPLACE ";" "\\\\;" FIND_PACKAGE_CONDA_ARGS "${FIND_PACKAGE_CONDA_ARGS}")
 string(REPLACE ";" "\\\\;" FIND_PACKAGE_PYTHON_ARGS "${FIND_PACKAGE_PYTHON_ARGS}")
 string(REPLACE ";" "\\\\;" FIND_PACKAGE_GETTEXT_ARGS "${FIND_PACKAGE_GETTEXT_ARGS}")
 string(REPLACE ";" "\\\\;" FIND_PACKAGE_CROWDIN_ARGS "${FIND_PACKAGE_CROWDIN_ARGS}")
@@ -469,19 +491,24 @@ set(SCRIPT_MODE_CACHE
     # [Cache Variables]
     -D LANGUAGE=${LANGUAGE}
     -D VERSION=${VERSION}
-    -D BUILDER=${BUILDER}
     -D AUTO_DEPEND=${AUTO_DEPEND}
-    -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D UPDATE_MODE=${UPDATE_MODE}
     -D INSTALL_MODE=${INSTALL_MODE}
+    -D COMPEND_VERSION=${COMPEND_VERSION}
+    -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D GIT_REMOTE_URL=${GIT_REMOTE_URL}
     -D BASEURL_HREF=${BASEURL_HREF}
-    -D COMPENDIUM_VERSION=${COMPENDIUM_VERSION}
-    -D CONSOLE_LOCALE=${CONSOLE_LOCALE}
-    -D GETTEXT_WRAP_WIDTH=${GETTEXT_WRAP_WIDTH}
-    -D SPHINX_ADDITIONAL_TARGETS=${SPHINX_ADDITIONAL_TARGETS}
+    -D GIT_EXACT_VERSION=${GIT_EXACT_VERSION}
+    -D CONDA_EXACT_VERSION=${CONDA_EXACT_VERSION}
+    -D PYTHON_EXACT_VERSION=${PYTHON_EXACT_VERSION}
+    -D GETTEXT_EXACT_VERSION=${GETTEXT_EXACT_VERSION}
+    -D CROWDIN_EXACT_VERSION=${CROWDIN_EXACT_VERSION}
+    -D SPHINX_BUILDER=${SPHINX_BUILDER}
+    -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
     -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}
     -D SPHINX_JOB_NUMBER=${SPHINX_JOB_NUMBER}
+    -D GETTEXT_WRAP_WIDTH=${GETTEXT_WRAP_WIDTH}
+    -D GETTEXT_ADDITIONAL_TARGETS=${GETTEXT_ADDITIONAL_TARGETS}
     # [Directory-Related Variables]
     -D PROJ_SOURCE_DIR=${PROJ_SOURCE_DIR}
     -D PROJ_BINARY_DIR=${PROJ_BINARY_DIR}
@@ -501,7 +528,6 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_L10N_VERSION_LOCALE_DIR=${PROJ_L10N_VERSION_LOCALE_DIR}
     -D PROJ_L10N_VERSION_CROWDIN_DIR=${PROJ_L10N_VERSION_CROWDIN_DIR}
     # [Configuration Files]
-    -D LATEST_TXT_PATH=${LATEST_TXT_PATH}
     -D LANGUAGES_JSON_PATH=${LANGUAGES_JSON_PATH}
     -D REFERENCE_JSON_PATH=${REFERENCE_JSON_PATH}
     -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
@@ -515,6 +541,7 @@ set(SCRIPT_MODE_CACHE
     -D BRANCH_NAME=${BRANCH_NAME}
     -D TAG_PATTERN=${TAG_PATTERN}
     -D FIND_PACKAGE_GIT_ARGS=${FIND_PACKAGE_GIT_ARGS}
+    -D FIND_PACKAGE_CONDA_ARGS=${FIND_PACKAGE_CONDA_ARGS}
     -D FIND_PACKAGE_PYTHON_ARGS=${FIND_PACKAGE_PYTHON_ARGS}
     -D FIND_PACKAGE_GETTEXT_ARGS=${FIND_PACKAGE_GETTEXT_ARGS}
     -D FIND_PACKAGE_CROWDIN_ARGS=${FIND_PACKAGE_CROWDIN_ARGS})
@@ -575,12 +602,6 @@ add_custom_target(crowdin_download_po
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_download_po.cmake
     VERBATIM)
 
-add_custom_target(crowdin_status
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_status.cmake
-    VERBATIM)
-
 add_custom_target(gettext_compend_po
     COMMAND ${CMAKE_COMMAND}
             ${SCRIPT_MODE_CACHE}
@@ -594,33 +615,8 @@ add_custom_target(readthedocs_symlinks
     VERBATIM)
 
 if(AUTO_DEPEND)
-    add_dependencies(conda_requirements   prepare_git_repo)
+    add_dependencies(conda_requirements prepare_git_repo)
     add_dependencies(sphinx_update_pot  conda_requirements)
     add_dependencies(gettext_update_po  sphinx_update_pot)
     add_dependencies(sphinx_build_docs  gettext_update_po)
 endif()
-
-#[[
-git fetch origin master --depth=1 --verbose
-git show --no-patch --format=%H FETCH_HEAD
-git show --no-patch --format=%ci FETCH_HEAD
-git show --no-patch --format=%s FETCH_HEAD
-#]]
-
-
-
-# if(RES_VAR EQUAL 128)
-#     # remote: Repository not found.
-#     message(FATAL_ERROR "${ERR_VAR}")
-# elseif(RES_VAR EQUAL 0)
-# endif()
-
-find_package(Conda MODULE)
-message(STATUS "Conda_FOUND       = ${Conda_FOUND}")
-message(STATUS "Conda_EXECUTABLE  = ${Conda_EXECUTABLE}")
-message(STATUS "Conda_VERSION     = ${Conda_VERSION}")
-
-unset(Python_EXECUTABLE)
-set(Python_ROOT_DIR "${PROJ_SOURCE_DIR}/.conda")
-find_package(Python MODULE)
-message(STATUS "Python_EXECUTABLE = ${Python_EXECUTABLE}")

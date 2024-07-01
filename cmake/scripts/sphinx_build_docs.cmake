@@ -17,7 +17,7 @@ find_package(Gettext  MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
 find_package(Sphinx   MODULE REQUIRED)
 include(JsonUtils)
 include(LogUtils)
-set(ENV{LANG} "${CONSOLE_LOCALE}")
+set(ENV{LANG} "${SPHINX_CONSOLE_LOCALE}")
 
 
 if(NOT LANGUAGE STREQUAL "all")
@@ -54,16 +54,16 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGES_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGES_LIST})
-    message(STATUS "Running 'sphinx-build' command with '${BUILDER}' builder to build HTML documentation for '${_LANGUAGE}' language...")
+    message(STATUS "Running 'sphinx-build' command with '${SPHINX_BUILDER}' builder to build HTML documentation for '${_LANGUAGE}' language...")
     remove_cmake_message_indent()
     message("")
     execute_process(
         COMMAND ${Sphinx_BUILD_EXECUTABLE}
-                -b ${BUILDER}
+                -b ${SPHINX_BUILDER}
                 -D locale_dirs=${LOCALE_TO_SOURCE_DIR}            # Relative to <sourcedir>
                 -D language=${_LANGUAGE}
                 -D gettext_compact=0
-                -D gettext_additional_targets=${SPHINX_ADDITIONAL_TARGETS}
+                -D gettext_additional_targets=${GETTEXT_ADDITIONAL_TARGETS}
                 -A versionswitch=1
                 -j ${SPHINX_JOB_NUMBER}
                 -v
@@ -122,7 +122,7 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
     endif()
 
 
-    if(BUILDER MATCHES "^html$")
+    if(SPHINX_BUILDER MATCHES "^html$")
         message(STATUS "Coying 'version_switch.js' file to the html output directory...")
         set(PROTOCOLS "file:///" "https://")
         foreach(PROTOCOL ${PROTOCOLS})
@@ -158,4 +158,4 @@ endforeach()
 unset(_LANGUAGE)
 
 
-message(STATUS "The '${BUILDER}' documentation is built succesfully!")
+message(STATUS "The '${SPHINX_BUILDER}' documentation is built succesfully!")

@@ -20,7 +20,7 @@ find_package(Sphinx   MODULE REQUIRED)
 include(GitUtils)
 include(JsonUtils)
 include(LogUtils)
-set(ENV{LANG} "${CONSOLE_LOCALE}")
+set(ENV{LANG} "${SPHINX_CONSOLE_LOCALE}")
 
 
 message(STATUS "Determining whether it is required to update .pot files...")
@@ -151,6 +151,7 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} 
             -S ${PROJ_OUT_REPO_SPHINX_DIR}
             -B ${PROJ_OUT_REPO_SPHINX_DIR}/build
+            # Enable SPHINX_HTML option to configure conf.py.in into conf.py.
             -D SPHINX_HTML=ON
             # Since find_program(SPHINX_EXECUTABLE) of CMake repo doesn't support to 
             # find sphinx-build inside the virtual environment currently, I have to 
@@ -187,7 +188,7 @@ execute_process(
             -b gettext
             -D version=${VERSION}                               # Specify 'Project-Id-Version' in .pot files
             -D gettext_compact=0
-            -D gettext_additional_targets=${SPHINX_ADDITIONAL_TARGETS}
+            -D gettext_additional_targets=${GETTEXT_ADDITIONAL_TARGETS}
             -c ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}                 # <configdir>, where conf.py locates
             ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                    # <sourcedir>, where index.rst locates
             ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES    # <outputdir>, where .pot generates

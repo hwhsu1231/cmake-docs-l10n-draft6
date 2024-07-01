@@ -169,7 +169,7 @@ jobs:
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          FILTER=".include | map(select(.COMPENDIUM_VERSION == null)) | .[].VERSION"
+          FILTER=".include | map(select(.COMPEND_VERSION == null)) | .[].VERSION"
           OUTPUT=$(jq -r "$FILTER" .github/workflows/matrix.json)
           readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
           LABELS_LIST="gettext"

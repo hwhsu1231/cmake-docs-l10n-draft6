@@ -11,8 +11,8 @@ message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 set(CMAKE_MODULE_PATH 
     "${PROJ_CMAKE_MODULES_DIR}"
     "${PROJ_CMAKE_MODULES_DIR}/common")
-find_package(Git    MODULE ${FIND_PACKAGE_GIT_ARGS}    REQUIRED)
-find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
+find_package(Git    MODULE ${FIND_PACKAGE_GIT_ARGS}     REQUIRED)
+find_package(Conda  MODULE ${FIND_PACKAGE_CONDA_ARGS}   REQUIRED)
 include(GitUtils)
 include(JsonUtils)
 include(LogUtils)
@@ -98,8 +98,7 @@ message(STATUS "Running 'git checkout -B' command to switch to the 'current' bra
 remove_cmake_message_indent()
 message("")
 execute_process(
-    COMMAND 
-        ${Git_EXECUTABLE} checkout -B current
+    COMMAND ${Git_EXECUTABLE} checkout -B current
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
@@ -133,82 +132,96 @@ message("")
 restore_cmake_message_indent()
 
 
-message(STATUS "Determining whether to remove the virtual environment...")
-set(CURRENT_PYTHON_VERSION "${Python_VERSION}")
-set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
-if(EXISTS "${PYVENV_CFG_PATH}")
-    file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENT)
-    string(REGEX MATCH    "version = [0-9]+\\.[0-9]+\\.[0-9]+" VERSION_LINE "${PYVENV_CFG_CONTENT}")
-    string(REGEX REPLACE  "version = ([0-9]+\\.[0-9]+\\.[0-9]+)" "\\1" PREVIOUS_PYTHON_VERSION "${VERSION_LINE}")
-    if(NOT CURRENT_PYTHON_VERSION STREQUAL PREVIOUS_PYTHON_VERSION)
-        set(REMOVE_VENV_REQUIRED ON)
-    else()
-        set(REMOVE_VENV_REQUIRED OFF)
-    endif()
+message(STATUS "Determining whether to (re)create the virtual environment...")
+set(REQUIRED_PYTHON_VERSION "${PYTHON_EXACT_VERSION}")
+set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
+find_package(Python QUIET MODULE)
+string(FIND "${Python_EXECUTABLE}" "${Python_ROOT_DIR}" EXECUTABLE_IS_IN_ROOT)
+if(EXECUTABLE_IS_IN_ROOT EQUAL 0)
+    set(PREVIOUS_PYTHON_VERSION "${Python_VERSION}")
 else()
-    set(REMOVE_VENV_REQUIRED OFF)
+    set(PREVIOUS_PYTHON_VERSION "")
+endif()
+if (PREVIOUS_PYTHON_VERSION STREQUAL "")
+    set(RECREATE_VENV_REQUIRED ON)
+else()
+    if (REQUIRED_PYTHON_VERSION STREQUAL "")
+        set(RECREATE_VENV_REQUIRED OFF)
+    else()
+        string(FIND "${PREVIOUS_PYTHON_VERSION}" "${REQUIRED_PYTHON_VERSION}" PREVIOUS_IS_REQUIRED)
+        if(PREVIOUS_IS_REQUIRED EQUAL 0)
+            set(RECREATE_VENV_REQUIRED OFF)
+        else()
+            set(RECREATE_VENV_REQUIRED ON)
+        endif()
+    endif()
 endif()
 remove_cmake_message_indent()
 message("")
-message("CURRENT_PYTHON_VERSION   = ${CURRENT_PYTHON_VERSION}")
+message("Python_ROOT_DIR          = ${Python_ROOT_DIR}")
+message("Python_EXECUTABLE        = ${Python_EXECUTABLE}")
+message("EXECUTABLE_IS_IN_ROOT    = ${EXECUTABLE_IS_IN_ROOT}")
+message("REQUIRED_PYTHON_VERSION  = ${REQUIRED_PYTHON_VERSION}")
 message("PREVIOUS_PYTHON_VERSION  = ${PREVIOUS_PYTHON_VERSION}")
-message("REMOVE_VENV_REQUIRED     = ${REMOVE_VENV_REQUIRED}")
+message("PREVIOUS_IS_REQUIRED     = ${PREVIOUS_IS_REQUIRED}")
+message("RECREATE_VENV_REQUIRED   = ${RECREATE_VENV_REQUIRED}")
 message("")
 restore_cmake_message_indent()
-if(REMOVE_VENV_REQUIRED)
-    file(REMOVE_RECURSE "${PROJ_VENV_DIR}")
-    message(STATUS "Removing the virtual environment '${PROJ_VENV_DIR}'...")
-else()
-    message(STATUS "No need to remove the virtual environment.")
-endif()
 
 
-message(STATUS "Running 'python -m venv' command to install a virtual environemnt...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Python_EXECUTABLE} -m venv ${PROJ_VENV_DIR}
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR
-    ERROR_VARIABLE  ERR_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE)
-if(RES_VAR EQUAL 0)
-    if(NOT ERR_VAR)
-        message("The virtual environment is installed in:")
-        message("${PROJ_VENV_DIR}")
+if(RECREATE_VENV_REQUIRED)
+    message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
+    remove_cmake_message_indent()
+    message("")
+    execute_process(
+        COMMAND ${Conda_EXECUTABLE} create
+                python=${REQUIRED_PYTHON_VERSION}
+                --channel conda-forge
+                --prefix ${PROJ_VENV_DIR} -y
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+        if(NOT ERR_VAR)
+            # message("The virtual environment is installed in:")
+            # message("${PROJ_VENV_DIR}")
+        else()
+            message("")
+            message("---------- RES ----------")
+            message("")
+            message("${RES_VAR}")
+            message("")
+            message("---------- ERR ----------")
+            message("")
+            message("${ERR_VAR}")
+            message("")
+            message("-------------------------")
+        endif()
     else()
         message("")
         message("---------- RES ----------")
         message("")
         message("${RES_VAR}")
         message("")
+        message("---------- OUT ----------")
+        message("")
+        message("${OUT_VAR}")
+        message("")
         message("---------- ERR ----------")
         message("")
         message("${ERR_VAR}")
         message("")
         message("-------------------------")
+        message("")
+        message(FATAL_ERROR "Fatal error occurred.")
     endif()
+    message("")
+    restore_cmake_message_indent()
 else()
-    message("")
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- OUT ----------")
-    message("")
-    message("${OUT_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
+    message(STATUS "No need to recreate the virtual environment.")
 endif()
-message("")
-restore_cmake_message_indent()
 
 
 message(STATUS "Determining whether to install the requirements...")
@@ -244,6 +257,7 @@ endif()
 
 
 unset(Python_EXECUTABLE)
+unset(_Python_EXECUTABLE CACHE)
 set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
 find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
 
@@ -251,6 +265,7 @@ find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
 message(STATUS "Running 'pip install --upgrade' command to upgrade pip in the virtual environment...")
 remove_cmake_message_indent()
 message("")
+set(ENV{PYTHONNOUSERSITE} "1")
 execute_process(
     COMMAND ${Python_EXECUTABLE} -m pip install pip
             --upgrade
@@ -258,10 +273,9 @@ execute_process(
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR
-    ERROR_VARIABLE  ERR_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE)
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+unset(ENV{PYTHONNOUSERSITE})
 if(RES_VAR EQUAL 0)
     if(ERR_VAR)
         # Success, but there might be some warnings.
@@ -298,15 +312,17 @@ if(EXISTS "${PREVIOUS_FREEZE_TXT_PATH}")
     message(STATUS "Running 'pip uninstall' command to uninstall the previous packages...")
     remove_cmake_message_indent()
     message("")
+    set(ENV{PYTHONNOUSERSITE} "1")
     execute_process(
-        COMMAND ${Python_EXECUTABLE} -m pip uninstall -y
+        COMMAND ${Python_EXECUTABLE} -m pip uninstall
                 --requirement ${PREVIOUS_FREEZE_TXT_PATH}
+                -y
         ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
         RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR
-        ERROR_VARIABLE  ERR_VAR
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_STRIP_TRAILING_WHITESPACE)
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    unset(ENV{PYTHONNOUSERSITE})
     if(RES_VAR EQUAL 0)
         if(ERR_VAR)
             # Success, but there might be some warnings.
@@ -369,17 +385,18 @@ restore_cmake_message_indent()
 message(STATUS "Running 'pip install' command to install the requirements...")
 remove_cmake_message_indent()
 message("")
+set(ENV{PYTHONNOUSERSITE} "1")
 execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip install 
+    COMMAND ${Python_EXECUTABLE} -m pip install
             --progress-bar off
             --force-reinstall
             --requirement ${REQUIREMENTS_PATH}
     ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
     RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR
-    ERROR_VARIABLE  ERR_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE)
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+unset(ENV{PYTHONNOUSERSITE})
 if(RES_VAR EQUAL 0)
     if(ERR_VAR)
         # Success, but there might be some warnings.
@@ -409,6 +426,10 @@ else()
 endif()
 message("")
 restore_cmake_message_indent()
+
+
+set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+find_package(Sphinx   MODULE REQUIRED)
 
 
 file(WRITE "${PREVIOUS_REFERENCE_TXT_PATH}" ${CURRENT_REFERENCE})
