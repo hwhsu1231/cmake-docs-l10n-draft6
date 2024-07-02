@@ -16,7 +16,7 @@
 #
 languages_mapping: &global_languages_mapping
   locale:
-    ja:     jp_JP
+    ja:     ja_JP
     ru:     ru_RU
     zh-CN:  zh_CN
     zh-TW:  zh_TW
