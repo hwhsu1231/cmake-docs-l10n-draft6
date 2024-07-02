@@ -69,10 +69,10 @@ The translations are contributed in Crowdin Project and downloaded automatically
 Git Repository:
 
 - GitHub (main): https://github.com/hwhsu1231/cmake-docs-l10n
-- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
-- GitFlic (mirror): https://gitflic.ru/project/hwhsu1231/cmake-docs-l10n
 - GitLab (mirror): https://github.com/hwhsu1231/cmake-docs-l10n
+- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
 - GitCode (mirror): https://gitcode.com/hwhsu1231/cmake-docs-l10n
+- GitFlic (mirror): https://gitflic.ru/project/hwhsu1231/cmake-docs-l10n
 - Gitea (mirror): https://gitea.com/hwhsu1231/cmake-docs-l10n
 - Codeberg (mirror): https://codeberg.org/hwhsu1231/cmake-docs-l10n
 
