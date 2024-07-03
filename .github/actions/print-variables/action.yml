@@ -1,0 +1,29 @@
+name: print-variables
+
+description: Print Variables
+
+runs:
+  using: composite
+  steps:
+    - name: Check Contexts, Inputs, and Secrets
+      shell: bash
+      run: |
+        echo "[Contexts]"
+        echo "github.job = ${{ github.job }}"
+        echo "github.ref = ${{ github.ref }}"
+        echo "github.ref_name = ${{ github.ref_name }}"
+        echo "github.event.action = ${{ github.event.action }}"
+        echo "github.event.number = ${{ github.event.number }}"
+        echo "github.event_name = ${{ github.event_name }}"
+        echo "[Inputs]"
+        echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+        echo "inputs.VERSION = ${{ inputs.VERSION }}"
+        echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
+        echo "inputs.UPDATE_MODE = ${{ inputs.UPDATE_MODE }}"
+        echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
+        echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+        echo "[Secrets]"
+        echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
+        echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+        echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
+        echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"

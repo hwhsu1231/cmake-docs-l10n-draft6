@@ -21,6 +21,9 @@ jobs:
           - 'ubuntu-latest'
           - 'macos-latest'
     steps:
+      - name: Check Contexts, Inputs, and Secrets
+        uses: ./.github/actions/print-variables.yml
+
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
