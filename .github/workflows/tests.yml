@@ -9,6 +9,7 @@ on:
       - 'source'
     paths:
       - '.github/actions/cmake-configure/action.yml'
+      - '.github/workflows/tests.yml'
   workflow_dispatch:
 
 jobs:
@@ -21,14 +22,14 @@ jobs:
           - 'ubuntu-latest'
           - 'macos-latest'
     steps:
-      - name: Check Contexts, Inputs, and Secrets
-        uses: ./.github/actions/print-variables
-
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
           submodules: true
+
+      - name: Check Contexts, Inputs, and Secrets
+        uses: ./.github/actions/print-variables
 
       - name: Setup CMake 3.23
         uses: jwlawson/actions-setup-cmake@v2.0
