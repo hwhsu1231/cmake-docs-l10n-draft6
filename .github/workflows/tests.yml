@@ -51,9 +51,6 @@ jobs:
           ref: ${{ github.ref }}
           submodules: true
 
-      - name: Check Contexts, Inputs, and Secrets
-        uses: ./.github/actions/print-variables
-
       - name: Setup CMake 3.23
         uses: jwlawson/actions-setup-cmake@v2.0
         with:
