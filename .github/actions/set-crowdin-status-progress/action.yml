@@ -36,7 +36,7 @@ runs:
 
     - name: Set the Crowdin Status Progress to $GITHUB_OUTPUT (Linux/macOS)
       id: scsp
-      if: ${{ runner.os == 'Linux' || ruuner.os == 'macOS' }}
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
       run: |
         CROWDIN_BRANCH=${{ inputs.crowdin-branch }}
