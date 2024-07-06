@@ -21,25 +21,25 @@ runs:
         npm view @crowdin/cli versions | jq -r '.'
         # AVAILABLE_VERSIONS=($(jq -r '.' languages.json | tr -d '\r'))
 
-    - name: Setup Crowdin CLI (Windows)
-      if: ${{ runner.os == 'Windows' }}
-      shell: cmd
-      run: |
-        npm install -g @crowdin/cli
-        crowdin --version
+    # - name: Setup Crowdin CLI (Windows)
+    #   if: ${{ runner.os == 'Windows' }}
+    #   shell: cmd
+    #   run: |
+    #     npm install -g @crowdin/cli
+    #     crowdin --version
 
-    - name: Setup Crowdin CLI (macOS)
-      if: ${{ runner.os == 'macOS' }}
-      shell: bash
-      run: |
-        brew tap crowdin/crowdin
-        brew install crowdin@4
+    # - name: Setup Crowdin CLI (macOS)
+    #   if: ${{ runner.os == 'macOS' }}
+    #   shell: bash
+    #   run: |
+    #     brew tap crowdin/crowdin
+    #     brew install crowdin@4
 
-    - name: Setup Crowdin CLI (Linux)
-      if: ${{ runner.os == 'Linux' }}
-      shell: bash
-      run: |
-        npm install -g @crowdin/cli
-        crowdin --version
-        # wget -qO - https://artifacts.crowdin.com/repo/GPG-KEY-crowdin | sudo apt-key add -
-        # echo "deb https://artifacts.crowdin.com/repo/deb/ /" > /etc/apt/sources.list.d/crowdin.list
+    # - name: Setup Crowdin CLI (Linux)
+    #   if: ${{ runner.os == 'Linux' }}
+    #   shell: bash
+    #   run: |
+    #     npm install -g @crowdin/cli
+    #     crowdin --version
+    #     # wget -qO - https://artifacts.crowdin.com/repo/GPG-KEY-crowdin | sudo apt-key add -
+    #     # echo "deb https://artifacts.crowdin.com/repo/deb/ /" > /etc/apt/sources.list.d/crowdin.list
