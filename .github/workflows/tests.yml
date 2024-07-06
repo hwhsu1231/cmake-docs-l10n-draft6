@@ -69,7 +69,7 @@ jobs:
           cmake-version: '3.23'
 
       - name: Setup Crowdin CLI
-        uses: ./.github/actions/setup-crowdin
+        uses: ./.github/actions/setup-crowdin-cli
         with:
           crowdin-version: '4'
 
