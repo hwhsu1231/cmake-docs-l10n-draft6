@@ -9,7 +9,7 @@ inputs:
     default: 'all'
 
 outputs:
-  crowdin-language-args:
+  CROWDIN_LANGUAGE_ARGS:
     value: ${{ steps.slago.outputs.CROWDIN_LANGUAGE_ARGS }}
     description: xxx
 
