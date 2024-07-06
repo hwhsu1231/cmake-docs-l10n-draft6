@@ -62,25 +62,25 @@ jobs:
         with:
           cmake-version: '3.23'
 
-      - name: Set LANGUAGE_ARGS variable in GITHUB_OUTPUT
+      - name: Set CROWDIN_LANGUAGE_ARGS variable in GITHUB_OUTPUT
         id: slago
         shell: bash
         run: |
           if [[ "${{ inputs.LANGUAGE }}" == "all" ]]; then
-            LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
+            CROWDIN_LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
           else
-            LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
+            CROWDIN_LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
           fi
-          echo "LANGUAGES: ${LANGUAGES[@]}"
-          LANGUAGE_ARGS=""
-          for LANGUAGE in "${LANGUAGES[@]}"; do
-            if [[ -z $LANGUAGE_ARGS ]]; then
-              LANGUAGE_ARGS="--language $LANGUAGE"
+          echo "CROWDIN_LANGUAGES: ${CROWDIN_LANGUAGES[@]}"
+          CROWDIN_LANGUAGE_ARGS=""
+          for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGES[@]}"; do
+            if [[ -z $CROWDIN_LANGUAGE_ARGS ]]; then
+              CROWDIN_LANGUAGE_ARGS="--language $CROWDIN_LANGUAGE"
             else
-              LANGUAGE_ARGS="$LANGUAGE_ARGS --language $LANGUAGE"
+              CROWDIN_LANGUAGE_ARGS="$CROWDIN_LANGUAGE_ARGS --language $CROWDIN_LANGUAGE"
             fi
           done
-          echo "LANGUAGE_ARGS=$LANGUAGE_ARGS" >> $GITHUB_OUTPUT
+          echo "CROWDIN_LANGUAGE_ARGS=$CROWDIN_LANGUAGE_ARGS" >> $GITHUB_OUTPUT
 
       # - name: Check whether CMake is installed
       #   run: |
