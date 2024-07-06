@@ -1,0 +1,39 @@
+name: setup-crowdin
+
+description: Setup Crowdin CLI
+
+inputs:
+  crowdin-version:
+    required: false
+    description: 'Value passed to GETTEXT_JOB_NUMBER cache.'
+    default: '[default]'
+
+
+runs:
+  using: composite
+  steps:
+    - name: Check available versions
+      shell: bash
+      run: |
+        which npm
+        npm --version
+
+    - name: Setup Crowdin CLI (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        npm install -g @crowdin/cli && crowdin --version
+
+    - name: Setup Crowdin CLI (macOS)
+      if: ${{ runner.os == 'macOS' }}
+      shell: bash
+      run: |
+        brew tap crowdin/crowdin
+        brew install crowdin@4
+
+    - name: Setup Crowdin CLI (Linux)
+      if: ${{ runner.os == 'Linux' }}
+      shell: bash
+      run: |
+        wget -qO - https://artifacts.crowdin.com/repo/GPG-KEY-crowdin | sudo apt-key add -
+        echo "deb https://artifacts.crowdin.com/repo/deb/ /" > /etc/apt/sources.list.d/crowdin.list

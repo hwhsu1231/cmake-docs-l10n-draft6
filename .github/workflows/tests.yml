@@ -32,6 +32,7 @@ jobs:
           - 'windows-latest'
           - 'ubuntu-latest'
           - 'macos-latest'
+      fail-fast: false
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
