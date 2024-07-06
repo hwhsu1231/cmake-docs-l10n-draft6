@@ -10,10 +10,10 @@
 </div>
 
 <h1 id="localization-of-cmake-documentation">
-CMake 文档的本地化
+Localization of CMake Documentation
 </h1>
 
-<details><summary><strong>切换语言</strong></summary>
+<details><summary><strong>Switch Languages</strong></summary>
 <p></p>
 <ul>
   <li><a href="./README.md"><code>en_US</code> : English</a></li>
@@ -25,27 +25,27 @@ CMake 文档的本地化
 </details>
 
 <h2 id="table-of-contents">
-目次表
+Table of Contents
 </h2>
 
-- <a href="#introduction">介绍</a>
-- <a href="#progress-of-translations">翻译进度</a>
-- <a href="#preview-translations">预览翻译</a>
-  - <a href="#preview-in-local-build">在本地构建中预览</a>
-  - <a href="#preview-in-gh-pages">在 GitHub 页面中预览</a>
-- <a href="#licenses">许可证</a>
+- <a href="#introduction">Introduction</a>
+- <a href="#progress-of-translations">Progress of Translations</a>
+- <a href="#preview-translations">Preview Translations</a>
+  - <a href="#preview-in-local-build">Preview in Local Build</a>
+  - <a href="#preview-in-gh-pages">Preview in GitHub Pages</a>
+- <a href="#licenses">Licenses</a>
 - <a href="#translation-disclaimer">Translation Disclaimer</a>
-- <a href="#about-author">维护着列表</a>
-- <a href="#support-this-project">支持这个项目</a>
-- <a href="#sponsorship">赞助</a>
-- <a href="#contributors-list">贡献者列表</a>
-  - <a href="#code-contributors">代码贡献者</a>
-  - <a href="#translation-contributors">翻译贡献者</a>
-  - <a href="#financial-contributors">财务贡献者</a>
+- <a href="#about-author">Maintainers List</a>
+- <a href="#support-this-project">Support This Project</a>
+- <a href="#sponsorship">Sponsorship</a>
+- <a href="#contributors-list">Contributors List</a>
+  - <a href="#code-contributors">Code Contributors</a>
+  - <a href="#translation-contributors">Translation Contributors</a>
+  - <a href="#financial-contributors">Financial Contributors</a>
 - <a href="#acknowledgements">Acknowledgements</a>
 
 <h2 id="introduction"><a href="#table-of-contents">
-介绍
+Introduction
 </a></h2>
 
 <div align="center">
@@ -68,10 +68,10 @@ The translations are contributed in Crowdin Project and downloaded automatically
 Git Repository:
 
 - GitHub (main): https://github.com/hwhsu1231/cmake-docs-l10n
-- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
-- GitFlic (mirror): https://gitflic.ru/project/hwhsu1231/cmake-docs-l10n
 - GitLab (mirror): https://github.com/hwhsu1231/cmake-docs-l10n
+- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
 - GitCode (mirror): https://gitcode.com/hwhsu1231/cmake-docs-l10n
+- GitFlic (mirror): https://gitflic.ru/project/hwhsu1231/cmake-docs-l10n
 - Gitea (mirror): https://gitea.com/hwhsu1231/cmake-docs-l10n
 - Codeberg (mirror): https://codeberg.org/hwhsu1231/cmake-docs-l10n
 
@@ -224,17 +224,17 @@ Progress of Translations
 </div>
 
 <h2 id="preview-translations"><a href="#table-of-contents">
-预览翻译
+Preview Translations
 </a></h2>
 
 <h3 id="preview-in-local-build"><a href="#table-of-contents">
-在本地构建中预览
+Preview in Local Build
 </a></h3>
 
 You can preview translations in Local Build. About how to build documentation locally, see this [section](docs/CONTRIBUTING.md#how-to-build-the-docs-locally) for details.
 
 <h3 id="preview-in-gh-pages"><a href="#table-of-contents">
-在 GitHub 页面中预览
+Preview in GitHub Pages
 </a></h3>
 
 You can preview translations in GitHub Pages:
@@ -265,7 +265,7 @@ You can preview translations in GitHub Pages:
 You can switch to other available versions by version switcher.
 
 <h2 id="licenses"><a href="#table-of-contents">
-许可证
+Licenses
 </a></h2>
 
 All the script files (<code>CMakeLists.txt</code> and <code>.cmake</code> files) and workflow files (<code>.yml</code> files inside <code>.github/workflows/</code> directory) of this project are distributed under <a href="https://opensource.org/license/bsd-3-clause/">3-Clause BSD</a> license. See <a href="./LICENSE">LICENSE</a> for details.
@@ -416,10 +416,10 @@ Alternatively, you can sponsor the author through the following platforms and e-
     <!-- Row 5 -->
     <tr>
       <th colspan="1" style="text-align: center; vertical-align: middle; width: 50%;">
-        <a href="https://global.alipay.com/" target="_blank">支付宝</a>
+        <a href="https://global.alipay.com/" target="_blank">Alipay</a>
       </th>
       <th colspan="1" style="text-align: center; vertical-align: middle; width: 50%;">
-        <a href="https://www.jkopay.com/" target="_blank">街口支付</a>
+        <a href="https://www.jkopay.com/" target="_blank">Jkopay</a>
       </th>
     </tr>
     <!-- Row 6 -->
