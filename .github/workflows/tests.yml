@@ -73,13 +73,13 @@ jobs:
         with:
           crowdin-version: '4'
 
-      - name: Set CROWDIN_LANGUAGE_ARGS variable in GITHUB_OUTPUT
+      - name: Setup crowdin-language-args
         id: slago
         uses: ./.github/actions/crowdin-language-args
         with:
           language: 'all'
 
-      - name: Set up Environment Variables
+      - name: Setup Environment Variables
         shell: bash
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
