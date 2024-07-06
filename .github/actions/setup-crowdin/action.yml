@@ -15,8 +15,9 @@ runs:
     - name: Check available versions
       shell: bash
       run: |
-        which npm
-        npm --version
+        # which npm
+        # npm --version
+        npm view @crowdin/cli versions
 
     - name: Setup Crowdin CLI (Windows)
       if: ${{ runner.os == 'Windows' }}
