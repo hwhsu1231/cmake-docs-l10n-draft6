@@ -20,10 +20,9 @@ runs:
   steps:
     - name: Set the Crowdin Status Progress to $GITHUB_OUTPUT
       id: scsp
-      # if: ${{ runner.os == 'Windows' }}
       shell: bash
       run: |
-        set -x
+        # set -x
 
         CROWDIN_BRANCH=${{ inputs.crowdin-branch }}
         CROWDIN_CONFIG=$(echo "${{ inputs.crowdin-config }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
@@ -36,20 +35,4 @@ runs:
         echo "CROWDIN_STATUS_PROGRESS:"
         echo "$CROWDIN_STATUS_PROGRESS"
 
-        trap 'echo "Error on line $LINENO: $BASH_COMMAND"' ERR
-
-    # - name: Set the Crowdin Status Progress to $GITHUB_OUTPUT (Linux/macOS)
-    #   id: scsplm
-    #   if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
-    #   shell: bash
-    #   run: |
-    #     CROWDIN_BRANCH=${{ inputs.crowdin-branch }}
-    #     CROWDIN_CONFIG=${{ inputs.crowdin-config }}
-    #     CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=${CROWDIN_BRANCH} --config=${CROWDIN_CONFIG} --no-progress --verbose 2>&1)
-    #     CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-    #     delimiter="$(openssl rand -hex 8)"
-    #     echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
-    #     echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
-    #     echo "$delimiter"                           >> $GITHUB_OUTPUT
-    #     echo "CROWDIN_STATUS_PROGRESS:"
-    #     echo "$CROWDIN_STATUS_PROGRESS"
+        # trap 'echo "Error on line $LINENO: $BASH_COMMAND"' ERR
