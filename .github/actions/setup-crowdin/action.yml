@@ -5,28 +5,20 @@ description: Setup Crowdin CLI
 inputs:
   crowdin-version:
     required: false
-    description: 'Value passed to GETTEXT_JOB_NUMBER cache.'
-    default: '[default]'
+    description: 'Specific version of Crowdin to install.'
+    default: ''
 
 
 runs:
   using: composite
   steps:
-    - name: Check available versions
+    # - name: Setup Crowdin CLI (Windows)
+      # if: ${{ runner.os == 'Windows' }}
+    - name: Setup Crowdin CLI
       shell: bash
       run: |
-        # which npm
-        # npm --version
-        # npm view @crowdin/cli versions
-        npm view @crowdin/cli versions | jq -r '.'
-        # AVAILABLE_VERSIONS=($(jq -r '.' languages.json | tr -d '\r'))
-
-    # - name: Setup Crowdin CLI (Windows)
-    #   if: ${{ runner.os == 'Windows' }}
-    #   shell: cmd
-    #   run: |
-    #     npm install -g @crowdin/cli
-    #     crowdin --version
+        npm install -g @crowdin/cli@${{ inputs.crowdin-version }}
+        crowdin --version
 
     # - name: Setup Crowdin CLI (macOS)
     #   if: ${{ runner.os == 'macOS' }}
