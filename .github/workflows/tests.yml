@@ -73,7 +73,7 @@ jobs:
         with:
           crowdin-version: '4'
 
-      - name: Setup crowdin-language-args
+      - name: Setup crowdin-language-args for 'crowdin download'
         id: slago
         uses: ./.github/actions/crowdin-language-args
         with:
