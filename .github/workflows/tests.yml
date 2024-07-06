@@ -11,6 +11,12 @@ on:
       - '.github/actions/cmake-configure/action.yml'
       - '.github/workflows/tests.yml'
   workflow_dispatch:
+    inputs:
+      LANGUAGE:
+        type: string
+        default: 'all'
+        description: xxxx
+        required: true
 
 jobs:
   single:
@@ -89,3 +95,23 @@ jobs:
         shell: bash
         run: |
           which node && node --version
+
+      - name: Set LANGUAGE_ARGS variable in GITHUB_OUTPUT
+        id: slago
+        shell: bash
+        run: |
+          if [[ "${{ inputs.LANGUAGE }}" == "all" ]]; then
+            LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
+          else
+            LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
+          fi
+          echo "LANGUAGES: ${LANGUAGES[@]}"
+          LANGUAGE_ARGS=""
+          for LANGUAGE in "${LANGUAGES[@]}"; do
+            if [[ -z $LANGUAGE_ARGS ]]; then
+              LANGUAGE_ARGS="--language $LANGUAGE"
+            else
+              LANGUAGE_ARGS="$LANGUAGE_ARGS --language $LANGUAGE"
+            fi
+          done
+          echo "LANGUAGE_ARGS=$LANGUAGE_ARGS" >> $GITHUB_OUTPUT
