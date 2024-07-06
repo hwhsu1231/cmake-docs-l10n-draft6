@@ -78,8 +78,8 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Set CROWDIN_LANGUAGE_ARGS to $GITHUB_OUTPUT
-        id: slago
+      - name: Set the Crowdin Language Arguments to $GITHUB_OUTPUT
+        id: scla
         uses: ./.github/actions/set-crowdin-language-args
         with:
           language: 'all'
@@ -89,25 +89,29 @@ jobs:
         run: |
           crowdin download \
             --dryrun \
-            ${{ steps.slago.outputs.CROWDIN_LANGUAGE_ARGS }} \
+            ${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }} \
             --branch ${{ inputs.VERSION }} \
             --export-only-approved \
             --no-progress \
             --verbose
 
-      - name: Get the Translated/Proofread Progress
-        id: gtpp
-        shell: bash
-        run: |
-          CROWDIN_YML_PATH=$(pwd)/crowdin.yml
-          CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
-          PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-          delimiter="$(openssl rand -hex 8)"
-          echo "PROGRESS_OUTPUT<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "$PROGRESS_OUTPUT"             >> $GITHUB_OUTPUT
-          echo "$delimiter"                   >> $GITHUB_OUTPUT
-          echo "PROGRESS_OUTPUT:"
-          echo "$PROGRESS_OUTPUT"
+      - name: Set the Crowdin Status Progress to $GITHUB_OUTPUT
+        id: scsp
+        uses: ./.github/actions/set-crowdin-status-progress
+        with:
+          crowdin-config: '${{ github.workspace }}/crowdin.yml'
+          crowdin-branch: 'repo'
+        # shell: bash
+        # run: |
+        #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
+        #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
+        #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
+        #   delimiter="$(openssl rand -hex 8)"
+        #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
+        #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
+        #   echo "$delimiter"                           >> $GITHUB_OUTPUT
+        #   echo "CROWDIN_STATUS_PROGRESS:"
+        #   echo "$CROWDIN_STATUS_PROGRESS"
 
       # # - name: Check whether CMake is installed
       # #   run: |
