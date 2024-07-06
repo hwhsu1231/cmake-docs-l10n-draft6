@@ -1,6 +1,6 @@
-name: setup-crowdin-cli
+name: install-crowdin-cli
 
-description: Setup Crowdin CLI
+description: Install Crowdin CLI
 
 inputs:
   crowdin-version:
@@ -12,7 +12,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Crowdin CLI
+    - name: Install Crowdin CLI
       shell: bash
       run: |
         npm install -g @crowdin/cli@${{ inputs.crowdin-version }}

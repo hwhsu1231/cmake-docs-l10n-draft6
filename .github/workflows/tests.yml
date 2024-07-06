@@ -63,24 +63,24 @@ jobs:
           ref: ${{ github.ref }}
           submodules: true
 
-      - name: Setup CMake
-        uses: jwlawson/actions-setup-cmake@v2.0
+      - name: Install CMake
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
-      - name: Setup Crowdin CLI
-        uses: ./.github/actions/setup-crowdin-cli
+      - name: Install Crowdin CLI
+        uses: ./.github/actions/install-crowdin-cli
         with:
           crowdin-version: '4'
 
-      - name: Setup Environment Variables
+      - name: Set Environment Variables to $GITHUB_ENV
         shell: bash
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Prepare CROWDIN_LANGUAGE_ARGS for 'crowdin download' command
+      - name: Set CROWDIN_LANGUAGE_ARGS to $GITHUB_OUTPUT
         id: slago
-        uses: ./.github/actions/crowdin-language-args
+        uses: ./.github/actions/set-crowdin-language-args
         with:
           language: 'all'
 

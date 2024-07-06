@@ -1,0 +1,17 @@
+name: install-cmake
+
+description: Install CMake
+
+inputs:
+  cmake-version:
+    required: false
+    description: 'Specific version of CMake to install.'
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Install CMake
+      uses: jwlawson/actions-setup-cmake@v2.0
+      with:
+        cmake-version: ${{ inputs.cmake-version }}
