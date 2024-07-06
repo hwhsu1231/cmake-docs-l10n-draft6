@@ -84,7 +84,7 @@ jobs:
         with:
           language: 'all'
 
-      - name: Download docs from the '${{ inputs.VERSION }}' branch in Crowdin
+      - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
         shell: bash
         run: |
           crowdin download \
