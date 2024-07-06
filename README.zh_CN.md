@@ -49,12 +49,12 @@ Introduction
 </a></h2>
 
 <div align="center">
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/stargazers" title="GitHub Stars" target="_blank"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/hwhsu1231/cmake-docs-l10n-draft5.svg?logo=github&style=flat&color=blue" ></a>
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/network/members" title="GitHub Forks" target="_blank"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/hwhsu1231/cmake-docs-l10n-draft5.svg?logo=github&style=flat&color=blue" ></a>
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/graphs/contributors" title="GitHub Contributors" target="_blank"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/hwhsu1231/cmake-docs-l10n-draft5.svg?logo=github&style=flat&color=blue" ></a>
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5" title="GitHub Repo Size" target="_blank"><img alt="GitHub Repo Size" src="https://img.shields.io/github/repo-size/hwhsu1231/cmake-docs-l10n-draft5?logo=github&style=flat&color=blue"></a>
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/issues" title="GitHub Open Issues" target="_blank"><img alt="GitHub Open Issues" src="https://img.shields.io/github/issues/hwhsu1231/cmake-docs-l10n-draft5.svg?logo=github&style=flat&color=brightgreen" ></a>
-  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/pulls" title="GitHub Open Pull Requests" target="_blank"><img alt="GitHub Open Pull Requests" src="https://img.shields.io/github/issues-pr/hwhsu1231/cmake-docs-l10n-draft5?logo=github&style=flat&color=brightgreen" ></a><br />
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/stargazers" title="GitHub Stars" target="_blank"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/hwhsu1231/cmake-docs-l10n-draft6.svg?logo=github&style=flat&color=blue" ></a>
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/network/members" title="GitHub Forks" target="_blank"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/hwhsu1231/cmake-docs-l10n-draft6.svg?logo=github&style=flat&color=blue" ></a>
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/graphs/contributors" title="GitHub Contributors" target="_blank"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/hwhsu1231/cmake-docs-l10n-draft6.svg?logo=github&style=flat&color=blue" ></a>
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6" title="GitHub Repo Size" target="_blank"><img alt="GitHub Repo Size" src="https://img.shields.io/github/repo-size/hwhsu1231/cmake-docs-l10n-draft6?logo=github&style=flat&color=blue"></a>
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/issues" title="GitHub Open Issues" target="_blank"><img alt="GitHub Open Issues" src="https://img.shields.io/github/issues/hwhsu1231/cmake-docs-l10n-draft6.svg?logo=github&style=flat&color=brightgreen" ></a>
+  <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/pulls" title="GitHub Open Pull Requests" target="_blank"><img alt="GitHub Open Pull Requests" src="https://img.shields.io/github/issues-pr/hwhsu1231/cmake-docs-l10n-draft6?logo=github&style=flat&color=brightgreen" ></a><br />
   <a href="https://opensource.org/licenses/BSD-3-Clause" title="License: BSD-3-Clause" target="_blank"><img alt="License: BSD-3-Clause" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg"></a>
   <a href="https://www.contributor-covenant.org/" title="Contributor Covenant: 2.1" target="_blank"><img alt="Contributor Covenant" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg"></a>
   <a href="https://org-test.crowdin.com/cmake-docs" title="Crowdin Localized" target="_blank"><img alt="Crowdin Localized" src="https://badges.crowdin.net/cmake-docs-i18n/localized.svg" ></a>  
@@ -94,35 +94,35 @@ GitHub Worflows:
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-check-pr-status.yml"><img alt="ci-check-pr-status" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-check-pr-status.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-check-pr-status.yml"><img alt="ci-check-pr-status" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-check-pr-status.yml/badge.svg" ></a>
       </td>
       <td><strong>NONE</strong></td>
       <td>Check PR's status before merging.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-gettext-update-po.yml"><img alt="ci-gettext-update-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-gettext-update-po.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-gettext-update-po.yml"><img alt="ci-gettext-update-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-gettext-update-po.yml/badge.svg" ></a>
       </td>
       <td><strong>NONE</strong></td>
       <td>Update po from Gettext.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-upload-pot.yml"><img alt="ci-crowdin-upload-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-upload-pot.yml/badge.svg" ></a><br />
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-upload-pot.yml"><img alt="ci-crowdin-upload-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-upload-pot.yml/badge.svg" ></a><br />
       </td>
       <td><strong>NONE</strong></td>
       <td>Upload pot to Crowdin.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-contributor.yml"><img alt="ci-crowdin-contributor" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-contributor.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-contributor.yml"><img alt="ci-crowdin-contributor" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-contributor.yml/badge.svg" ></a>
       </td>
       <td><strong>0 0 1,15 * *</strong></td>
       <td>Update Crowdin Contributors.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-document.yml"><img alt="ci-crowdin-document" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-document.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-document.yml"><img alt="ci-crowdin-document" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-document.yml/badge.svg" ></a>
       </td>
       <td><strong>0 0 1,15 * *</strong></td>
       <td>
@@ -132,35 +132,35 @@ GitHub Worflows:
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-download-po.yml"><img alt="ci-crowdin-download-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-crowdin-download-po.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-download-po.yml"><img alt="ci-crowdin-download-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-download-po.yml/badge.svg" ></a>
       </td>
       <td><strong>0 0 1,15 * *</strong></td>
       <td>Download po from Crowdin.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-gettext-compend-po.yml"><img alt="ci-gettext-compend-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-gettext-compend-po.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-gettext-compend-po.yml"><img alt="ci-gettext-compend-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-gettext-compend-po.yml/badge.svg" ></a>
       </td>
       <td><strong>0 4 1,15 * *</strong></td>
       <td>Merge po with Compendium.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-deploy-gh-pages.yml"><img alt="ci-deploy-gh-pages" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-deploy-gh-pages.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-deploy-gh-pages.yml"><img alt="ci-deploy-gh-pages" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-deploy-gh-pages.yml/badge.svg" ></a>
       </td>
       <td><strong>0 8 1,15 * *</strong></td>
       <td>Deploy html to GitHub Pages.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-deploy-po-version.yml"><img alt="ci-deploy-po-version" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-deploy-po-version.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-deploy-po-version.yml"><img alt="ci-deploy-po-version" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-deploy-po-version.yml/badge.svg" ></a>
       </td>
       <td><strong>0 8 1,15 * *</strong></td>
       <td>Deploy po to <code>po/${VERSION}</code> branch.</td>
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-sphinx-update-pot.yml"><img alt="ci-sphinx-update-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft5/actions/workflows/ci-sphinx-update-pot.yml/badge.svg" ></a>
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-sphinx-update-pot.yml"><img alt="ci-sphinx-update-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-sphinx-update-pot.yml/badge.svg" ></a>
       </td>
       <td><strong>0 8 1,15 * *</strong></td>
       <td>Update pot from Sphinx.</td>
@@ -248,15 +248,15 @@ You can preview translations in GitHub Pages:
     <tr>
       <td><code>zh_CN</code></td>
       <td>
-        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft5/zh_CN/git-master">git-master</a>
-        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft5/zh_CN/latest">latest</a>
+        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft6/zh_CN/git-master">git-master</a>
+        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft6/zh_CN/latest">latest</a>
       </td>
     </tr>
     <tr>
       <td><code>zh_TW</code></td>
       <td>
-        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft5/zh_TW/git-master">git-master</a>
-        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft5/zh_TW/latest">latest</a>
+        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft6/zh_TW/git-master">git-master</a>
+        <a href="https://hwhsu1231.github.io/cmake-docs-l10n-draft6/zh_TW/latest">latest</a>
       </td>
     </tr>
   </tbody>
