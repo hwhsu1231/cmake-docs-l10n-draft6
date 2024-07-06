@@ -70,6 +70,8 @@ jobs:
 
       - name: Setup Crowdin CLI
         uses: ./.github/actions/setup-crowdin
+        with:
+          crowdin-version: '3.19'
 
       # - name: Set CROWDIN_LANGUAGE_ARGS variable in GITHUB_OUTPUT
       #   id: slago
