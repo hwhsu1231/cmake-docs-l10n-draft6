@@ -69,9 +69,7 @@ jobs:
           cmake-version: '3.23'
 
       - name: Setup Crowdin CLI
-        shell: bash
-        run: |
-          npm install -g @crowdin/cli && crowdin --version
+        uses: ./.github/actions/setup-crowdin
 
       - name: Set CROWDIN_LANGUAGE_ARGS variable in GITHUB_OUTPUT
         id: slago
