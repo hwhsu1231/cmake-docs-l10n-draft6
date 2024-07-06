@@ -73,23 +73,23 @@ jobs:
         with:
           crowdin-version: '4'
 
-      - name: Setup crowdin-language-args for 'crowdin download'
-        id: slago
-        uses: ./.github/actions/crowdin-language-args
-        with:
-          language: 'all'
-
       - name: Setup Environment Variables
         shell: bash
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Prepare CROWDIN_LANGUAGE_ARGS for 'crowdin download' command
+        id: slago
+        uses: ./.github/actions/crowdin-language-args
+        with:
+          language: 'all'
 
       - name: Download docs from the '${{ inputs.VERSION }}' branch in Crowdin
         shell: bash
         run: |
           crowdin download \
             --dryrun \
-            ${{ steps.slago.outputs.crowdin-language-args }} \
+            ${{ steps.slago.outputs.CROWDIN_LANGUAGE_ARGS }} \
             --branch ${{ inputs.VERSION }} \
             --export-only-approved \
             --no-progress \
