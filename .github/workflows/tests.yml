@@ -67,9 +67,9 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ inputs.LANGUAGE }}" == "all" ]]; then
-            CROWDIN_LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
+            CROWDIN_LANGUAGES=($(jq -r 'values[].crowdin' languages.json | tr -d '\r'))
           else
-            CROWDIN_LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
+            CROWDIN_LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json | tr -d '\r'))
           fi
           echo "CROWDIN_LANGUAGES: ${CROWDIN_LANGUAGES[@]}"
           CROWDIN_LANGUAGE_ARGS=""
