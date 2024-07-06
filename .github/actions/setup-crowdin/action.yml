@@ -17,7 +17,9 @@ runs:
       run: |
         # which npm
         # npm --version
-        npm view @crowdin/cli versions
+        # npm view @crowdin/cli versions
+        npm view @crowdin/cli versions | jq -r '.'
+        # AVAILABLE_VERSIONS=($(jq -r '.' languages.json | tr -d '\r'))
 
     - name: Setup Crowdin CLI (Windows)
       if: ${{ runner.os == 'Windows' }}
