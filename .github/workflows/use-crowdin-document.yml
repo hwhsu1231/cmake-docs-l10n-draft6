@@ -78,20 +78,22 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ inputs.LANGUAGE }}" == "all" ]]; then
-            LANGUAGES=($(jq -r 'values[].crowdin' languages.json))
+            LANGUAGES=($(jq -r 'values[].crowdin' languages.json | tr -d '\r'))
           else
-            LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json))
+            LANGUAGES=($(jq -r --arg key "${{ inputs.LANGUAGE }}" 'values[$key].crowdin' languages.json | tr -d '\r'))
           fi
+          # https://github.com/jqlang/jq/issues/92#issuecomment-350754078
           echo "LANGUAGES: ${LANGUAGES[@]}"
           LANGUAGE_ARGS=""
           for LANGUAGE in "${LANGUAGES[@]}"; do
-            if [[ -z $LANGUAGE_ARGS ]]; then
-              LANGUAGE_ARGS="--language $LANGUAGE"
+            # LANGUAGE=$(echo "${LANGUAGE}" | tr -d '\r\n')   # For Windows Bash
+            if [[ -z ${LANGUAGE_ARGS} ]]; then
+              LANGUAGE_ARGS="--language ${LANGUAGE}"
             else
-              LANGUAGE_ARGS="$LANGUAGE_ARGS --language $LANGUAGE"
+              LANGUAGE_ARGS="${LANGUAGE_ARGS} --language ${LANGUAGE}"
             fi
           done
-          echo "LANGUAGE_ARGS=$LANGUAGE_ARGS" >> $GITHUB_OUTPUT
+          echo "LANGUAGE_ARGS=${LANGUAGE_ARGS}" >> $GITHUB_OUTPUT
 
       - name: Upload docs to the '${{ inputs.VERSION }}' branch in Crowdin
         continue-on-error: true
