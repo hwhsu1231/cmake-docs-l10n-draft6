@@ -83,8 +83,8 @@ jobs:
               CROWDIN_LANGUAGE_ARGS="${CROWDIN_LANGUAGE_ARGS} --language ${CROWDIN_LANGUAGE}"
             fi
           done
-          echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}"
           echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}" >> $GITHUB_OUTPUT
+          echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}"
 
       # - name: Check whether CMake is installed
       #   run: |
