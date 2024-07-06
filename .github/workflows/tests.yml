@@ -15,7 +15,12 @@ on:
       LANGUAGE:
         type: string
         default: 'all'
-        description: xxxx
+        description: xxx
+        required: true
+      VERSION:
+        type: string
+        default: 'git-master'
+        description: yyy
         required: true
 
 jobs:
@@ -87,7 +92,6 @@ jobs:
           echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}"
 
       - name: Download docs from the '${{ inputs.VERSION }}' branch in Crowdin
-        if: inputs.VERSION == 'repo'
         shell: bash
         run: |
           crowdin download \
