@@ -74,12 +74,14 @@ jobs:
           echo "CROWDIN_LANGUAGES: ${CROWDIN_LANGUAGES[@]}"
           CROWDIN_LANGUAGE_ARGS=""
           for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGES[@]}"; do
+            echo "CROWDIN_LANGUAGE: ${CROWDIN_LANGUAGE}"
             if [[ -z $CROWDIN_LANGUAGE_ARGS ]]; then
               CROWDIN_LANGUAGE_ARGS="--language $CROWDIN_LANGUAGE"
             else
               CROWDIN_LANGUAGE_ARGS="$CROWDIN_LANGUAGE_ARGS --language $CROWDIN_LANGUAGE"
             fi
           done
+          echo "CROWDIN_LANGUAGE_ARGS=$CROWDIN_LANGUAGE_ARGS"
           echo "CROWDIN_LANGUAGE_ARGS=$CROWDIN_LANGUAGE_ARGS" >> $GITHUB_OUTPUT
 
       # - name: Check whether CMake is installed
