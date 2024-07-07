@@ -56,6 +56,7 @@ runs:
         brew install gettext
 
     - name: Add custom directory to PATH
+      if: ${{ runner.os == 'Windows' }}
       shell: powershell
       run: |
         echo "PATH = $env:PATH"
@@ -68,6 +69,7 @@ runs:
 
 
     - name: Verify PATH
+      if: ${{ runner.os == 'Windows' }}
       shell: powershell
       run: |
         echo "$env:PATH"
