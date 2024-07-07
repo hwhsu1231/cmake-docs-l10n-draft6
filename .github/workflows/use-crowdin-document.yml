@@ -6,21 +6,37 @@ name: use-crowdin-document
 on:
   workflow_call:
     inputs:
-      CHECKOUT:
+      CHECKOUT:         # required
         type: string
         required: true
-      VERSION:
+      VERSION:          # required
         type: string
         required: true
-      LANGUAGE:
+      LANGUAGE:         # required
         type: string
         required: true
-      CALLER_JOB:
+      CALLER_JOB:       # required
         type: string
         required: true
-      ENABLE_JOB:
+      ENABLE_JOB:       # required
         type: boolean
         required: true
+      INSTALL_CMAKE:
+        type: boolean
+        required: false
+        default: true
+      INSTALL_CONDA:
+        type: boolean
+        required: false
+        default: true
+      INSTALL_GETTEXT:
+        type: boolean
+        required: false
+        default: true
+      INSTALL_CROWDIN:
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   crowdin-document:

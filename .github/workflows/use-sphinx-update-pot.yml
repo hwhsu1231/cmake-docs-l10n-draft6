@@ -127,26 +127,41 @@ jobs:
           echo "POT_BEFORE:"
           echo "$POT_BEFORE"
 
-      - name: Build with 'prepare_repositories' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target prepare_repositories
+      - name: Build the 'prepare_repositories' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: '${{ github.workspace }}'
+          language: ${{ inputs.LANGUAGE }}
+          target: 'prepare_repositories'
+        # shell: bash
+        # run: |
+        #   cmake \
+        #     --build out/build/${{ inputs.LANGUAGE }} \
+        #     --target prepare_repositories
 
-      - name: Build with 'install_requirements' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target install_requirements
+      - name: Build the 'install_requirements' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: '${{ github.workspace }}'
+          language: ${{ inputs.LANGUAGE }}
+          target: 'install_requirements'
+        # shell: bash
+        # run: |
+        #   cmake \
+        #     --build out/build/${{ inputs.LANGUAGE }} \
+        #     --target install_requirements
 
       - name: Build with 'sphinx_update_pot' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target sphinx_update_pot
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: '${{ github.workspace }}'
+          language: ${{ inputs.LANGUAGE }}
+          target: 'sphinx_update_pot'
+        # shell: bash
+        # run: |
+        #   cmake \
+        #     --build out/build/${{ inputs.LANGUAGE }} \
+        #     --target sphinx_update_pot
 
       # Refer to:
       # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
