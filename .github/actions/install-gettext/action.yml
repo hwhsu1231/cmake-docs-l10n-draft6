@@ -16,3 +16,15 @@ runs:
       shell: bash
       run: |
         conda install gettext=${{ inputs.gettext-version }} --channel conda-forge
+
+    - name: Check if gettext is installed (Windows)
+      shell: cmd
+      uses: |
+        where xgettext
+        xgettext --version
+
+    - name: Check if gettext is installed (Linux/macOS)
+      shell: cmd
+      uses: |
+        which xgettext
+        xgettext --version
