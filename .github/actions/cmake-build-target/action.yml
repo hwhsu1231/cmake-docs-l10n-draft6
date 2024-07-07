@@ -9,7 +9,7 @@ inputs:
   source-directory:   # required
     required: true
     description: 'Source directory of the CMake Project.'
-  language:           # required
+  preset:             # required
     required: true
     description: 'Configure Preset Name.'
   target:             # required
@@ -25,9 +25,9 @@ runs:
       run: |
         echo Building the project...
         echo.
-        echo cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target ${{ inputs.target }}
+        echo cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.preset }} --target ${{ inputs.target }}
         echo.
-        cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.language }} --target ${{ inputs.target }}
+        cmake --build ${{ inputs.source-directory }}\out\build\${{ inputs.preset }} --target ${{ inputs.target }}
 
     - name: Build the project (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
@@ -35,6 +35,6 @@ runs:
       run: |
         echo "building the project..."
         echo ""
-        echo "cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target ${{ inputs.target }}"
+        echo "cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}"
         echo ""
-        cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.language }} --target ${{ inputs.target }}
+        cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}

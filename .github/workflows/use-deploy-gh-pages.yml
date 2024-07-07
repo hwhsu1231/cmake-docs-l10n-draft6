@@ -97,65 +97,72 @@ jobs:
       - name: Install Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10.7'
+          python-version: '3.10'
 
       - name: Install Gettext
         shell: bash
         run: |
           sudo apt-get install gettext && xgettext --version
 
-      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-            -D AUTO_DEPEND=OFF
+      - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          cache-version: ${{ inputs.VERSION }}
+          cache-update-mode: ${{ inputs.UPDATE_MODE }}
+          cache-auto-depend: 'OFF'
+        # shell: bash
+        # run: |
+        #   cmake \
+        #     --preset ${{ inputs.LANGUAGE }} \
+        #     -D VERSION=${{ inputs.VERSION }} \
+        #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
+        #     -D AUTO_DEPEND=OFF
 
-      - name: Build with 'prepare_repositories' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target prepare_repositories
+      - name: Build the 'prepare_repositories' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'prepare_repositories'
 
-      - name: Build with 'install_requirements' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target install_requirements
+      - name: Build the 'install_requirements' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'install_requirements'
 
-      - name: Build with 'sphinx_update_pot' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target sphinx_update_pot
+      - name: Build the 'sphinx_update_pot' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'sphinx_update_pot'
 
-      - name: Build with 'gettext_update_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target gettext_update_po
+      - name: Build the 'gettext_update_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'gettext_update_po'
 
-      - name: Build with 'sphinx_build_docs' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target sphinx_build_docs
+      - name: Build the 'sphinx_build_docs' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'sphinx_build_docs'
 
-      - name: Set up mutex for 'gh-pages' branch
+      - name: Set up mutex for the 'gh-pages' branch
         if: inputs.DEPLOY_HTML
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
           branch: mutex/gh-pages
           repo-token: ${{ steps.ggat.outputs.token }}
 
-      - name: Deploy to 'gh-pages' branch
+      - name: Deploy to the 'gh-pages' branch
         if: inputs.DEPLOY_HTML
         uses: JamesIves/github-pages-deploy-action@v4
         with:

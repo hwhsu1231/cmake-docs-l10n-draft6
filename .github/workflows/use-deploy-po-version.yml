@@ -59,19 +59,19 @@ jobs:
           token: ${{ steps.ggat.outputs.token }}
           submodules: true
 
-      - name: Configure with 'all' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset all \
-            -D VERSION=${{ inputs.VERSION }}
+      - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          cache-version: ${{ inputs.VERSION }}
 
-      - name: Build with 'readthedocs_symlinks' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/all \
-            --target readthedocs_symlinks
+      - name: Build the 'readthedocs_symlinks' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          target: 'readthedocs_symlinks'
 
       - name: Remove 'l10n/${{ inputs.VERSION }}/locale/pot' directory
         run: |

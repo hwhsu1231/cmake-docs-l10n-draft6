@@ -130,8 +130,8 @@ jobs:
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target
         with:
-          source-directory: '${{ github.workspace }}'
-          language: ${{ inputs.LANGUAGE }}
+          source-directory:  github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
           target: 'prepare_repositories'
         # shell: bash
         # run: |
@@ -142,8 +142,8 @@ jobs:
       - name: Build the 'install_requirements' target
         uses: ./.github/actions/cmake-build-target
         with:
-          source-directory: '${{ github.workspace }}'
-          language: ${{ inputs.LANGUAGE }}
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
           target: 'install_requirements'
         # shell: bash
         # run: |
@@ -151,11 +151,11 @@ jobs:
         #     --build out/build/${{ inputs.LANGUAGE }} \
         #     --target install_requirements
 
-      - name: Build with 'sphinx_update_pot' target
+      - name: Build the 'sphinx_update_pot' target
         uses: ./.github/actions/cmake-build-target
         with:
-          source-directory: '${{ github.workspace }}'
-          language: ${{ inputs.LANGUAGE }}
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
           target: 'sphinx_update_pot'
         # shell: bash
         # run: |
@@ -174,10 +174,10 @@ jobs:
           POT_AFTER=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
           delimiter="$(openssl rand -hex 8)"
           echo "POT_AFTER<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "$POT_AFTER"             >> $GITHUB_OUTPUT
-          echo "$delimiter"             >> $GITHUB_OUTPUT
+          echo "${POT_AFTER}"           >> $GITHUB_OUTPUT
+          echo "${delimiter}"           >> $GITHUB_OUTPUT
           echo "POT_AFTER:"
-          echo "$POT_AFTER"
+          echo "${POT_AFTER}"
 
       - name: Set the Labels List for the Pull Request
         id: sllpr
@@ -186,16 +186,16 @@ jobs:
           VERSION="${{ inputs.VERSION }}"
           FILTER=".include | map(select(.COMPEND_VERSION == null)) | .[].VERSION"
           OUTPUT=$(jq -r "$FILTER" .github/workflows/matrix.json)
-          readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
-          LABELS_LIST="gettext"
+          readarray -t CROWDIN_BRANCHES <<< "${OUTPUT}"
+          PULL_REQUEST_LABELS_LIST="gettext"
           for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
-            if [ "$VERSION" == "$CROWDIN_BRANCH" ]; then
-              LABELS_LIST="${LABELS_LIST},crowdin"
+            if [ "${VERSION}" == "${CROWDIN_BRANCH}" ]; then
+              PULL_REQUEST_LABELS_LIST="${PULL_REQUEST_LABELS_LIST},crowdin"
               break
             fi
           done
-          echo "LABELS_LIST: $LABELS_LIST"
-          echo "LABELS_LIST=$LABELS_LIST" >> $GITHUB_OUTPUT
+          echo "PULL_REQUEST_LABELS_LIST: ${PULL_REQUEST_LABELS_LIST}"
+          echo "PULL_REQUEST_LABELS_LIST=${PULL_REQUEST_LABELS_LIST}" >> $GITHUB_OUTPUT
 
       - name: Get the Current Job's ID
         id: gcji
@@ -249,7 +249,7 @@ jobs:
           github_token: ${{ steps.ggat.outputs.token }}  # required
           source_branch: sphinx/pot/${{ inputs.VERSION }}
           target_branch: l10n
-          label: ${{ steps.sllpr.outputs.LABELS_LIST }}
+          label: ${{ steps.sllpr.outputs.PULL_REQUEST_LABELS_LIST }}
           title: |
             pot(${{ inputs.VERSION }}): Update pot from Sphinx
           body: |

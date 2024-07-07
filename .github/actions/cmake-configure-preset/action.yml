@@ -1,18 +1,18 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: cmake-configure
+name: cmake-configure-preset
 
-description: Configure the project with CMake
+description: Configure the CMake preset
 
 inputs:
   source-directory:     # required
     required: true
     description: ''
-  language:             # required
+  preset:               # required
     required: true
-    description: 'Value passed to LANGUAGE cache (Configure Preset Name).'
-  version:              # required
+    description: ''
+  cache-version:        # required
     required: true
     description: 'Value passed to VERSION cache.'
   cache-update-mode:
@@ -93,10 +93,8 @@ runs:
           CMAKE_ARG=""
           if [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
-          elif [[ "${KEY}" == "language" ]]; then
+          elif [[ "${KEY}" == "preset" ]]; then
             CMAKE_ARG="--preset=${VALUE}"
-          elif [[ "${KEY}" == "version" ]]; then
-            CMAKE_ARG="-DVERSION=${VALUE}"
           elif [[ "${KEY}" =~ ^cache- ]]; then
             if [[ "${VALUE}" != "[default]" ]]; then
               # Convert lowercase to uppercase by tr since BSD-sed cannot support '\U'. (for macOS bash)
