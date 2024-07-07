@@ -12,26 +12,39 @@ inputs:
 runs:
   using: composite
   steps:
-    # - name: Install Gettext by Win-Get (Windows)
-    #   shell: cmd
+    # - uses: conda-incubator/setup-miniconda@v3
+    #   with:
+    #     auto-activate-base: true
+    #     activate-environment: ""
+
+    # - name: Check if conda is installed
+    #   shell: bash
     #   run: |
-    #     winget install
+    #     which conda
+    #     conda --version
 
-    - uses: conda-incubator/setup-miniconda@v3
-      with:
-        auto-activate-base: true
-        activate-environment: ""
+    # - name: Install Gettext by Conda
+    #   shell: bash
+    #   run: |
+    #     conda install gettext=${{ inputs.gettext-version }} --channel conda-forge
 
-    - name: Check if conda is installed
+    - name: Install Gettext by Aptget (Ubuntu)
+      if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |
-        which conda
-        conda --version
+        sudo apt install gettext
 
-    - name: Install Gettext by Conda
-      shell: bash
+    - name: Install Gettext by Winget (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
       run: |
-        conda install gettext=${{ inputs.gettext-version }} --channel conda-forge
+        winget install mlocati.GetText
+
+    - name: Install Gettext by Homebrew (macOS)
+      if: ${{ runner.os == 'macOS' }}
+      shell: zsh
+      run: |
+        brew install gettext
 
     - name: Check if gettext is installed (Windows)
       shell: cmd
@@ -40,7 +53,7 @@ runs:
         xgettext --version
 
     - name: Check if gettext is installed (Linux/macOS)
-      shell: cmd
+      shell: bash
       run: |
         which xgettext
         xgettext --version
