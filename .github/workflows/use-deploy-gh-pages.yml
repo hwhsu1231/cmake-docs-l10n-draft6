@@ -89,20 +89,28 @@ jobs:
             echo "${KEY}: $VALUE"
           done
 
-      - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+      - name: Install CMake
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
+      # - name: Install CMake 3.23
+      #   uses: jwlawson/actions-setup-cmake@v2.0
+      #   with:
+      #     cmake-version: '3.23'
 
-      - name: Install Python 3.10
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+      - name: Install Conda
+        uses: ./.github/actions/install-conda
+
+      # - name: Install Python 3.10
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.10'
 
       - name: Install Gettext
-        shell: bash
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
+        # shell: bash
+        # run: |
+        #   sudo apt-get install gettext && xgettext --version
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
