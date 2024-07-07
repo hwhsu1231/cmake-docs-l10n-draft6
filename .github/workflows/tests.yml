@@ -73,8 +73,6 @@ jobs:
 
       - name: Install Crowdin CLI
         uses: ./.github/actions/install-crowdin-cli
-        with:
-          crowdin-version: '4'
 
       - name: Set Environment Variables to $GITHUB_ENV
         shell: bash
