@@ -1,0 +1,57 @@
+{
+  "po" : 
+  {
+    "ja_JP" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    },
+    "ru_RU" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    },
+    "zh_CN" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    },
+    "zh_TW" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    }
+  },
+  "pot" : 
+  {
+    "branch" : "master",
+    "commit" : 
+    {
+      "date" : "2024-07-07 00:01:08 -0400",
+      "hash" : "d308437d6d01a9011e9f02856cb45a9df2dbca41",
+      "title" : "CMake Nightly Date Stamp"
+    }
+  },
+  "type" : "branch",
+  "version" : "git-master"
+}
