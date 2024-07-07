@@ -1,6 +1,6 @@
-name: cmake-build
+name: cmake-build-target
 
-description: Build the project with CMake
+description: Build the target with CMake
 
 inputs:
   source-directory:   # required

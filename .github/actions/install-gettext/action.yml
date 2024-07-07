@@ -1,0 +1,18 @@
+name: install-gettext
+
+description: Install Gettext
+
+inputs:
+  gettext-version:
+    required: false
+    description: 'Specific version of Gettext to install.'
+    default: ''
+
+
+runs:
+  using: composite
+  steps:
+    - name: Install Gettext by Conda
+      shell: bash
+      run: |
+        conda install gettext=${{ inputs.gettext-version }} --channel conda-forge

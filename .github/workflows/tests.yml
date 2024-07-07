@@ -68,6 +68,11 @@ jobs:
         with:
           cmake-version: '3.23'
 
+      - name: Install Gettext
+        uses: ./.github/actions/install-gettext
+        with:
+          gettext-version: '0.20'
+
       - name: Install Crowdin CLI
         uses: ./.github/actions/install-crowdin-cli
         with:
@@ -78,7 +83,7 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Set the Crowdin Language Arguments to $GITHUB_OUTPUT
+      - name: Set the Crowdin Language Arguments
         id: scla
         uses: ./.github/actions/set-crowdin-language-args
         with:
@@ -95,7 +100,7 @@ jobs:
             --no-progress \
             --verbose
 
-      - name: Set the Crowdin Status Progress to $GITHUB_OUTPUT
+      - name: Set the Crowdin Status Progress
         id: scsp
         uses: ./.github/actions/set-crowdin-status-progress
         with:
@@ -125,7 +130,7 @@ jobs:
       #     version: 'git-master'
 
       # - name: Build the 'prepare_repositories' target
-      #   uses: ./.github/actions/cmake-build
+      #   uses: ./.github/actions/cmake-build-target
       #   with:
       #     source-directory: '${{ github.workspace }}'
       #     language: 'all'
