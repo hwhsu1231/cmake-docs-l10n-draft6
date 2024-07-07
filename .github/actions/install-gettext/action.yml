@@ -60,6 +60,7 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
+        echo "GITHUB_PATH = $GITHUB_PATH"
         where xgettext
         xgettext --version
       # run: |
