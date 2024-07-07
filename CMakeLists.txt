@@ -54,7 +54,7 @@ set(GIT_EXACT_VERSION ""
 set(CONDA_EXACT_VERSION ""
     CACHE STRING "Exact version for calling find_package(Conda).")
 
-set(PYTHON_EXACT_VERSION ""
+set(PYTHON_EXACT_VERSION "3.10"
     CACHE STRING "Exact version for calling find_package(Python).")
 
 set(GETTEXT_EXACT_VERSION ""
