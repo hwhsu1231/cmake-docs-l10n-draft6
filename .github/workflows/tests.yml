@@ -74,8 +74,8 @@ jobs:
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
 
-      - name: Install Crowdin CLI
-        uses: ./.github/actions/install-crowdin-cli
+      - name: Install Crowdin
+        uses: ./.github/actions/install-crowdin
 
       - name: Set Environment Variables to $GITHUB_ENV
         shell: bash
