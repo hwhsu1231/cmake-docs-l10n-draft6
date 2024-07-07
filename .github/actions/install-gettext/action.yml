@@ -11,13 +11,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install Winget
-      if: ${{ runner.os == 'Windows' }}
-      uses: Cyberboss/install-winget@v1
-      with:
-        GITHUB_TOKEN: ${{ inputs.token }}
-
-    - name: Install Gettext by Aptget (Ubuntu)
+    - name: Install Gettext by Apt (Ubuntu)
       if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |
@@ -28,6 +22,12 @@ runs:
       shell: bash
       run: |
         brew install gettext
+
+    - name: Install Winget (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      uses: Cyberboss/install-winget@v1
+      # with:
+      #   GITHUB_TOKEN: ${{ inputs.token }}
 
     - name: Install Gettext by Winget (Windows)
       if: ${{ runner.os == 'Windows' }}
