@@ -19,12 +19,12 @@ runs:
 
     - name: Check if gettext is installed (Windows)
       shell: cmd
-      uses: |
+      run: |
         where xgettext
         xgettext --version
 
     - name: Check if gettext is installed (Linux/macOS)
       shell: cmd
-      uses: |
+      run: |
         which xgettext
         xgettext --version
