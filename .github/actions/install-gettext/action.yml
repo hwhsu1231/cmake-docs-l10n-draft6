@@ -12,6 +12,12 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Check if conda is installed
+      shell: bash
+      run: |
+        where conda
+        conda --version
+
     - name: Install Gettext by Conda
       shell: bash
       run: |
