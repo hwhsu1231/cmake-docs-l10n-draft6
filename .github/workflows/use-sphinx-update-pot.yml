@@ -211,6 +211,12 @@ jobs:
           echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
           echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
 
+      - name: Set up mutex for 'l10n' branch
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: mutex/l10n
+          repo-token: ${{ steps.ggat.outputs.token }}
+
       - name: Add and Commit the Change
         id: acc
         if: inputs.CREATE_PR
