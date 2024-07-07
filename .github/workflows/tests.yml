@@ -68,6 +68,9 @@ jobs:
         with:
           cmake-version: '3.23'
 
+      - name: Install Conda
+        uses: ./.github/actions/install-conda
+
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
 
