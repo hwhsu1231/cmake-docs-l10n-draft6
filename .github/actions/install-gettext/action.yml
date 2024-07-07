@@ -42,7 +42,7 @@ runs:
 
     - name: Install Gettext by Homebrew (macOS)
       if: ${{ runner.os == 'macOS' }}
-      shell: zsh
+      shell: bash
       run: |
         brew install gettext
 
