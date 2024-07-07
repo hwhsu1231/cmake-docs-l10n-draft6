@@ -7,7 +7,10 @@ inputs:
     required: false
     description: 'Specific version of Gettext to install.'
     default: ''
-
+  token:
+    required: false
+    description: xxx
+    default: '${{ github.token }}'
 
 runs:
   using: composite
@@ -32,7 +35,7 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       uses: Cyberboss/install-winget@v1
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
 
     - name: Install Gettext by Aptget (Ubuntu)
       if: ${{ runner.os == 'Linux' }}
