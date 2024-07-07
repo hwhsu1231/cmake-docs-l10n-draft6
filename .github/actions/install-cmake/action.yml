@@ -1,3 +1,6 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
 name: install-cmake
 
 description: Install CMake
@@ -7,6 +10,10 @@ inputs:
     required: false
     description: 'Specific version of CMake to install.'
     default: ''
+  token:
+    required: false
+    description: xxx
+    default: '${{ github.token }}'
 
 runs:
   using: composite
