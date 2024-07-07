@@ -70,8 +70,6 @@ jobs:
 
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
-        with:
-          gettext-version: '0.20'
 
       - name: Install Crowdin CLI
         uses: ./.github/actions/install-crowdin-cli
