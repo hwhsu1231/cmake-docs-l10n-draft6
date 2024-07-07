@@ -47,12 +47,14 @@ runs:
         brew install gettext
 
     - name: Check if gettext is installed (Windows)
+      if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
         where xgettext
         xgettext --version
 
     - name: Check if gettext is installed (Linux/macOS)
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
       run: |
         which xgettext
