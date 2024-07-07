@@ -61,7 +61,7 @@ runs:
       run: |
         # where xgettext
         # xgettext --version
-        C:\Program Files\gettext-iconv\bin\xgettext.exe --version
+        "C:\Program Files\gettext-iconv\bin\xgettext.exe" --version
 
     - name: Check if gettext is installed (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
