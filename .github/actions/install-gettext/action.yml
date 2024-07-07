@@ -49,6 +49,7 @@ runs:
       run: |
         winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
         setx /M PATH "C:\Program Files\gettext-iconv\bin;%PATH%"
+        set     PATH="C:\Program Files\gettext-iconv\bin;%PATH%"
 
     - name: Install Gettext by Homebrew (macOS)
       if: ${{ runner.os == 'macOS' }}
