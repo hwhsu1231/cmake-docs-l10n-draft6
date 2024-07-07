@@ -48,13 +48,22 @@ runs:
       shell: cmd
       run: |
         winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
-        echo "C:\Program Files\gettext-iconv\bin;%PATH%" >> $GITHUB_PATH
 
     - name: Install Gettext by Homebrew (macOS)
       if: ${{ runner.os == 'macOS' }}
       shell: bash
       run: |
         brew install gettext
+
+    - name: Add custom directory to PATH
+      shell: powershell
+      run: |
+        echo "Adding custom directory to PATH"
+        echo "C:\Program Files\gettext-iconv\bin" >> $Env:PATH
+
+    - name: Verify PATH
+      shell: powershell
+      run: echo $Env:PATH
 
     - name: Check if gettext is installed (Windows)
       if: ${{ runner.os == 'Windows' }}
