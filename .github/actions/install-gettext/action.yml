@@ -3,10 +3,6 @@ name: install-gettext
 description: Install Gettext
 
 inputs:
-  gettext-version:
-    required: false
-    description: 'Specific version of Gettext to install.'
-    default: ''
   token:
     required: false
     description: xxx
@@ -15,22 +11,6 @@ inputs:
 runs:
   using: composite
   steps:
-    # - uses: conda-incubator/setup-miniconda@v3
-    #   with:
-    #     auto-activate-base: true
-    #     activate-environment: ""
-
-    # - name: Check if conda is installed
-    #   shell: bash
-    #   run: |
-    #     which conda
-    #     conda --version
-
-    # - name: Install Gettext by Conda
-    #   shell: bash
-    #   run: |
-    #     conda install gettext=${{ inputs.gettext-version }} --channel conda-forge
-
     - name: Install Winget
       if: ${{ runner.os == 'Windows' }}
       uses: Cyberboss/install-winget@v1
@@ -56,14 +36,14 @@ runs:
         winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
         echo "C:\Program Files\gettext-iconv\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-    - name: Check if gettext is installed (Windows)
+    - name: Check if Gettext is installed (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
         where xgettext
         xgettext --version
 
-    - name: Check if gettext is installed (Linux/macOS)
+    - name: Check if Gettext is installed (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
       run: |
