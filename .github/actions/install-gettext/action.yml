@@ -31,7 +31,7 @@ runs:
     #   run: |
     #     conda install gettext=${{ inputs.gettext-version }} --channel conda-forge
 
-    - name: Install winget
+    - name: Install Winget
       if: ${{ runner.os == 'Windows' }}
       uses: Cyberboss/install-winget@v1
       with:
@@ -43,36 +43,18 @@ runs:
       run: |
         sudo apt install gettext
 
-    - name: Install Gettext by Winget (Windows)
-      if: ${{ runner.os == 'Windows' }}
-      shell: cmd
-      run: |
-        winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
-
     - name: Install Gettext by Homebrew (macOS)
       if: ${{ runner.os == 'macOS' }}
       shell: bash
       run: |
         brew install gettext
 
-    - name: Add custom directory to PATH
+    - name: Install Gettext by Winget (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: powershell
       run: |
-        echo "PATH = $env:PATH"
+        winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
         echo "C:\Program Files\gettext-iconv\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-        echo "PATH = $env:PATH"
-      # shell: cmd
-      # run: |
-      #   echo "Adding custom directory to PATH"
-      #   echo "PATH=C:\Program Files\gettext-iconv\bin;$Env:PATH" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-
-    - name: Verify PATH
-      if: ${{ runner.os == 'Windows' }}
-      shell: powershell
-      run: |
-        echo "$env:PATH"
 
     - name: Check if gettext is installed (Windows)
       if: ${{ runner.os == 'Windows' }}
@@ -80,8 +62,6 @@ runs:
       run: |
         where xgettext
         xgettext --version
-      # run: |
-      #   "C:\Program Files\gettext-iconv\bin\xgettext.exe" --version
 
     - name: Check if gettext is installed (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
