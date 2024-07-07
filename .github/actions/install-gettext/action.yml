@@ -18,6 +18,11 @@ runs:
         which conda
         conda --version
 
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-activate-base: true
+        activate-environment: ""
+
     - name: Install Gettext by Conda
       shell: bash
       run: |
