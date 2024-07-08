@@ -1,0 +1,34 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: get-version-info-from-reference
+
+description: Get Version Infomation from reference.json
+
+inputs:
+  jq-filter:
+    required: true
+    description: xxx
+  jq-file:
+    required: true
+    description: xxx
+
+outputs:
+  VERSION_INFO:
+    value: ${{ steps.gvi.outputs.VERSION_INFO }}
+    description: xxx
+
+runs:
+  using: composite
+  steps:
+    - name: Get Version Infomation from reference.json
+      id: gvi
+      shell: bash
+      run: |
+        VERSION_INFO=$(jq "${{ inputs.jq-filter }}" ${{ inputs.jq-file }})
+        DELIMITER="$(openssl rand -hex 8)"
+        echo "VERSION_INFO<<${DELIMITER}" >> $GITHUB_OUTPUT
+        echo "${VERSION_INFO}"            >> $GITHUB_OUTPUT
+        echo "${DELIMITER}"               >> $GITHUB_OUTPUT
+        echo "VERSION_INFO:"
+        echo "${VERSION_INFO}"

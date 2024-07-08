@@ -82,9 +82,15 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
+      - name: Get Version Information from reference.json
+        uses: ./.github/actions/get-version-info-from-reference
+        with:
+          jq-filter: '.pot'
+          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+
       - name: Set the Crowdin Language Arguments
         id: scla
-        uses: ./.github/actions/set-crowdin-language-args
+        uses: ./.github/actions/get-crowdin-language-args
         with:
           language: 'all'
 
@@ -101,7 +107,7 @@ jobs:
 
       - name: Set the Crowdin Status Progress
         id: scsp
-        uses: ./.github/actions/set-crowdin-status-progress
+        uses: ./.github/actions/get-crowdin-status-progress
         with:
           crowdin-config: '${{ github.workspace }}/crowdin.yml'
           crowdin-branch: 'repo'
