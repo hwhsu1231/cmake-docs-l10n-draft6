@@ -63,6 +63,11 @@ jobs:
           ref: ${{ github.ref }}
           submodules: true
 
+      - name: Check JQ version
+        shell: bash
+        run: |
+          which jq
+
       - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
