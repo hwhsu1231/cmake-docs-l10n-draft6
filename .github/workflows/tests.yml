@@ -82,6 +82,14 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
+      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+        shell: bash
+        run: |
+          cmake \
+            --preset ${{ inputs.LANGUAGE }} \
+            -D VERSION=${{ inputs.VERSION }} \
+            -D AUTO_DEPEND=OFF
+
       - name: Get Version Information from reference.json
         uses: ./.github/actions/get-version-info-from-reference
         with:
