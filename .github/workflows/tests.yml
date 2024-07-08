@@ -67,6 +67,7 @@ jobs:
         shell: bash
         run: |
           which jq
+          jq --version
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
