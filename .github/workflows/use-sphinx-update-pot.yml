@@ -130,7 +130,7 @@ jobs:
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target
         with:
-          source-directory:  github.workspace }}
+          source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'prepare_repositories'
         # shell: bash
