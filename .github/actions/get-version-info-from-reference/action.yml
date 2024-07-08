@@ -21,11 +21,17 @@ outputs:
 runs:
   using: composite
   steps:
+    # Refer to:
+    # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
+    # - https://github.com/github/docs/issues/21529
+    # - https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
     - name: Get Version Infomation from reference.json
       id: gvi
       shell: bash
       run: |
-        VERSION_INFO=$(jq "${{ inputs.jq-filter }}" ${{ inputs.jq-file }})
+        JQ_FILTER="${{ inputs.jq-filter }}"
+        JQ_FILE=$(echo "${{ inputs.jq-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+        VERSION_INFO=$(jq "${JQ_FILTER}" "${JQ_FILE}")
         DELIMITER="$(openssl rand -hex 8)"
         echo "VERSION_INFO<<${DELIMITER}" >> $GITHUB_OUTPUT
         echo "${VERSION_INFO}"            >> $GITHUB_OUTPUT
