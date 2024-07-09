@@ -72,7 +72,7 @@ runs:
           elif [[ "${KEY}" == "crowdin-personal-token" ]]; then
             if [[ "${VALUE}" != "" ]]; then
               CROWDIN_PERSONAL_TOKEN="${{ inputs.crowdin-personal-token }}"
-              CROWDIN_ARG="--branch=${CROWDIN_PERSONAL_TOKEN}"
+              CROWDIN_ARG="--token=${CROWDIN_PERSONAL_TOKEN}"
             fi
           elif [[ "${KEY}" == "crowdin-language-list" ]]; then
             if [[ "${VALUE}" != "" ]]; then
