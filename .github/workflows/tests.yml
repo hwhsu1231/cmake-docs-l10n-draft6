@@ -138,23 +138,24 @@ jobs:
         #     --no-progress \
         #     --verbose
 
-      # - name: Set the Crowdin Status Progress
-      #   id: scsp
-      #   uses: ./.github/actions/get-crowdin-status-progress
-      #   with:
-      #     crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
-      #     crowdin-branch-name: 'repo'
-      #   # shell: bash
-      #   # run: |
-      #   #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
-      #   #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
-      #   #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-      #   #   delimiter="$(openssl rand -hex 8)"
-      #   #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
-      #   #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
-      #   #   echo "$delimiter"                           >> $GITHUB_OUTPUT
-      #   #   echo "CROWDIN_STATUS_PROGRESS:"
-      #   #   echo "$CROWDIN_STATUS_PROGRESS"
+      - name: Get the Crowdin Status Progress
+        id: scsp
+        uses: ./.github/actions/get-crowdin-status-progress
+        with:
+          crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
+          crowdin-branch-name: 'repo'
+          crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+        # shell: bash
+        # run: |
+        #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
+        #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
+        #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
+        #   delimiter="$(openssl rand -hex 8)"
+        #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
+        #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
+        #   echo "$delimiter"                           >> $GITHUB_OUTPUT
+        #   echo "CROWDIN_STATUS_PROGRESS:"
+        #   echo "$CROWDIN_STATUS_PROGRESS"
 
       # # - name: Check whether CMake is installed
       # #   run: |
