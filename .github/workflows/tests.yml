@@ -123,7 +123,7 @@ jobs:
           crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
           crowdin-branch-name: 'repo'
           crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-          crowdin-language-list: 'ja, ru, zh-CN, zh-TW'
+          crowdin-language-list: 'ja,ru,zh-CN,zh-TW'
           crowdin-export-only-approved: 'true'
           crowdin-no-progress: 'true'
           crowdin-verbose: 'true'
