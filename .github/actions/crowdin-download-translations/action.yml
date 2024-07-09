@@ -19,6 +19,14 @@ inputs:
     required: true
     description: xxx
     default: ''
+  crowdin-export-only-approved:
+    required: true
+    description: xxx
+    default: 'false'
+  crowdin-no-progress:
+    required: false
+    description: xxx
+    default: 'false'
   crowdin-verbose:
     required: false
     description: xxx
@@ -63,6 +71,10 @@ runs:
                   CROWDIN_ARG="${CROWDIN_ARG} --language ${CROWDIN_LANGUAGE}"
                 fi
               done
+            fi
+          elif [[ "${KEY}" == "crowdin-no-progress" ]]; then
+            if [[ "${VALUE}" == "true" ]]; then
+              CROWDIN_ARG="--no-progress"
             fi
           elif [[ "${KEY}" == "crowdin-verbose" ]]; then
             if [[ "${VALUE}" == "true" ]]; then
