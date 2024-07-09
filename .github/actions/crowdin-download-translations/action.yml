@@ -57,13 +57,16 @@ runs:
               read -r -a CROWDIN_LANGUAGE_LIST <<< "${{ inputs.crowdin-language-list }}"
               unset IFS
               for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGE_LIST[@]}"; do
-                echo "CROWDIN_LANGUAGE: ${CROWDIN_LANGUAGE}"
                 if [[ -z ${CROWDIN_ARG} ]]; then
                   CROWDIN_ARG="--language ${CROWDIN_LANGUAGE}"
                 else
                   CROWDIN_ARG="${CROWDIN_ARG} --language ${CROWDIN_LANGUAGE}"
                 fi
               done
+            fi
+          elif [[ "${KEY}" == "crowdin-verbose" ]]; then
+            if [[ "${VALUE}" == "true" ]]; then
+              CROWDIN_ARG="--verbose"
             fi
           elif [[ "${KEY}" == "crowdin-dryrun" ]]; then
             if [[ "${VALUE}" == "true" ]]; then
