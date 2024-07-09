@@ -115,17 +115,21 @@ jobs:
             -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
             -D AUTO_DEPEND=OFF
 
-      - name: Get POT_BEFORE from reference.json
-        id: gpbr
-        shell: bash
-        run: |
-          POT_BEFORE=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
-          delimiter="$(openssl rand -hex 8)"
-          echo "POT_BEFORE<<$delimiter" >> $GITHUB_OUTPUT
-          echo "$POT_BEFORE"            >> $GITHUB_OUTPUT
-          echo "$delimiter"             >> $GITHUB_OUTPUT
-          echo "POT_BEFORE:"
-          echo "$POT_BEFORE"
+      - name: Get the Version Information of '.pot' Before Building
+        id: pot-before
+        uses: ./.github/actions/get-version-info-from-reference
+        with:
+          jq-filter: '.pot'
+          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+        # shell: bash
+        # run: |
+        #   POT_BEFORE=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
+        #   DELIMITER="$(openssl rand -hex 8)"
+        #   echo "POT_BEFORE<<${DELIMITER}" >> $GITHUB_OUTPUT
+        #   echo "${POT_BEFORE}"            >> $GITHUB_OUTPUT
+        #   echo "${DELIMITER}"             >> $GITHUB_OUTPUT
+        #   echo "POT_BEFORE:"
+        #   echo "${POT_BEFORE}"
 
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target
@@ -167,17 +171,23 @@ jobs:
       # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
       # - https://github.com/github/docs/issues/21529
       # - https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-      - name: Get POT_AFTER from reference.json
-        id: gpar
-        shell: bash
-        run: |
-          POT_AFTER=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
-          delimiter="$(openssl rand -hex 8)"
-          echo "POT_AFTER<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "${POT_AFTER}"           >> $GITHUB_OUTPUT
-          echo "${delimiter}"           >> $GITHUB_OUTPUT
-          echo "POT_AFTER:"
-          echo "${POT_AFTER}"
+      - name: Get the Version Information of '.pot' After Building
+        id: pot-after
+        uses: ./.github/actions/get-version-info-from-reference
+        with:
+          jq-filter: '.pot'
+          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+      # - name: Get POT_AFTER from reference.json
+      #   id: pot-after
+      #   shell: bash
+      #   run: |
+      #     POT_AFTER=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
+      #     DELIMITER="$(openssl rand -hex 8)"
+      #     echo "POT_AFTER<<${DELIMITER}"  >> $GITHUB_OUTPUT
+      #     echo "${POT_AFTER}"             >> $GITHUB_OUTPUT
+      #     echo "${DELIMITER}"             >> $GITHUB_OUTPUT
+      #     echo "POT_AFTER:"
+      #     echo "${POT_AFTER}"
 
       - name: Set the Labels List for the Pull Request
         id: sllpr
@@ -231,8 +241,8 @@ jobs:
           message: |
             pot(${{ inputs.VERSION }}): Update pot from Sphinx
 
-            Before: ${{ steps.gpbr.outputs.POT_BEFORE }}
-            After: ${{ steps.gpar.outputs.POT_AFTER }}
+            Before: ${{ steps.pot-before.outputs.VERSION_INFO }}
+            After: ${{ steps.pot-after.outputs.VERSION_INFO }}
 
       - name: Check Outputs of the Commit
         if: inputs.CREATE_PR && steps.acc.outputs.committed == 'true'
@@ -294,8 +304,8 @@ jobs:
       #     commit-message: |
       #       pot(${{ inputs.VERSION }}): Update pot from Sphinx
 
-      #       Before: ${{ steps.gpbr.outputs.POT_BEFORE }}
-      #       After: ${{ steps.gpar.outputs.POT_AFTER }}
+      #       Before: ${{ steps.pot-before.outputs.POT_BEFORE }}
+      #       After: ${{ steps.pot-after.outputs.POT_AFTER }}
       #     draft: false
       #     labels: |
       #       gettext

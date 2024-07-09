@@ -1,0 +1,76 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: crowdin-download-translations
+
+description: Download Translations of Documents from Crowdin
+
+inputs:
+  crowdin-config-file:      # required
+    required: true
+    description: xxx
+  crowdin-branch-name:      # required
+    required: true
+    description: xxx
+  crowdin-personal-token:   # required
+    required: true
+    description: xxx
+  crowdin-language-list:
+    required: true
+    description: xxx
+    default: ''
+  crowdin-verbose:
+    required: false
+    description: xxx
+    default: 'false'
+  crowdin-dryrun:
+    required: false
+    description: xxx
+    default: 'false'
+  # source-directory:   # required
+  #   required: true
+  #   description: 'Source directory of the CMake Project.'
+  # preset:             # required
+  #   required: true
+  #   description: 'Configure Preset Name.'
+  # target:             # required
+  #   required: true
+  #   description: 'CMake Build Target'
+
+runs:
+  using: composite
+  steps:
+    - name: Get Crowdin Arguments by Inputs
+      shell: bash
+      run: |
+        INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
+        INPUTS_KEYS=$(echo "${INPUTS_JSON}" | jq -r 'keys[]' | tr -d '\r')
+        for KEY in ${INPUTS_KEYS}; do
+          VALUE=$(echo "${INPUTS_JSON}" | jq -r --arg key "${KEY}" '.[$key]')
+          echo "(KEY, VALUE) = (${KEY}, ${VALUE})"
+        done
+
+    - name: Build the project (Linux/macOS)
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+      shell: bash
+      run: |
+        echo "building the project..."
+        echo ""
+        echo "cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}"
+        echo ""
+        cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}
+
+    # - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
+    #   uses: crowdin/github-action@v2
+    #   with:
+    #     command: 'download'
+    #     command_args: '${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }}'
+      # shell: bash
+      # run: |
+      #   crowdin download \
+      #     --dryrun \
+      #     ${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }} \
+      #     --branch ${{ inputs.VERSION }} \
+      #     --export-only-approved \
+      #     --no-progress \
+      #     --verbose

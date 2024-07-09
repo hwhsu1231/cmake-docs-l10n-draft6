@@ -1,37 +1,37 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: set-crowdin-status-progress
+name: get-crowdin-status-progress
 
-description: Set the Crowdin Status Progress
+description: Get the Crowdin Status Progress
 
 inputs:
-  crowdin-config:
+  crowdin-config-file:
     required: true
     description: xxx
-  crowdin-branch:
+  crowdin-branch-name:
     required: true
     description: xxx
 
 outputs:
   CROWDIN_STATUS_PROGRESS:
-    value: ${{ steps.scsp.outputs.CROWDIN_STATUS_PROGRESS }}
+    value: ${{ steps.gcsp.outputs.CROWDIN_STATUS_PROGRESS }}
     description: xxx
 
 runs:
   using: composite
   steps:
-    - name: Set the Crowdin Status Progress
-      id: scsp
+    - name: Get the Crowdin Status Progress
+      id: gcsp
       shell: bash
       run: |
-        CROWDIN_BRANCH=${{ inputs.crowdin-branch }}
-        CROWDIN_CONFIG=$(echo "${{ inputs.crowdin-config }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-        CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=${CROWDIN_BRANCH} --config=${CROWDIN_CONFIG} --no-progress --verbose 2>&1)
+        CROWDIN_BRANCH_NAME=${{ inputs.crowdin-branch-name }}
+        CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+        CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=${CROWDIN_BRANCH_NAME} --config=${CROWDIN_CONFIG_FILE} --no-progress --verbose 2>&1)
         CROWDIN_STATUS_PROGRESS=$(echo "${CROWDIN_STATUS_OUTPUT}" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-        delimiter="$(openssl rand -hex 8)"
-        echo "CROWDIN_STATUS_PROGRESS<<${delimiter}"  >> $GITHUB_OUTPUT
-        echo "${CROWDIN_STATUS_PROGRESS}"             >> $GITHUB_OUTPUT
-        echo "${delimiter}"                           >> $GITHUB_OUTPUT
+        DELIMITER="$(openssl rand -hex 8)"
+        echo "CROWDIN_STATUS_PROGRESS<<${DELIMITER}"    >> ${GITHUB_OUTPUT}
+        echo "${CROWDIN_STATUS_PROGRESS}"               >> ${GITHUB_OUTPUT}
+        echo "${DELIMITER}"                             >> ${GITHUB_OUTPUT}
         echo "CROWDIN_STATUS_PROGRESS:"
         echo "${CROWDIN_STATUS_PROGRESS}"

@@ -83,7 +83,7 @@ jobs:
       - name: Install Crowdin
         uses: ./.github/actions/install-crowdin
 
-      - name: Set Environment Variables to $GITHUB_ENV
+      - name: Set Environment Variables
         shell: bash
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
@@ -102,40 +102,59 @@ jobs:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
 
-      - name: Set the Crowdin Language Arguments
-        id: scla
-        uses: ./.github/actions/get-crowdin-language-args
-        with:
-          language: 'all'
+      # - name: Get the Crowdin Language List
+      #   id: gcla
+      #   uses: ./.github/actions/get-crowdin-language-list
+      #   with:
+      #     preset: 'all'
 
-      - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
-        shell: bash
-        run: |
-          crowdin download \
-            --dryrun \
-            ${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }} \
-            --branch ${{ inputs.VERSION }} \
-            --export-only-approved \
-            --no-progress \
-            --verbose
+      # - name: Crowdin Upload Sources to the 'repo' Branch
+      #   uses: ./.github/actions/crowdin-upload-sources
+      #   with:
+      #     crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
+      #     crowdin-branch-name: 'repo'
+      #     crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      #     crowdin-verbose: 'true'
+      #     crowdin-dryrun: 'true'
 
-      - name: Set the Crowdin Status Progress
-        id: scsp
-        uses: ./.github/actions/get-crowdin-status-progress
+      - name: Crowdin Download Translations from the 'repo' Branch
+        uses: ./.github/actions/crowdin-download-translations
         with:
-          crowdin-config: '${{ github.workspace }}/crowdin.yml'
-          crowdin-branch: 'repo'
+          crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
+          crowdin-branch-name: 'repo'
+          crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          crowdin-language-list: 'ja,ru,zh-CN,zh-TW'
+          crowdin-export-only-approved: 'true'
+          crowdin-no-progress: 'true'
+          crowdin-verbose: 'true'
+          crowdin-dryrun: 'true'
         # shell: bash
         # run: |
-        #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
-        #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
-        #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-        #   delimiter="$(openssl rand -hex 8)"
-        #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
-        #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
-        #   echo "$delimiter"                           >> $GITHUB_OUTPUT
-        #   echo "CROWDIN_STATUS_PROGRESS:"
-        #   echo "$CROWDIN_STATUS_PROGRESS"
+        #   crowdin download \
+        #     --dryrun \
+        #     ${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }} \
+        #     --branch ${{ inputs.VERSION }} \
+        #     --export-only-approved \
+        #     --no-progress \
+        #     --verbose
+
+      # - name: Set the Crowdin Status Progress
+      #   id: scsp
+      #   uses: ./.github/actions/get-crowdin-status-progress
+      #   with:
+      #     crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
+      #     crowdin-branch-name: 'repo'
+      #   # shell: bash
+      #   # run: |
+      #   #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
+      #   #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
+      #   #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
+      #   #   delimiter="$(openssl rand -hex 8)"
+      #   #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
+      #   #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
+      #   #   echo "$delimiter"                           >> $GITHUB_OUTPUT
+      #   #   echo "CROWDIN_STATUS_PROGRESS:"
+      #   #   echo "$CROWDIN_STATUS_PROGRESS"
 
       # # - name: Check whether CMake is installed
       # #   run: |
