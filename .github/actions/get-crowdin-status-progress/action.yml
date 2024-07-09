@@ -12,6 +12,10 @@ inputs:
   crowdin-branch-name:
     required: true
     description: xxx
+  crowdin-personal-token:
+    required: true
+    description: xxx
+    default: ''
 
 outputs:
   CROWDIN_STATUS_PROGRESS:
@@ -27,7 +31,12 @@ runs:
       run: |
         CROWDIN_BRANCH_NAME=${{ inputs.crowdin-branch-name }}
         CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-        CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=${CROWDIN_BRANCH_NAME} --config=${CROWDIN_CONFIG_FILE} --no-progress --verbose 2>&1)
+        CROWDIN_PERSONAL_TOKEN=${{ inputs.crowdin-personal-token }}
+        CROWDIN_STATUS_OUTPUT=$(crowdin status 
+          --branch=${CROWDIN_BRANCH_NAME} 
+          --config=${CROWDIN_CONFIG_FILE} 
+          --token=${CROWDIN_PERSONAL_TOKEN}
+          --no-progress --verbose 2>&1)
         CROWDIN_STATUS_PROGRESS=$(echo "${CROWDIN_STATUS_OUTPUT}" | sed '/Fetching project info/d' | sed 's/\t/  /g')
         DELIMITER="$(openssl rand -hex 8)"
         echo "CROWDIN_STATUS_PROGRESS<<${DELIMITER}"    >> ${GITHUB_OUTPUT}
