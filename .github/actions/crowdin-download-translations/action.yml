@@ -3,7 +3,7 @@
 
 name: crowdin-download-translations
 
-description: Download Translations of Documents from Crowdin
+description: Download Translations from Crowdin
 
 inputs:
   crowdin-config-file:      # required
@@ -13,14 +13,15 @@ inputs:
     required: true
     description: xxx
   crowdin-personal-token:   # required
-    required: true
+    required: false
     description: xxx
+    default: ''
   crowdin-language-list:
-    required: true
+    required: false
     description: xxx
     default: ''
   crowdin-export-only-approved:
-    required: true
+    required: false
     description: xxx
     default: 'false'
   crowdin-no-progress:
@@ -57,7 +58,6 @@ runs:
         CROWDIN_ARGS=()
         for KEY in ${INPUTS_KEYS}; do
           VALUE=$(echo "${INPUTS_JSON}" | jq -r --arg key "${KEY}" '.[$key]')
-          echo "(KEY, VALUE) = (${KEY}, ${VALUE})"
           CROWDIN_ARG=""
           if [[ "${KEY}" == "crowdin-config-file" ]]; then
             if [[ "${VALUE}" != "" ]]; then
@@ -106,15 +106,11 @@ runs:
         done
         echo "CROWDIN_ARGS=${CROWDIN_ARGS[@]}" >> ${GITHUB_OUTPUT}
 
-    - name: Download Translations from the Crowdin
-      # uses: crowdin/github-action@v2
-      # with:
-      #   command: 'download'
-      #   command_args: '${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}'
+    - name: Download Translations from Crowdin
       shell: bash
       run: |
         CROWDIN_ARGS="${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
-        echo "Downloading Translations from the Crowdin..."
+        echo "Downloading Translations from Crowdin..."
         echo ""
         echo "crowdin download ${CROWDIN_ARGS[@]}"
         echo ""
