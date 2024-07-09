@@ -6,13 +6,15 @@ name: crowdin-download-translations
 description: Download Translations from Crowdin
 
 inputs:
-  crowdin-config-file:      # required
-    required: true
+  crowdin-config-file:
+    required: false
     description: xxx
-  crowdin-branch-name:      # required
-    required: true
+    default: ''
+  crowdin-branch-name:
+    required: false
     description: xxx
-  crowdin-personal-token:   # required
+    default: ''
+  crowdin-personal-token:
     required: false
     description: xxx
     default: ''
@@ -36,15 +38,6 @@ inputs:
     required: false
     description: xxx
     default: 'false'
-  # source-directory:   # required
-  #   required: true
-  #   description: 'Source directory of the CMake Project.'
-  # preset:             # required
-  #   required: true
-  #   description: 'Configure Preset Name.'
-  # target:             # required
-  #   required: true
-  #   description: 'CMake Build Target'
 
 runs:
   using: composite
