@@ -48,7 +48,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Get Crowdin Arguments by Inputs
+    - name: Get the Crowdin Arguments by Inputs
       id: crowdin-args
       shell: bash
       run: |
@@ -61,15 +61,22 @@ runs:
           CROWDIN_ARG=""
           if [[ "${KEY}" == "crowdin-config-file" ]]; then
             if [[ "${VALUE}" != "" ]]; then
-              # CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-              CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#^\([A-Za-z]\):#/\L\1#')
+              CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
               CROWDIN_ARG="--config=${CROWDIN_CONFIG_FILE}"
+            fi
+          elif [[ "${KEY}" == "crowdin-branch-name" ]]; then
+            if [[ "${VALUE}" != "" ]]; then
+              CROWDIN_BRANCH_NAME="${{ inputs.crowdin-branch-name }}"
+              CROWDIN_ARG="--branch=${CROWDIN_BRANCH_NAME}"
+            fi
+          elif [[ "${KEY}" == "crowdin-personal-token" ]]; then
+            if [[ "${VALUE}" != "" ]]; then
+              CROWDIN_PERSONAL_TOKEN="${{ inputs.crowdin-personal-token }}"
+              CROWDIN_ARG="--branch=${CROWDIN_PERSONAL_TOKEN}"
             fi
           elif [[ "${KEY}" == "crowdin-language-list" ]]; then
             if [[ "${VALUE}" != "" ]]; then
-              IFS=","
-              read -r -a CROWDIN_LANGUAGE_LIST <<< "${{ inputs.crowdin-language-list }}"
-              unset IFS
+              IFS="," read -r -a CROWDIN_LANGUAGE_LIST <<< "${{ inputs.crowdin-language-list }}"
               for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGE_LIST[@]}"; do
                 if [[ -z ${CROWDIN_ARG} ]]; then
                   CROWDIN_ARG="--language=${CROWDIN_LANGUAGE}"
@@ -77,6 +84,10 @@ runs:
                   CROWDIN_ARG="${CROWDIN_ARG} --language=${CROWDIN_LANGUAGE}"
                 fi
               done
+            fi
+          elif [[ "${KEY}" == "crowdin-export-only-approved" ]]; then
+            if [[ "${VALUE}" == "true" ]]; then
+              CROWDIN_ARG="--export-only-approved"
             fi
           elif [[ "${KEY}" == "crowdin-no-progress" ]]; then
             if [[ "${VALUE}" == "true" ]]; then
@@ -95,7 +106,7 @@ runs:
         done
         echo "CROWDIN_ARGS=${CROWDIN_ARGS[@]}" >> ${GITHUB_OUTPUT}
 
-    - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
+    - name: Download Translations from the Crowdin
       # uses: crowdin/github-action@v2
       # with:
       #   command: 'download'
