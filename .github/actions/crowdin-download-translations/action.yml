@@ -61,7 +61,8 @@ runs:
           CROWDIN_ARG=""
           if [[ "${KEY}" == "crowdin-config-file" ]]; then
             if [[ "${VALUE}" != "" ]]; then
-              CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+              # CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+              CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#^\([A-Za-z]\):#/\L\1#')
               CROWDIN_ARG="--config=${CROWDIN_CONFIG_FILE}"
             fi
           elif [[ "${KEY}" == "crowdin-language-list" ]]; then
@@ -101,4 +102,9 @@ runs:
       #   command_args: '${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}'
       shell: bash
       run: |
-        crowdin download ${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}
+        CROWDIN_ARGS="${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
+        echo "Downloading Translations from the Crowdin..."
+        echo ""
+        echo "crowdin download ${CROWDIN_ARGS[@]}"
+        echo ""
+        crowdin download ${CROWDIN_ARGS[@]}
