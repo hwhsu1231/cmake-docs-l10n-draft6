@@ -75,10 +75,10 @@ runs:
         echo "CROWDIN_ARGS=${CROWDIN_ARGS[@]}" >> ${GITHUB_OUTPUT}
 
     - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
-      # uses: crowdin/github-action@v2
-      # with:
-      #   command: 'download'
-      #   command_args: '${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}'
-      shell: bash
-      run: |
-        echo "${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
+      uses: crowdin/github-action@v2
+      with:
+        command: 'download'
+        command_args: '${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}'
+      # shell: bash
+      # run: |
+      #   echo "${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
