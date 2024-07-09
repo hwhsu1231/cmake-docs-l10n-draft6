@@ -59,16 +59,21 @@ runs:
           VALUE=$(echo "${INPUTS_JSON}" | jq -r --arg key "${KEY}" '.[$key]')
           echo "(KEY, VALUE) = (${KEY}, ${VALUE})"
           CROWDIN_ARG=""
-          if [[ "${KEY}" == "crowdin-language-list" ]]; then
+          if [[ "${KEY}" == "crowdin-config-file" ]]; then
+            if [[ "${VALUE}" != "" ]]; then
+              CROWDIN_CONFIG_FILE=$(echo "${{ inputs.crowdin-config-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+              CROWDIN_ARG="--config=${CROWDIN_CONFIG_FILE}"
+            fi
+          elif [[ "${KEY}" == "crowdin-language-list" ]]; then
             if [[ "${VALUE}" != "" ]]; then
               IFS=","
               read -r -a CROWDIN_LANGUAGE_LIST <<< "${{ inputs.crowdin-language-list }}"
               unset IFS
               for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGE_LIST[@]}"; do
                 if [[ -z ${CROWDIN_ARG} ]]; then
-                  CROWDIN_ARG="--language ${CROWDIN_LANGUAGE}"
+                  CROWDIN_ARG="--language=${CROWDIN_LANGUAGE}"
                 else
-                  CROWDIN_ARG="${CROWDIN_ARG} --language ${CROWDIN_LANGUAGE}"
+                  CROWDIN_ARG="${CROWDIN_ARG} --language=${CROWDIN_LANGUAGE}"
                 fi
               done
             fi
