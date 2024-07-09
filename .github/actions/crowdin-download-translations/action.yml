@@ -41,36 +41,44 @@ runs:
   using: composite
   steps:
     - name: Get Crowdin Arguments by Inputs
+      id: crowdin-args
       shell: bash
       run: |
         INPUTS_JSON=$(echo '${{ toJSON(inputs) }}' | jq -c)
         INPUTS_KEYS=$(echo "${INPUTS_JSON}" | jq -r 'keys[]' | tr -d '\r')
+        CROWDIN_ARGS=()
         for KEY in ${INPUTS_KEYS}; do
           VALUE=$(echo "${INPUTS_JSON}" | jq -r --arg key "${KEY}" '.[$key]')
           echo "(KEY, VALUE) = (${KEY}, ${VALUE})"
+          CROWDIN_ARG=""
+          if [[ "${KEY}" == "crowdin-language-list" ]]; then
+            if [[ "${VALUE}" != "" ]]; then
+              IFS=","
+              read -r -a CROWDIN_LANGUAGE_LIST <<< "${{ inputs.crowdin-language-list }}"
+              unset IFS
+              for CROWDIN_LANGUAGE in "${CROWDIN_LANGUAGE_LIST[@]}"; do
+                echo "CROWDIN_LANGUAGE: ${CROWDIN_LANGUAGE}"
+                if [[ -z ${CROWDIN_ARG} ]]; then
+                  CROWDIN_ARG="--language ${CROWDIN_LANGUAGE}"
+                else
+                  CROWDIN_ARG="${CROWDIN_ARG} --language ${CROWDIN_LANGUAGE}"
+                fi
+              done
+            fi
+          elif [[ "${KEY}" == "crowdin-dryrun" ]]; then
+            if [[ "${VALUE}" == "true" ]]; then
+              CROWDIN_ARG="--dryrun"
+            fi
+          fi
+          CROWDIN_ARGS+=(${CROWDIN_ARG})
         done
+        echo "CROWDIN_ARGS=${CROWDIN_ARGS[@]}" >> ${GITHUB_OUTPUT}
 
-    - name: Build the project (Linux/macOS)
-      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+    - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
+      # uses: crowdin/github-action@v2
+      # with:
+      #   command: 'download'
+      #   command_args: '${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}'
       shell: bash
       run: |
-        echo "building the project..."
-        echo ""
-        echo "cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}"
-        echo ""
-        cmake --build ${{ inputs.source-directory }}/out/build/${{ inputs.preset }} --target ${{ inputs.target }}
-
-    # - name: Crowdin Download Documents from the '${{ inputs.VERSION }}' Branch
-    #   uses: crowdin/github-action@v2
-    #   with:
-    #     command: 'download'
-    #     command_args: '${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }}'
-      # shell: bash
-      # run: |
-      #   crowdin download \
-      #     --dryrun \
-      #     ${{ steps.scla.outputs.CROWDIN_LANGUAGE_ARGS }} \
-      #     --branch ${{ inputs.VERSION }} \
-      #     --export-only-approved \
-      #     --no-progress \
-      #     --verbose
+        echo "${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
