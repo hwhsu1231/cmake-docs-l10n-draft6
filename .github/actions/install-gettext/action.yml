@@ -26,21 +26,15 @@ runs:
       run: |
         brew install gettext
 
+    # Refer to:
+    # - https://github.com/translate/translate/pull/5201
+    # - https://stackoverflow.com/a/40211150/16265240
     - name: Install Gettext by Nuget (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: powershell
-      # run: |
-      #   nuget install Gettext.Tools -Version 0.22.4 -OutputDirectory C:\nuget;
-      #   Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools.0.22.4\tools\bin"
       run: |
         nuget install Gettext.Tools -ExcludeVersion -OutputDirectory C:\nuget;
         Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools\tools\bin"
-
-    - name: Check nuget directory
-      if: ${{ runner.os == 'Windows' }}
-      shell: cmd
-      run: |
-        dir C:\nuget
 
     # - name: Install Gettext by Conda (Windows)
     #   if: ${{ runner.os == 'Windows' }}
