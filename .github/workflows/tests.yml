@@ -96,12 +96,21 @@ jobs:
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
 
       - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D AUTO_DEPEND=OFF
+      #   shell: bash
+      #   run: |
+      #     cmake \
+      #       --preset ${{ inputs.LANGUAGE }} \
+      #       -D VERSION=${{ inputs.VERSION }} \
+      #       -D AUTO_DEPEND=OFF
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          version: ${{ inputs.VERSION }}
+          cache-update-mode: ''
+          cache-auto-depend: 'OFF'
+          cache-python-exact-version: ''
+
 
       - name: Get Version Information from reference.json
         uses: ./.github/actions/get-version-info-from-reference
@@ -169,13 +178,6 @@ jobs:
       # # - name: Check whether CMake is installed
       # #   run: |
       # #     which cmake && cmake --version
-
-      # - name: Configure the project
-      #   uses: ./.github/actions/cmake-configure
-      #   with:
-      #     source-directory: '${{ github.workspace }}'
-      #     preset: 'all'
-      #     version: 'git-master'
 
       # - name: Build the 'prepare_repositories' target
       #   uses: ./.github/actions/cmake-build-target
