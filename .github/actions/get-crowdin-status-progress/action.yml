@@ -90,8 +90,8 @@ runs:
         # CROWDIN_PERSONAL_TOKEN=${{ inputs.crowdin-personal-token }}
         # CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=${CROWDIN_BRANCH_NAME} --config=${CROWDIN_CONFIG_FILE} --token=${CROWDIN_PERSONAL_TOKEN} --no-progress --verbose 2>&1)
 
-        CROWDIN_ARGS="${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
-        CROWDIN_STATUS_OUTPUTS=$(crowdin status ${CROWDIN_ARGS[@]} 2>&1)
+        CROWDIN_STATUS_ARGS="${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
+        CROWDIN_STATUS_OUTPUTS=$(crowdin status ${CROWDIN_STATUS_ARGS[@]} 2>&1)
         CROWDIN_STATUS_PROGRESS=$(echo "${CROWDIN_STATUS_OUTPUTS}" | sed '/Fetching project info/d' | sed 's/\t/  /g')
         DELIMITER="$(openssl rand -hex 8)"
         echo "CROWDIN_STATUS_PROGRESS<<${DELIMITER}"    >> ${GITHUB_OUTPUT}
