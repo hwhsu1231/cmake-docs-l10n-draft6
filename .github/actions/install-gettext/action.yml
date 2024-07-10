@@ -30,7 +30,14 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: powershell
       run: |
-        nuget install Gettext.Tools
+        nuget install Gettext.Tools -Version 0.22.4 -OutputDirectory C:\nuget;
+        Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools.0.22.4\tools\bin"
+
+    - name: Check nuget directory
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        dir C:\nuget
 
     # - name: Install Gettext by Conda (Windows)
     #   if: ${{ runner.os == 'Windows' }}
