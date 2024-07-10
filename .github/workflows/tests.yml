@@ -110,7 +110,7 @@ jobs:
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
 
       - name: Get the Crowdin Language List
-        id: gcla
+        id: gcll
         uses: ./.github/actions/get-crowdin-language-list
         with:
           language: 'all'
@@ -130,7 +130,7 @@ jobs:
           crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
           crowdin-branch-name: 'repo'
           crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-          crowdin-language-list: 'ja,ru,zh-CN,zh-TW'
+          crowdin-language-list: ${{ steps.gcll.outputs.CROWDIN_LANGUAGE_LIST }}
           crowdin-export-only-approved: 'true'
           # crowdin-no-progress: 'true'
           # crowdin-verbose: 'true'
