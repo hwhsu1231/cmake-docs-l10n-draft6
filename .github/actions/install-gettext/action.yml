@@ -29,9 +29,12 @@ runs:
     - name: Install Gettext by Nuget (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: powershell
+      # run: |
+      #   nuget install Gettext.Tools -Version 0.22.4 -OutputDirectory C:\nuget;
+      #   Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools.0.22.4\tools\bin"
       run: |
-        nuget install Gettext.Tools -Version 0.22.4 -OutputDirectory C:\nuget;
-        Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools.0.22.4\tools\bin"
+        nuget install Gettext.Tools -OutputDirectory C:\nuget;
+        Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools\tools\bin"
 
     - name: Check nuget directory
       if: ${{ runner.os == 'Windows' }}
