@@ -69,6 +69,12 @@ jobs:
           which jq
           jq --version
 
+      - name: Check Git version
+        shell: bash
+        run: |
+          which git
+          git --version
+
       - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
@@ -117,7 +123,7 @@ jobs:
       #     crowdin-verbose: 'true'
       #     crowdin-dryrun: 'true'
 
-      - name: Crowdin Download Translations from the 'repo' Branch
+      - name: Download Translations of the 'repo' Branch from Crowdin
         uses: ./.github/actions/crowdin-download-translations
         with:
           crowdin-config-file: '${{ github.workspace }}/crowdin.yml'
