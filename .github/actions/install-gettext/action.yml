@@ -31,8 +31,6 @@ runs:
       shell: powershell
       run: |
         nuget install Gettext.Tools
-        Get-Item Env:PATH;
-        which msgfmt
 
     # - name: Install Gettext by Conda (Windows)
     #   if: ${{ runner.os == 'Windows' }}
