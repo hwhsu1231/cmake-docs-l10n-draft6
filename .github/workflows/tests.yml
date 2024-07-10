@@ -70,9 +70,10 @@ jobs:
           jq --version
 
       - name: Check Git version
-        shell: bash
+        if: ${{ runner.os == 'Windows' }}
+        shell: cmd
         run: |
-          which git
+          where git
           git --version
 
       - name: Install CMake
