@@ -113,7 +113,7 @@ jobs:
         id: gcla
         uses: ./.github/actions/get-crowdin-language-list
         with:
-          preset: 'all'
+          language: 'all'
 
       # - name: Crowdin Upload Sources to the 'repo' Branch
       #   uses: ./.github/actions/crowdin-upload-sources
