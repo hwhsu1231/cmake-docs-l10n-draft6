@@ -26,11 +26,19 @@ runs:
       run: |
         brew install gettext
 
-    - name: Install Gettext by Conda (Windows)
+    - name: Install Gettext by Nuget (Windows)
       if: ${{ runner.os == 'Windows' }}
       shell: powershell
       run: |
-        conda install gettext --channel conda-forge
+        nuget install Gettext.Tools
+        Get-Item Env:PATH;
+        which msgfmt
+
+    # - name: Install Gettext by Conda (Windows)
+    #   if: ${{ runner.os == 'Windows' }}
+    #   shell: powershell
+    #   run: |
+    #     conda install gettext --channel conda-forge
 
     # - name: Install Winget (Windows)
     #   if: ${{ runner.os == 'Windows' }}
