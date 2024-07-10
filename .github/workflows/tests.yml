@@ -125,8 +125,8 @@ jobs:
           crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
           crowdin-language-list: 'ja,ru,zh-CN,zh-TW'
           crowdin-export-only-approved: 'true'
-          crowdin-no-progress: 'true'
-          crowdin-verbose: 'true'
+          # crowdin-no-progress: 'true'
+          # crowdin-verbose: 'true'
           crowdin-dryrun: 'true'
         # shell: bash
         # run: |
