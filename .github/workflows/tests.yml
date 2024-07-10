@@ -146,7 +146,7 @@ jobs:
           crowdin-branch-name: 'repo'
           crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
           crowdin-no-progress: true
-          crowdin-verbose: true
+          # crowdin-verbose: true
         # shell: bash
         # run: |
         #   CROWDIN_YML_PATH=$(pwd)/crowdin.yml
