@@ -36,25 +36,6 @@ runs:
         nuget install Gettext.Tools -ExcludeVersion -OutputDirectory C:\nuget;
         Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools\tools\bin"
 
-    # - name: Install Gettext by Conda (Windows)
-    #   if: ${{ runner.os == 'Windows' }}
-    #   shell: powershell
-    #   run: |
-    #     conda install gettext --channel conda-forge
-
-    # - name: Install Winget (Windows)
-    #   if: ${{ runner.os == 'Windows' }}
-    #   uses: Cyberboss/install-winget@v1
-    #   with:
-    #     GITHUB_TOKEN: ${{ inputs.token }}
-
-    # - name: Install Gettext by Winget (Windows)
-    #   if: ${{ runner.os == 'Windows' }}
-    #   shell: powershell
-    #   run: |
-    #     winget install mlocati.GetText --accept-source-agreements --accept-package-agreements
-    #     echo "C:\Program Files\gettext-iconv\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
     - name: Check if Gettext is installed (Linux/macOS)
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
