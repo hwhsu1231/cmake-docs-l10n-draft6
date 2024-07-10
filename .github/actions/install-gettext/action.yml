@@ -56,5 +56,8 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
+        echo dir C:\Miniconda 
+        dir C:\Miniconda
+        echo CONDA_PREFIX = %CONDA_PREFIX%
         where xgettext
         xgettext --version
