@@ -109,11 +109,11 @@ jobs:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
 
-      # - name: Get the Crowdin Language List
-      #   id: gcla
-      #   uses: ./.github/actions/get-crowdin-language-list
-      #   with:
-      #     preset: 'all'
+      - name: Get the Crowdin Language List
+        id: gcla
+        uses: ./.github/actions/get-crowdin-language-list
+        with:
+          preset: 'all'
 
       # - name: Crowdin Upload Sources to the 'repo' Branch
       #   uses: ./.github/actions/crowdin-upload-sources
