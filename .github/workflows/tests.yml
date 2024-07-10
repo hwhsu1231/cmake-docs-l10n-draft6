@@ -106,7 +106,7 @@ jobs:
         with:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
-          version: ${{ inputs.VERSION }}
+          cache-version: ${{ inputs.VERSION }}
           cache-update-mode: ''
           cache-auto-depend: 'OFF'
           cache-python-exact-version: ''
