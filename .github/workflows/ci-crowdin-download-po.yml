@@ -75,7 +75,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-crowdin-download-po.yml

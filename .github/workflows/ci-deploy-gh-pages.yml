@@ -45,17 +45,17 @@ jobs:
         id: rvm
         run: |
           FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
-          echo "$VERSION" | jq "."
+          echo "${VERSION}" | jq "."
       - name: Read LANGUAGE from languages.json
         id: rll
         run: |
           LANGUAGE=$(jq -c "keys" languages.json)
-          echo "LANGUAGE=$LANGUAGE" >> $GITHUB_OUTPUT
+          echo "LANGUAGE=${LANGUAGE}" >> ${GITHUB_OUTPUT}
           echo "LANGUAGE:"
-          echo "$LANGUAGE" | jq "."
+          echo "${LANGUAGE}" | jq "."
 
   matrix:
     needs: get-matrix
@@ -67,11 +67,12 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-deploy-gh-pages.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
@@ -88,6 +89,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-deploy-gh-pages.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}

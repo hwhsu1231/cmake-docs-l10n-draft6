@@ -6,6 +6,9 @@ name: use-deploy-po-version
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -21,9 +24,8 @@ on:
 
 jobs:
   deploy-po-version:
-    #  Don't run on forked repos.
-    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash

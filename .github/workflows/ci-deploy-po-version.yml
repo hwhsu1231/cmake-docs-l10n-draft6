@@ -54,10 +54,11 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
       fail-fast: false
     uses: ./.github/workflows/use-deploy-po-version.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
@@ -71,6 +72,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-deploy-po-version.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'

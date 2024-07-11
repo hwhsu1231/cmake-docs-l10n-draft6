@@ -53,7 +53,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJson(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
       fail-fast: false
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:

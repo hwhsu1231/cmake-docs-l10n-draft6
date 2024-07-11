@@ -6,6 +6,9 @@ name: use-deploy-gh-pages
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -30,9 +33,8 @@ on:
 
 jobs:
   deploy-gh-pages:
-    #  Don't run on forked repos.
-    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -89,28 +91,16 @@ jobs:
             echo "${KEY}: $VALUE"
           done
 
-      - name: Install CMake
+      - name: Install CMake 3.23
         uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
-      # - name: Install CMake 3.23
-      #   uses: jwlawson/actions-setup-cmake@v2.0
-      #   with:
-      #     cmake-version: '3.23'
 
       - name: Install Conda
         uses: ./.github/actions/install-conda
 
-      # - name: Install Python 3.10
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '3.10'
-
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
-        # shell: bash
-        # run: |
-        #   sudo apt-get install gettext && xgettext --version
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
@@ -120,13 +110,10 @@ jobs:
           cache-version: ${{ inputs.VERSION }}
           cache-update-mode: ${{ inputs.UPDATE_MODE }}
           cache-auto-depend: 'OFF'
-        # shell: bash
-        # run: |
-        #   cmake \
-        #     --preset ${{ inputs.LANGUAGE }} \
-        #     -D VERSION=${{ inputs.VERSION }} \
-        #     -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-        #     -D AUTO_DEPEND=OFF
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target

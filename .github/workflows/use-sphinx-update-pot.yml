@@ -66,12 +66,6 @@ jobs:
           token: ${{ steps.ggat.outputs.token }}
           submodules: true
 
-      # - name: Fetch 'refs/heads/l10n' to track
-      #   shell: bash
-      #   run: |
-      #     git fetch origin +refs/heads/l10n:refs/remotes/origin/l10n
-      #     git branch l10n origin/l10n
-
       - name: Get Other Fields from matrix.json
         id: gofm
         shell: bash
@@ -89,21 +83,6 @@ jobs:
             echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
             echo "${KEY}: ${VALUE}"
           done
-        # run: |
-        #   get_keys() {
-        #     jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json | tr -d '\r'
-        #   }
-        #   declare -A VERSION_FILTERS
-        #   for KEY in $(get_keys); do
-        #     VERSION_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
-        #   done
-        #   for KEY in "${!VERSION_FILTERS[@]}"; do
-        #     FILTER="${VERSION_FILTERS[${KEY}]}"
-        #     VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
-        #     if [ "${VALUE}" = "null" ]; then VALUE=""; fi
-        #     echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
-        #     echo "${KEY}: ${VALUE}"
-        #   done
 
       - name: Install CMake 3.23
         uses: ./.github/actions/install-cmake
@@ -157,10 +136,6 @@ jobs:
           preset: ${{ inputs.LANGUAGE }}
           target: 'sphinx_update_pot'
 
-      # Refer to:
-      # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
-      # - https://github.com/github/docs/issues/21529
-      # - https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
       - name: Get the Version Information of '.pot' After Building
         id: pot-after
         uses: ./.github/actions/get-version-info-from-reference
@@ -168,7 +143,7 @@ jobs:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
 
-      - name: Set the Labels List for the Pull Request
+      - name: Set the Label List for the Pull Request
         id: sllpr
         shell: bash
         run: |
@@ -176,15 +151,15 @@ jobs:
           FILTER=".include | map(select(.VERSION_COMPENDIUM == null)) | .[].VERSION"
           OUTPUT=$(jq -r "${FILTER}" .github/workflows/matrix.json)
           readarray -t CROWDIN_BRANCHES <<< "${OUTPUT}"
-          PULL_REQUEST_LABELS_LIST="gettext"
+          PULL_REQUEST_LABEL_LIST="gettext"
           for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
             if [ "${VERSION}" == "${CROWDIN_BRANCH}" ]; then
-              PULL_REQUEST_LABELS_LIST="${PULL_REQUEST_LABELS_LIST},crowdin"
+              PULL_REQUEST_LABEL_LIST="${PULL_REQUEST_LABEL_LIST},crowdin"
               break
             fi
           done
-          echo "PULL_REQUEST_LABELS_LIST: ${PULL_REQUEST_LABELS_LIST}"
-          echo "PULL_REQUEST_LABELS_LIST=${PULL_REQUEST_LABELS_LIST}" >> $GITHUB_OUTPUT
+          echo "PULL_REQUEST_LABEL_LIST: ${PULL_REQUEST_LABEL_LIST}"
+          echo "PULL_REQUEST_LABEL_LIST=${PULL_REQUEST_LABEL_LIST}" >> $GITHUB_OUTPUT
 
       - name: Get the Current Job's ID
         id: gcji
@@ -238,7 +213,7 @@ jobs:
           github_token: ${{ steps.ggat.outputs.token }}  # required
           source_branch: sphinx/pot/${{ inputs.VERSION }}
           target_branch: l10n
-          label: ${{ steps.sllpr.outputs.PULL_REQUEST_LABELS_LIST }}
+          label: ${{ steps.sllpr.outputs.PULL_REQUEST_LABEL_LIST }}
           title: |
             pot(${{ inputs.VERSION }}): Update pot from Sphinx
           body: |
