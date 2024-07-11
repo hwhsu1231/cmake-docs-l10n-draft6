@@ -27,6 +27,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-upload-pot.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: 'refs/heads/source'
       VERSION: ${{ github.event.client_payload.VERSION }}
       ENABLE_JOB: true
@@ -39,6 +40,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-upload-pot.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       ENABLE_JOB: true

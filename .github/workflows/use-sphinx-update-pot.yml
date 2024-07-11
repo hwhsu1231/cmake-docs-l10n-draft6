@@ -44,6 +44,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
           echo "inputs.UPDATE_MODE = ${{ inputs.UPDATE_MODE }}"

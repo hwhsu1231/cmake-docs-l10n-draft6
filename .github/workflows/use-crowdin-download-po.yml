@@ -6,6 +6,9 @@ name: use-crowdin-download-po
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -27,9 +30,8 @@ on:
 
 jobs:
   crowdin-download-po:
-    #  Don't run on forked repos.
-    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -42,6 +44,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
@@ -98,23 +101,31 @@ jobs:
           cmake-version: '3.23'
 
       - name: Install Gettext
-        shell: bash
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
 
-      - name: Install Crowdin CLI
-        shell: bash
-        run: |
-          npm install -g @crowdin/cli && crowdin --version
+      - name: Install Crowdin
+        uses: ./.github/actions/install-crowdin
 
+      # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      #   shell: bash
+      #   run: |
+      #     cmake \
+      #       --preset ${{ inputs.LANGUAGE }} \
+      #       -D VERSION=${{ inputs.VERSION }} \
+      #       -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
+      #       -D AUTO_DEPEND=OFF
       - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-            -D AUTO_DEPEND=OFF
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          cache-version: ${{ inputs.VERSION }}
+          cache-update-mode: ${{ inputs.UPDATE_MODE }}
+          cache-auto-depend: 'OFF'
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
       - name: Build with 'gettext_update_po' target
         shell: bash

@@ -77,7 +77,8 @@ jobs:
         id: rvm
         run: |
           FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          MATRIX=".github/workflows/matrix.json"
+          VERSION=$(jq -c "${FILTER}" "${MATRIX}")
           echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
           echo "${VERSION}" | jq "."

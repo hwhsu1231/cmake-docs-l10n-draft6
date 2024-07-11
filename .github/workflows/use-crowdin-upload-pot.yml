@@ -6,6 +6,9 @@ name: use-crowdin-upload-pot
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -18,9 +21,8 @@ on:
 
 jobs:
   crowdin-upload-pot:
-    #  Don't run on forked repos.
-    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -33,6 +35,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"

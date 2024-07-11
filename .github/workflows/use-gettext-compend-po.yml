@@ -6,6 +6,9 @@ name: use-gettext-compend-po
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -24,9 +27,8 @@ on:
 
 jobs:
   gettext-compend-po:
-    #  Don't run on forked repos.
-    if: (inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231')
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -39,6 +41,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
@@ -83,30 +86,46 @@ jobs:
           done
 
       - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
       - name: Install Gettext
-        shell: bash
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
 
-      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D VERSION_COMPENDIUM=${{ steps.gofm.outputs.VERSION_COMPENDIUM }} \
-            -D AUTO_DEPEND=OFF
+      - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          cache-version: ${{ inputs.VERSION }}
+          cache-auto-depend: 'OFF'
+          cache-version-compendium: ${{ steps.gofm.outputs.VERSION_COMPENDIUM }}
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
+      # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      #   shell: bash
+      #   run: |
+      #     cmake \
+      #       --preset ${{ inputs.LANGUAGE }} \
+      #       -D VERSION=${{ inputs.VERSION }} \
+      #       -D VERSION_COMPENDIUM=${{ steps.gofm.outputs.VERSION_COMPENDIUM }} \
+      #       -D AUTO_DEPEND=OFF
 
-      - name: Build with 'gettext_compend_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target gettext_compend_po
+      - name: Build the 'gettext_compend_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'gettext_compend_po'
+      # - name: Build with 'gettext_compend_po' target
+      #   shell: bash
+      #   run: |
+      #     cmake \
+      #       --build out/build/${{ inputs.LANGUAGE }} \
+      #       --target gettext_compend_po
 
       - name: Get the Current Job's ID
         id: gcji

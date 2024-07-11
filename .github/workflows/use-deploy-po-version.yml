@@ -39,6 +39,7 @@ jobs:
           echo "github.event_name = ${{ github.event_name }}"
           echo "github.event.repository.default_branch = ${{ github.event.repository.default_branch }}"
           echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"

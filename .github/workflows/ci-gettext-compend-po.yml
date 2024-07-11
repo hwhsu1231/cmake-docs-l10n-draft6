@@ -50,9 +50,9 @@ jobs:
         id: rll
         run: |
           LANGUAGE=$(jq -c "keys" languages.json)
-          echo "LANGUAGE=$LANGUAGE" >> ${GITHUB_OUTPUT}
+          echo "LANGUAGE=${LANGUAGE}" >> ${GITHUB_OUTPUT}
           echo "LANGUAGE:"
-          echo "$LANGUAGE" | jq "."
+          echo "${LANGUAGE}" | jq "."
 
   matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )

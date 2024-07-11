@@ -200,13 +200,13 @@ On Windows
 
 4.  Install Gettext
 
-    * Method 1: Install it by completing Git-for-Windows installation
+    * Method 1: Install it by Nuget:
 
-      > After that, you should be able to find a Gettext Toolkit in:
-      > 
-      > ```cmd
-      > C:\Program Files\Git\usr\bin
-      > ```
+      ```powershell
+      # Powershell
+      nuget install Gettext.Tools -ExcludeVersion -OutputDirectory C:\nuget;
+      Add-Content $env:GITHUB_PATH "C:\nuget\Gettext.Tools\tools\bin"
+      ```
 
     * Method 2: Install it by archives or installers of <a href="https://mlocati.github.io/articles/gettext-iconv-windows.html">gettext-iconv-windows</a> manually.
 
