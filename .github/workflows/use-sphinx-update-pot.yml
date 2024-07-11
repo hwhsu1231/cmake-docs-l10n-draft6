@@ -6,6 +6,9 @@ name: use-sphinx-update-pot
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       VERSION:
         type: string
         required: true
@@ -27,9 +30,8 @@ on:
 
 jobs:
   sphinx-update-pot:
-    #  Don't run on forked repos.
-    if: (inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231')
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -159,7 +161,7 @@ jobs:
             fi
           done
           echo "PULL_REQUEST_LABEL_LIST: ${PULL_REQUEST_LABEL_LIST}"
-          echo "PULL_REQUEST_LABEL_LIST=${PULL_REQUEST_LABEL_LIST}" >> $GITHUB_OUTPUT
+          echo "PULL_REQUEST_LABEL_LIST=${PULL_REQUEST_LABEL_LIST}" >> ${GITHUB_OUTPUT}
 
       - name: Get the Current Job's ID
         id: gcji

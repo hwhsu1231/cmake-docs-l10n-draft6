@@ -46,11 +46,11 @@ jobs:
           VERSION_REGEX="pot\(([^)]+)\):"
           if [[ $PR_TITLE =~ $VERSION_REGEX ]]; then
             VERSION="${BASH_REMATCH[1]}"
-            echo "Extracted version: $VERSION"
-            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+            echo "Extracted version: ${VERSION}"
+            echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           else
             echo "Version format not found in PR title"
-            echo "VERSION=" >> $GITHUB_OUTPUT
+            echo "VERSION=" >> ${GITHUB_OUTPUT}
           fi
       - name: Get the GitHub App's Token
         id: ggat

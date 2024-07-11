@@ -108,7 +108,7 @@ runs:
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
         done
-        echo "CMAKE_ARGS=${CMAKE_ARGS[@]}" >> $GITHUB_OUTPUT
+        echo "CMAKE_ARGS=${CMAKE_ARGS[@]}" >> ${GITHUB_OUTPUT}
 
     - name: Configure the project (Windows)
       if: ${{ runner.os == 'Windows' }}

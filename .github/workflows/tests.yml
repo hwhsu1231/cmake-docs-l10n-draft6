@@ -169,9 +169,9 @@ jobs:
         #   CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
         #   CROWDIN_STATUS_PROGRESS=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
         #   delimiter="$(openssl rand -hex 8)"
-        #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> $GITHUB_OUTPUT
-        #   echo "$CROWDIN_STATUS_PROGRESS"             >> $GITHUB_OUTPUT
-        #   echo "$delimiter"                           >> $GITHUB_OUTPUT
+        #   echo "CROWDIN_STATUS_PROGRESS<<$delimiter"  >> ${GITHUB_OUTPUT}
+        #   echo "$CROWDIN_STATUS_PROGRESS"             >> ${GITHUB_OUTPUT}
+        #   echo "$delimiter"                           >> ${GITHUB_OUTPUT}
         #   echo "CROWDIN_STATUS_PROGRESS:"
         #   echo "$CROWDIN_STATUS_PROGRESS"
 

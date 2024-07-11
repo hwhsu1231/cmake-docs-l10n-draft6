@@ -6,6 +6,9 @@ name: use-gettext-update-po
 on:
   workflow_call:
     inputs:
+      RUNNER:
+        type: string
+        required: true
       CHECKOUT:
         type: string
         required: true
@@ -27,9 +30,8 @@ on:
 
 jobs:
   gettext-update-po:
-    #  Don't run on forked repos.
-    if: inputs.ENABLE_JOB && github.repository_owner == 'hwhsu1231'
-    runs-on: ubuntu-latest
+    if: inputs.ENABLE_JOB
+    runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -80,61 +82,83 @@ jobs:
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
       - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
       - name: Install Gettext
-        shell: bash
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
 
       - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-            -D AUTO_DEPEND=OFF
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          cache-version: ${{ inputs.VERSION }}
+          cache-update-mode: ${{ inputs.UPDATE_MODE }}
+          cache-auto-depend: 'OFF'
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
+      # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      #   shell: bash
+      #   run: |
+      #     cmake \
+      #       --preset ${{ inputs.LANGUAGE }} \
+      #       -D VERSION=${{ inputs.VERSION }} \
+      #       -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
+      #       -D AUTO_DEPEND=OFF
 
-      - name: Get PO_BEFORE from reference.json
-        id: gpbr
-        shell: bash
-        run: |
-          PO_BEFORE=$(jq ".po" l10n/${{ inputs.VERSION }}/reference.json)
-          delimiter="$(openssl rand -hex 8)"
-          echo "PO_BEFORE<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "$PO_BEFORE"             >> $GITHUB_OUTPUT
-          echo "$delimiter"             >> $GITHUB_OUTPUT
-          echo "PO_BEFORE:"
-          echo "$PO_BEFORE"
+      - name: Get the Version Information of '.po' Before Building
+        id: po-before
+        uses: ./.github/actions/get-version-info-from-reference
+        with:
+          jq-filter: '.po'
+          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+      # - name: Get PO_BEFORE from reference.json
+      #   id: po-before
+      #   shell: bash
+      #   run: |
+      #     PO_BEFORE=$(jq ".po" l10n/${{ inputs.VERSION }}/reference.json)
+      #     delimiter="$(openssl rand -hex 8)"
+      #     echo "PO_BEFORE<<$delimiter"  >> ${GITHUB_OUTPUT}
+      #     echo "$PO_BEFORE"             >> ${GITHUB_OUTPUT}
+      #     echo "$delimiter"             >> ${GITHUB_OUTPUT}
+      #     echo "PO_BEFORE:"
+      #     echo "$PO_BEFORE"
 
-      - name: Build with 'gettext_update_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target gettext_update_po
+      - name: Build the 'gettext_update_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'gettext_update_po'
 
-      - name: Get PO_AFTER from reference.json
-        id: gpar
-        shell: bash
-        run: |
-          PO_AFTER=$(jq '.po' l10n/${{ inputs.VERSION }}/reference.json)
-          delimiter="$(openssl rand -hex 8)"
-          echo "PO_AFTER<<$delimiter" >> $GITHUB_OUTPUT
-          echo "$PO_AFTER"            >> $GITHUB_OUTPUT
-          echo "$delimiter"           >> $GITHUB_OUTPUT
-          echo "PO_AFTER:"
-          echo "$PO_AFTER"
+      - name: Get the Version Information of '.po' After Building
+        id: po-after
+        uses: ./.github/actions/get-version-info-from-reference
+        with:
+          jq-filter: '.po'
+          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+      # - name: Get PO_AFTER from reference.json
+      #   id: po-after
+      #   shell: bash
+      #   run: |
+      #     PO_AFTER=$(jq '.po' l10n/${{ inputs.VERSION }}/reference.json)
+      #     delimiter="$(openssl rand -hex 8)"
+      #     echo "PO_AFTER<<$delimiter" >> ${GITHUB_OUTPUT}
+      #     echo "$PO_AFTER"            >> ${GITHUB_OUTPUT}
+      #     echo "$delimiter"           >> ${GITHUB_OUTPUT}
+      #     echo "PO_AFTER:"
+      #     echo "$PO_AFTER"
 
       - name: Get the Current Job's ID
         id: gcji
@@ -167,8 +191,8 @@ jobs:
           message: |
             po(${{ inputs.VERSION }}): Update po from Gettext
 
-            Before: ${{ steps.gpbr.outputs.PO_BEFORE }}
-            After: ${{ steps.gpar.outputs.PO_AFTER }}
+            Before: ${{ steps.po-before.outputs.VERSION_INFO }}
+            After: ${{ steps.po-after.outputs.VERSION_INFO }}
 
             Created by GitHub Workflows:
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml

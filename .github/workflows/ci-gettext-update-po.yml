@@ -55,6 +55,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: 'refs/heads/source'
       VERSION: ${{ github.event.client_payload.VERSION }}
       LANGUAGE: 'all'
@@ -76,10 +77,10 @@ jobs:
         id: rvm
         run: |
           FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
-          echo "$VERSION" | jq "."
+          echo "${VERSION}" | jq "."
 
   matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
@@ -95,6 +96,7 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
@@ -110,6 +112,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}

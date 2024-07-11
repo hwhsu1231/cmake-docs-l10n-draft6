@@ -72,9 +72,9 @@ jobs:
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
@@ -108,9 +108,9 @@ jobs:
         run: |
           STATISTIC_TXT_PATH=$(pwd)/l10n/${{ inputs.VERSION }}/statistic.txt
           delimiter="$(openssl rand -hex 8)"
-          echo "STATISTIC_OUTPUT<<$delimiter" >> $GITHUB_OUTPUT
-          echo "$(<$STATISTIC_TXT_PATH)"      >> $GITHUB_OUTPUT
-          echo "$delimiter"                   >> $GITHUB_OUTPUT
+          echo "STATISTIC_OUTPUT<<$delimiter" >> ${GITHUB_OUTPUT}
+          echo "$(<$STATISTIC_TXT_PATH)"      >> ${GITHUB_OUTPUT}
+          echo "$delimiter"                   >> ${GITHUB_OUTPUT}
 
       - name: Get the Current Job's ID
         id: gcji

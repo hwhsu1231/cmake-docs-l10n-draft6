@@ -53,15 +53,15 @@ jobs:
         id: rvm
         run: |
           FILTER=".include | map(select(.VERSION_COMPENDIUM == null) | .VERSION)"
-          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
-          echo "$VERSION" | jq "."
+          echo "${VERSION}" | jq "."
       - name: Read LANGUAGE from languages.json
         id: rll
         run: |
           LANGUAGE=$(jq -c "keys" languages.json)
-          echo "LANGUAGE=$LANGUAGE" >> $GITHUB_OUTPUT
+          echo "LANGUAGE=$LANGUAGE" >> ${GITHUB_OUTPUT}
           echo "LANGUAGE:"
           echo "$LANGUAGE" | jq "."
 

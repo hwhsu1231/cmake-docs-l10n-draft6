@@ -110,7 +110,7 @@ jobs:
               CROWDIN_LANGUAGE_ARGS="${CROWDIN_LANGUAGE_ARGS} --language ${CROWDIN_LANGUAGE}"
             fi
           done
-          echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}" >> $GITHUB_OUTPUT
+          echo "CROWDIN_LANGUAGE_ARGS=${CROWDIN_LANGUAGE_ARGS}" >> ${GITHUB_OUTPUT}
 
       - name: Upload docs to the '${{ inputs.VERSION }}' branch in Crowdin
         continue-on-error: true
@@ -159,9 +159,9 @@ jobs:
           CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
           PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
           delimiter="$(openssl rand -hex 8)"
-          echo "PROGRESS_OUTPUT<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "$PROGRESS_OUTPUT"             >> $GITHUB_OUTPUT
-          echo "$delimiter"                   >> $GITHUB_OUTPUT
+          echo "PROGRESS_OUTPUT<<$delimiter"  >> ${GITHUB_OUTPUT}
+          echo "$PROGRESS_OUTPUT"             >> ${GITHUB_OUTPUT}
+          echo "$delimiter"                   >> ${GITHUB_OUTPUT}
           echo "PROGRESS_OUTPUT:"
           echo "$PROGRESS_OUTPUT"
 

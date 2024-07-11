@@ -86,9 +86,9 @@ jobs:
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
@@ -142,9 +142,9 @@ jobs:
       #   run: |
       #     PROGRESS_CROWDIN_TXT_PATH=$(pwd)/l10n/${{ inputs.VERSION }}/progress.txt
       #     delimiter="$(openssl rand -hex 8)"
-      #     echo "PROGRESS_OUTPUT<<$delimiter"    >> $GITHUB_OUTPUT
-      #     echo "$(<$PROGRESS_CROWDIN_TXT_PATH)" >> $GITHUB_OUTPUT
-      #     echo "$delimiter"                     >> $GITHUB_OUTPUT
+      #     echo "PROGRESS_OUTPUT<<$delimiter"    >> ${GITHUB_OUTPUT}
+      #     echo "$(<$PROGRESS_CROWDIN_TXT_PATH)" >> ${GITHUB_OUTPUT}
+      #     echo "$delimiter"                     >> ${GITHUB_OUTPUT}
       - name: Get the Translated/Proofread Progress
         id: gtpp
         shell: bash
@@ -153,9 +153,9 @@ jobs:
           CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
           PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
           delimiter="$(openssl rand -hex 8)"
-          echo "PROGRESS_OUTPUT<<$delimiter"  >> $GITHUB_OUTPUT
-          echo "$PROGRESS_OUTPUT"             >> $GITHUB_OUTPUT
-          echo "$delimiter"                   >> $GITHUB_OUTPUT
+          echo "PROGRESS_OUTPUT<<$delimiter"  >> ${GITHUB_OUTPUT}
+          echo "$PROGRESS_OUTPUT"             >> ${GITHUB_OUTPUT}
+          echo "$delimiter"                   >> ${GITHUB_OUTPUT}
           echo "PROGRESS_OUTPUT:"
           echo "$PROGRESS_OUTPUT"
 

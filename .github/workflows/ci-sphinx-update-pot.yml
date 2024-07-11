@@ -52,10 +52,10 @@ jobs:
         id: rvm
         run: |
           FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
-          echo "$VERSION" | jq "."
+          echo "${VERSION}" | jq "."
 
   matrix:
     needs: get-matrix
@@ -72,6 +72,7 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
+      RUNNER: 'ubuntu-latest'
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
       UPDATE_MODE: ${{ inputs.UPDATE_MODE || 'COMPARE' }}
@@ -87,6 +88,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
+      RUNNER: 'ubuntu-latest'
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
       UPDATE_MODE: ${{ inputs.UPDATE_MODE }}

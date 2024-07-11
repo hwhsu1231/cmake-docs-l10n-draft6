@@ -76,9 +76,9 @@ jobs:
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
+            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
