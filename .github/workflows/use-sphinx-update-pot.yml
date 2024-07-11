@@ -77,10 +77,10 @@ jobs:
         shell: bash
         run: |
           MATRIX=".github/workflows/matrix.json"
-          KEYS=$(jq -r ".[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
+          KEYS=$(jq -r ".include[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
           declare -A KEY_FILTERS
           for KEY in ${KEYS[@]}; do
-            KEY_FILTERS[${KEY}]=".[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
+            KEY_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
           done
           for KEY in ${!KEY_FILTERS[@]}; do
             FILTER="${KEY_FILTERS[${KEY}]}"
@@ -89,7 +89,6 @@ jobs:
             echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
             echo "${KEY}: ${VALUE}"
           done
-
         # run: |
         #   get_keys() {
         #     jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json | tr -d '\r'
