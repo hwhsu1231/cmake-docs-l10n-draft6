@@ -2,163 +2,291 @@
   "include": [
     {
       "VERSION": "git-master",
-      "COMPEND_VERSION": null,
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": null,
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "latest",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.29",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.28",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.27",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.26",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.25",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.24",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.23",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.22",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.21",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.20",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.19",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.18",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.17",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.16",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.15",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.14",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.13",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.12",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.11",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.10",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.9",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.8",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.7",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.6",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.5",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.4",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.3",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.2",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.1",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     },
     {
       "VERSION": "v3.0",
-      "COMPEND_VERSION": "git-master",
-      "PYTHON_EXACT_VERSION": "3.10"
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
     }
   ]
 }

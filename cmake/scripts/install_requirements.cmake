@@ -133,7 +133,7 @@ restore_cmake_message_indent()
 
 
 message(STATUS "Determining whether to (re)create the virtual environment...")
-set(REQUIRED_PYTHON_VERSION "${PYTHON_EXACT_VERSION}")
+set(REQUIRED_PYTHON_VERSION "${VERSION_EXACT_PYTHON}")
 set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
 find_package(Python QUIET MODULE)
 string(FIND "${Python_EXECUTABLE}" "${Python_ROOT_DIR}" EXECUTABLE_IS_IN_ROOT)

@@ -6,15 +6,18 @@ name: cmake-configure-preset
 description: Configure the CMake preset
 
 inputs:
-  source-directory:     # required
-    required: true
+  source-directory:
+    required: false
     description: ''
-  preset:               # required
-    required: true
+    default: '${{ github.workspace }}'
+  preset:
+    required: false
     description: ''
-  cache-version:        # required
-    required: true
+    default: 'all'
+  cache-version:
+    required: false
     description: 'Value passed to VERSION cache.'
+    default: '[default]'
   cache-update-mode:
     required: false
     description: 'Value passed to UPDATE_MODE cache.'
@@ -31,25 +34,25 @@ inputs:
     required: false
     description: 'Value passed to REMOVE_REDUNDANT cache.'
     default: '[default]'
-  cache-compend-version:
+  cache-version-compendium:
     required: false
-    description: 'Value passed to COMPEND_VERSION cache.'
+    description: 'Value passed to VERSION_COMPENDIUM cache.'
     default: '[default]'
-  cache-git-exact-version:
+  cache-version-exact-git:
     required: false
-    description: 'Value passed to GIT_EXACT_VERSION cache.'
+    description: 'Value passed to VERSION_EXACT_GIT cache.'
     default: '[default]'
-  cache-python-exact-version:
+  cache-version-exact-python:
     required: false
-    description: 'Value passed to PYTHON_EXACT_VERSION cache.'
+    description: 'Value passed to VERSION_EXACT_PYTHON cache.'
     default: '[default]'
-  cache-gettext-exact-version:
+  cache-version-exact-gettext:
     required: false
-    description: 'Value passed to GETTEXT_EXACT_VERSION cache.'
+    description: 'Value passed to VERSION_EXACT_GETTEXT cache.'
     default: '[default]'
-  cache-crowdin-exact-version:
+  cache-version-exact-crowdin:
     required: false
-    description: 'Value passed to CROWDIN_EXACT_VERSION cache.'
+    description: 'Value passed to VERSION_EXACT_CROWDIN cache.'
     default: '[default]'
   cache-gettext-wrap-width:
     required: false

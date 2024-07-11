@@ -14,7 +14,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install Gettext by Apt (Ubuntu)
+    - name: Install Gettext by Apt (Linux)
       if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |

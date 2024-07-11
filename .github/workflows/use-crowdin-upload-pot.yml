@@ -56,7 +56,7 @@ jobs:
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          FILTER=".include | map(select(.COMPEND_VERSION == null)) | .[].VERSION"
+          FILTER=".include | map(select(.VERSION_COMPENDIUM == null)) | .[].VERSION"
           OUTPUT=$(jq -r "$FILTER" .github/workflows/matrix.json)
           readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
           VERSION_FOUND=false

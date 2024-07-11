@@ -76,44 +76,59 @@ jobs:
         id: gofm
         shell: bash
         run: |
-          get_keys() {
-            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
-          }
-          declare -A VERSION_FILTERS
-          for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+          MATRIX=".github/workflows/matrix.json"
+          KEYS=$(jq -r ".[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
+          declare -A KEY_FILTERS
+          for KEY in ${KEYS[@]}; do
+            KEY_FILTERS[${KEY}]=".[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
           done
-          for KEY in "${!VERSION_FILTERS[@]}"; do
-            FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "$FILTER" .github/workflows/matrix.json)
-            if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> $GITHUB_OUTPUT
-            echo "${KEY}: $VALUE"
+          for KEY in ${!KEY_FILTERS[@]}; do
+            FILTER="${KEY_FILTERS[${KEY}]}"
+            VALUE=$(jq -r "${FILTER}" "${MATRIX}" | tr -d '\r')
+            if [ "${VALUE}" = "null" ]; then VALUE=""; fi
+            echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
+            echo "${KEY}: ${VALUE}"
           done
 
+        # run: |
+        #   get_keys() {
+        #     jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json | tr -d '\r'
+        #   }
+        #   declare -A VERSION_FILTERS
+        #   for KEY in $(get_keys); do
+        #     VERSION_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
+        #   done
+        #   for KEY in "${!VERSION_FILTERS[@]}"; do
+        #     FILTER="${VERSION_FILTERS[${KEY}]}"
+        #     VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
+        #     if [ "${VALUE}" = "null" ]; then VALUE=""; fi
+        #     echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
+        #     echo "${KEY}: ${VALUE}"
+        #   done
+
       - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
-      - name: Install Python 3.10
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+      - name: Install Conda
+        uses: ./.github/actions/install-conda
 
       - name: Install Gettext
-        shell: bash
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
 
       - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset ${{ inputs.LANGUAGE }} \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-            -D AUTO_DEPEND=OFF
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          cache-version: ${{ inputs.VERSION }}
+          cache-update-mode: ${{ inputs.UPDATE_MODE }}
+          cache-auto-depend: 'OFF'
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
       - name: Get the Version Information of '.pot' Before Building
         id: pot-before
@@ -121,15 +136,6 @@ jobs:
         with:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
-        # shell: bash
-        # run: |
-        #   POT_BEFORE=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
-        #   DELIMITER="$(openssl rand -hex 8)"
-        #   echo "POT_BEFORE<<${DELIMITER}" >> $GITHUB_OUTPUT
-        #   echo "${POT_BEFORE}"            >> $GITHUB_OUTPUT
-        #   echo "${DELIMITER}"             >> $GITHUB_OUTPUT
-        #   echo "POT_BEFORE:"
-        #   echo "${POT_BEFORE}"
 
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target
@@ -137,11 +143,6 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'prepare_repositories'
-        # shell: bash
-        # run: |
-        #   cmake \
-        #     --build out/build/${{ inputs.LANGUAGE }} \
-        #     --target prepare_repositories
 
       - name: Build the 'install_requirements' target
         uses: ./.github/actions/cmake-build-target
@@ -149,11 +150,6 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'install_requirements'
-        # shell: bash
-        # run: |
-        #   cmake \
-        #     --build out/build/${{ inputs.LANGUAGE }} \
-        #     --target install_requirements
 
       - name: Build the 'sphinx_update_pot' target
         uses: ./.github/actions/cmake-build-target
@@ -161,11 +157,6 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'sphinx_update_pot'
-        # shell: bash
-        # run: |
-        #   cmake \
-        #     --build out/build/${{ inputs.LANGUAGE }} \
-        #     --target sphinx_update_pot
 
       # Refer to:
       # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
@@ -177,25 +168,14 @@ jobs:
         with:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
-      # - name: Get POT_AFTER from reference.json
-      #   id: pot-after
-      #   shell: bash
-      #   run: |
-      #     POT_AFTER=$(jq '.pot' l10n/${{ inputs.VERSION }}/reference.json)
-      #     DELIMITER="$(openssl rand -hex 8)"
-      #     echo "POT_AFTER<<${DELIMITER}"  >> $GITHUB_OUTPUT
-      #     echo "${POT_AFTER}"             >> $GITHUB_OUTPUT
-      #     echo "${DELIMITER}"             >> $GITHUB_OUTPUT
-      #     echo "POT_AFTER:"
-      #     echo "${POT_AFTER}"
 
       - name: Set the Labels List for the Pull Request
         id: sllpr
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          FILTER=".include | map(select(.COMPEND_VERSION == null)) | .[].VERSION"
-          OUTPUT=$(jq -r "$FILTER" .github/workflows/matrix.json)
+          FILTER=".include | map(select(.VERSION_COMPENDIUM == null)) | .[].VERSION"
+          OUTPUT=$(jq -r "${FILTER}" .github/workflows/matrix.json)
           readarray -t CROWDIN_BRANCHES <<< "${OUTPUT}"
           PULL_REQUEST_LABELS_LIST="gettext"
           for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
@@ -234,8 +214,8 @@ jobs:
         with:
           cwd: ./l10n
           add: ./${{ inputs.VERSION }}
-          new_branch: sphinx/pot/${{ inputs.VERSION }}
           push: 'origin sphinx/pot/${{ inputs.VERSION }} --set-upstream --force'
+          new_branch: sphinx/pot/${{ inputs.VERSION }}
           author_name: docs-l10n[bot]
           author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
           message: |

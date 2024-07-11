@@ -41,7 +41,7 @@ jobs:
       - name: Read VERSION from matrix.json
         id: rvm
         run: |
-          FILTER=".include | map(select(.COMPEND_VERSION != null) | .VERSION)"
+          FILTER=".include | map(select(.VERSION_COMPENDIUM != null) | .VERSION)"
           VERSION=$(jq -c "$FILTER" .github/workflows/matrix.json)
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "VERSION:"

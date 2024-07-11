@@ -36,35 +36,23 @@ set(AUTO_DEPEND ON
 set(REMOVE_REDUNDANT ON
     CACHE BOOL "Removing redundant files after building documentation.")
 
-set(GIT_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
-    CACHE STRING "Remote URL of the upstream Git repository.")
+set(VERSION_COMPENDIUM "git-master"
+    CACHE STRING "Version of compendium that the current version merges translations from.")
 
-set(GIT_L10N_REMOTE_URL "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
-    CACHE STRING "Remote URL of the l10n Git repository.")
-
-set(GIT_DOCS_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
-    CACHE STRING "Remote URL of the docs Git repository.")
-
-set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft5"
-    CACHE STRING "Base URL of the deployed documentation.")
-
-set(GIT_EXACT_VERSION ""
+set(VERSION_EXACT_GIT ""
     CACHE STRING "Exact version for calling find_package(Git).")
 
-set(CONDA_EXACT_VERSION ""
+set(VERSION_EXACT_CONDA ""
     CACHE STRING "Exact version for calling find_package(Conda).")
 
-set(PYTHON_EXACT_VERSION "3.10"
+set(VERSION_EXACT_PYTHON "3.10"
     CACHE STRING "Exact version for calling find_package(Python).")
 
-set(GETTEXT_EXACT_VERSION ""
+set(VERSION_EXACT_GETTEXT ""
     CACHE STRING "Exact version for calling find_package(Gettext).")
 
-set(CROWDIN_EXACT_VERSION ""
+set(VERSION_EXACT_CROWDIN ""
     CACHE STRING "Exact version for calling find_package(Crowdin).")
-
-set(COMPEND_VERSION "git-master"
-    CACHE STRING "Version of compendium that the current version merges translations from.")
 
 set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
     CACHE STRING "Locale setting for the console.")
@@ -96,6 +84,18 @@ set(SPHINX_JOB_NUMBER "1"
     CACHE STRING "")
     # Possible values are "auto", "1", "2",...etc.
     # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-j for details.
+
+set(GIT_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
+    CACHE STRING "Remote URL of the upstream Git repository.")
+
+set(GIT_L10N_REMOTE_URL "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
+    CACHE STRING "Remote URL of the l10n Git repository.")
+
+set(GIT_DOCS_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
+    CACHE STRING "Remote URL of the docs Git repository.")
+
+set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft5"
+    CACHE STRING "Base URL of the deployed documentation.")
 
 #[============================[
   Directory-Related Variables.
@@ -216,31 +216,31 @@ endif()
 #]====================]
 
 set(FIND_PACKAGE_GIT_ARGS)
-if(GIT_EXACT_VERSION)
-    set(GIT_EXACT_VERSION_ARGS ${GIT_EXACT_VERSION} EXACT)
+if(VERSION_EXACT_GIT)
+    set(VERSION_EXACT_GIT_ARGS ${VERSION_EXACT_GIT} EXACT)
 else()
-    set(GIT_EXACT_VERSION_ARGS)
+    set(VERSION_EXACT_GIT_ARGS)
 endif()
 set(FIND_PACKAGE_GIT_ARGS
-    ${GIT_EXACT_VERSION_ARGS})
+    ${VERSION_EXACT_GIT_ARGS})
 
 set(FIND_PACKAGE_CONDA_ARGS)
-if(CONDA_EXACT_VERSION)
-    set(CONDA_EXACT_VERSION_ARGS ${CONDA_EXACT_VERSION} EXACT)
+if(VERSION_EXACT_CONDA)
+    set(VERSION_EXACT_CONDA_ARGS ${VERSION_EXACT_CONDA} EXACT)
 else()
-    set(CONDA_EXACT_VERSION_ARGS)
+    set(VERSION_EXACT_CONDA_ARGS)
 endif()
 set(FIND_PACKAGE_CONDA_ARGS
-    ${CONDA_EXACT_VERSION_ARGS})
+    ${VERSION_EXACT_CONDA_ARGS})
 
 set(FIND_PACKAGE_PYTHON_ARGS)
-if(PYTHON_EXACT_VERSION)
-    set(PYTHON_EXACT_VERSION_ARGS ${PYTHON_EXACT_VERSION} EXACT)
+if(VERSION_EXACT_PYTHON)
+    set(VERSION_EXACT_PYTHON_ARGS ${VERSION_EXACT_PYTHON} EXACT)
 else()
-    set(PYTHON_EXACT_VERSION_ARGS)
+    set(VERSION_EXACT_PYTHON_ARGS)
 endif()
 set(FIND_PACKAGE_PYTHON_ARGS
-    ${PYTHON_EXACT_VERSION_ARGS})
+    ${VERSION_EXACT_PYTHON_ARGS})
 
 set(FIND_PACKAGE_GETTEXT_ARGS)
 
@@ -406,12 +406,12 @@ message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
 message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
-message(STATUS "GIT_EXACT_VERSION             = ${GIT_EXACT_VERSION}")
-message(STATUS "CONDA_EXACT_VERSION           = ${CONDA_EXACT_VERSION}")
-message(STATUS "PYTHON_EXACT_VERSION          = ${PYTHON_EXACT_VERSION}")
-message(STATUS "GETTEXT_EXACT_VERSION         = ${GETTEXT_EXACT_VERSION}")
-message(STATUS "CROWDIN_EXACT_VERSION         = ${CROWDIN_EXACT_VERSION}")
-message(STATUS "COMPEND_VERSION               = ${COMPEND_VERSION}")
+message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
+message(STATUS "VERSION_EXACT_GIT             = ${VERSION_EXACT_GIT}")
+message(STATUS "VERSION_EXACT_CONDA           = ${VERSION_EXACT_CONDA}")
+message(STATUS "VERSION_EXACT_PYTHON          = ${VERSION_EXACT_PYTHON}")
+message(STATUS "VERSION_EXACT_GETTEXT         = ${VERSION_EXACT_GETTEXT}")
+message(STATUS "VERSION_EXACT_CROWDIN         = ${VERSION_EXACT_CROWDIN}")
 message(STATUS "GETTEXT_WRAP_WIDTH            = ${GETTEXT_WRAP_WIDTH}")
 message(STATUS "GETTEXT_ADDITIONAL_TARGETS    = ${GETTEXT_ADDITIONAL_TARGETS}")
 message(STATUS "SPHINX_BUILDER                = ${SPHINX_BUILDER}")
@@ -494,15 +494,15 @@ set(SCRIPT_MODE_CACHE
     -D AUTO_DEPEND=${AUTO_DEPEND}
     -D UPDATE_MODE=${UPDATE_MODE}
     -D INSTALL_MODE=${INSTALL_MODE}
-    -D COMPEND_VERSION=${COMPEND_VERSION}
     -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D GIT_REMOTE_URL=${GIT_REMOTE_URL}
     -D BASEURL_HREF=${BASEURL_HREF}
-    -D GIT_EXACT_VERSION=${GIT_EXACT_VERSION}
-    -D CONDA_EXACT_VERSION=${CONDA_EXACT_VERSION}
-    -D PYTHON_EXACT_VERSION=${PYTHON_EXACT_VERSION}
-    -D GETTEXT_EXACT_VERSION=${GETTEXT_EXACT_VERSION}
-    -D CROWDIN_EXACT_VERSION=${CROWDIN_EXACT_VERSION}
+    -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
+    -D VERSION_EXACT_GIT=${VERSION_EXACT_GIT}
+    -D VERSION_EXACT_CONDA=${VERSION_EXACT_CONDA}
+    -D VERSION_EXACT_PYTHON=${VERSION_EXACT_PYTHON}
+    -D VERSION_EXACT_GETTEXT=${VERSION_EXACT_GETTEXT}
+    -D VERSION_EXACT_CROWDIN=${VERSION_EXACT_CROWDIN}
     -D SPHINX_BUILDER=${SPHINX_BUILDER}
     -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
     -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}
