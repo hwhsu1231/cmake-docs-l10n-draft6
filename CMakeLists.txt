@@ -124,7 +124,7 @@ set(PROJ_L10N_VERSION_CROWDIN_DIR   "${PROJ_L10N_VERSION_DIR}/.crowdin")
 #]====================]
 
 set(LANGUAGES_JSON_PATH             "${PROJ_SOURCE_DIR}/languages.json")
-set(REFERENCE_JSON_PATH             "${PROJ_L10N_VERSION_DIR}/reference.json")
+set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/reference.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(PROGRESS_TXT_PATH               "${PROJ_L10N_VERSION_DIR}/progress.txt")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
@@ -378,11 +378,12 @@ endif()
   Initialize a reference.json file in ${PROJ_L10N_VERSION_DIR}.
 #]=============================================================]
 
-init_reference_json_file(
-    IN_FILEPATH     "${REFERENCE_JSON_PATH}"
-    IN_LANGUAGES    "${LANGUAGES_LIST}"
+init_references_json_file(
+    IN_FILEPATH     "${REFERENCES_JSON_PATH}"
+    IN_VERSION      "${VERSION}"
     IN_TYPE         "${VERSION_TYPE}"
-    IN_VERSION      "${VERSION}")
+    IN_MODE         "language"
+    IN_LANGUAGE     "${LANGUAGES_LIST}")
 
 #[=========================================================[
   Configure a crowdin.yml file in ${PROJ_L10N_VERSION_DIR}.
@@ -438,7 +439,7 @@ message(STATUS "PROJ_L10N_VERSION_LOCALE_DIR  = ${PROJ_L10N_VERSION_LOCALE_DIR}"
 message(STATUS "PROJ_L10N_VERSION_CROWDIN_DIR = ${PROJ_L10N_VERSION_CROWDIN_DIR}")
 message(STATUS "---------- Configuration Files ----------")
 message(STATUS "LANGUAGES_JSON_PATH           = ${LANGUAGES_JSON_PATH}")
-message(STATUS "REFERENCE_JSON_PATH           = ${REFERENCE_JSON_PATH}")
+message(STATUS "REFERENCES_JSON_PATH           = ${REFERENCES_JSON_PATH}")
 message(STATUS "CROWDIN_YML_PATH              = ${CROWDIN_YML_PATH}")
 message(STATUS "PROGRESS_TXT_PATH             = ${PROGRESS_TXT_PATH}")
 message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
@@ -529,7 +530,7 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_L10N_VERSION_CROWDIN_DIR=${PROJ_L10N_VERSION_CROWDIN_DIR}
     # [Configuration Files]
     -D LANGUAGES_JSON_PATH=${LANGUAGES_JSON_PATH}
-    -D REFERENCE_JSON_PATH=${REFERENCE_JSON_PATH}
+    -D REFERENCES_JSON_PATH=${REFERENCES_JSON_PATH}
     -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
     -D PROGRESS_TXT_PATH=${PROGRESS_TXT_PATH}
     -D STATISTIC_TXT_PATH=${STATISTIC_TXT_PATH}
@@ -620,3 +621,50 @@ if(AUTO_DEPEND)
     add_dependencies(gettext_update_po      sphinx_update_pot)
     add_dependencies(sphinx_build_docs      gettext_update_po)
 endif()
+
+
+# set(VERSION       "2")
+# set(VERSION_TYPE  "branch")
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/${VERSION}/reference.json"
+#     IN_VERSION      "${VERSION}"
+#     IN_TYPE         "${VERSION_TYPE}"
+#     IN_MODE         "language"
+#     IN_LANGUAGE     "${LANGUAGES_LIST}"
+#     )
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/${VERSION}/reference.json"
+#     IN_VERSION      "${VERSION}"
+#     IN_TYPE         "${VERSION_TYPE}"
+#     IN_MODE         "repository"
+#     IN_REPOSITORY   "conan"
+#     )
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/develop2/docs.json"
+#     IN_VERSION      "2"
+#     IN_TYPE         "branch"
+#     IN_MODE         "language"
+#     IN_LANGUAGE     "${LANGUAGES_LIST}"
+#     )
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/develop2/conan.json"
+#     IN_VERSION      "2"
+#     IN_TYPE         "branch"
+#     IN_MODE         "repository"
+#     IN_REPOSITORY   "conan"
+#     )
+
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/git-master/docs.json"
+#     IN_VERSION      "git-master"
+#     IN_TYPE         "branch"
+#     IN_MODE         "language"
+#     IN_LANGUAGE     "${LANGUAGES_LIST}"
+#     )
+# init_references_json_file(
+#     IN_FILEPATH     "${PROJ_OUT_DIR}/git-master/conan.json"
+#     IN_VERSION      "git-master"
+#     IN_TYPE         "branch"
+#     IN_MODE         "repository"
+#     IN_REPOSITORY   "torchdistx;torchvision"
+#     )

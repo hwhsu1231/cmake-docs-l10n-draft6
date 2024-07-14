@@ -19,9 +19,9 @@ include(LogUtils)
 
 
 message(STATUS "Determining which reference to checkout...")
-file(READ "${REFERENCE_JSON_PATH}" REFERENCE_JSON_CNT)
+file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
 get_json_value_by_dot_notation(
-    IN_JSON_OBJECT      "${REFERENCE_JSON_CNT}"
+    IN_JSON_OBJECT      "${REFERENCES_JSON_CNT}"
     IN_DOT_NOTATION     ".pot"
     OUT_JSON_VALUE      CURRENT_POT_OBJECT)
 if(VERSION_TYPE STREQUAL "branch")
@@ -41,7 +41,7 @@ if(VERSION_TYPE STREQUAL "branch")
         IN_MEMBER_HASH      "\"${LATEST_POT_COMMIT_HASH}\""
         IN_MEMBER_TITLE     "\"${LATEST_POT_COMMIT_TITLE}\""
         OUT_JSON_OBJECT     COMMIT_CNT)
-    set_members_of_language_json_object(
+    set_members_of_reference_json_object(
         IN_TYPE             "branch"
         IN_MEMBER_BRANCH    "\"${BRANCH_NAME}\""
         IN_MEMBER_COMMIT    "${COMMIT_CNT}"
@@ -58,7 +58,7 @@ else()
         IN_SOURCE_TYPE      "local"
         IN_TAG_PATTERN      "${TAG_PATTERN}"
         OUT_TAG             LATEST_POT_TAG)
-    set_members_of_language_json_object(
+    set_members_of_reference_json_object(
         IN_TYPE             "tag"
         IN_MEMBER_TAG       "\"${LATEST_POT_TAG}\""
         OUT_JSON_OBJECT     LATEST_POT_OBJECT)

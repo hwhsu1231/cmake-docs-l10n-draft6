@@ -48,35 +48,35 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
 
     message(STATUS "Running 'msgmerge' command to sync translations from crowdin to local...")
     set(CROWDIN_PO_DIR  "${PROJ_L10N_VERSION_CROWDIN_DIR}/${_LANGUAGE}/LC_MESSAGES")
-    set(LOCAL_PO_DIR    "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}/LC_MESSAGES")
-    set(LOCAL_POT_DIR   "${PROJ_L10N_VERSION_LOCALE_DIR}/pot/LC_MESSAGES")
+    set(LOCALE_PO_DIR   "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}/LC_MESSAGES")
+    set(LOCALE_POT_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/pot/LC_MESSAGES")
     remove_cmake_message_indent()
     message("")
     message("CROWDIN_PO_DIR = ${CROWDIN_PO_DIR}")
-    message("LOCAL_PO_DIR   = ${LOCAL_PO_DIR}")
-    message("LOCAL_POT_DIR  = ${LOCAL_POT_DIR}")
+    message("LOCALE_PO_DIR  = ${LOCALE_PO_DIR}")
+    message("LOCALE_POT_DIR = ${LOCALE_POT_DIR}")
     message("")
     file(GLOB_RECURSE CROWDIN_PO_FILES "${CROWDIN_PO_DIR}/*.po")
     foreach(CROWDIN_PO_FILE ${CROWDIN_PO_FILES})
         string(REPLACE "${CROWDIN_PO_DIR}/" "" CROWDIN_PO_FILE_RELATIVE "${CROWDIN_PO_FILE}")
-        set(LOCAL_PO_FILE "${LOCAL_PO_DIR}/${CROWDIN_PO_FILE_RELATIVE}")
-        string(REGEX REPLACE "\\.po$" ".pot" LOCAL_POT_FILE_RELATIVE "${CROWDIN_PO_FILE_RELATIVE}")
-        set(LOCAL_POT_FILE "${LOCAL_POT_DIR}/${LOCAL_POT_FILE_RELATIVE}")
+        set(LOCALE_PO_FILE "${LOCALE_PO_DIR}/${CROWDIN_PO_FILE_RELATIVE}")
+        string(REGEX REPLACE "\\.po$" ".pot" LOCALE_POT_FILE_RELATIVE "${CROWDIN_PO_FILE_RELATIVE}")
+        set(LOCALE_POT_FILE "${LOCALE_POT_DIR}/${LOCALE_POT_FILE_RELATIVE}")
         message("msgmerge:")
         message("  --lang         ${_LANGUAGE}")
         message("  --width        ${GETTEXT_WRAP_WIDTH}")
         message("  --compendium   ${CROWDIN_PO_FILE}")
-        message("  --output-file  ${LOCAL_PO_FILE}")
-        message("  [def.po]       ${LOCAL_POT_FILE}")
-        message("  [ref.pot]      ${LOCAL_POT_FILE}")
+        message("  --output-file  ${LOCALE_PO_FILE}")
+        message("  [def.po]       ${LOCALE_POT_FILE}")
+        message("  [ref.pot]      ${LOCALE_POT_FILE}")
         execute_process(
             COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
                     --lang ${_LANGUAGE} 
                     --width ${GETTEXT_WRAP_WIDTH} 
                     --compendium ${CROWDIN_PO_FILE}
-                    --output-file ${LOCAL_PO_FILE}
-                    ${LOCAL_POT_FILE}   # [def.po]
-                    ${LOCAL_POT_FILE}   # [ref.pot]
+                    --output-file ${LOCALE_PO_FILE}
+                    ${LOCALE_POT_FILE}  # [def.po]
+                    ${LOCALE_POT_FILE}  # [ref.pot]
             RESULT_VARIABLE RES_VAR
             OUTPUT_VARIABLE OUT_VAR
             ERROR_VARIABLE  ERR_VAR

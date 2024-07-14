@@ -42,6 +42,10 @@ inputs:
     required: false
     description: 'Value passed to VERSION_EXACT_GIT cache.'
     default: '[default]'
+  cache-version-exact-proj:
+    required: false
+    description: 'Value passed to VERSION_EXACT_PROJ cache.'
+    default: '[default]'
   cache-version-exact-python:
     required: false
     description: 'Value passed to VERSION_EXACT_PYTHON cache.'

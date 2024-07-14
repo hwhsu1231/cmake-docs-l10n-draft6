@@ -17,18 +17,18 @@ include(JsonUtils)
 include(LogUtils)
 
 
-file(READ "${REFERENCE_JSON_PATH}" REFERENCE_JSON_CNT)
+file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
 if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGES_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGES_LIST})
     message(STATUS "Comparing the version of 'pot' and 'po.${_LANGUAGE}' object...")
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${REFERENCE_JSON_CNT}"
+        IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
         IN_DOT_NOTATION   ".pot"
         OUT_JSON_VALUE    CURRENT_POT_OBJECT)
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${REFERENCE_JSON_CNT}"
+        IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
         IN_DOT_NOTATION   ".po.${_LANGUAGE}"
         OUT_JSON_VALUE    CURRENT_PO_LOCALE_OBJECT)
     if(VERSION_TYPE STREQUAL "branch")
@@ -182,12 +182,12 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
 
 
     set_json_value_by_dot_notation(
-        IN_JSON_OBJECT      "${REFERENCE_JSON_CNT}"
+        IN_JSON_OBJECT      "${REFERENCES_JSON_CNT}"
         IN_DOT_NOTATION     ".po.${_LANGUAGE}"
         IN_JSON_VALUE       "${CURRENT_POT_OBJECT}"
-        OUT_JSON_OBJECT     REFERENCE_JSON_CNT)
+        OUT_JSON_OBJECT     REFERENCES_JSON_CNT)
 endforeach()
 unset(_LANGUAGE)
 
 
-file(WRITE "${REFERENCE_JSON_PATH}" ${REFERENCE_JSON_CNT})
+file(WRITE "${REFERENCES_JSON_PATH}" ${REFERENCES_JSON_CNT})
