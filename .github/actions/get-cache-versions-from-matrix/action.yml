@@ -57,7 +57,7 @@ runs:
         CACHE_VERSIONS[4]="VERSION_EXACT_PYTHON"
         CACHE_VERSIONS[5]="VERSION_EXACT_CROWDIN"
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          ${CACHE_VERSION}="[default]"
+          eval "${CACHE_VERSION}=[default]"
         done
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           echo "${CACHE_VERSION}: ${${CACHE_VERSION}}"
