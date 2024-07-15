@@ -17,6 +17,9 @@ inputs:
 #     description: xxx
 
 outputs:
+  VERSION_COMPENDIUM:
+    value: ${{ steps.slago.outputs.VERSION_COMPENDIUM }}
+    description: xxx
   VERSION_EXACT_GIT:
     value: ${{ steps.slago.outputs.VERSION_EXACT_GIT }}
     description: xxx
@@ -46,13 +49,29 @@ runs:
         for KEY in ${KEYS[@]}; do
           KEY_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.version }}\") | .${KEY}"
         done
-        # for KEY in ${KEYS[@]}; do
-        for KEY in ${!KEY_FILTERS[@]}; do
-          FILTER="${KEY_FILTERS[${KEY}]}"
-          VALUE=$(jq -r "${FILTER}" "${MATRIX}" | tr -d '\r')
-          echo "KEY:    ${KEY}"
-          echo "VALUE:  ${VALUE}"
+        CACHE_VERSIONS=()
+        CACHE_VERSIONS[0]="VERSION_COMPENDIUM"
+        CACHE_VERSIONS[1]="VERSION_EXACT_GIT"
+        CACHE_VERSIONS[2]="VERSION_EXACT_CONDA"
+        CACHE_VERSIONS[3]="VERSION_EXACT_GETTEXT"
+        CACHE_VERSIONS[4]="VERSION_EXACT_PYTHON"
+        CACHE_VERSIONS[5]="VERSION_EXACT_CROWDIN"
+        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+          echo "CACHE_VERSION: ${CACHE_VERSION}"
         done
+        # VERSION_COMPENDIUM="[default]"
+        # VERSION_EXACT_GIT="[default]"
+        # VERSION_EXACT_CONDA="[default]"
+        # VERSION_EXACT_GETTEXT="[default]"
+        # VERSION_EXACT_PYTHON="[default]"
+        # VERSION_EXACT_CROWDIN="[default]"
+        # # for KEY in ${KEYS[@]}; do
+        # for KEY in ${!KEY_FILTERS[@]}; do
+        #   FILTER="${KEY_FILTERS[${KEY}]}"
+        #   VALUE=$(jq -r "${FILTER}" "${MATRIX}" | tr -d '\r')
+        #   echo "KEY:    ${KEY}"
+        #   echo "VALUE:  ${VALUE}"
+        # done
         
         # declare -A KEY_FILTERS
         # for KEY in ${KEYS[@]}; do
