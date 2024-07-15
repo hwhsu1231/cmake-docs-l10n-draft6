@@ -76,6 +76,8 @@ jobs:
           where git
           git --version
 
+      - uses: ./.github/actions/get-cache-versions-from-matrix
+
       - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
