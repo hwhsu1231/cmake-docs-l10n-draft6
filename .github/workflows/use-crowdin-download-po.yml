@@ -74,7 +74,7 @@ jobs:
       - name: Set up Environment Variables
         shell: bash
         run: |
-          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Get Other Fields from matrix.json
         id: gofm

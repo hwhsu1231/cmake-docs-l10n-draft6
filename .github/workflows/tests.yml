@@ -93,7 +93,7 @@ jobs:
       - name: Set Environment Variables
         shell: bash
         run: |
-          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
       #   shell: bash
@@ -112,8 +112,8 @@ jobs:
           cache-version-exact-python: '[default]'
 
 
-      - name: Get Version Information from reference.json
-        uses: ./.github/actions/get-version-info-from-reference
+      - name: Get Version Reference from reference.json
+        uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'

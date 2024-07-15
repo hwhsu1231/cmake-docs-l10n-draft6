@@ -1,9 +1,9 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: get-version-info-from-reference
+name: get-version-ref-from-reference
 
-description: Get the Version Infomation from reference.json
+description: Get the Version Reference from reference.json
 
 inputs:
   jq-filter:
@@ -14,8 +14,8 @@ inputs:
     description: xxx
 
 outputs:
-  VERSION_INFO:
-    value: ${{ steps.gvi.outputs.VERSION_INFO }}
+  VERSION_REF:
+    value: ${{ steps.gvi.outputs.VERSION_REF }}
     description: xxx
 
 runs:
@@ -25,16 +25,16 @@ runs:
     # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
     # - https://github.com/github/docs/issues/21529
     # - https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-    - name: Get the Version Infomation from reference.json
+    - name: Get the Version Reference from reference.json
       id: gvi
       shell: bash
       run: |
         JQ_FILTER="${{ inputs.jq-filter }}"
         JQ_FILE=$(echo "${{ inputs.jq-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-        VERSION_INFO=$(jq "${JQ_FILTER}" "${JQ_FILE}")
+        VERSION_REF=$(jq "${JQ_FILTER}" "${JQ_FILE}")
         DELIMITER="$(openssl rand -hex 8)"
-        echo "VERSION_INFO<<${DELIMITER}" >> ${GITHUB_OUTPUT}
-        echo "${VERSION_INFO}"            >> ${GITHUB_OUTPUT}
-        echo "${DELIMITER}"               >> ${GITHUB_OUTPUT}
-        echo "VERSION_INFO:"
-        echo "${VERSION_INFO}"
+        echo "VERSION_REF<<${DELIMITER}"  >> ${GITHUB_OUTPUT}
+        echo "${VERSION_REF}"             >> ${GITHUB_OUTPUT}
+        echo "${DELIMITER}"                     >> ${GITHUB_OUTPUT}
+        echo "VERSION_REF:"
+        echo "${VERSION_REF}"

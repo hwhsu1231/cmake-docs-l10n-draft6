@@ -98,7 +98,7 @@ jobs:
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
 
-      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
         with:
           source-directory: ${{ github.workspace }}
@@ -111,9 +111,9 @@ jobs:
           cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
           cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
-      - name: Get the Version Information of '.pot' Before Building
+      - name: Get the Version Reference of '.pot' Before Building
         id: pot-before
-        uses: ./.github/actions/get-version-info-from-reference
+        uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
@@ -139,9 +139,9 @@ jobs:
           preset: ${{ inputs.LANGUAGE }}
           target: 'sphinx_update_pot'
 
-      - name: Get the Version Information of '.pot' After Building
+      - name: Get the Version Reference of '.pot' After Building
         id: pot-after
-        uses: ./.github/actions/get-version-info-from-reference
+        uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
@@ -198,8 +198,8 @@ jobs:
           message: |
             pot(${{ inputs.VERSION }}): Update pot from Sphinx
 
-            Before: ${{ steps.pot-before.outputs.VERSION_INFO }}
-            After: ${{ steps.pot-after.outputs.VERSION_INFO }}
+            Before: ${{ steps.pot-before.outputs.VERSION_REF }}
+            After: ${{ steps.pot-after.outputs.VERSION_REF }}
 
       - name: Check Outputs of the Commit
         if: inputs.CREATE_PR && steps.acc.outputs.committed == 'true'

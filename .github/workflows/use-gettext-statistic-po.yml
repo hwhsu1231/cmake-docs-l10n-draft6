@@ -21,6 +21,9 @@ on:
       ENABLE_JOB:
         type: boolean
         required: true
+      MATRIX_GROUP:
+        type: string
+        required: true
 
 jobs:
   gettext-statistic-po:
@@ -43,6 +46,7 @@ jobs:
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inupts.MATRIX_GROUP = ${{ inputs.MATRIX_GROUP }}"
           echo "[Secrets]"
           echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
           echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
@@ -67,53 +71,56 @@ jobs:
         shell: bash
         run: |
           get_keys() {
-            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+            jq -r ".${{ inputs.MATRIX_GROUP }}[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
           }
           declare -A VERSION_FILTERS
           for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+            VERSION_FILTERS[${KEY}]=".${{ inputs.MATRIX_GROUP }}[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
-            FILTER="${VERSION_FILTERS[$KEY]}"
+            FILTER="${VERSION_FILTERS[${KEY}]}"
             VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
-            if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
-            echo "${KEY}: $VALUE"
+            if [ "${VALUE}" = "null" ]; then VALUE=""; fi
+            echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
+            echo "${KEY}: ${VALUE}"
           done
 
       - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
       - name: Install Gettext
-        run: |
-          sudo apt-get install gettext && xgettext --version
+        uses: ./.github/actions/install-gettext
 
-      - name: Configure with 'all' preset for '${{ inputs.VERSION }}' version
-        shell: bash
-        run: |
-          cmake \
-            --preset all \
-            -D VERSION=${{ inputs.VERSION }} \
-            -D AUTO_DEPEND=OFF
+      - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
+        uses: ./.github/actions/cmake-configure-preset
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          cache-version: ${{ inputs.VERSION }}
+          cache-auto-depend: 'OFF'
+          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
+          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
+          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
-      - name: Build with 'gettext_statistic_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/all \
-            --target gettext_statistic_po
+      - name: Build the 'gettext_statistic_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          target: 'gettext_statistic_po'
 
-      - name: Get the Statistic Information
+      - name: Get the Statistic Information from statistic.txt
         id: gsi
         shell: bash
         run: |
           STATISTIC_TXT_PATH=$(pwd)/l10n/${{ inputs.VERSION }}/statistic.txt
-          delimiter="$(openssl rand -hex 8)"
-          echo "STATISTIC_OUTPUT<<$delimiter" >> ${GITHUB_OUTPUT}
-          echo "$(<$STATISTIC_TXT_PATH)"      >> ${GITHUB_OUTPUT}
-          echo "$delimiter"                   >> ${GITHUB_OUTPUT}
+          DELIMITER="$(openssl rand -hex 8)"
+          echo "STATISTIC_OUTPUT<<${DELIMITER}" >> ${GITHUB_OUTPUT}
+          echo "$(<${STATISTIC_TXT_PATH})"      >> ${GITHUB_OUTPUT}
+          echo "${DELIMITER}"                   >> ${GITHUB_OUTPUT}
 
       - name: Get the Current Job's ID
         id: gcji

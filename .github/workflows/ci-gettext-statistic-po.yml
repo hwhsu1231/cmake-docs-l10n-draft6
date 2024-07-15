@@ -21,6 +21,11 @@ on:
         required: true
         type: string
         default: 'git-master'
+      MATRIX_GROUP:
+        description: 'Set MATRIX_GROUP input (for single type)'
+        required: true
+        type: string
+        default: 'include'
 
 jobs:
   get-matrix:
@@ -37,8 +42,9 @@ jobs:
       - name: Read VERSION from matrix.json
         id: rvm
         run: |
+          MATRIX=".github/workflows/matrix.json"
           FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
+          VERSION=$(jq -c "${FILTER}" ${MATRIX})
           echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
           echo "${VERSION}" | jq "."
@@ -62,6 +68,7 @@ jobs:
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
       ENABLE_JOB: true
+      MATRIX_GROUP: 'include'
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
@@ -76,3 +83,4 @@ jobs:
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+      MATRIX_GROUP: ${{ inputs.MATRIX_GROUP }}

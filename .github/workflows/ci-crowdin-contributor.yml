@@ -45,9 +45,9 @@ jobs:
       - name: Set up Environment Variables
         shell: bash
         run: |
-          echo "CROWDIN_PROJECT_ID=8"                                         >> $GITHUB_ENV
-          echo "CROWDIN_ORGANIZATION=https://org-test.api.crowdin.com"        >> $GITHUB_ENV
-          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> $GITHUB_ENV
+          echo "CROWDIN_PROJECT_ID=8"                                         >> ${GITHUB_ENV}
+          echo "CROWDIN_ORGANIZATION=https://org-test.api.crowdin.com"        >> ${GITHUB_ENV}
+          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Update Crowdin Contributors Table
         # uses: andrii-bodnar/action-crowdin-contributors@v1.0.3

@@ -118,9 +118,9 @@ jobs:
       #       -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
       #       -D AUTO_DEPEND=OFF
 
-      - name: Get the Version Information of '.po' Before Building
+      - name: Get the Version Reference of '.po' Before Building
         id: po-before
-        uses: ./.github/actions/get-version-info-from-reference
+        uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
@@ -143,9 +143,9 @@ jobs:
           preset: ${{ inputs.LANGUAGE }}
           target: 'gettext_update_po'
 
-      - name: Get the Version Information of '.po' After Building
+      - name: Get the Version Reference of '.po' After Building
         id: po-after
-        uses: ./.github/actions/get-version-info-from-reference
+        uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
           jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
@@ -192,8 +192,8 @@ jobs:
           message: |
             po(${{ inputs.VERSION }}): Update po from Gettext
 
-            Before: ${{ steps.po-before.outputs.VERSION_INFO }}
-            After: ${{ steps.po-after.outputs.VERSION_INFO }}
+            Before: ${{ steps.po-before.outputs.VERSION_REF }}
+            After: ${{ steps.po-after.outputs.VERSION_REF }}
 
             Created by GitHub Workflows:
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml

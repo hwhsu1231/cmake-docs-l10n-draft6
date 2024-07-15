@@ -68,6 +68,7 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-gettext-compend-po.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
@@ -82,6 +83,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-compend-po.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
