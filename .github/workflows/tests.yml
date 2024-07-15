@@ -77,6 +77,8 @@ jobs:
           git --version
 
       - uses: ./.github/actions/get-cache-versions-from-matrix
+        with:
+          version: ${{ inputs.VERSION }}
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
@@ -109,7 +111,7 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
-          cache-update-mode: ''
+          # cache-update-mode: ''
           cache-auto-depend: 'OFF'
           cache-version-exact-python: '[default]'
 
