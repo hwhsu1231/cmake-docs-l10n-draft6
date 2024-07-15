@@ -43,6 +43,7 @@ runs:
       id: slago
       shell: bash
       run: |
+        bash --version
         MATRIX=".github/workflows/matrix.json"
         KEYS=$(jq -r ".include[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
         declare -A KEY_FILTERS
