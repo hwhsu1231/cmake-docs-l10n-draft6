@@ -60,7 +60,7 @@ runs:
           eval "${CACHE_VERSION}=[default]"
         done
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          echo "${CACHE_VERSION}: \${${CACHE_VERSION}}"
+          echo "${CACHE_VERSION}: \$$CACHE_VERSION"
         done
         # VERSION_COMPENDIUM="[default]"
         # VERSION_EXACT_GIT="[default]"
