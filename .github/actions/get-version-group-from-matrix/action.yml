@@ -51,8 +51,8 @@ runs:
           echo "GROUP: ${GROUP}"
 
           # 检查版本号是否在当前组中
-          FILTER="[.[$group][] | select(.VERSION == $version)] | length"
-          IS_IN_GROUP=$(jq --arg version "${VERSION}" --arg group "${GROUP}" "${FILTER}" "$MATRIX_FILE")
+          FILTER="[.[${GROUP}][] | select(.VERSION == ${VERSION})] | length"
+          IS_IN_GROUP=$(jq "${FILTER}" "$MATRIX_FILE")
           
           # 如果找到版本号，则输出并设置标志
           if [ "$IS_IN_GROUP" -gt 0 ]; then
