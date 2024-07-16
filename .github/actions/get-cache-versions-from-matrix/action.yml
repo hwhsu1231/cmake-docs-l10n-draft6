@@ -88,16 +88,18 @@ runs:
         done
 
         # Print all cache versions
+        # Set GitHub Actions outputs
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           eval "echo ${CACHE_VERSION}: \$$CACHE_VERSION"
+          eval "echo ${CACHE_VERSION}=\$${CACHE_VERSION} >> ${GITHUB_OUTPUT}"
         done
 
-        # Set GitHub Actions outputs
-        for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
-          eval "echo ${CACHE_VERSION}=\$${CACHE_VERSION} >> ${GITHUB_OUTPUT}"
-          # echo "${CACHE_VERSION}=${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}" >> ${GITHUB_OUTPUT}
-          # echo "::set-output name=${CACHE_VERSION}::${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
-        done
+        # # Set GitHub Actions outputs
+        # for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
+        #   eval "echo ${CACHE_VERSION}=\$${CACHE_VERSION} >> ${GITHUB_OUTPUT}"
+        #   # echo "${CACHE_VERSION}=${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}" >> ${GITHUB_OUTPUT}
+        #   # echo "::set-output name=${CACHE_VERSION}::${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
+        # done
 
 
         # bash --version
