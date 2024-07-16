@@ -29,10 +29,16 @@ outputs:
   VERSION_EXACT_GETTEXT:
     value: ${{ steps.slago.outputs.VERSION_EXACT_GETTEXT }}
     description: xxx
+  VERSION_EXACT_CROWDIN:
+    value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
+    description: xxx
   VERSION_EXACT_PYTHON:
     value: ${{ steps.slago.outputs.VERSION_EXACT_PYTHON }}
     description: xxx
-  VERSION_EXACT_CROWDIN:
+  VERSION_EXACT_PROJ:
+    value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
+    description: xxx
+  VERSION_EXACT_DOXYGEN:
     value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
     description: xxx
 
