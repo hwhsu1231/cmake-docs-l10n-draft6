@@ -44,25 +44,56 @@ runs:
       shell: bash
       run: |
         bash --version
+
         MATRIX=".github/workflows/matrix.json"
-        KEYS=$(jq -r ".include[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
-        declare -A KEY_FILTERS
-        for KEY in ${KEYS[@]}; do
-          KEY_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.version }}\") | .${KEY}"
+        VERSION_INPUT="${{ inputs.version }}"
+        
+        declare -A CACHE_VERSIONS_DEFAULT=(
+          [VERSION_COMPENDIUM]='[default]'
+          [VERSION_EXACT_GIT]='[default]'
+          [VERSION_EXACT_CONDA]='[default]'
+          [VERSION_EXACT_GETTEXT]='[default]'
+          [VERSION_EXACT_PYTHON]='[default]'
+          [VERSION_EXACT_CROWDIN]='[default]'
+        )
+
+        for KEY in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
+          VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${KEY}" "${MATRIX}")
+          if [ "$VALUE" != "null" ] && [ -n "$VALUE" ]; then
+            CACHE_VERSIONS_DEFAULT[$KEY]=$VALUE
+          fi
         done
-        CACHE_VERSIONS=()
-        CACHE_VERSIONS[0]="VERSION_COMPENDIUM"
-        CACHE_VERSIONS[1]="VERSION_EXACT_GIT"
-        CACHE_VERSIONS[2]="VERSION_EXACT_CONDA"
-        CACHE_VERSIONS[3]="VERSION_EXACT_GETTEXT"
-        CACHE_VERSIONS[4]="VERSION_EXACT_PYTHON"
-        CACHE_VERSIONS[5]="VERSION_EXACT_CROWDIN"
-        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          eval "${CACHE_VERSION}=[default]"
+
+        for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
+          echo "${CACHE_VERSION}: ${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
         done
-        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          eval "echo ${CACHE_VERSION}: \$$CACHE_VERSION"
+
+        for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
+          echo "${CACHE_VERSION}=${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}" >> ${GITHUB_OUTPUT}
+          # echo "::set-output name=${CACHE_VERSION}::${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
         done
+
+
+        # bash --version
+        # MATRIX=".github/workflows/matrix.json"
+        # KEYS=$(jq -r ".include[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
+        # declare -A KEY_FILTERS
+        # for KEY in ${KEYS[@]}; do
+        #   KEY_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${{ inputs.version }}\") | .${KEY}"
+        # done
+        # CACHE_VERSIONS=()
+        # CACHE_VERSIONS[0]="VERSION_COMPENDIUM"
+        # CACHE_VERSIONS[1]="VERSION_EXACT_GIT"
+        # CACHE_VERSIONS[2]="VERSION_EXACT_CONDA"
+        # CACHE_VERSIONS[3]="VERSION_EXACT_GETTEXT"
+        # CACHE_VERSIONS[4]="VERSION_EXACT_PYTHON"
+        # CACHE_VERSIONS[5]="VERSION_EXACT_CROWDIN"
+        # for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+        #   eval "${CACHE_VERSION}=[default]"
+        # done
+        # for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+        #   eval "echo ${CACHE_VERSION}: \$$CACHE_VERSION"
+        # done
         # VERSION_COMPENDIUM="[default]"
         # VERSION_EXACT_GIT="[default]"
         # VERSION_EXACT_CONDA="[default]"
