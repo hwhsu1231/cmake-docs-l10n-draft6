@@ -62,6 +62,9 @@ runs:
           "VERSION_EXACT_GETTEXT"
           "VERSION_EXACT_PYTHON"
           "VERSION_EXACT_CROWDIN"
+          "VERSION_EXACT_PROJ"
+          "VERSION_EXACT_DOXYGEN"
+          "VERSION_EXACT_SPHINX"
         )
 
         # Initialize all variables with the default value
@@ -72,7 +75,9 @@ runs:
         # Read actual values from matrix.json
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${CACHE_VERSION}" "${MATRIX}")
-          if [ "$VALUE" != "null" ] && [ -n "$VALUE" ]; then
+          if [ "$VALUE" == "null" ] || [ -z "$VALUE" ]; then
+            eval "${CACHE_VERSION}=''"
+          else
             eval "${CACHE_VERSION}='${VALUE}'"
           fi
         done
