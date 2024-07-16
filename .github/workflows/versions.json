@@ -1,0 +1,42 @@
+{
+  "v2" : [
+    {
+      "VERSION": "v2.14",
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
+    }
+  ],
+  "v3" : [
+    {
+      "VERSION": "git-master",
+      "VERSION_COMPENDIUM": null,
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
+    },
+    {
+      "VERSION": "latest",
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
+    },
+    {
+      "VERSION": "v3.29",
+      "VERSION_COMPENDIUM": "git-master",
+      "VERSION_EXACT_GIT": "[default]",
+      "VERSION_EXACT_CONDA": "[default]",
+      "VERSION_EXACT_PYTHON": "3.10",
+      "VERSION_EXACT_GETTEXT": "[default]",
+      "VERSION_EXACT_CROWDIN": "[default]"
+    }
+  ]
+}

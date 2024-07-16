@@ -79,7 +79,7 @@ jobs:
       - uses: ./.github/actions/get-version-group-from-matrix
         with:
           version: ${{ inputs.VERSION }}
-          matrix-file: '.github/workflows/matrix.json'
+          matrix-file: '.github/workflows/versions.json'
 
       - uses: ./.github/actions/get-cache-versions-from-matrix
         with:
