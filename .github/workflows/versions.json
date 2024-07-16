@@ -28,9 +28,9 @@
       "VERSION_EXACT_CROWDIN" : "[default]"
     }
   ],
-  "v2" : [
+  "v4" : [
     {
-      "VERSION" : "v2.14",
+      "VERSION" : "v4.0",
       "VERSION_COMPENDIUM" : "git-master",
       "VERSION_EXACT_GIT" : "[default]",
       "VERSION_EXACT_CONDA" : "[default]",
