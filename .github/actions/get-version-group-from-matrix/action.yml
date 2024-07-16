@@ -1,0 +1,62 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: get-version-group-from-matrix
+
+description: Get the Version Group from matrix.json
+
+inputs:
+  version:
+    required: true
+    description: xxx
+  matrix-file:
+    required: true
+    description: xxx
+  workspace:
+    required: false
+    description: xxx
+    default: '${{ github.workspace }}'
+
+outputs:
+  VERSION_GROUP:
+    value: ${{ steps.gcvm.outputs.VERSION_GROUP }}
+    description: xxx
+
+runs:
+  using: composite
+  steps:
+    - name: Get the Version Group from matrix.json
+      id: gcvm
+      shell: bash
+      run: |
+        VERSION="${{ inputs.version }}"
+        MATRIX_FILE=$(echo "${{ inputs.matrix-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+        WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+
+        cd ${WORKSPACE}
+
+        # 获取所有的顶级键（版本组名）
+        GROUPS=$(jq -r 'keys[]' "$MATRIX_FILE")
+
+        # 初始化找到的标志
+        FOUND_GROUP=""
+
+        # 遍历每个组并检查版本
+        for GROUP in ${GROUPS}; do
+          # 检查版本号是否在当前组中
+          FILTER="[.[$group][] | select(.VERSION == $version)] | length"
+          IS_IN_GROUP=$(jq --arg version "${VERSION}" --arg group "${GROUP}" "${FILTER}" "$MATRIX_FILE")
+          
+          # 如果找到版本号，则输出并设置标志
+          if [ "$IS_IN_GROUP" -gt 0 ]; then
+            FOUND_GROUP="${GROUP}"
+            break
+          fi
+        done
+
+        # 输出结果
+        if [ -n "$FOUND_GROUP" ]; then
+          echo "$TARGET_VERSION is in $FOUND_GROUP"
+        else
+          echo "$TARGET_VERSION is not found in any group"
+        fi

@@ -9,10 +9,10 @@ inputs:
   version:
     required: true
     description: xxx
-  matrix-file:
+  version-group:
     required: true
     description: xxx
-  matrix-group:
+  matrix-file:
     required: true
     description: xxx
   workspace:
@@ -57,8 +57,8 @@ runs:
       shell: bash
       run: |
         VERSION="${{ inputs.version }}"
+        VERSION_GROUP="${{ inputs.version-group }}"
         MATRIX_FILE=$(echo "${{ inputs.matrix-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-        MATRIX_GROUP="${{ inputs.matrix-group }}"
         WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
 
         cd ${WORKSPACE}
@@ -82,7 +82,7 @@ runs:
 
         # Read actual values from matrix.json
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          FILTER=".${MATRIX_GROUP}[] | select(.VERSION == \"${VERSION}\") | .${CACHE_VERSION}"
+          FILTER=".${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\") | .${CACHE_VERSION}"
           VALUE=$(jq -r "${FILTER}" "${MATRIX_FILE}")
           if [ "${VALUE}" != "null" ]; then
             eval "${CACHE_VERSION}='${VALUE}'"
