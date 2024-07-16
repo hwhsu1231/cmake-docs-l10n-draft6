@@ -75,6 +75,8 @@ runs:
         # Read actual values from matrix.json
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${CACHE_VERSION}" "${MATRIX}")
+          echo "CACHE_VERSION:  ${CACHE_VERSION}"
+          echo "VALUE:          ${VALUE}"
           # if [ "$VALUE" == "null" ] || [ -z "$VALUE" ]; then
           #   eval "${CACHE_VERSION}=''"
           # else
