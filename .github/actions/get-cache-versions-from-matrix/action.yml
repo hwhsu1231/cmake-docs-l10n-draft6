@@ -53,31 +53,39 @@ runs:
 
         MATRIX=".github/workflows/matrix.json"
         VERSION_INPUT="${{ inputs.version }}"
-        
-        declare -A CACHE_VERSIONS_DEFAULT=(
-          [VERSION_COMPENDIUM]='[default]'
-          [VERSION_EXACT_GIT]='[default]'
-          [VERSION_EXACT_CONDA]='[default]'
-          [VERSION_EXACT_GETTEXT]='[default]'
-          [VERSION_EXACT_CROWDIN]='[default]'
-          [VERSION_EXACT_PYTHON]='[default]'
-          [VERSION_EXACT_PROJ]='[default]'
-          [VERSION_EXACT_DOXYGEN]='[default]'
+          
+        # Predefine default values for all output variables
+        CACHE_VERSIONS=(
+          "VERSION_COMPENDIUM"
+          "VERSION_EXACT_GIT"
+          "VERSION_EXACT_CONDA"
+          "VERSION_EXACT_GETTEXT"
+          "VERSION_EXACT_PYTHON"
+          "VERSION_EXACT_CROWDIN"
         )
 
-        for KEY in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
-          VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${KEY}" "${MATRIX}")
+        # Initialize all variables with the default value
+        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+          eval "${CACHE_VERSION}='[default]'"
+        done
+
+        # Read actual values from matrix.json
+        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+          VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${CACHE_VERSION}" "${MATRIX}")
           if [ "$VALUE" != "null" ] && [ -n "$VALUE" ]; then
-            CACHE_VERSIONS_DEFAULT[$KEY]=$VALUE
+            eval "${CACHE_VERSION}='${VALUE}'"
           fi
         done
 
-        for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
-          echo "${CACHE_VERSION}: ${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
+        # Print all cache versions
+        for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
+          eval "echo ${CACHE_VERSION}: \$$CACHE_VERSION"
         done
 
+        # Set GitHub Actions outputs
         for CACHE_VERSION in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
-          echo "${CACHE_VERSION}=${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}" >> ${GITHUB_OUTPUT}
+          eval "echo ${CACHE_VERSION}=\$${CACHE_VERSION} >> ${GITHUB_OUTPUT}"
+          # echo "${CACHE_VERSION}=${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}" >> ${GITHUB_OUTPUT}
           # echo "::set-output name=${CACHE_VERSION}::${CACHE_VERSIONS_DEFAULT[$CACHE_VERSION]}"
         done
 
