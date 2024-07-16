@@ -5,8 +5,9 @@ name: ci-deploy-po-version
 
 on:
   schedule:
-    - cron: '0 8  1 * *'  # Runs at 08:00 on day  1 of the month in UTC zone
-    - cron: '0 8 15 * *'  # Runs at 08:00 on day 15 of the month in UTC zone
+    - cron: '0 8 1,15 * *'  # Runs at 08:00 on day 1 and 15 of the month in UTC zone
+    - cron: '1 8 1,15 * *'  # Runs at 08:01 on day 1 and 15 of the month in UTC zone
+    - cron: '2 8 1,15 * *'  # Runs at 08:02 on day 1 and 15 of the month in UTC zone
   workflow_dispatch:
     inputs:
       TYPE:
@@ -22,6 +23,20 @@ on:
         required: true
         type: string
         default: 'git-master'
+      VERSION_GROUP:
+        description: 'Set VERSION_GROUP input (for matrix type)'
+        required: true
+        type: choice
+        default: 'include'
+        options:
+          - 'v3'
+          - 'v4'
+          - 'v5'
+
+env:
+  CRON_V3: '0 8 1,15 * *'
+  CRON_V4: '1 8 1,15 * *'
+  CRON_V5: '2 8 1,15 * *'
 
 jobs:
   get-matrix:
@@ -29,20 +44,36 @@ jobs:
         ( github.event_name == 'schedule' )
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
+      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Read VERSION from matrix.json
-        id: rvm
+      - name: Get VERSION_GROUP from inputs/matrix.json
+        shell: bash
         run: |
-          FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
+          if [[ ${{ github.event_name == 'schedule' }} ]]; then
+            if [[ ${{ github.event.schedule == env.CRON_V3 }} ]]; then
+              echo "VERSION_GROUP=v3"
+            elif [[ ${{ github.event.schedule == env.CRON_V4 }} ]]; then
+              echo "VERSION_GROUP=v4"
+            elif [[ ${{ github.event.schedule == env.CRON_V5 }} ]]; then
+              echo "VERSION_GROUP=v5"
+            fi
+          elif [[ ${{ github.event_name == 'workflow_dispatch' }} ]]; then
+            echo "VERSION_GROUP=${{ inputs.VERSION_GROUP }}"
+          fi
+      - name: Get VERSION_LIST from matrix.json
+        id: rvm
+        shell: bash
+        run: |
+          JQ_FILE=".github/workflows/matrix.json"
+          JQ_FILTER=".include | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
 
   matrix:
     needs: get-matrix
@@ -54,7 +85,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
       fail-fast: false
     uses: ./.github/workflows/use-deploy-po-version.yml
     with:
