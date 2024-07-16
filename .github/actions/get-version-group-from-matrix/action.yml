@@ -35,36 +35,21 @@ runs:
 
         cd ${WORKSPACE}
 
-        echo "VERSION: ${VERSION}"
-        echo "MATRIX_FILE: ${MATRIX_FILE}"
-        echo "WORKSPACE: ${WORKSPACE}"
-
         jq -r 'keys[]' "${MATRIX_FILE}"
-
-        # 获取所有的顶级键（版本组名）
         VERSION_GROUPS=($(jq -r 'keys[]' "${MATRIX_FILE}"))
-
-        # 初始化找到的标志
         FOUND_GROUP=""
-
-        # 遍历每个组并检查版本
         for VERSION_GROUP in ${VERSION_GROUPS[@]}; do
           echo "VERSION_GROUP: ${VERSION_GROUP}"
-
-          # 检查版本号是否在当前组中
-          FILTER="[.[${VERSION_GROUP}][] | select(.VERSION == ${VERSION})] | length"
+          FILTER="[.${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\")] | length"
           IS_IN_GROUP=$(jq "${FILTER}" "$MATRIX_FILE")
-          
-          # 如果找到版本号，则输出并设置标志
           if [ "$IS_IN_GROUP" -gt 0 ]; then
             FOUND_GROUP="${VERSION_GROUP}"
             break
           fi
         done
 
-        # 输出结果
-        if [ -n "$FOUND_GROUP" ]; then
-          echo "$TARGET_VERSION is in $FOUND_GROUP"
+        if [ -n "${FOUND_GROUP}" ]; then
+          echo "${VERSION} is in ${FOUND_GROUP}"
         else
-          echo "$TARGET_VERSION is not found in any group"
+          echo "${VERSION} is not found in any group"
         fi
