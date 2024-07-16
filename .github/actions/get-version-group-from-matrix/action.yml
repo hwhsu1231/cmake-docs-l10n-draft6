@@ -40,7 +40,7 @@ runs:
         for VERSION_GROUP in ${VERSION_GROUPS[@]}; do
           echo "VERSION_GROUP: ${VERSION_GROUP}"
           FILTER="[.${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\")] | length"
-          IS_IN_GROUP=$(jq "${FILTER}" "${MATRIX_FILE}")
+          IS_IN_GROUP=$(jq "${FILTER}" "${MATRIX_FILE}" | tr -d '\r')
           if [ "$IS_IN_GROUP" -gt 0 ]; then
             FOUND_GROUP="${VERSION_GROUP}"
             break
