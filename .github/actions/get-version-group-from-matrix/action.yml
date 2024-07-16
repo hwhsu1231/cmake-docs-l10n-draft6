@@ -42,7 +42,9 @@ runs:
         FOUND_GROUP=""
 
         # 遍历每个组并检查版本
-        for GROUP in ${GROUPS}; do
+        for GROUP in ${GROUPS[@]}; do
+          echo "GROUP: ${GROUP}"
+
           # 检查版本号是否在当前组中
           FILTER="[.[$group][] | select(.VERSION == $version)] | length"
           IS_IN_GROUP=$(jq --arg version "${VERSION}" --arg group "${GROUP}" "${FILTER}" "$MATRIX_FILE")
