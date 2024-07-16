@@ -59,8 +59,10 @@ runs:
           [VERSION_EXACT_GIT]='[default]'
           [VERSION_EXACT_CONDA]='[default]'
           [VERSION_EXACT_GETTEXT]='[default]'
-          [VERSION_EXACT_PYTHON]='[default]'
           [VERSION_EXACT_CROWDIN]='[default]'
+          [VERSION_EXACT_PYTHON]='[default]'
+          [VERSION_EXACT_PROJ]='[default]'
+          [VERSION_EXACT_DOXYGEN]='[default]'
         )
 
         for KEY in "${!CACHE_VERSIONS_DEFAULT[@]}"; do
