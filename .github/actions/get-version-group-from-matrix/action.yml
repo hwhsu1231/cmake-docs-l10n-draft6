@@ -43,7 +43,7 @@ runs:
 
         # 获取所有的顶级键（版本组名）
         VERSION_GROUPS=($(jq -r 'keys[]' "${MATRIX_FILE}"))
-        echo "VERSION_GROUPS: ${VERSION_GROUPS}"
+        echo "VERSION_GROUPS: ${VERSION_GROUPS[@]}"
 
         # # 初始化找到的标志
         # FOUND_GROUP=""
