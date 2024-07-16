@@ -56,16 +56,16 @@ jobs:
           GITHUB_EVENT_NAME=${{ github.event_name }}
           GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
           INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
-          if [[ ${{ github.event_name }} == 'schedule' ]]; then
-            if [[ ${{ github.event.schedule }} == ${{ env.CRON_V3 }} ]]; then
+          if [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+            if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
               echo "VERSION_GROUP=v3"
-            elif [[ ${{ github.event.schedule }} == ${{ env.CRON_V4 }} ]]; then
+            elif [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V4 }}" ]]; then
               echo "VERSION_GROUP=v4"
-            elif [[ ${{ github.event.schedule }} == ${{ env.CRON_V5 }} ]]; then
+            elif [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V5 }}" ]]; then
               echo "VERSION_GROUP=v5"
             fi
-          elif [[ ${{ github.event_name }} == 'workflow_dispatch' ]]; then
-            echo "VERSION_GROUP=${{ inputs.VERSION_GROUP }}"
+          elif [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            echo "VERSION_GROUP=${INPUTS_VERSION_GROUP}"
           fi
       - name: Get VERSION_LIST from matrix.json
         id: rvm
