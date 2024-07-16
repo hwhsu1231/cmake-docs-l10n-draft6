@@ -82,7 +82,7 @@ runs:
           # else
           #   eval "${CACHE_VERSION}='${VALUE}'"
           # fi
-          if [ -n "${VALUE}" ] && [ "${VALUE}" != "null" ]; then
+          if [ "${VALUE}" != "null" ]; then
             eval "${CACHE_VERSION}='${VALUE}'"
           fi
         done
