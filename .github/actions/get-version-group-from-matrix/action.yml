@@ -40,7 +40,7 @@ runs:
         echo "WORKSPACE: ${WORKSPACE}"
 
         # 获取所有的顶级键（版本组名）
-        GROUPS=$(jq -r 'keys[]' "$MATRIX_FILE")
+        GROUPS=$(jq -r 'keys[]' "${MATRIX_FILE}")
         echo "GROUPS: ${GROUPS[@]}"
 
         # 初始化找到的标志
