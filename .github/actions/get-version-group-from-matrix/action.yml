@@ -33,10 +33,10 @@ runs:
         MATRIX_FILE=$(echo "${{ inputs.matrix-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
         WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
 
-        echo "VERSION: ${VERSION}"
-
         cd ${WORKSPACE}
 
+        echo "VERSION: ${VERSION}"
+        echo "MATRIX_FILE: ${MATRIX_FILE}"
         echo "WORKSPACE: ${WORKSPACE}"
 
         # 获取所有的顶级键（版本组名）
