@@ -42,11 +42,11 @@ outputs:
   VERSION_EXACT_SPHINX:
     value: ${{ steps.gcvm.outputs.VERSION_EXACT_SPHINX }}
     description: xxx
-  VERSION_EXACT_PROJ:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PROJ }}
-    description: xxx
   VERSION_EXACT_DOXYGEN:
     value: ${{ steps.gcvm.outputs.VERSION_EXACT_DOXYGEN }}
+    description: xxx
+  VERSION_EXACT_PROJ:
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PROJ }}
     description: xxx
 
 runs:
@@ -57,13 +57,12 @@ runs:
       shell: bash
       run: |
         VERSION="${{ inputs.version }}"
-        MATRIX_FILE="${{ inputs.matrix-file }}"
+        MATRIX_FILE=$(echo "${{ inputs.matrix-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
         MATRIX_GROUP="${{ inputs.matrix-group }}"
         WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
 
         cd ${WORKSPACE}
 
-        # Predefine default values for all output variables
         CACHE_VERSIONS=(
           "VERSION_COMPENDIUM"
           "VERSION_EXACT_GIT"
@@ -76,7 +75,7 @@ runs:
           "VERSION_EXACT_PROJ"
         )
 
-        # Initialize all variables with the default value
+        # Initialize all output variables with the default value
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           eval "${CACHE_VERSION}='[default]'"
         done
