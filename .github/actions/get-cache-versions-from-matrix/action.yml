@@ -15,6 +15,10 @@ inputs:
   matrix-group:
     required: true
     description: xxx
+  workspace:
+    required: false
+    description: xxx
+    default: '${{ github.workspace }}'
 
 outputs:
   VERSION_COMPENDIUM:
@@ -52,12 +56,13 @@ runs:
       id: gcvm
       shell: bash
       run: |
-        cd ${{ github.workspace }}
-
         VERSION="${{ inputs.version }}"
         MATRIX_FILE="${{ inputs.matrix-file }}"
         MATRIX_GROUP="${{ inputs.matrix-group }}"
-          
+        WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+
+        cd ${WORKSPACE}
+
         # Predefine default values for all output variables
         CACHE_VERSIONS=(
           "VERSION_COMPENDIUM"
