@@ -79,6 +79,8 @@ jobs:
       - uses: ./.github/actions/get-cache-versions-from-matrix
         with:
           version: ${{ inputs.VERSION }}
+          matrix-file: '.github/workflows/matrix.json'
+          matrix-group: 'include'
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
