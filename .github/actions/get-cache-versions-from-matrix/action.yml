@@ -77,14 +77,12 @@ runs:
           VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${CACHE_VERSION}" "${MATRIX}")
           echo "CACHE_VERSION:  ${CACHE_VERSION}"
           echo "VALUE:          ${VALUE}"
-          # if [ "$VALUE" == "null" ] || [ -z "$VALUE" ]; then
+          # if [ "${VALUE}" == "null" ] || [ -z "${VALUE}" ]; then
           #   eval "${CACHE_VERSION}=''"
           # else
           #   eval "${CACHE_VERSION}='${VALUE}'"
           # fi
-          if [ "$VALUE" == "null" ] || [ -z "$VALUE" ]; then
-            eval "${CACHE_VERSION}=''"
-          elif [ -n "$VALUE" ]; then
+          if [ -n "${VALUE}" ] && [ "${VALUE}" != "null" ]; then
             eval "${CACHE_VERSION}='${VALUE}'"
           fi
         done

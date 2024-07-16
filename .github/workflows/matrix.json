@@ -2,7 +2,7 @@
   "include": [
     {
       "VERSION": "git-master",
-      "VERSION_COMPENDIUM": null,
+      "VERSION_COMPENDIUM": "",
       "VERSION_EXACT_GIT": "[default]",
       "VERSION_EXACT_CONDA": "[default]",
       "VERSION_EXACT_PYTHON": "3.10",
