@@ -60,11 +60,11 @@ runs:
           "VERSION_EXACT_GIT"
           "VERSION_EXACT_CONDA"
           "VERSION_EXACT_GETTEXT"
-          "VERSION_EXACT_PYTHON"
           "VERSION_EXACT_CROWDIN"
-          "VERSION_EXACT_PROJ"
-          "VERSION_EXACT_DOXYGEN"
+          "VERSION_EXACT_PYTHON"
           "VERSION_EXACT_SPHINX"
+          "VERSION_EXACT_DOXYGEN"
+          "VERSION_EXACT_PROJ"
         )
 
         # Initialize all variables with the default value
