@@ -53,15 +53,18 @@ jobs:
       - name: Get VERSION_GROUP from inputs/matrix.json
         shell: bash
         run: |
-          if [[ ${{ github.event_name == 'schedule' }} ]]; then
-            if [[ ${{ github.event.schedule == env.CRON_V3 }} ]]; then
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          if [[ ${{ github.event_name }} == 'schedule' ]]; then
+            if [[ ${{ github.event.schedule }} == ${{ env.CRON_V3 }} ]]; then
               echo "VERSION_GROUP=v3"
-            elif [[ ${{ github.event.schedule == env.CRON_V4 }} ]]; then
+            elif [[ ${{ github.event.schedule }} == ${{ env.CRON_V4 }} ]]; then
               echo "VERSION_GROUP=v4"
-            elif [[ ${{ github.event.schedule == env.CRON_V5 }} ]]; then
+            elif [[ ${{ github.event.schedule }} == ${{ env.CRON_V5 }} ]]; then
               echo "VERSION_GROUP=v5"
             fi
-          elif [[ ${{ github.event_name == 'workflow_dispatch' }} ]]; then
+          elif [[ ${{ github.event_name }} == 'workflow_dispatch' ]]; then
             echo "VERSION_GROUP=${{ inputs.VERSION_GROUP }}"
           fi
       - name: Get VERSION_LIST from matrix.json
