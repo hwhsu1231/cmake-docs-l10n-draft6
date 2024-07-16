@@ -18,41 +18,41 @@ inputs:
 
 outputs:
   VERSION_COMPENDIUM:
-    value: ${{ steps.slago.outputs.VERSION_COMPENDIUM }}
+    value: ${{ steps.gcvm.outputs.VERSION_COMPENDIUM }}
     description: xxx
   VERSION_EXACT_GIT:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_GIT }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_GIT }}
     description: xxx
   VERSION_EXACT_CONDA:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_CONDA }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_CONDA }}
     description: xxx
   VERSION_EXACT_GETTEXT:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_GETTEXT }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_GETTEXT }}
     description: xxx
   VERSION_EXACT_CROWDIN:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_CROWDIN }}
     description: xxx
   VERSION_EXACT_PYTHON:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_PYTHON }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PYTHON }}
     description: xxx
   VERSION_EXACT_PROJ:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PROJ }}
     description: xxx
   VERSION_EXACT_DOXYGEN:
-    value: ${{ steps.slago.outputs.VERSION_EXACT_CROWDIN }}
+    value: ${{ steps.gcvm.outputs.VERSION_EXACT_DOXYGEN }}
     description: xxx
 
 runs:
   using: composite
   steps:
-    - name: Set the Crowdin Language Arguments
-      id: slago
+    - name: Get Cache Versions from matrix.json
+      id: gcvm
       shell: bash
       run: |
         bash --version
 
         MATRIX=".github/workflows/matrix.json"
-        VERSION_INPUT="${{ inputs.version }}"
+        VERSION="${{ inputs.version }}"
           
         # Predefine default values for all output variables
         CACHE_VERSIONS=(
@@ -74,14 +74,10 @@ runs:
 
         # Read actual values from matrix.json
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
-          VALUE=$(jq -r ".include[] | select(.VERSION == \"${VERSION_INPUT}\") | .${CACHE_VERSION}" "${MATRIX}")
+          FILTER=".include[] | select(.VERSION == \"${VERSION}\") | .${CACHE_VERSION}"
+          VALUE=$(jq -r "${FILTER}" "${MATRIX}")
           echo "CACHE_VERSION:  ${CACHE_VERSION}"
           echo "VALUE:          ${VALUE}"
-          # if [ "${VALUE}" == "null" ] || [ -z "${VALUE}" ]; then
-          #   eval "${CACHE_VERSION}=''"
-          # else
-          #   eval "${CACHE_VERSION}='${VALUE}'"
-          # fi
           if [ "${VALUE}" != "null" ]; then
             eval "${CACHE_VERSION}='${VALUE}'"
           fi
