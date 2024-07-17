@@ -93,7 +93,6 @@ jobs:
           echo "VERSION_LIST:"
           echo "${VERSION_LIST}" | jq "."
 
-
   matrix:
     needs: get-matrix
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
