@@ -26,33 +26,45 @@ on:
         required: true
         type: string
         default: 'all'
+      VERSION_GROUP:
+        description: 'Set VERSION_GROUP input (for matrix type)'
+        required: true
+        type: choice
+        default: 'include'
+        options:
+          - 'v3'
+          - 'v4'
+          - 'v5'
 
 jobs:
   get-matrix:
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
-      LANGUAGE: ${{ steps.rll.outputs.LANGUAGE }}
+      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
+      LANGUAGE_LIST: ${{ steps.rll.outputs.LANGUAGE_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Read VERSION from matrix.json
+      - name: Get VERSION_LIST from versions.json
         id: rvm
         run: |
-          FILTER=".include | map(select(.VERSION_COMPENDIUM != null) | .VERSION)"
-          VERSION=$(jq -c "${FILTER}" .github/workflows/matrix.json)
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
-      - name: Read LANGUAGE from languages.json
+          JQ_FILE=".github/workflows/versions.json"
+          JQ_FILTER=".v3 | map(select(.VERSION_COMPENDIUM != "") | .VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
+      - name: Get LANGUAGE_LIST from languages.json
         id: rll
         run: |
-          LANGUAGE=$(jq -c "keys" languages.json)
-          echo "LANGUAGE=${LANGUAGE}" >> ${GITHUB_OUTPUT}
-          echo "LANGUAGE:"
-          echo "${LANGUAGE}" | jq "."
+          JQ_FILE="languages.json"
+          JQ_FILTER="keys"
+          LANGUAGE_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "LANGUAGE_LIST=${LANGUAGE_LIST}" >> ${GITHUB_OUTPUT}
+          echo "LANGUAGE_LIST:"
+          echo "${LANGUAGE_LIST}" | jq "."
 
   matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
@@ -63,7 +75,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-gettext-compend-po.yml

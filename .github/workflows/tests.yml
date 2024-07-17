@@ -80,14 +80,14 @@ jobs:
         uses: ./.github/actions/get-version-group-from-matrix
         with:
           version: ${{ inputs.VERSION }}
-          matrix-file: '.github/workflows/matrix.json'
+          matrix-file: '.github/workflows/versions.json'
 
       - uses: ./.github/actions/get-cache-versions-from-matrix
         with:
           version: ${{ inputs.VERSION }}
           # version-group: 'include'
           version-group: ${{ steps.version-group.outputs.VERSION_GROUP }}
-          matrix-file: '.github/workflows/matrix.json'
+          matrix-file: '.github/workflows/versions.json'
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
@@ -129,7 +129,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
-          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
 
       - name: Get the Crowdin Language List
         id: gcll

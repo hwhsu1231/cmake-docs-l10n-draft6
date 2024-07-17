@@ -3,7 +3,7 @@
 
 name: get-cache-versions-from-matrix
 
-description: Get Cache Versions from matrix.json
+description: Get Cache Versions from versions.json
 
 inputs:
   version:
@@ -52,7 +52,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Get Cache Versions from matrix.json
+    - name: Get Cache Versions from versions.json
       id: gcvm
       shell: bash
       run: |
@@ -80,7 +80,7 @@ runs:
           eval "${CACHE_VERSION}='[default]'"
         done
 
-        # Read actual values from matrix.json
+        # Read actual values from versions.json
         for CACHE_VERSION in "${CACHE_VERSIONS[@]}"; do
           FILTER=".${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\") | .${CACHE_VERSION}"
           VALUE=$(jq -r "${FILTER}" "${MATRIX_FILE}")

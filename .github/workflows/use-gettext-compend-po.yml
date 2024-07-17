@@ -66,20 +66,20 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Get Other Fields from matrix.json
+      - name: Get Other Fields from versions.json
         id: gofm
         shell: bash
         run: |
           get_keys() {
-            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+            jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
           }
           declare -A VERSION_FILTERS
           for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+            VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
             echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"

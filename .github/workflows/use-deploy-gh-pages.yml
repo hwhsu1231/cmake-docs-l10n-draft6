@@ -73,16 +73,16 @@ jobs:
           token: ${{ steps.ggat.outputs.token }}
           submodules: true
 
-      - name: Get Other Fields from matrix.json
+      - name: Get Other Fields from versions.json
         id: gofm
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          MATRIX=".github/workflows/matrix.json"
-          KEYS=$(jq -r ".include[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
+          MATRIX=".github/workflows/versions.json"
+          KEYS=$(jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" "${MATRIX}" | tr -d '\r')
           declare -A KEY_FILTERS
           for KEY in ${KEYS[@]}; do
-            KEY_FILTERS[${KEY}]=".include[] | select(.VERSION == \"${VERSION}\") | .${KEY}"
+            KEY_FILTERS[${KEY}]=".v3[] | select(.VERSION == \"${VERSION}\") | .${KEY}"
           done
           for KEY in ${!KEY_FILTERS[@]}; do
             FILTER="${KEY_FILTERS[${KEY}]}"
@@ -91,20 +91,20 @@ jobs:
             echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
             echo "${KEY}: ${VALUE}"
           done
-      # - name: Get Other Fields from matrix.json
+      # - name: Get Other Fields from versions.json
       #   id: gofm
       #   shell: bash
       #   run: |
       #     get_keys() {
-      #       jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+      #       jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
       #     }
       #     declare -A VERSION_FILTERS
       #     for KEY in $(get_keys); do
-      #       VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+      #       VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
       #     done
       #     for KEY in "${!VERSION_FILTERS[@]}"; do
       #       FILTER="${VERSION_FILTERS[$KEY]}"
-      #       VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
+      #       VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
       #       if [ "$VALUE" = "null" ]; then VALUE=""; fi
       #       echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
       #       echo "${KEY}: $VALUE"

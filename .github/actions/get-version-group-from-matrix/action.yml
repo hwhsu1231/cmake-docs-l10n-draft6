@@ -3,7 +3,7 @@
 
 name: get-version-group-from-matrix
 
-description: Get the Version Group from matrix.json
+description: Get the Version Group from versions.json
 
 inputs:
   version:
@@ -25,7 +25,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Get the Version Group from matrix.json
+    - name: Get the Version Group from versions.json
       id: gcvm
       shell: bash
       run: |

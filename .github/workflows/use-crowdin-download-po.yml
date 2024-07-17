@@ -76,27 +76,27 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
-      - name: Get Other Fields from matrix.json
+      - name: Get Other Fields from versions.json
         id: gofm
         shell: bash
         run: |
           get_keys() {
-            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+            jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
           }
           declare -A VERSION_FILTERS
           for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+            VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
             echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
-      - name: Install CMake 3.23
-        uses: jwlawson/actions-setup-cmake@v2.0
+      - name: Install CMake
+        uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
 
@@ -127,19 +127,19 @@ jobs:
           cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
           cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
 
-      - name: Build with 'gettext_update_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target gettext_update_po
+      - name: Build the 'gettext_update_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'gettext_update_po'
 
-      - name: Build with 'crowdin_download_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target crowdin_download_po
+      - name: Build the 'crowdin_download_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'crowdin_download_po'
 
       # - name: Build with 'crowdin_status' target
       #   shell: bash
@@ -156,26 +156,35 @@ jobs:
       #     echo "PROGRESS_OUTPUT<<$delimiter"    >> ${GITHUB_OUTPUT}
       #     echo "$(<$PROGRESS_CROWDIN_TXT_PATH)" >> ${GITHUB_OUTPUT}
       #     echo "$delimiter"                     >> ${GITHUB_OUTPUT}
-      - name: Get the Translated/Proofread Progress
+      # - name: Get the Translated/Proofread Progress
+      #   id: gtpp
+      #   shell: bash
+      #   run: |
+      #     CROWDIN_YML_PATH=$(pwd)/l10n/${{ inputs.VERSION }}/crowdin.yml
+      #     CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
+      #     PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
+      #     delimiter="$(openssl rand -hex 8)"
+      #     echo "PROGRESS_OUTPUT<<$delimiter"  >> ${GITHUB_OUTPUT}
+      #     echo "$PROGRESS_OUTPUT"             >> ${GITHUB_OUTPUT}
+      #     echo "$delimiter"                   >> ${GITHUB_OUTPUT}
+      #     echo "PROGRESS_OUTPUT:"
+      #     echo "$PROGRESS_OUTPUT"
+      - name: Get the Translated/Proofread Progress from Crowdin
         id: gtpp
-        shell: bash
-        run: |
-          CROWDIN_YML_PATH=$(pwd)/l10n/${{ inputs.VERSION }}/crowdin.yml
-          CROWDIN_STATUS_OUTPUT=$(crowdin status --branch=repo --config=$CROWDIN_YML_PATH --no-progress --verbose 2>&1)
-          PROGRESS_OUTPUT=$(echo "$CROWDIN_STATUS_OUTPUT" | sed '/Fetching project info/d' | sed 's/\t/  /g')
-          delimiter="$(openssl rand -hex 8)"
-          echo "PROGRESS_OUTPUT<<$delimiter"  >> ${GITHUB_OUTPUT}
-          echo "$PROGRESS_OUTPUT"             >> ${GITHUB_OUTPUT}
-          echo "$delimiter"                   >> ${GITHUB_OUTPUT}
-          echo "PROGRESS_OUTPUT:"
-          echo "$PROGRESS_OUTPUT"
+        uses: ./.github/actions/get-crowdin-status-progress
+        with:
+          crowdin-config-file: 'l10n/${{ inputs.VERSION }}/crowdin.yml'
+          crowdin-branch-name: ${{ inputs.VERSION }}
+          crowdin-personal-token: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          # crowdin-no-progress: true
+          # crowdin-verbose: true
 
-      - name: Build with 'gettext_statistic_po' target
-        shell: bash
-        run: |
-          cmake \
-            --build out/build/${{ inputs.LANGUAGE }} \
-            --target gettext_statistic_po
+      - name: Build the 'gettext_statistic_po' target
+        uses: ./.github/actions/cmake-build-target
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'gettext_statistic_po'
 
       - name: Get the Current Job's ID
         id: gcji

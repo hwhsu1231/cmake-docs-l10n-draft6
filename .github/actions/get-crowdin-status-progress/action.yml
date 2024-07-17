@@ -30,6 +30,10 @@ inputs:
     required: false
     description: xxx
     default: 'false'
+  workspace:
+    required: false
+    description: xxx
+    default: '${{ github.workspace }}'
 
 outputs:
   CROWDIN_STATUS_PROGRESS:
@@ -85,6 +89,8 @@ runs:
       id: gcsp
       shell: bash
       run: |
+        WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+        cd ${WORKSPACE}
         CROWDIN_STATUS_ARGS="${{ steps.crowdin-args.outputs.CROWDIN_ARGS }}"
         CROWDIN_STATUS_OUTPUTS=$(crowdin status ${CROWDIN_STATUS_ARGS[@]} 2>&1)
         CROWDIN_STATUS_PROGRESS=$(echo "${CROWDIN_STATUS_OUTPUTS}" | sed '/Fetching project info/d' | sed 's/\t/  /g')

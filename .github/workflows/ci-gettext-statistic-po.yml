@@ -33,21 +33,21 @@ jobs:
         ( github.event_name == 'schedule' )
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
+      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Read VERSION from matrix.json
+      - name: Get VERSION_LIST from versions.json
         id: rvm
         run: |
-          MATRIX=".github/workflows/matrix.json"
-          FILTER=".include | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" ${MATRIX})
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
+          MATRIX=".github/workflows/versions.json"
+          FILTER=".v3 | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${FILTER}" ${MATRIX})
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
 
   matrix:
     needs: get-matrix
@@ -59,7 +59,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
       fail-fast: false
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:

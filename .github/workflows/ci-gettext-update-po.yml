@@ -73,11 +73,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Read VERSION from matrix.json
+      - name: Get VERSION_LIST from versions.json
         id: rvm
         run: |
-          FILTER=".include | map(.VERSION)"
-          MATRIX=".github/workflows/matrix.json"
+          FILTER=".v3 | map(.VERSION)"
+          MATRIX=".github/workflows/versions.json"
           VERSION=$(jq -c "${FILTER}" "${MATRIX}")
           echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"

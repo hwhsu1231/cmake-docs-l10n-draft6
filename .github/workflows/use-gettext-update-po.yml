@@ -70,26 +70,26 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Get Other Fields from matrix.json
+      - name: Get Other Fields from versions.json
         id: gofm
         shell: bash
         run: |
           get_keys() {
-            jq -r ".include[0] | keys[] | select(. != \"VERSION\")" .github/workflows/matrix.json
+            jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
           }
           declare -A VERSION_FILTERS
           for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".include[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+            VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
           done
           for KEY in "${!VERSION_FILTERS[@]}"; do
             FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "${FILTER}" .github/workflows/matrix.json)
+            VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
             if [ "$VALUE" = "null" ]; then VALUE=""; fi
             echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
             echo "${KEY}: $VALUE"
           done
 
-      - name: Install CMake 3.23
+      - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
@@ -97,7 +97,7 @@ jobs:
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
 
-      - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
         with:
           source-directory: ${{ github.workspace }}
@@ -109,32 +109,13 @@ jobs:
           cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
           cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
           cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
-      # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-      #   shell: bash
-      #   run: |
-      #     cmake \
-      #       --preset ${{ inputs.LANGUAGE }} \
-      #       -D VERSION=${{ inputs.VERSION }} \
-      #       -D UPDATE_MODE=${{ inputs.UPDATE_MODE }} \
-      #       -D AUTO_DEPEND=OFF
 
       - name: Get the Version Reference of '.po' Before Building
         id: po-before
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
-          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
-      # - name: Get PO_BEFORE from reference.json
-      #   id: po-before
-      #   shell: bash
-      #   run: |
-      #     PO_BEFORE=$(jq ".po" l10n/${{ inputs.VERSION }}/reference.json)
-      #     delimiter="$(openssl rand -hex 8)"
-      #     echo "PO_BEFORE<<$delimiter"  >> ${GITHUB_OUTPUT}
-      #     echo "$PO_BEFORE"             >> ${GITHUB_OUTPUT}
-      #     echo "$delimiter"             >> ${GITHUB_OUTPUT}
-      #     echo "PO_BEFORE:"
-      #     echo "$PO_BEFORE"
+          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
 
       - name: Build the 'gettext_update_po' target
         uses: ./.github/actions/cmake-build-target
@@ -148,18 +129,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
-          jq-file: '${{ github.workspace }}/l10n/${{ inputs.VERSION }}/reference.json'
-      # - name: Get PO_AFTER from reference.json
-      #   id: po-after
-      #   shell: bash
-      #   run: |
-      #     PO_AFTER=$(jq '.po' l10n/${{ inputs.VERSION }}/reference.json)
-      #     delimiter="$(openssl rand -hex 8)"
-      #     echo "PO_AFTER<<$delimiter" >> ${GITHUB_OUTPUT}
-      #     echo "$PO_AFTER"            >> ${GITHUB_OUTPUT}
-      #     echo "$delimiter"           >> ${GITHUB_OUTPUT}
-      #     echo "PO_AFTER:"
-      #     echo "$PO_AFTER"
+          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
 
       - name: Get the Current Job's ID
         id: gcji
