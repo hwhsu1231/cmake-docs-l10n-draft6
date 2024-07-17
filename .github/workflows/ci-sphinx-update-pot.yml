@@ -35,6 +35,16 @@ on:
           - 'COMPARE'
           - 'ALWAYS'
           - 'NEVER'
+      VERSION_GROUP:
+        description: 'Set VERSION_GROUP input (for matrix type)'
+        required: true
+        type: choice
+        default: 'include'
+        options:
+          - 'v3'
+
+env:
+  CRON_V3: '0 8 1,15 * *'
 
 jobs:
   get-matrix:
@@ -42,7 +52,7 @@ jobs:
         (github.event_name == 'schedule')
     runs-on: ubuntu-latest
     outputs:
-      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
