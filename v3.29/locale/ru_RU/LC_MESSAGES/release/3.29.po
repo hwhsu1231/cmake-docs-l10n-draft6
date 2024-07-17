@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 08:17+0000\n"
+"POT-Creation-Date: 2024-07-17 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -358,7 +358,7 @@ msgstr ""
 msgid "3.29.2, 3.29.3, 3.29.4"
 msgstr ""
 
-#: ../../../release/3.29.rst:211
+#: ../../../release/3.29.rst:211 ../../../release/3.29.rst:237
 msgid ""
 "These versions made no changes to documented features or interfaces. Some "
 "implementation updates were made to support ecosystem changes and/or fix "
@@ -390,12 +390,5 @@ msgid ""
 msgstr ""
 
 #: ../../../release/3.29.rst:235
-msgid "3.29.6"
-msgstr ""
-
-#: ../../../release/3.29.rst:237
-msgid ""
-"This version made no changes to documented features or interfaces. Some "
-"implementation updates were made to support ecosystem changes and/or fix "
-"regressions."
+msgid "3.29.6, 3.29.7"
 msgstr ""
