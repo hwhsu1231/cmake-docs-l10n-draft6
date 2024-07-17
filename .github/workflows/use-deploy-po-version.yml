@@ -85,8 +85,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ steps.ggat.outputs.token }}
-          branch: po/${{ inputs.VERSION }}
-          folder: ./l10n/${{ inputs.VERSION }}/locale
+          branch: 'po/${{ inputs.VERSION }}'
+          folder: './l10n/${{ inputs.VERSION }}/locale'
+          target-folder: '.'
           single-commit: true
-          target-folder: .
           clean: true
