@@ -51,7 +51,7 @@ jobs:
         id: rvm
         run: |
           JQ_FILE=".github/workflows/versions.json"
-          JQ_FILTER=".v3 | map(select(.VERSION_COMPENDIUM != "") | .VERSION)"
+          JQ_FILTER=".v3 | map(select(.VERSION_COMPENDIUM != \"\") | .VERSION)"
           VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
           echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
           echo "VERSION_LIST:"

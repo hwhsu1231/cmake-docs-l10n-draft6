@@ -59,7 +59,7 @@ jobs:
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == "")) | .[].VERSION"
+          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
           OUTPUT=$(jq -r "${FILTER}" .github/workflows/versions.json)
           readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
           VERSION_FOUND=false

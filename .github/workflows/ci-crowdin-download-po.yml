@@ -52,7 +52,7 @@ jobs:
       - name: Get VERSION_LIST from versions.json
         id: rvm
         run: |
-          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == "") | .VERSION)"
+          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\") | .VERSION)"
           VERSION=$(jq -c "${FILTER}" .github/workflows/versions.json)
           echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
           echo "VERSION:"
