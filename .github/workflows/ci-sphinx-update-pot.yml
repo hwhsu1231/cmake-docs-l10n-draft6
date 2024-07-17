@@ -42,20 +42,47 @@ jobs:
         (github.event_name == 'schedule')
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
+      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Get VERSION_LIST from versions.json
-        id: rvm
+      # - name: Get VERSION_LIST from versions.json
+      #   id: rvm
+      #   run: |
+      #     FILTER=".v3 | map(.VERSION)"
+      #     VERSION=$(jq -c "${FILTER}" .github/workflows/versions.json)
+      #     echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
+      #     echo "VERSION:"
+      #     echo "${VERSION}" | jq "."
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
         run: |
-          FILTER=".v3 | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" .github/workflows/versions.json)
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          elif [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+            if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
+              VERSION_GROUP=v3
+            fi
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
+      - name: Get VERSION_LIST from versions.json
+        id: gvl
+        shell: bash
+        run: |
+          VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
+          JQ_FILE=".github/workflows/versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
+
 
   matrix:
     needs: get-matrix
@@ -67,7 +94,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-sphinx-update-pot.yml
