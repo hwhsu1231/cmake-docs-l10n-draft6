@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../manual/cpack.1.rst:7
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../manual/cpack.1.rst:11
 msgid "cpack -G <generator> [<options>]"
