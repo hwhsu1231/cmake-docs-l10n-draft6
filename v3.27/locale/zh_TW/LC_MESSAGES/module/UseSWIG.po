@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../../../../Modules/UseSWIG.cmake:12
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../../Modules/UseSWIG.cmake:16
 msgid "CMake Commands"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../../../../Modules/UseSWIG.cmake:136
 msgid "Properties on Source Files"
-msgstr ""
+msgstr "來源檔的屬性"
 
 #: ../../../../Modules/UseSWIG.cmake:138
 msgid ""
@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../../../../Modules/UseSWIG.cmake:232
 msgid "Properties on Targets"
-msgstr ""
+msgstr "目標的屬性"
 
 #: ../../../../Modules/UseSWIG.cmake:234
 msgid ""
