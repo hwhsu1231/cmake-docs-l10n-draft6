@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-07-18 02:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -506,58 +506,66 @@ msgid "Apple mixed reality operating system"
 msgstr ""
 
 #: ../../../variable/CMAKE_SYSTEM_NAME.rst:88
-msgid "``watchOS``"
+msgid "``WASI``"
 msgstr ""
 
 #: ../../../variable/CMAKE_SYSTEM_NAME.rst:88
+msgid "WebAssembly System Interface"
+msgstr ""
+
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:89
+msgid "``watchOS``"
+msgstr ""
+
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:89
 msgid "Apple watch operating system"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:89
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:90
 msgid "``Windows``"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:89
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:90
 msgid "Windows stationary operating systems"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:90
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:91
 msgid "``WindowsCE``"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:90
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:91
 msgid "Windows Embedded Compact"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:91
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:92
 msgid "``WindowsPhone``"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:91
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:92
 msgid "Windows mobile phone operating system"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:92
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:93
 msgid "``WindowsStore``"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:92
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:93
 msgid "Universal Windows Platform applications"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:93
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:94
 msgid "``Xenix``"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:93
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:94
 msgid "SCO Xenix Unix operating system (discontinued)"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:96
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:97
 msgid "Platform-specific notes:"
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:98
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:99
 msgid ""
 "MSYS2's ``msys/cmake`` package (``/usr/bin/cmake``) works only under "
 "``MSYSTEM=MSYS`` environments, with system name ``MSYS``.  Under other "
@@ -566,7 +574,7 @@ msgid ""
 "``MSYSTEM=MINGW64`` with system name ``Windows``."
 msgstr ""
 
-#: ../../../variable/CMAKE_SYSTEM_NAME.rst:104
+#: ../../../variable/CMAKE_SYSTEM_NAME.rst:105
 msgid ""
 "Cygwin's ``cmake`` package (``/usr/bin/cmake``) uses system name ``CYGWIN``. "
 "A non-cygwin CMake on Windows (e.g. ``$PROGRAMFILES/CMake/bin/cmake``) uses "
