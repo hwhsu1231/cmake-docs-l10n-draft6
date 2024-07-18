@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../manual/ccmake.1.rst:7
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../manual/ccmake.1.rst:11
 msgid "ccmake [<options>] <path-to-source | path-to-existing-build>"
