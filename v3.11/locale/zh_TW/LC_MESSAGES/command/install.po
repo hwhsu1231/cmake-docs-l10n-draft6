@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../command/install.rst:5
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../command/install.rst:8
 msgid "Specify rules to run at install time."
@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../../command/install.rst:11
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../command/install.rst:13
 msgid ""
