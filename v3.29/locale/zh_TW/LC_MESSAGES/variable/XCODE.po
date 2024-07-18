@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 08:17+0000\n"
+"POT-Creation-Date: 2024-07-17 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 
 #: ../../../variable/XCODE.rst:2
 msgid "XCODE"
-msgstr ""
+msgstr "XCODE"
 
 #: ../../../variable/XCODE.rst:6
 msgid "``True`` when using :generator:`Xcode` generator."
-msgstr ""
+msgstr "當使用 :generator:`Xcode` 生成器時為 ``True``。"

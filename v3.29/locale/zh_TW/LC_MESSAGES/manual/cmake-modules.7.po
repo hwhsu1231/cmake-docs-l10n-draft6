@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 08:17+0000\n"
+"POT-Creation-Date: 2024-07-17 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../manual/cmake-modules.7.rst:4
 msgid "cmake-modules(7)"
-msgstr ""
+msgstr "cmake-模組(7)"
 
 #: ../../../manual/cmake-modules.7.rst:6
 msgid ""

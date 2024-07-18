@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 08:17+0000\n"
+"POT-Creation-Date: 2024-07-17 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../release/3.1.rst:5
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../release/3.1.rst:8
 msgid "Changes made since CMake 3.0 include the following."
