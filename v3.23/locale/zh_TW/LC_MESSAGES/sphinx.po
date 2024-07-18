@@ -3486,7 +3486,7 @@ msgstr ""
 
 #: sphinx/themes/haiku/layout.html:24
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: sphinx/transforms/__init__.py:218
 #, python-format
