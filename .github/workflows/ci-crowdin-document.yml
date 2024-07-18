@@ -33,6 +33,7 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-document.yml
     with:
+      RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: 'repo'
       LANGUAGE: 'all'
