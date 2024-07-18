@@ -72,7 +72,7 @@ jobs:
 
       - name: Get Other Caches from versions.json
         id: gocv
-        uses: ./.github/actions/get-other-caches-from-verions
+        uses: ./.github/actions/get-other-caches-from-versions
         with:
           version: ${{ inputs.VERSION }}
           versions-file: '.github/workflows/versions.json'

@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: get-other-caches-from-verions
+name: get-other-caches-from-versions
 
 description: Get Other Caches from versions.json
 
