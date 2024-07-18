@@ -23,11 +23,11 @@ msgstr ""
 
 #: ../../../guide/using-dependencies/index.rst:5
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../guide/using-dependencies/index.rst:9
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../guide/using-dependencies/index.rst:11
 msgid ""

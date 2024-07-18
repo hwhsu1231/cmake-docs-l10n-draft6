@@ -27,11 +27,11 @@ msgstr ""
 
 #: ../../../../Modules/CPackComponent.cmake:11
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../../Modules/CPackComponent.cmake:15
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../Modules/CPackComponent.cmake:17
 msgid "This module is automatically included by :module:`CPack`."
