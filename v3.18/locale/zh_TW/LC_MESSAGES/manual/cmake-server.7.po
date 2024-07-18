@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../../manual/cmake-server.7.rst:4
 msgid "cmake-server(7)"
-msgstr ""
+msgstr "cmake-伺服器(7)"
 
 #: ../../../manual/cmake-server.7.rst:7
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../manual/cmake-server.7.rst:12
 msgid ""
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../../../manual/cmake-server.7.rst:16
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../manual/cmake-server.7.rst:18
 msgid ""
