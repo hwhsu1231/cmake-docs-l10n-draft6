@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../manual/ctest.1.rst:7
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../manual/ctest.1.rst:11
 msgid "ctest [<options>]"

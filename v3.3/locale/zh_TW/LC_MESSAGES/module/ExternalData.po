@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../../../Modules/ExternalData.cmake:12
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../Modules/ExternalData.cmake:14
 msgid ""
