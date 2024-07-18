@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../../../manual/cmake-generators.7.rst:4
 msgid "cmake-generators(7)"
-msgstr ""
+msgstr "cmake-生成器(7)"
 
 #: ../../../manual/cmake-generators.7.rst:7
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../manual/cmake-generators.7.rst:11
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../manual/cmake-generators.7.rst:13
 msgid ""
