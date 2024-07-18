@@ -66,26 +66,14 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Get Other Fields from versions.json
-        id: gofm
-        shell: bash
-        run: |
-          get_keys() {
-            jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
-          }
-          declare -A VERSION_FILTERS
-          for KEY in $(get_keys); do
-            VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
-          done
-          for KEY in "${!VERSION_FILTERS[@]}"; do
-            FILTER="${VERSION_FILTERS[$KEY]}"
-            VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
-            if [ "$VALUE" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
-            echo "${KEY}: $VALUE"
-          done
+      - name: Get Other Caches from versions.json
+        id: gocv
+        uses: ./.github/actions/get-other-caches-from-verions
+        with:
+          version: ${{ inputs.VERSION }}
+          versions-file: '.github/workflows/versions.json'
 
-      - name: Install CMake 3.23
+      - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
           cmake-version: '3.23'
@@ -100,19 +88,11 @@ jobs:
           preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
           cache-auto-depend: 'OFF'
-          cache-version-compendium: ${{ steps.gofm.outputs.VERSION_COMPENDIUM }}
-          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
-          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
-          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
-          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
-      # - name: Configure with '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-      #   shell: bash
-      #   run: |
-      #     cmake \
-      #       --preset ${{ inputs.LANGUAGE }} \
-      #       -D VERSION=${{ inputs.VERSION }} \
-      #       -D VERSION_COMPENDIUM=${{ steps.gofm.outputs.VERSION_COMPENDIUM }} \
-      #       -D AUTO_DEPEND=OFF
+          cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
+          cache-version-exact-python: ${{ steps.gocv.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-sphinx: ${{ steps.gocv.outputs.VERSION_EXACT_SPHINX }}
+          cache-version-exact-doxygen: ${{ steps.gocv.outputs.VERSION_EXACT_DOXYGEN }}
+          cache-version-exact-proj: ${{ steps.gocv.outputs.VERSION_EXACT_PROJ }}
 
       - name: Build the 'gettext_compend_po' target
         uses: ./.github/actions/cmake-build-target
@@ -120,12 +100,6 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'gettext_compend_po'
-      # - name: Build with 'gettext_compend_po' target
-      #   shell: bash
-      #   run: |
-      #     cmake \
-      #       --build out/build/${{ inputs.LANGUAGE }} \
-      #       --target gettext_compend_po
 
       - name: Get the Current Job's ID
         id: gcji
@@ -158,7 +132,7 @@ jobs:
           author_name: docs-l10n[bot]
           author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
           message: |
-            tr(${{ inputs.VERSION }}): Merge po from Compendium of '${{ steps.gofm.outputs.VERSION_COMPENDIUM }}'
+            tr(${{ inputs.VERSION }}): Merge po from Compendium of '${{ steps.gocv.outputs.VERSION_COMPENDIUM }}'
 
             Created by GitHub Workflows:
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml

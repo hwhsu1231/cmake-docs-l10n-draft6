@@ -38,25 +38,17 @@ inputs:
     required: false
     description: 'Value passed to VERSION_COMPENDIUM cache.'
     default: '[default]'
-  cache-version-exact-git:
-    required: false
-    description: 'Value passed to VERSION_EXACT_GIT cache.'
-    default: '[default]'
-  cache-version-exact-proj:
-    required: false
-    description: 'Value passed to VERSION_EXACT_PROJ cache.'
-    default: '[default]'
   cache-version-exact-python:
     required: false
     description: 'Value passed to VERSION_EXACT_PYTHON cache.'
     default: '[default]'
-  cache-version-exact-gettext:
+  cache-version-exact-sphinx:
     required: false
-    description: 'Value passed to VERSION_EXACT_GETTEXT cache.'
+    description: 'Value passed to VERSION_EXACT_SPHINX cache.'
     default: '[default]'
-  cache-version-exact-crowdin:
+  cache-version-exact-proj:
     required: false
-    description: 'Value passed to VERSION_EXACT_CROWDIN cache.'
+    description: 'Value passed to VERSION_EXACT_PROJ cache.'
     default: '[default]'
   cache-gettext-wrap-width:
     required: false

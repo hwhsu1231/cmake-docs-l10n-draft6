@@ -21,9 +21,6 @@ on:
       ENABLE_JOB:
         type: boolean
         required: true
-      MATRIX_GROUP:
-        type: string
-        required: true
 
 jobs:
   gettext-statistic-po:
@@ -46,7 +43,6 @@ jobs:
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
-          echo "inupts.MATRIX_GROUP = ${{ inputs.MATRIX_GROUP }}"
           echo "[Secrets]"
           echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
           echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
@@ -66,25 +62,6 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Get Other Fields from versions.json
-        id: gofm
-        shell: bash
-        run: |
-          get_keys() {
-            jq -r ".${{ inputs.MATRIX_GROUP }}[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
-          }
-          declare -A VERSION_FILTERS
-          for KEY in $(get_keys); do
-            VERSION_FILTERS[${KEY}]=".${{ inputs.MATRIX_GROUP }}[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .${KEY}"
-          done
-          for KEY in "${!VERSION_FILTERS[@]}"; do
-            FILTER="${VERSION_FILTERS[${KEY}]}"
-            VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
-            if [ "${VALUE}" = "null" ]; then VALUE=""; fi
-            echo "${KEY}=${VALUE}" >> ${GITHUB_OUTPUT}
-            echo "${KEY}: ${VALUE}"
-          done
-
       - name: Install CMake
         uses: ./.github/actions/install-cmake
         with:
@@ -93,6 +70,13 @@ jobs:
       - name: Install Gettext
         uses: ./.github/actions/install-gettext
 
+      - name: Get Other Caches from versions.json
+        id: gocv
+        uses: ./.github/actions/get-other-caches-from-verions
+        with:
+          version: ${{ inputs.VERSION }}
+          versions-file: '.github/workflows/versions.json'
+
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
         with:
@@ -100,10 +84,11 @@ jobs:
           preset: 'all'
           cache-version: ${{ inputs.VERSION }}
           cache-auto-depend: 'OFF'
-          cache-version-exact-git: ${{ steps.gofm.outputs.VERSION_EXACT_GIT }}
-          cache-version-exact-conda: ${{ steps.gofm.outputs.VERSION_EXACT_CONDA }}
-          cache-version-exact-python: ${{ steps.gofm.outputs.VERSION_EXACT_PYTHON }}
-          cache-version-exact-gettext: ${{ steps.gofm.outputs.VERSION_EXACT_GETTEXT }}
+          cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
+          cache-version-exact-python: ${{ steps.gocv.outputs.VERSION_EXACT_PYTHON }}
+          cache-version-exact-sphinx: ${{ steps.gocv.outputs.VERSION_EXACT_SPHINX }}
+          cache-version-exact-doxygen: ${{ steps.gocv.outputs.VERSION_EXACT_DOXYGEN }}
+          cache-version-exact-proj: ${{ steps.gocv.outputs.VERSION_EXACT_PROJ }}
 
       - name: Build the 'gettext_statistic_po' target
         uses: ./.github/actions/cmake-build-target

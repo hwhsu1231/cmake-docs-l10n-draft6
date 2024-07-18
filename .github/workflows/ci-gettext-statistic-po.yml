@@ -68,7 +68,6 @@ jobs:
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
       ENABLE_JOB: true
-      MATRIX_GROUP: 'include'
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
@@ -83,4 +82,3 @@ jobs:
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
-      MATRIX_GROUP: ${{ inputs.MATRIX_GROUP }}
