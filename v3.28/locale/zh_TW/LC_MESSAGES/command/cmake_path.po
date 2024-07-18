@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../../command/cmake_path.rst:22
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../command/cmake_path.rst:26
 msgid ""
