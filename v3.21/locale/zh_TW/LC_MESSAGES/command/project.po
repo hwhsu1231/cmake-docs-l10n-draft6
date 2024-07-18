@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../../command/project.rst:7
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../command/project.rst:9
 msgid ""
