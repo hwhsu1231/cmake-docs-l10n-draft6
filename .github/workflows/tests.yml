@@ -77,17 +77,15 @@ jobs:
           git --version
 
       - id: version-group
-        uses: ./.github/actions/get-version-group-from-matrix
+        uses: ./.github/actions/get-version-group-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          matrix-file: '.github/workflows/versions.json'
+          versions-file: '.github/workflows/versions.json'
 
-      - uses: ./.github/actions/get-cache-versions-from-matrix
+      - uses: ./.github/actions/get-other-caches-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          # version-group: 'include'
-          version-group: ${{ steps.version-group.outputs.VERSION_GROUP }}
-          matrix-file: '.github/workflows/versions.json'
+          versions-file: '.github/workflows/versions.json'
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake

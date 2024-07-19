@@ -55,52 +55,27 @@ jobs:
         run: |
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
-      - name: Check whether '${{ inputs.VERSION }}' version should be uploaded to Crowdin
-        shell: bash
-        run: |
-          VERSION="${{ inputs.VERSION }}"
-          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
-          OUTPUT=$(jq -r "${FILTER}" .github/workflows/versions.json)
-          readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
-          VERSION_FOUND=false
-          for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
-            if [ "${VERSION}" == "$CROWDIN_BRANCH" ]; then
-              VERSION_FOUND=true
-              break
-            fi
-          done
-          echo "VERSION_FOUND: $VERSION_FOUND"
-          if [[ $VERSION_FOUND == "true" ]]; then
-            echo "'${{ inputs.VERSION }}' version should be uploaded to Crowdin."
-          else
-            echo "'${{ inputs.VERSION }}' version should NOT be uploaded to Crowdin."
-            exit 1
-          fi
-
-      - name: Get Other Caches from versions.json
-        id: gocv
-        uses: ./.github/actions/get-other-caches-from-versions
-        with:
-          version: ${{ inputs.VERSION }}
-          versions-file: '.github/workflows/versions.json'
-      # - name: Get Other Fields from versions.json
-      #   id: gocv
+      # - name: Check whether '${{ inputs.VERSION }}' version should be uploaded to Crowdin
       #   shell: bash
       #   run: |
-      #     get_keys() {
-      #       jq -r ".v3[0] | keys[] | select(. != \"VERSION\")" .github/workflows/versions.json
-      #     }
-      #     declare -A VERSION_FILTERS
-      #     for KEY in $(get_keys); do
-      #       VERSION_FILTERS[$KEY]=".v3[] | select(.VERSION == \"${{ inputs.VERSION }}\") | .$KEY"
+      #     VERSION="${{ inputs.VERSION }}"
+      #     FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
+      #     OUTPUT=$(jq -r "${FILTER}" .github/workflows/versions.json)
+      #     readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
+      #     VERSION_FOUND=false
+      #     for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
+      #       if [ "${VERSION}" == "$CROWDIN_BRANCH" ]; then
+      #         VERSION_FOUND=true
+      #         break
+      #       fi
       #     done
-      #     for KEY in "${!VERSION_FILTERS[@]}"; do
-      #       FILTER="${VERSION_FILTERS[$KEY]}"
-      #       VALUE=$(jq -r "${FILTER}" .github/workflows/versions.json)
-      #       if [ "$VALUE" = "null" ]; then VALUE=""; fi
-      #       echo "${KEY}=$VALUE" >> ${GITHUB_OUTPUT}
-      #       echo "${KEY}: $VALUE"
-      #     done
+      #     echo "VERSION_FOUND: $VERSION_FOUND"
+      #     if [[ $VERSION_FOUND == "true" ]]; then
+      #       echo "'${{ inputs.VERSION }}' version should be uploaded to Crowdin."
+      #     else
+      #       echo "'${{ inputs.VERSION }}' version should NOT be uploaded to Crowdin."
+      #       exit 1
+      #     fi
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
@@ -112,6 +87,13 @@ jobs:
 
       - name: Install Crowdin
         uses: ./.github/actions/install-crowdin
+
+      - name: Get Other Caches from versions.json
+        id: gocv
+        uses: ./.github/actions/get-other-caches-from-versions
+        with:
+          version: ${{ inputs.VERSION }}
+          versions-file: '.github/workflows/versions.json'
 
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset

@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: get-version-group-from-matrix
+name: get-version-group-from-versions
 
 description: Get the Version Group from versions.json
 
@@ -9,7 +9,7 @@ inputs:
   version:
     required: true
     description: xxx
-  matrix-file:
+  versions-file:
     required: true
     description: xxx
   workspace:
@@ -19,27 +19,27 @@ inputs:
 
 outputs:
   VERSION_GROUP:
-    value: ${{ steps.gcvm.outputs.VERSION_GROUP }}
+    value: ${{ steps.gvgv.outputs.VERSION_GROUP }}
     description: xxx
 
 runs:
   using: composite
   steps:
     - name: Get the Version Group from versions.json
-      id: gcvm
+      id: gvgv
       shell: bash
       run: |
         VERSION="${{ inputs.version }}"
-        MATRIX_FILE=$(echo "${{ inputs.matrix-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+        VERSIONS_FILE=$(echo "${{ inputs.versions-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
         WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
 
         cd ${WORKSPACE}
 
-        VERSION_GROUPS=($(jq -r 'keys[]' "${MATRIX_FILE}" | tr -d '\r'))
+        VERSION_GROUPS=($(jq -r 'keys[]' "${VERSIONS_FILE}" | tr -d '\r'))
         FOUND_GROUP=""
         for VERSION_GROUP in ${VERSION_GROUPS[@]}; do
           FILTER="[.${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\")] | length"
-          IS_IN_GROUP=$(jq "${FILTER}" "${MATRIX_FILE}" | tr -d '\r')
+          IS_IN_GROUP=$(jq "${FILTER}" "${VERSIONS_FILE}" | tr -d '\r')
           if [ "$IS_IN_GROUP" -gt 0 ]; then
             FOUND_GROUP="${VERSION_GROUP}"
             break
