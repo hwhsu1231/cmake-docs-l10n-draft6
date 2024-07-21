@@ -80,12 +80,12 @@ jobs:
         uses: ./.github/actions/get-version-group-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          versions-file: '.github/workflows/versions.json'
+          versions-file: 'versions.json'
 
       - uses: ./.github/actions/get-other-caches-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          versions-file: '.github/workflows/versions.json'
+          versions-file: 'versions.json'
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake

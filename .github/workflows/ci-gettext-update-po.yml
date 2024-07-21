@@ -67,21 +67,33 @@ jobs:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Get VERSION_LIST from versions.json
-        id: rvm
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
         run: |
-          FILTER=".v3 | map(.VERSION)"
-          MATRIX=".github/workflows/versions.json"
-          VERSION=$(jq -c "${FILTER}" "${MATRIX}")
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
+      - name: Get VERSION_LIST from versions.json
+        id: gvl
+        run: |
+          VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
+          JQ_FILE="versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
 
   matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
@@ -92,7 +104,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-gettext-update-po.yml

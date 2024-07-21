@@ -5,8 +5,7 @@ name: ci-deploy-gh-pages
 
 on:
   schedule:
-    - cron: '0 8  1 * *'  # Runs at 08:00 on day  1 of the month in UTC zone
-    - cron: '0 8 15 * *'  # Runs at 08:00 on day 15 of the month in UTC zone
+    - cron: '0 8 1,15 * *'  # Runs at 08:00 on day 1 and 15 of the month in UTC zone
   workflow_dispatch:
     inputs:
       TYPE:
@@ -28,35 +27,56 @@ on:
         type: string
         default: 'all'
 
+env:
+  CRON_V3: '0 8 1,15 * *'
+
 jobs:
   get-matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.rvm.outputs.VERSION }}
-      LANGUAGE: ${{ steps.rll.outputs.LANGUAGE }}
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
+      LANGUAGE_LIST: ${{ steps.gll.outputs.LANGUAGE_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
+        run: |
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          elif [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+            if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
+              VERSION_GROUP=v3
+            fi
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
       - name: Get VERSION_LIST from versions.json
-        id: rvm
+        id: gvl
         run: |
-          MATRIX=".github/workflows/versions.json"
-          FILTER=".v3 | map(.VERSION)"
-          VERSION=$(jq -c "${FILTER}" "${MATRIX}")
-          echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-          echo "VERSION:"
-          echo "${VERSION}" | jq "."
-      - name: Read LANGUAGE from languages.json
-        id: rll
+          VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
+          JQ_FILE="versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
+      - name: Get LANGUAGE_LIST from languages.json
+        id: gll
         run: |
-          LANGUAGE=$(jq -c "keys" languages.json)
-          echo "LANGUAGE=${LANGUAGE}" >> ${GITHUB_OUTPUT}
-          echo "LANGUAGE:"
-          echo "${LANGUAGE}" | jq "."
+          JQ_FILE="languages.json"
+          JQ_FILTER="keys"
+          LANGUAGE_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "LANGUAGE_LIST=${LANGUAGE_LIST}" >> ${GITHUB_OUTPUT}
+          echo "LANGUAGE_LIST:"
+          echo "${LANGUAGE_LIST}" | jq "."
 
   matrix:
     needs: get-matrix
@@ -68,7 +88,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix: 
-        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION) }}
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
     uses: ./.github/workflows/use-deploy-gh-pages.yml

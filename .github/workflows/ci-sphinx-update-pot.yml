@@ -58,14 +58,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      # - name: Get VERSION_LIST from versions.json
-      #   id: rvm
-      #   run: |
-      #     FILTER=".v3 | map(.VERSION)"
-      #     VERSION=$(jq -c "${FILTER}" .github/workflows/versions.json)
-      #     echo "VERSION=${VERSION}" >> ${GITHUB_OUTPUT}
-      #     echo "VERSION:"
-      #     echo "${VERSION}" | jq "."
       - name: Get VERSION_GROUP from Inputs or Schedule
         id: gvg
         shell: bash
@@ -86,7 +78,7 @@ jobs:
         shell: bash
         run: |
           VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
-          JQ_FILE=".github/workflows/versions.json"
+          JQ_FILE="versions.json"
           JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
           VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
           echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}

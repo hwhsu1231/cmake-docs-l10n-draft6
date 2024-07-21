@@ -64,7 +64,7 @@ jobs:
         shell: bash
         run: |
           VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
-          JQ_FILE=".github/workflows/versions.json"
+          JQ_FILE="versions.json"
           JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
           VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
           echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}

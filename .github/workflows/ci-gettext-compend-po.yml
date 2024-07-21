@@ -33,31 +33,48 @@ on:
         default: 'include'
         options:
           - 'v3'
-          - 'v4'
-          - 'v5'
+
+env:
+  CRON_V3: '0 4 1,15 * *'
 
 jobs:
   get-matrix:
     runs-on: ubuntu-latest
     outputs:
-      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
-      LANGUAGE_LIST: ${{ steps.rll.outputs.LANGUAGE_LIST }}
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
+      LANGUAGE_LIST: ${{ steps.gll.outputs.LANGUAGE_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Get VERSION_LIST from versions.json
-        id: rvm
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
         run: |
-          JQ_FILE=".github/workflows/versions.json"
-          JQ_FILTER=".v3 | map(select(.VERSION_COMPENDIUM != \"\") | .VERSION)"
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          elif [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+            if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
+              VERSION_GROUP=v3
+            fi
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
+      - name: Get VERSION_LIST from versions.json
+        id: gvl
+        run: |
+          VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
+          JQ_FILE="versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(select(.VERSION_COMPENDIUM != \"\") | .VERSION)"
           VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
           echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
           echo "VERSION_LIST:"
           echo "${VERSION_LIST}" | jq "."
       - name: Get LANGUAGE_LIST from languages.json
-        id: rll
+        id: gll
         run: |
           JQ_FILE="languages.json"
           JQ_FILTER="keys"

@@ -60,7 +60,7 @@ jobs:
       #   run: |
       #     VERSION="${{ inputs.VERSION }}"
       #     FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
-      #     OUTPUT=$(jq -r "${FILTER}" .github/workflows/versions.json)
+      #     OUTPUT=$(jq -r "${FILTER}" versions.json)
       #     readarray -t CROWDIN_BRANCHES <<< "$OUTPUT"
       #     VERSION_FOUND=false
       #     for CROWDIN_BRANCH in "${CROWDIN_BRANCHES[@]}"; do
@@ -93,7 +93,7 @@ jobs:
         uses: ./.github/actions/get-other-caches-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          versions-file: '.github/workflows/versions.json'
+          versions-file: 'versions.json'
 
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset

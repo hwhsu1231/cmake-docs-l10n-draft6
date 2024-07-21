@@ -83,7 +83,7 @@ jobs:
         uses: ./.github/actions/get-other-caches-from-versions
         with:
           version: ${{ inputs.VERSION }}
-          versions-file: '.github/workflows/versions.json'
+          versions-file: 'versions.json'
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset

@@ -50,7 +50,6 @@ jobs:
           echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Update Crowdin Contributors Table
-        # uses: andrii-bodnar/action-crowdin-contributors@v1.0.3
         uses: andrii-bodnar/action-crowdin-contributors@v2.0.0
         with:
           contributors_per_line: 8
