@@ -43,6 +43,13 @@ on:
           - 'COMPARE'
           - 'ALWAYS'
           - 'NEVER'
+      VERSION_GROUP:
+        description: 'Set VERSION_GROUP input (for matrix type)'
+        required: true
+        type: choice
+        default: 'include'
+        options:
+          - 'v3'
 
 jobs:
   pr-merged:
