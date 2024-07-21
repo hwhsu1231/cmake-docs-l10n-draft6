@@ -39,20 +39,11 @@ set(REMOVE_REDUNDANT ON
 set(VERSION_COMPENDIUM "git-master"
     CACHE STRING "Version of compendium that the current version merges translations from.")
 
-set(VERSION_EXACT_GIT ""
-    CACHE STRING "Exact version for calling find_package(Git).")
-
-set(VERSION_EXACT_CONDA ""
-    CACHE STRING "Exact version for calling find_package(Conda).")
-
-set(VERSION_EXACT_PYTHON "3.10"
+set(VERSION_OF_PYTHON "3.10"
     CACHE STRING "Exact version for calling find_package(Python).")
 
-set(VERSION_EXACT_GETTEXT ""
-    CACHE STRING "Exact version for calling find_package(Gettext).")
-
-set(VERSION_EXACT_CROWDIN ""
-    CACHE STRING "Exact version for calling find_package(Crowdin).")
+set(VERSION_OF_SPHINX ""
+    CACHE STRING "Exact version for calling find_package(Sphinx).")
 
 set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
     CACHE STRING "Locale setting for the console.")
@@ -128,7 +119,6 @@ set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/reference.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(PROGRESS_TXT_PATH               "${PROJ_L10N_VERSION_DIR}/progress.txt")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
-set(PYVENV_CFG_PATH                 "${PROJ_VENV_DIR}/pyvenv.cfg")
 set(PREVIOUS_FREEZE_TXT_PATH        "${PROJ_VENV_DIR}/prev/freeze.txt")
 set(PREVIOUS_REFERENCE_TXT_PATH     "${PROJ_VENV_DIR}/prev/reference.txt")
 
@@ -215,41 +205,21 @@ endif()
   Check prerequisites.
 #]====================]
 
-set(FIND_PACKAGE_GIT_ARGS)
-if(VERSION_EXACT_GIT)
-    set(VERSION_EXACT_GIT_ARGS ${VERSION_EXACT_GIT} EXACT)
-else()
-    set(VERSION_EXACT_GIT_ARGS)
-endif()
-set(FIND_PACKAGE_GIT_ARGS
-    ${VERSION_EXACT_GIT_ARGS})
-
-set(FIND_PACKAGE_CONDA_ARGS)
-if(VERSION_EXACT_CONDA)
-    set(VERSION_EXACT_CONDA_ARGS ${VERSION_EXACT_CONDA} EXACT)
-else()
-    set(VERSION_EXACT_CONDA_ARGS)
-endif()
-set(FIND_PACKAGE_CONDA_ARGS
-    ${VERSION_EXACT_CONDA_ARGS})
-
 set(FIND_PACKAGE_PYTHON_ARGS)
-if(VERSION_EXACT_PYTHON)
-    set(VERSION_EXACT_PYTHON_ARGS ${VERSION_EXACT_PYTHON} EXACT)
+if(VERSION_OF_PYTHON)
+    set(VERSION_OF_PYTHON_ARGS ${VERSION_OF_PYTHON} EXACT)
 else()
-    set(VERSION_EXACT_PYTHON_ARGS)
+    set(VERSION_OF_PYTHON_ARGS)
 endif()
 set(FIND_PACKAGE_PYTHON_ARGS
-    ${VERSION_EXACT_PYTHON_ARGS})
+    ${VERSION_OF_PYTHON_ARGS})
 
-set(FIND_PACKAGE_GETTEXT_ARGS)
 
-set(FIND_PACKAGE_CROWDIN_ARGS)
 
-find_package(Git      MODULE QUIET ${FIND_PACKAGE_GIT_ARGS})
-find_package(Conda    MODULE QUIET ${FIND_PACKAGE_CONDA_ARGS})
-find_package(Gettext  MODULE QUIET ${FIND_PACKAGE_GETTEXT_ARGS})
-find_package(Crowdin  MODULE QUIET ${FIND_PACKAGE_CROWDIN_ARGS})
+find_package(Git      MODULE QUIET)
+find_package(Conda    MODULE QUIET)
+find_package(Gettext  MODULE QUIET)
+find_package(Crowdin  MODULE QUIET)
 
 #[==========================================================[
   Create Git Worktree for 'l10n' branch in ${PROJ_L10N_DIR}.
@@ -408,11 +378,8 @@ message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
 message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
-message(STATUS "VERSION_EXACT_GIT             = ${VERSION_EXACT_GIT}")
-message(STATUS "VERSION_EXACT_CONDA           = ${VERSION_EXACT_CONDA}")
-message(STATUS "VERSION_EXACT_PYTHON          = ${VERSION_EXACT_PYTHON}")
-message(STATUS "VERSION_EXACT_GETTEXT         = ${VERSION_EXACT_GETTEXT}")
-message(STATUS "VERSION_EXACT_CROWDIN         = ${VERSION_EXACT_CROWDIN}")
+message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON}")
+message(STATUS "VERSION_OF_SPHINX             = ${VERSION_OF_SPHINX}")
 message(STATUS "GETTEXT_WRAP_WIDTH            = ${GETTEXT_WRAP_WIDTH}")
 message(STATUS "GETTEXT_ADDITIONAL_TARGETS    = ${GETTEXT_ADDITIONAL_TARGETS}")
 message(STATUS "SPHINX_BUILDER                = ${SPHINX_BUILDER}")
@@ -439,7 +406,7 @@ message(STATUS "PROJ_L10N_VERSION_LOCALE_DIR  = ${PROJ_L10N_VERSION_LOCALE_DIR}"
 message(STATUS "PROJ_L10N_VERSION_CROWDIN_DIR = ${PROJ_L10N_VERSION_CROWDIN_DIR}")
 message(STATUS "---------- Configuration Files ----------")
 message(STATUS "LANGUAGES_JSON_PATH           = ${LANGUAGES_JSON_PATH}")
-message(STATUS "REFERENCES_JSON_PATH           = ${REFERENCES_JSON_PATH}")
+message(STATUS "REFERENCES_JSON_PATH          = ${REFERENCES_JSON_PATH}")
 message(STATUS "CROWDIN_YML_PATH              = ${CROWDIN_YML_PATH}")
 message(STATUS "PROGRESS_TXT_PATH             = ${PROGRESS_TXT_PATH}")
 message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
@@ -496,14 +463,11 @@ set(SCRIPT_MODE_CACHE
     -D UPDATE_MODE=${UPDATE_MODE}
     -D INSTALL_MODE=${INSTALL_MODE}
     -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
+    -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
+    -D VERSION_OF_PYTHON=${VERSION_OF_PYTHON}
+    -D VERSION_OF_SPHINX=${VERSION_OF_SPHINX}
     -D GIT_REMOTE_URL=${GIT_REMOTE_URL}
     -D BASEURL_HREF=${BASEURL_HREF}
-    -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
-    -D VERSION_EXACT_GIT=${VERSION_EXACT_GIT}
-    -D VERSION_EXACT_CONDA=${VERSION_EXACT_CONDA}
-    -D VERSION_EXACT_PYTHON=${VERSION_EXACT_PYTHON}
-    -D VERSION_EXACT_GETTEXT=${VERSION_EXACT_GETTEXT}
-    -D VERSION_EXACT_CROWDIN=${VERSION_EXACT_CROWDIN}
     -D SPHINX_BUILDER=${SPHINX_BUILDER}
     -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
     -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}
@@ -624,7 +588,7 @@ endif()
 
 
 # set(VERSION       "2")
-# set(VERSION_TYPE  "branch")
+# set(VERSION_TYPE  "tag")
 # init_references_json_file(
 #     IN_FILEPATH     "${PROJ_OUT_DIR}/${VERSION}/reference.json"
 #     IN_VERSION      "${VERSION}"
@@ -668,3 +632,13 @@ endif()
 #     IN_MODE         "repository"
 #     IN_REPOSITORY   "torchdistx;torchvision"
 #     )
+
+find_package(Sphinx)
+execute_process(
+    COMMAND ${Sphinx_BUILD_EXECUTABLE} --version
+    RESULT_VARIABLE _Sphinx_VERSION_RESULT
+    OUTPUT_VARIABLE _Sphinx_VERSION_OUTPUT  OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  _Sphinx_VERSION_ERROR   ERROR_STRIP_TRAILING_WHITESPACE)
+message(STATUS "_Sphinx_VERSION_RESULT = ${_Sphinx_VERSION_RESULT}")
+message(STATUS "_Sphinx_VERSION_OUTPUT = ${_Sphinx_VERSION_OUTPUT}")
+message(STATUS "_Sphinx_VERSION_ERROR  = ${_Sphinx_VERSION_ERROR}")

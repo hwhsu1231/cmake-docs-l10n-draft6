@@ -22,7 +22,7 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGES_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGES_LIST})
-    message(STATUS "Comparing the version of 'pot' and 'po.${_LANGUAGE}' object...")
+    message(STATUS "Comparing the version of '.pot' and '.po.${_LANGUAGE}' object...")
     get_json_value_by_dot_notation(
         IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
         IN_DOT_NOTATION   ".pot"

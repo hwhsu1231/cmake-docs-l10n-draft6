@@ -120,7 +120,7 @@ jobs:
           cache-version: ${{ inputs.VERSION }}
           # cache-update-mode: ''
           cache-auto-depend: 'OFF'
-          cache-version-exact-python: '[default]'
+          cache-version-of-python: '[default]'
 
 
       - name: Get Version Reference from reference.json

@@ -24,29 +24,29 @@ outputs:
   VERSION_COMPENDIUM:
     value: ${{ steps.gcvm.outputs.VERSION_COMPENDIUM }}
     description: xxx
-  VERSION_EXACT_GIT:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_GIT }}
+  VERSION_OF_GIT:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_GIT }}
     description: xxx
-  VERSION_EXACT_CONDA:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_CONDA }}
+  VERSION_OF_CONDA:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_CONDA }}
     description: xxx
-  VERSION_EXACT_GETTEXT:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_GETTEXT }}
+  VERSION_OF_GETTEXT:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_GETTEXT }}
     description: xxx
-  VERSION_EXACT_CROWDIN:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_CROWDIN }}
+  VERSION_OF_CROWDIN:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_CROWDIN }}
     description: xxx
-  VERSION_EXACT_PYTHON:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PYTHON }}
+  VERSION_OF_PYTHON:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_PYTHON }}
     description: xxx
-  VERSION_EXACT_SPHINX:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_SPHINX }}
+  VERSION_OF_SPHINX:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_SPHINX }}
     description: xxx
-  VERSION_EXACT_DOXYGEN:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_DOXYGEN }}
+  VERSION_OF_DOXYGEN:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_DOXYGEN }}
     description: xxx
-  VERSION_EXACT_PROJ:
-    value: ${{ steps.gcvm.outputs.VERSION_EXACT_PROJ }}
+  VERSION_OF_PROJ:
+    value: ${{ steps.gcvm.outputs.VERSION_OF_PROJ }}
     description: xxx
 
 runs:
@@ -65,14 +65,14 @@ runs:
 
         CACHE_VERSIONS=(
           "VERSION_COMPENDIUM"
-          "VERSION_EXACT_GIT"
-          "VERSION_EXACT_CONDA"
-          "VERSION_EXACT_GETTEXT"
-          "VERSION_EXACT_CROWDIN"
-          "VERSION_EXACT_PYTHON"
-          "VERSION_EXACT_SPHINX"
-          "VERSION_EXACT_DOXYGEN"
-          "VERSION_EXACT_PROJ"
+          "VERSION_OF_GIT"
+          "VERSION_OF_CONDA"
+          "VERSION_OF_GETTEXT"
+          "VERSION_OF_CROWDIN"
+          "VERSION_OF_PYTHON"
+          "VERSION_OF_SPHINX"
+          "VERSION_OF_DOXYGEN"
+          "VERSION_OF_PROJ"
         )
 
         # Initialize all output variables with the default value

@@ -8,11 +8,11 @@ description: Configure the CMake preset
 inputs:
   source-directory:
     required: false
-    description: ''
+    description: 'Source directory of the CMake project.'
     default: '${{ github.workspace }}'
   preset:
     required: false
-    description: ''
+    description: 'CMake preset name.'
     default: 'all'
   cache-version:
     required: false
@@ -38,17 +38,21 @@ inputs:
     required: false
     description: 'Value passed to VERSION_COMPENDIUM cache.'
     default: '[default]'
-  cache-version-exact-python:
+  cache-version-of-python:
     required: false
-    description: 'Value passed to VERSION_EXACT_PYTHON cache.'
+    description: 'Value passed to VERSION_OF_PYTHON cache.'
     default: '[default]'
-  cache-version-exact-sphinx:
+  cache-version-of-sphinx:
     required: false
-    description: 'Value passed to VERSION_EXACT_SPHINX cache.'
+    description: 'Value passed to VERSION_OF_SPHINX cache.'
     default: '[default]'
-  cache-version-exact-proj:
+  cache-version-of-doxygen:
     required: false
-    description: 'Value passed to VERSION_EXACT_PROJ cache.'
+    description: 'Value passed to VERSION_OF_DOXYGEN cache.'
+    default: '[default]'
+  cache-version-of-proj:
+    required: false
+    description: 'Value passed to VERSION_OF_PROJ cache.'
     default: '[default]'
   cache-gettext-wrap-width:
     required: false

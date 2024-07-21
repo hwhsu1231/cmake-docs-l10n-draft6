@@ -21,17 +21,17 @@ outputs:
   VERSION_COMPENDIUM:
     value: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
     description: xxx
-  VERSION_EXACT_PYTHON:
-    value: ${{ steps.gocv.outputs.VERSION_EXACT_PYTHON }}
+  VERSION_OF_PYTHON:
+    value: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}
     description: xxx
-  VERSION_EXACT_SPHINX:
-    value: ${{ steps.gocv.outputs.VERSION_EXACT_SPHINX }}
+  VERSION_OF_SPHINX:
+    value: ${{ steps.gocv.outputs.VERSION_OF_SPHINX }}
     description: xxx
-  VERSION_EXACT_DOXYGEN:
-    value: ${{ steps.gocv.outputs.VERSION_EXACT_DOXYGEN }}
+  VERSION_OF_DOXYGEN:
+    value: ${{ steps.gocv.outputs.VERSION_OF_DOXYGEN }}
     description: xxx
-  VERSION_EXACT_PROJ:
-    value: ${{ steps.gocv.outputs.VERSION_EXACT_PROJ }}
+  VERSION_OF_PROJ:
+    value: ${{ steps.gocv.outputs.VERSION_OF_PROJ }}
     description: xxx
 
 runs:
@@ -44,32 +44,6 @@ runs:
         version: ${{ inputs.version }}
         versions-file: ${{ inputs.versions-file }}
         workspace: ${{ inputs.workspace }}
-      # shell: bash
-      # run: |
-      #   VERSION="${{ inputs.version }}"
-      #   VERSIONS_FILE=$(echo "${{ inputs.versions-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-      #   WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
-
-      #   cd ${WORKSPACE}
-
-      #   VERSION_GROUPS=($(jq -r 'keys[]' "${VERSIONS_FILE}" | tr -d '\r'))
-      #   FOUND_GROUP=""
-      #   for VERSION_GROUP in ${VERSION_GROUPS[@]}; do
-      #     FILTER="[.${VERSION_GROUP}[] | select(.VERSION == \"${VERSION}\")] | length"
-      #     IS_IN_GROUP=$(jq "${FILTER}" "${VERSIONS_FILE}" | tr -d '\r')
-      #     if [ "$IS_IN_GROUP" -gt 0 ]; then
-      #       FOUND_GROUP="${VERSION_GROUP}"
-      #       break
-      #     fi
-      #   done
-
-      #   if [ -n "${FOUND_GROUP}" ]; then
-      #     echo "${VERSION} is in ${FOUND_GROUP}"
-      #   else
-      #     echo "${VERSION} is not found in any group"
-      #   fi
-
-      #   echo "VERSION_GROUP=${FOUND_GROUP}" >> ${GITHUB_OUTPUT}
 
     - name: Get Other Caches from versions.json
       id: gocv
@@ -84,10 +58,10 @@ runs:
 
         CACHE_VERSIONS=(
           "VERSION_COMPENDIUM"
-          "VERSION_EXACT_PYTHON"
-          "VERSION_EXACT_SPHINX"
-          "VERSION_EXACT_DOXYGEN"
-          "VERSION_EXACT_PROJ"
+          "VERSION_OF_PYTHON"
+          "VERSION_OF_SPHINX"
+          "VERSION_OF_DOXYGEN"
+          "VERSION_OF_PROJ"
         )
 
         # Initialize all output variables with the default value

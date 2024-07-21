@@ -100,10 +100,10 @@ jobs:
           cache-update-mode: ${{ inputs.UPDATE_MODE }}
           cache-auto-depend: 'OFF'
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
-          cache-version-exact-python: ${{ steps.gocv.outputs.VERSION_EXACT_PYTHON }}
-          cache-version-exact-sphinx: ${{ steps.gocv.outputs.VERSION_EXACT_SPHINX }}
-          cache-version-exact-doxygen: ${{ steps.gocv.outputs.VERSION_EXACT_DOXYGEN }}
-          cache-version-exact-proj: ${{ steps.gocv.outputs.VERSION_EXACT_PROJ }}
+          cache-version-of-python: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}
+          cache-version-of-sphinx: ${{ steps.gocv.outputs.VERSION_OF_SPHINX }}
+          cache-version-of-doxygen: ${{ steps.gocv.outputs.VERSION_OF_DOXYGEN }}
+          cache-version-of-proj: ${{ steps.gocv.outputs.VERSION_OF_PROJ }}
 
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target

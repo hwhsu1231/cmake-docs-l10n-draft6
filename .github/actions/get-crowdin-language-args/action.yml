@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: set-crowdin-language-args
+name: get-crowdin-language-args
 
 description: Set the Crowdin Language Arguments
 
