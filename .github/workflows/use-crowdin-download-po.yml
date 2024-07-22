@@ -121,6 +121,8 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           target: 'crowdin_download_po'
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Get the Crowdin Status Progress of the '${{ inputs.VERSION }}' branch
         id: gtpp
