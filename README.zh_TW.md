@@ -10,7 +10,7 @@
 </div>
 
 <h1 id="localization-of-cmake-documentation">
-Localization of CMake Documentation
+CMake 文件的在地化
 </h1>
 
 <details><summary><strong>Switch Languages</strong></summary>
@@ -28,24 +28,24 @@ Localization of CMake Documentation
 Table of Contents
 </h2>
 
-- <a href="#introduction">Introduction</a>
-- <a href="#progress-of-translations">Progress of Translations</a>
-- <a href="#preview-translations">Preview Translations</a>
-  - <a href="#preview-in-local-build">Preview in Local Build</a>
-  - <a href="#preview-in-gh-pages">Preview in GitHub Pages</a>
-- <a href="#licenses">Licenses</a>
+- <a href="#introduction">介紹</a>
+- <a href="#progress-of-translations">翻譯進度</a>
+- <a href="#preview-translations">預覽翻譯</a>
+  - <a href="#preview-in-local-build">在本機中預覽</a>
+  - <a href="#preview-in-gh-pages">在 GitHub 頁面中預覽</a>
+- <a href="#licenses">授權條款</a>
 - <a href="#translation-disclaimer">Translation Disclaimer</a>
-- <a href="#about-author">Maintainers List</a>
-- <a href="#support-this-project">Support This Project</a>
-- <a href="#sponsorship">Sponsorship</a>
-- <a href="#contributors-list">Contributors List</a>
-  - <a href="#code-contributors">Code Contributors</a>
-  - <a href="#translation-contributors">Translation Contributors</a>
-  - <a href="#financial-contributors">Financial Contributors</a>
+- <a href="#about-author">維護者列表</a>
+- <a href="#support-this-project">支援這個專案</a>
+- <a href="#sponsorship">贊助</a>
+- <a href="#contributors-list">貢獻者列表</a>
+  - <a href="#code-contributors">程式碼貢獻者</a>
+  - <a href="#translation-contributors">翻譯貢獻者</a>
+  - <a href="#financial-contributors">財務貢獻者</a>
 - <a href="#acknowledgements">Acknowledgements</a>
 
 <h2 id="introduction"><a href="#table-of-contents">
-Introduction
+介紹
 </a></h2>
 
 <div align="center">
@@ -65,9 +65,9 @@ This is a localization project for CMake Documentation.
 
 The translations are contributed in Crowdin Project and downloaded automatically in Git Repository.
 
-Crowdin Project: https://org-test.crowdin.com/cmake-docs
+Crowdin 專案：https://org-test.crowdin.com/cmake-docs
 
-Git Repository:
+Git 儲存庫：
 
 - GitHub (main): https://github.com/hwhsu1231/cmake-docs-l10n
 - GitLab (mirror): https://gitlab.com/hwhsu1231/cmake-docs-l10n
@@ -168,15 +168,15 @@ GitHub Worflows:
 </table>
 
 <h2 id="progress-of-translations"><a href="#table-of-contents">
-Progress of Translations
+翻譯進度
 </a></h2>
 
 <table align="center">
   <thead>
     <tr>
-      <th>Language<br />Code</th>
-      <th>Language Name<br />Localized Name</th>
-      <th>Translated<br />Proofread</th>
+      <th>語言<br />代碼</th>
+      <th>語言名稱<br />在地化名稱</th>
+      <th>已翻譯<br />已校對</th>
     </tr>
   </thead>
   <tbody>
@@ -224,7 +224,7 @@ Progress of Translations
 </div>
 
 <h2 id="preview-translations"><a href="#table-of-contents">
-Preview Translations
+預覽翻譯
 </a></h2>
 
 <h3 id="preview-in-local-build"><a href="#table-of-contents">
@@ -265,7 +265,7 @@ You can preview translations in GitHub Pages:
 You can switch to other available versions by version switcher.
 
 <h2 id="licenses"><a href="#table-of-contents">
-Licenses
+授權條款
 </a></h2>
 
 All the script files (<code>CMakeLists.txt</code> and <code>.cmake</code> files) and workflow files (<code>.yml</code> files inside <code>.github/workflows/</code> directory) of this project are distributed under <a href="https://opensource.org/license/bsd-3-clause/">3-Clause BSD</a> license. See <a href="./LICENSE">LICENSE</a> for details.
@@ -279,7 +279,7 @@ Translation Disclaimer
 Translators who contribute to this project will never make use of the copyright on his or her translations, will never forbid copying them, and will never ask for some kind of compensation. Everyone will always be allowed to freely use, modify, and distribute these translations.
 
 <h2 id="about-author"><a href="#table-of-contents">
-Maintainers List
+維護者列表
 </a></h2>
 
 This project is created and currently maintained by the author, Haowei Hsu.
@@ -342,7 +342,7 @@ This project is created and currently maintained by the author, Haowei Hsu.
 </table>
 
 <h2 id="support-this-project"><a href="#table-of-contents">
-Support this Project
+支援這個專案
 </a></h2>
 
 You can contribute and support this project by doing any of the following:
@@ -416,10 +416,10 @@ Alternatively, you can sponsor the author through the following platforms and e-
     <!-- Row 5 -->
     <tr>
       <th colspan="1" style="text-align: center; vertical-align: middle; width: 50%;">
-        <a href="https://global.alipay.com/" target="_blank">Alipay</a>
+        <a href="https://global.alipay.com/" target="_blank">支付寶</a>
       </th>
       <th colspan="1" style="text-align: center; vertical-align: middle; width: 50%;">
-        <a href="https://www.jkopay.com/" target="_blank">Jkopay</a>
+        <a href="https://www.jkopay.com/" target="_blank">街口支付</a>
       </th>
     </tr>
     <!-- Row 6 -->
@@ -443,19 +443,19 @@ Contributors List
 </a></h2>
 
 <h3 id="code-contributors"><a href="#table-of-contents">
-Code Contributors
+程式碼貢獻者
 </a></h3>
 
 <img alt="GitHub Contributors SVG" src="https://contrib.nn.ci/api?repo=hwhsu1231/cmake-docs-l10n-draft2&no_bot=true">
 
 <h3 id="translation-contributors"><a href="#table-of-contents">
-Translation Contributors
+翻譯貢獻者
 </a></h3>
 
 See <a href="./docs/CROWDIN_CONTRIBUTORS.md">CROWDIN_CONTRIBUTORS</a>.
 
 <h3 id="financial-contributors"><a href="#table-of-contents">
-Financial Contributors
+財務貢獻者
 </a></h3>
 
 TODO: Provided by <a href="https://github.com/antfu/sponsorkit">sponsorkit</a>.
