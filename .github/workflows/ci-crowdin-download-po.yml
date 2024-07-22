@@ -5,8 +5,7 @@ name: ci-crowdin-download-po
 
 on:
   schedule:
-    - cron: '0 0  1 * *'  # Runs at 00:00 on day  1 of the month in UTC zone
-    - cron: '0 0 15 * *'  # Runs at 00:00 on day 15 of the month in UTC zone
+    - cron: '0 0 1,15 * *'  # Runs at 00:00 on day 1 and 15 of the month in UTC zone
   workflow_dispatch:
     inputs:
       TYPE:
@@ -43,6 +42,9 @@ on:
         default: 'include'
         options:
           - 'v3'
+
+env:
+  CRON_V3: '0 0 1,15 * *'
 
 jobs:
   get-matrix:

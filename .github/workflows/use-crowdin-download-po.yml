@@ -165,7 +165,7 @@ jobs:
           message: |
             tr(${{ inputs.VERSION }}): Download ${{ inputs.LANGUAGE }} Translations from Crowdin
 
-            ${{ steps.gtpp.outputs.PROGRESS_OUTPUT }}
+            ${{ steps.gtpp.outputs.CROWDIN_STATUS_PROGRESS }}
 
             Created by GitHub Workflows:
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
