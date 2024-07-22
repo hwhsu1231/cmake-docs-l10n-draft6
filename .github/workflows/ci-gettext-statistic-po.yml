@@ -21,11 +21,13 @@ on:
         required: true
         type: string
         default: 'git-master'
-      MATRIX_GROUP:
-        description: 'Set MATRIX_GROUP input (for single type)'
+      VERSION_GROUP:
+        description: 'Set VERSION_GROUP input (for matrix type)'
         required: true
-        type: string
+        type: choice
         default: 'include'
+        options:
+          - 'v3'
 
 jobs:
   get-matrix:
@@ -33,18 +35,35 @@ jobs:
         ( github.event_name == 'schedule' )
     runs-on: ubuntu-latest
     outputs:
-      VERSION_LIST: ${{ steps.rvm.outputs.VERSION_LIST }}
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
     steps:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Get VERSION_LIST from versions.json
-        id: rvm
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
         run: |
-          MATRIX="versions.json"
-          FILTER=".v3 | map(.VERSION)"
-          VERSION_LIST=$(jq -c "${FILTER}" ${MATRIX})
+          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
+          GITHUB_EVENT_NAME=${{ github.event_name }}
+          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
+          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
+            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          elif [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+            if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
+              VERSION_GROUP=v3
+            fi
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
+      - name: Get VERSION_LIST from versions.json
+        id: gvl
+        shell: bash
+        run: |
+          VERSION_GROUP=${{ steps.gvg.outputs.VERSION_GROUP }}
+          JQ_FILE="versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(.VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
           echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
           echo "VERSION_LIST:"
           echo "${VERSION_LIST}" | jq "."
