@@ -85,7 +85,7 @@ set(GIT_L10N_REMOTE_URL "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git
 set(GIT_DOCS_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
     CACHE STRING "Remote URL of the docs Git repository.")
 
-set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft5"
+set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft6"
     CACHE STRING "Base URL of the deployed documentation.")
 
 #[============================[
@@ -235,8 +235,12 @@ if(EXISTS "${PROJ_L10N_DIR}/.git")
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
+    message("")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} show --no-patch --format=%s
+        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=%s
+        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=short
+        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=medium
+        COMMAND ${Git_EXECUTABLE} show --no-patch --format=full
         WORKING_DIRECTORY ${PROJ_L10N_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
@@ -633,12 +637,12 @@ endif()
 #     IN_REPOSITORY   "torchdistx;torchvision"
 #     )
 
-find_package(Sphinx)
-execute_process(
-    COMMAND ${Sphinx_BUILD_EXECUTABLE} --version
-    RESULT_VARIABLE _Sphinx_VERSION_RESULT
-    OUTPUT_VARIABLE _Sphinx_VERSION_OUTPUT  OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  _Sphinx_VERSION_ERROR   ERROR_STRIP_TRAILING_WHITESPACE)
-message(STATUS "_Sphinx_VERSION_RESULT = ${_Sphinx_VERSION_RESULT}")
-message(STATUS "_Sphinx_VERSION_OUTPUT = ${_Sphinx_VERSION_OUTPUT}")
-message(STATUS "_Sphinx_VERSION_ERROR  = ${_Sphinx_VERSION_ERROR}")
+# find_package(Sphinx)
+# execute_process(
+#     COMMAND ${Sphinx_BUILD_EXECUTABLE} --version
+#     RESULT_VARIABLE _Sphinx_VERSION_RESULT
+#     OUTPUT_VARIABLE _Sphinx_VERSION_OUTPUT  OUTPUT_STRIP_TRAILING_WHITESPACE
+#     ERROR_VARIABLE  _Sphinx_VERSION_ERROR   ERROR_STRIP_TRAILING_WHITESPACE)
+# message(STATUS "_Sphinx_VERSION_RESULT = ${_Sphinx_VERSION_RESULT}")
+# message(STATUS "_Sphinx_VERSION_OUTPUT = ${_Sphinx_VERSION_OUTPUT}")
+# message(STATUS "_Sphinx_VERSION_ERROR  = ${_Sphinx_VERSION_ERROR}")
