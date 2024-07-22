@@ -123,7 +123,7 @@ jobs:
           crowdin-no-progress: 'true'
           crowdin-verbose: 'true'
 
-      - name: Get the Translated/Proofread Progress of the '${{ inputs.VERSION }}' branch from Crowdin
+      - name: Get the Crowdin Status Progress of the '${{ inputs.VERSION }}' branch
         id: gtpp
         if: inputs.VERSION == 'repo'
         uses: ./.github/actions/get-crowdin-status-progress
