@@ -71,10 +71,10 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Set up Environment Variables
-        shell: bash
-        run: |
-          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
+      # - name: Set up Environment Variables
+      #   shell: bash
+      #   run: |
+      #     echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Get Other Caches from versions.json
         id: gocv
@@ -122,7 +122,7 @@ jobs:
           preset: ${{ inputs.LANGUAGE }}
           target: 'crowdin_download_po'
 
-      - name: Get the Translated/Proofread Progress from Crowdin
+      - name: Get the Crowdin Status Progress of the '${{ inputs.VERSION }}' branch
         id: gtpp
         uses: ./.github/actions/get-crowdin-status-progress
         with:
