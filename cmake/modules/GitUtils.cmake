@@ -364,7 +364,6 @@ function(get_git_latest_tag_on_tag_pattern)
                 --tags 
                 --sort=-v:refname
                 ${GGLTTP_REPO_SOURCE}
-                ${GGLTTP_IN_TAG_PATTERN}
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -394,6 +393,7 @@ function(get_git_latest_tag_on_tag_pattern)
         string(REGEX REPLACE "^[a-f0-9]+\trefs/tags/(.*)" "\\1" TAG_NAME "${TAG_LINE}")
         list(APPEND TAG_LIST ${TAG_NAME})
     endforeach()
+    list(FILTER TAG_LIST INCLUDE REGEX "${GGLTTP_IN_TAG_PATTERN}")
     #
     # Get the list of release tags. For example, v3.25.2.
     # Get the list of candidate release tags. For example, v3.25.0-rc2.
