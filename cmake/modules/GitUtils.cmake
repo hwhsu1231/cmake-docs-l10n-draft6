@@ -394,6 +394,8 @@ function(get_git_latest_tag_on_tag_pattern)
         list(APPEND TAG_LIST ${TAG_NAME})
     endforeach()
     list(FILTER TAG_LIST INCLUDE REGEX "${GGLTTP_IN_TAG_PATTERN}")
+    list(SORT TAG_LIST COMPARE "NATURAL" ORDER "DESCENDING")
+    list(GET TAG_LIST 0 LATEST_TAG)
 #[[
     #
     # Get the list of release tags. For example, v3.25.2.
@@ -445,8 +447,6 @@ function(get_git_latest_tag_on_tag_pattern)
         message(FATAL_ERROR "There is no available tag on IN_TAG_PATTERN. (${GGLTTP_IN_TAG_PATTERN})")
     endif()
 #]]
-    list(SORT TAG_LIST COMPARE "NATURAL" ORDER "DESCENDING")
-    list(GET TAG_LIST 0 LATEST_TAG)
     #
     # Return the ${LATEST_TAG} on OUT_TAG.
     #
