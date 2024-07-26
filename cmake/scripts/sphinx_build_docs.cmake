@@ -60,13 +60,13 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
     execute_process(
         COMMAND ${Sphinx_BUILD_EXECUTABLE}
                 -b ${SPHINX_BUILDER}
-                -D locale_dirs=${LOCALE_TO_SOURCE_DIR}            # Relative to <sourcedir>
+                -D locale_dirs=${LOCALE_TO_SOURCE_DIR}            # Relative to <sourcedir>.
                 -D language=${_LANGUAGE}
                 -D gettext_compact=0
                 -D gettext_additional_targets=${GETTEXT_ADDITIONAL_TARGETS}
                 -A versionswitch=1
                 -j ${SPHINX_JOB_NUMBER}
-                -v
+                ${SPHINX_VERBOSE_ARGS}
                 -c ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}               # <configdir>, where conf.py locates.
                 ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                  # <sourcedir>, where index.rst locates.
                 ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}   # <outputdir>, where .html generates.

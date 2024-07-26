@@ -92,72 +92,72 @@
     },
     {
       "VERSION" : "v3.13",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.12",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.11",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.10",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.9",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.8",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.7",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.6",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.5",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.4",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.3",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.2",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.1",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     },
     {
       "VERSION" : "v3.0",
-      "VERSION_COMPENDIUM" : "git-master",
+      "VERSION_COMPENDIUM" : "v3.13",
       "VERSION_OF_PYTHON" : "3.10"
     }
   ]

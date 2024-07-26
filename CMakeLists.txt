@@ -39,11 +39,11 @@ set(REMOVE_REDUNDANT ON
 set(VERSION_COMPENDIUM "git-master"
     CACHE STRING "Version of compendium that the current version merges translations from.")
 
-set(VERSION_OF_PYTHON "3.10"
-    CACHE STRING "Exact version for calling find_package(Python).")
+set(VERSION_OF_PYTHON ""
+    CACHE STRING "Python version to install.")
 
 set(VERSION_OF_SPHINX ""
-    CACHE STRING "Exact version for calling find_package(Sphinx).")
+    CACHE STRING "Sphinx version to install.")
 
 set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
     CACHE STRING "Locale setting for the console.")
@@ -155,10 +155,11 @@ if (VERSION MATCHES     "^git-master$")
     set(BRANCH_NAME     "master")
 elseif(VERSION MATCHES  "^latest$")
     set(VERSION_TYPE    "tag")
-    set(TAG_PATTERN     "v3.*")
+    set(TAG_PATTERN     "v([0-9]+)\\.([0-9]+)\\.([0-9]+)")
 elseif(VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
     set(VERSION_TYPE    "tag")
-    set(TAG_PATTERN     "${VERSION}.*")
+    string(REGEX REPLACE "\\." "\\\\." VERSION_ESCAPED "${VERSION}")
+    set(TAG_PATTERN     "${VERSION_ESCAPED}\\.([0-9]+)")
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
 endif()
@@ -199,6 +200,24 @@ endif()
 if (NOT INSTALL_MODE STREQUAL "COMPARE" AND 
     NOT INSTALL_MODE STREQUAL "ALWAYS")
     message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
+endif()
+
+#[======================================================[
+  Set SPHINX_VERBOSE_ARGS based on SPHINX_VERBOSE_LEVEL.
+#]======================================================]
+
+if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
+    set(SPHINX_VERBOSE_LEVEL 0)
+endif()
+set(SPHINX_VERBOSE_ARGS "")
+if(SPHINX_VERBOSE_LEVEL GREATER 0)
+    set(SPHINX_VERBOSE_ARGS "-")
+    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+    foreach(INDEX RANGE ${REPEAT_COUNT})
+        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+    endforeach()
+    unset(INDEX)
+    unset(REPEAT_COUNT)
 endif()
 
 #[====================[
@@ -421,6 +440,7 @@ message(STATUS "LANGUAGES_LIST                = ${LANGUAGES_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
 message(STATUS "TAG_PATTERN                   = ${TAG_PATTERN}")
+message(STATUS "SPHINX_VERBOSE_ARGS           = ${SPHINX_VERBOSE_ARGS}")
 message(STATUS "FIND_PACKAGE_GIT_ARGS         = ${FIND_PACKAGE_GIT_ARGS}")
 message(STATUS "FIND_PACKAGE_CONDA_ARGS       = ${FIND_PACKAGE_CONDA_ARGS}")
 message(STATUS "FIND_PACKAGE_PYTHON_ARGS      = ${FIND_PACKAGE_PYTHON_ARGS}")
@@ -509,6 +529,7 @@ set(SCRIPT_MODE_CACHE
     -D VERSION_TYPE=${VERSION_TYPE}
     -D BRANCH_NAME=${BRANCH_NAME}
     -D TAG_PATTERN=${TAG_PATTERN}
+    -D SPHINX_VERBOSE_ARGS=${SPHINX_VERBOSE_ARGS}
     -D FIND_PACKAGE_GIT_ARGS=${FIND_PACKAGE_GIT_ARGS}
     -D FIND_PACKAGE_CONDA_ARGS=${FIND_PACKAGE_CONDA_ARGS}
     -D FIND_PACKAGE_PYTHON_ARGS=${FIND_PACKAGE_PYTHON_ARGS}
@@ -646,3 +667,52 @@ endif()
 # message(STATUS "_Sphinx_VERSION_RESULT = ${_Sphinx_VERSION_RESULT}")
 # message(STATUS "_Sphinx_VERSION_OUTPUT = ${_Sphinx_VERSION_OUTPUT}")
 # message(STATUS "_Sphinx_VERSION_ERROR  = ${_Sphinx_VERSION_ERROR}")
+
+
+set(SPHINX_VERBOSE_LEVEL "3")
+# Set the default value for SPHINX_VERBOSE_LEVEL if not set
+if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
+    set(SPHINX_VERBOSE_LEVEL 0)
+endif()
+set(SPHINX_VERBOSE_ARGS "")
+if(SPHINX_VERBOSE_LEVEL GREATER 0)
+    set(SPHINX_VERBOSE_ARGS "-")
+    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+    foreach(INDEX RANGE ${REPEAT_COUNT})
+        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+    endforeach()
+    unset(INDEX)
+    unset(REPEAT_COUNT)
+endif()
+message(STATUS "SPHINX_VERBOSE_ARGS = ${SPHINX_VERBOSE_ARGS}")
+
+
+# set(SPHINX_VERBOSE_LEVEL "2")
+# message(STATUS "SPHINX_VERBOSE_LEVEL = ${SPHINX_VERBOSE_LEVEL}")
+# # Set the default value for SPHINX_VERBOSE_LEVEL if not set
+# if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
+#     set(SPHINX_VERBOSE_LEVEL 0)
+# endif()
+# message(STATUS "SPHINX_VERBOSE_LEVEL = ${SPHINX_VERBOSE_LEVEL}")
+# # Function to generate verbosity flags for sphinx-build
+# function(get_sphinx_verbose_flags verbose_level output_var)
+#     message(STATUS "verbose_level = ${verbose_level}")
+#     if(verbose_level GREATER 0)
+#         set(verbose_flags "-")
+#         math(EXPR repeat_count "${verbose_level} - 1")
+#         foreach(i RANGE ${repeat_count})
+#             set(verbose_flags "${verbose_flags}v")
+#         endforeach()
+#         set(${output_var} "${verbose_flags}" PARENT_SCOPE)
+#     else()
+#         set(${output_var} "" PARENT_SCOPE)
+#     endif()
+# endfunction()
+# get_sphinx_verbose_flags(${SPHINX_VERBOSE_LEVEL} SPHINX_VERBOSE_ARGS)
+# message(STATUS "SPHINX_VERBOSE_ARGS = ${SPHINX_VERBOSE_ARGS}")
+
+# set(TAG_LIST "v3.30.1;v3.30.0-rc4;v3.30.0-rc3;v3.30.0-rc2;v3.30.0-rc1;v3.30.0;v3.29.7;v3.29.6;v3.29.5;v3.29.4;v3.29.3;v3.29.2;v3.29.1;v3.29.0-rc4;v3.29.0-rc3;v3.29.0-rc2;v3.29.0-rc1;v3.29.0;v3.28.6;v3.28.5;v3.28.4;v3.28.3;v3.28.2;v3.28.1;v3.28.0-rc6;v3.28.0-rc5;v3.28.0-rc4;v3.28.0-rc3;v3.28.0-rc2;v3.28.0-rc1;v3.28.0;v3.27.9;v3.27.8;v3.27.7;v3.27.6;v3.27.5;v3.27.4;v3.27.3;v3.27.2;v3.27.1;v3.27.0-rc5;v3.27.0-rc4;v3.27.0-rc3;v3.27.0-rc2;v3.27.0-rc1;v3.27.0;v3.26.6;v3.26.5;v3.26.4;v3.26.3;v3.26.2;v3.26.1;v3.26.0-rc6;v3.26.0-rc5;v3.26.0-rc4;v3.26.0-rc3;v3.26.0-rc2;v3.26.0-rc1;v3.26.0;v3.25.3;v3.25.2;v3.25.1;v3.25.0-rc4;v3.25.0-rc3;v3.25.0-rc2;v3.25.0-rc1;v3.25.0;v3.24.4;v3.24.3;v3.24.2;v3.24.1;v3.24.0-rc5;v3.24.0-rc4;v3.24.0-rc3;v3.24.0-rc2;v3.24.0-rc1;v3.24.0;v3.23.5;v3.23.4;v3.23.3;v3.23.2;v3.23.1;v3.23.0-rc5;v3.23.0-rc4;v3.23.0-rc3;v3.23.0-rc2;v3.23.0-rc1;v3.23.0;v3.22.6;v3.22.5;v3.22.4;v3.22.3;v3.22.2;v3.22.1;v3.22.0-rc3;v3.22.0-rc2;v3.22.0-rc1;v3.22.0;v3.21.7;v3.21.6;v3.21.5;v3.21.4;v3.21.3;v3.21.2;v3.21.1;v3.21.0-rc3;v3.21.0-rc2;v3.21.0-rc1;v3.21.0;v3.20.6;v3.20.5;v3.20.4;v3.20.3;v3.20.2;v3.20.1;v3.20.0-rc5;v3.20.0-rc4;v3.20.0-rc3;v3.20.0-rc2;v3.20.0-rc1;v3.20.0;v3.19.8;v3.19.7;v3.19.6;v3.19.5;v3.19.4;v3.19.3;v3.19.2;v3.19.1;v3.19.0-rc3;v3.19.0-rc2;v3.19.0-rc1;v3.19.0;v3.18.6;v3.18.5;v3.18.4;v3.18.3;v3.18.2;v3.18.1;v3.18.0-rc4;v3.18.0-rc3;v3.18.0-rc2;v3.18.0-rc1;v3.18.0;v3.17.5;v3.17.4;v3.17.3;v3.17.2;v3.17.1;v3.17.0-rc3;v3.17.0-rc2;v3.17.0-rc1;v3.17.0;v3.16.9;v3.16.8;v3.16.7;v3.16.6;v3.16.5;v3.16.4;v3.16.3;v3.16.2;v3.16.1;v3.16.0-rc4;v3.16.0-rc3;v3.16.0-rc2;v3.16.0-rc1;v3.16.0;v3.15.7;v3.15.6;v3.15.5;v3.15.4;v3.15.3;v3.15.2;v3.15.1;v3.15.0-rc4;v3.15.0-rc3;v3.15.0-rc2;v3.15.0-rc1;v3.15.0;v3.14.7;v3.14.6;v3.14.5;v3.14.4;v3.14.3;v3.14.2;v3.14.1;v3.14.0-rc4;v3.14.0-rc3;v3.14.0-rc2;v3.14.0-rc1;v3.14.0;v3.13.5;v3.13.4;v3.13.3;v3.13.2;v3.13.1;v3.13.0-rc3;v3.13.0-rc2;v3.13.0-rc1;v3.13.0;v3.12.4;v3.12.3;v3.12.2;v3.12.1;v3.12.0-rc3;v3.12.0-rc2;v3.12.0-rc1;v3.12.0;v3.11.4;v3.11.3;v3.11.2;v3.11.1;v3.11.0-rc4;v3.11.0-rc3;v3.11.0-rc2;v3.11.0-rc1;v3.11.0;v3.10.3;v3.10.2;v3.10.1;v3.10.0-rc5;v3.10.0-rc4;v3.10.0-rc3;v3.10.0-rc2;v3.10.0-rc1;v3.10.0;v3.9.6;v3.9.5;v3.9.4;v3.9.3;v3.9.2;v3.9.1;v3.9.0-rc6;v3.9.0-rc5;v3.9.0-rc4;v3.9.0-rc3;v3.9.0-rc2;v3.9.0-rc1;v3.9.0;v3.8.2;v3.8.1;v3.8.0-rc4;v3.8.0-rc3;v3.8.0-rc2;v3.8.0-rc1;v3.8.0;v3.7.2;v3.7.1;v3.7.0-rc3;v3.7.0-rc2;v3.7.0-rc1;v3.7.0;v3.6.3;v3.6.2;v3.6.1;v3.6.0-rc4;v3.6.0-rc3;v3.6.0-rc2;v3.6.0-rc1;v3.6.0;v3.5.2;v3.5.1;v3.5.0-rc3;v3.5.0-rc2;v3.5.0-rc1;v3.5.0;v3.4.3;v3.4.2;v3.4.1;v3.4.0-rc3;v3.4.0-rc2;v3.4.0-rc1;v3.4.0;v3.3.2;v3.3.1;v3.3.0-rc4;v3.3.0-rc3;v3.3.0-rc2;v3.3.0-rc1;v3.3.0;v3.2.3;v3.2.2;v3.2.1;v3.2.0-rc2;v3.2.0-rc1;v3.2.0;v3.1.3;v3.1.2;v3.1.1;v3.1.0-rc3;v3.1.0-rc2;v3.1.0-rc1;v3.1.0;v3.0.2;v3.0.1;v3.0.0-rc6;v3.0.0-rc5;v3.0.0-rc4;v3.0.0-rc3;v3.0.0-rc2;v3.0.0-rc1;v3.0.0;v2.8.12.2;v2.8.12.1;v2.8.12;v2.8.11.2;v2.8.11.1;v2.8.11;v2.8.10.2;v2.8.10.1;v2.8.10;v2.8.9;v2.8.8;v2.8.7;v2.8.6;v2.8.5;v2.8.4;v2.8.3;v2.8.2;v2.8.1;v2.8.0;v2.6.4;v2.6.3;v2.6.2;v2.6.1;v2.6.0;v2.4.8;v2.4.7;v2.4.6;v2.4.5;v2.4.4;v2.4.3;v2.4.2;v2.4.1;v2.4.0")
+# set(TAG_PATTERN "v3\\.2\\.")
+# message(STATUS "TAG_PATTERN = ${TAG_PATTERN}")
+# list(FILTER TAG_LIST INCLUDE REGEX "${TAG_PATTERN}")
+# message(STATUS "TAG_LIST = ${TAG_LIST}")

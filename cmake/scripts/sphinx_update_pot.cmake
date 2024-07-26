@@ -105,6 +105,7 @@ message("")
 restore_cmake_message_indent()
 
 
+#[[
 message(STATUS "Running 'git checkout -B' command to switch to the 'current' branch...")
 remove_cmake_message_indent()
 message("")
@@ -137,6 +138,35 @@ execute_process(
     COMMAND ${Git_EXECUTABLE} reset --hard
             FETCH_HEAD
     WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    COMMAND_ERROR_IS_FATAL ANY)
+message("")
+restore_cmake_message_indent()
+#]]
+message(STATUS "Switching to the '${CHECKOUT_REFERENCE}' reference on the 'current' branch...")
+remove_cmake_message_indent()
+message("")
+execute_process(
+    COMMAND ${Git_EXECUTABLE} checkout -B current
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    COMMAND_ERROR_IS_FATAL ANY)
+message("")
+execute_process(
+    COMMAND ${Git_EXECUTABLE} fetch origin
+            ${CHECKOUT_REFERENCE}
+            --depth=1
+            --verbose
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    COMMAND_ERROR_IS_FATAL ANY)
+message("")
+execute_process(
+    COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     COMMAND_ERROR_IS_FATAL ANY)
@@ -186,12 +216,14 @@ message("")
 execute_process(
     COMMAND ${Sphinx_BUILD_EXECUTABLE}
             -b gettext
-            -D version=${VERSION}                               # Specify 'Project-Id-Version' in .pot files
+            -D version=${VERSION}                               # Specify 'Project-Id-Version' in .pot files.
             -D gettext_compact=0
             -D gettext_additional_targets=${GETTEXT_ADDITIONAL_TARGETS}
-            -c ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}                 # <configdir>, where conf.py locates
-            ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                    # <sourcedir>, where index.rst locates
-            ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES    # <outputdir>, where .pot generates
+            -j ${SPHINX_JOB_NUMBER}
+            ${SPHINX_VERBOSE_ARGS}
+            -c ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}                 # <configdir>, where conf.py locates.
+            ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                    # <sourcedir>, where index.rst locates.
+            ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES    # <outputdir>, where .pot generates.
     ECHO_OUTPUT_VARIABLE
     RESULT_VARIABLE RES_VAR
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
