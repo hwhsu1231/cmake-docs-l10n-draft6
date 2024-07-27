@@ -94,48 +94,11 @@ message("")
 restore_cmake_message_indent()
 
 
-#[[
-message(STATUS "Running 'git checkout -B' command to checkout/reset to the 'current' branch...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} checkout -B current
-    WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-restore_cmake_message_indent()
-message(STATUS "Running 'git fetch' command to fetch the '${CHECKOUT_REFERENCE}' commit to FETCH_HEAD...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} fetch origin
-            ${CHECKOUT_REFERENCE}
-            --depth=1
-            --verbose
-    WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-restore_cmake_message_indent()
-message(STATUS "Running 'git reset --hard' command to reset the 'current' branch from FETCH_HEAD...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
-    WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-restore_cmake_message_indent()
-#]]
 message(STATUS "Switching to the '${CHECKOUT_REFERENCE}' reference on the 'current' branch...")
 remove_cmake_message_indent()
 message("")
 execute_process(
+    # Run 'git checkout -B' command to checkout/reset to the 'current' branch.
     COMMAND ${Git_EXECUTABLE} checkout -B current
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
@@ -143,6 +106,7 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 execute_process(
+    # Run 'git fetch' command to fetch the '${CHECKOUT_REFERENCE}' commit to FETCH_HEAD.
     COMMAND ${Git_EXECUTABLE} fetch origin
             ${CHECKOUT_REFERENCE}
             --depth=1
@@ -153,6 +117,7 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 execute_process(
+    # Run 'git reset --hard' command to reset the 'current' branch from FETCH_HEAD.
     COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
@@ -162,7 +127,13 @@ message("")
 restore_cmake_message_indent()
 
 
-#[[
+#[======================================================================[
+1. Determining whether to (re)create the virtual environment.
+2. Run 'conda create' command to (re)create the virtual environemnt.
+3. Create 'pyvenv.cfg' in the virtual environment.
+#]======================================================================]
+
+
 message(STATUS "Determining whether to (re)create the virtual environment...")
 set(REQUIRED_PYTHON_VERSION "${VERSION_OF_PYTHON}")
 set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
@@ -198,26 +169,22 @@ message("PREVIOUS_IS_REQUIRED     = ${PREVIOUS_IS_REQUIRED}")
 message("RECREATE_VENV_REQUIRED   = ${RECREATE_VENV_REQUIRED}")
 message("")
 restore_cmake_message_indent()
-
-
 if(RECREATE_VENV_REQUIRED)
     message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
     remove_cmake_message_indent()
     message("")
     execute_process(
         COMMAND ${Conda_EXECUTABLE} create
+                --prefix ${PROJ_VENV_DIR}
                 --channel conda-forge
-                --prefix ${PROJ_VENV_DIR} -y
+                --yes
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
-        if(NOT ERR_VAR)
-            # message("The virtual environment is installed in:")
-            # message("${PROJ_VENV_DIR}")
-        else()
+        if(ERR_VAR)
             message("")
             message("---------- RES ----------")
             message("")
@@ -249,9 +216,31 @@ if(RECREATE_VENV_REQUIRED)
     endif()
     message("")
     restore_cmake_message_indent()
-else()
-    message(STATUS "No need to recreate the virtual environment.")
+    message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
+    set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
+    if(NOT EXISTS "${PYVENV_CFG_PATH}")
+        file(WRITE "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+    else()
+        file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
+        if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
+            if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages[ ]*=[ ]*true")
+                string(REGEX REPLACE 
+                    "include-system-site-packages[ ]*=[ ]*true"
+                    "include-system-site-packages = false" 
+                    PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
+                file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
+            endif()
+        else()
+            file(APPEND "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+        endif()
+    endif()
 endif()
+
+
+#[[
+1. Determining whether to install the requirements.
+2. Run 'conda install' command to intall dependencies.
+3. Run 'pip install' command to install the requirements.
 #]]
 
 
@@ -281,64 +270,40 @@ message("PREVIOUS_REFERENCE = ${PREVIOUS_REFERENCE}")
 message("INSTALL_REQUIRED   = ${INSTALL_REQUIRED}")
 message("")
 restore_cmake_message_indent()
+
+
 if(NOT INSTALL_REQUIRED)
     message(STATUS "No need to install the requirements.")
     return()
-endif()
-
-
-#[[
-message(STATUS "Running 'conda remove' command to remove the previous packages...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Conda_EXECUTABLE} remove
-            --prefix ${PROJ_VENV_DIR}
-            --all
-            --keep-env
-            --yes
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-restore_cmake_message_indent()
-
-
-if(VERSION MATCHES "^git-master$")
-    set(VERSION_OF_SPHINX "6.2.1")
-elseif(VERSION MATCHES "^latest$")
-    set(VERSION_OF_SPHINX "6.2.1")
 else()
-    string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
-    if(VERSION_NO_V VERSION_LESS "3.9")
-        set(VERSION_OF_SPHINX "1.6.1")           # For v3.0~v3.8
-    elseif(VERSION_NO_V VERSION_LESS "3.19")
-        set(VERSION_OF_SPHINX "2.4.5")           # For v3.9~v3.18
-    elseif(VERSION_NO_V VERSION_LESS "3.28")
-        set(VERSION_OF_SPHINX "5.3.0")           # For v3.19~v3.27
+    message(STATUS "Running 'conda install' command to install dependencies...")
+    remove_cmake_message_indent()
+    message("")
+    execute_process(
+        COMMAND ${Conda_EXECUTABLE} install
+                python=${VERSION_OF_PYTHON}
+                --prefix ${PROJ_VENV_DIR}
+                --channel conda-forge
+                --yes
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+        if(ERR_VAR)
+            message("")
+            message("---------- RES ----------")
+            message("")
+            message("${RES_VAR}")
+            message("")
+            message("---------- ERR ----------")
+            message("")
+            message("${ERR_VAR}")
+            message("")
+            message("-------------------------")
+        endif()
     else()
-        set(VERSION_OF_SPHINX "6.2.1")           # For v3.28~
-    endif()
-endif()
-
-
-message(STATUS "Running 'conda install' command to install dependencies...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Conda_EXECUTABLE} install
-            python=${VERSION_OF_PYTHON}
-            sphinx=${VERSION_OF_SPHINX}
-            --channel conda-forge
-            --prefix ${PROJ_VENV_DIR}
-            --yes
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-if(RES_VAR EQUAL 0)
-    if(ERR_VAR)
         message("")
         message("---------- RES ----------")
         message("")
@@ -349,292 +314,85 @@ if(RES_VAR EQUAL 0)
         message("${ERR_VAR}")
         message("")
         message("-------------------------")
+        message("")
+        message(FATAL_ERROR "Fatal error occurred.")
     endif()
-else()
     message("")
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- OUT ----------")
-    message("")
-    message("${OUT_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
-endif()
-message("")
-restore_cmake_message_indent()
-# ]]
+    restore_cmake_message_indent()
 
 
-message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Conda_EXECUTABLE} create
-            --channel conda-forge
-            --prefix ${PROJ_VENV_DIR}
-            --yes
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-if(RES_VAR EQUAL 0)
-    if(ERR_VAR)
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
+    unset(Python_EXECUTABLE)
+    unset(_Python_EXECUTABLE CACHE)
+    set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
+    find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
+    execute_process(
+        COMMAND ${Python_EXECUTABLE} -c "import sys; print('\\n'.join(sys.path))"
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE)
+
+
+    if(VERSION MATCHES "^git-master$")
+        set(SPHINX_VERSION "6.2.1")
+    elseif(VERSION MATCHES "^latest$")
+        set(SPHINX_VERSION "6.2.1")
+    elseif(VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
+        string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
+        if(VERSION_NO_V VERSION_LESS "3.9")
+            # set(SPHINX_VERSION "1.6.1")    # For v3.0~v3.8
+            # set(SPHINX_VERSION "1.6.7")    # For v3.0~v3.8
+            set(SPHINX_VERSION "2.4.5")
+        elseif(VERSION_NO_V VERSION_LESS "3.19")
+            set(SPHINX_VERSION "2.4.5")    # For v3.9~v3.18
+        elseif(VERSION_NO_V VERSION_LESS "3.28")
+            set(SPHINX_VERSION "5.3.0")    # For v3.19~v3.27
+        else()
+            set(SPHINX_VERSION "6.2.1")    # For v3.28~
+        endif()
     endif()
-else()
+    set(REQUIREMENTS_PATH "${PROJ_SOURCE_DIR}/requirements/sphinx-${SPHINX_VERSION}.txt")
+    file(READ "${REQUIREMENTS_PATH}" REQUIREMENTS_CNT)
+    message(STATUS "The requirements.txt to install:")
+    remove_cmake_message_indent()
     message("")
-    message("---------- RES ----------")
+    message("${REQUIREMENTS_PATH}")
+    message("${REQUIREMENTS_CNT}")
     message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- OUT ----------")
-    message("")
-    message("${OUT_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
-endif()
-message("")
-restore_cmake_message_indent()
-#[[
-message(STATUS "Running 'conda remove' command to remove the previous packages...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Conda_EXECUTABLE} remove
-            --prefix ${PROJ_VENV_DIR}
-            --all
-            --keep-env
-            --yes
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-restore_cmake_message_indent()
-#]]
+    restore_cmake_message_indent()
 
 
-message(STATUS "Running 'conda install' command to install dependencies...")
-remove_cmake_message_indent()
-message("")
-execute_process(
-    COMMAND ${Conda_EXECUTABLE} install
-            python=${VERSION_OF_PYTHON}
-            --channel conda-forge
-            --prefix ${PROJ_VENV_DIR}
-            --yes
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-if(RES_VAR EQUAL 0)
-    if(ERR_VAR)
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-    endif()
-else()
+    message(STATUS "Running 'pip install' command to install the requirements...")
+    remove_cmake_message_indent()
     message("")
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
-endif()
-message("")
-restore_cmake_message_indent()
-
-
-unset(Python_EXECUTABLE)
-unset(_Python_EXECUTABLE CACHE)
-set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
-
-
-message(STATUS "Running 'pip install --upgrade' command to upgrade pip in the virtual environment...")
-remove_cmake_message_indent()
-message("")
-set(ENV{PYTHONNOUSERSITE} "1")
-execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip install pip
-            --upgrade
-            --progress-bar off
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-unset(ENV{PYTHONNOUSERSITE})
-if(RES_VAR EQUAL 0)
-    if(ERR_VAR)
-        # Success, but there might be some warnings.
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-    endif()
-else()
-    message("")
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred!")
-endif()
-message("")
-restore_cmake_message_indent()
-
-
-# if(EXISTS "${PREVIOUS_FREEZE_TXT_PATH}")
-#     message(STATUS "Running 'pip uninstall' command to uninstall the previous packages...")
-#     remove_cmake_message_indent()
-#     message("")
-#     set(ENV{PYTHONNOUSERSITE} "1")
-#     execute_process(
-#         COMMAND ${Python_EXECUTABLE} -m pip uninstall
-#                 --requirement ${PREVIOUS_FREEZE_TXT_PATH}
-#                 -y
-#         ECHO_OUTPUT_VARIABLE
-#         ECHO_ERROR_VARIABLE
-#         RESULT_VARIABLE RES_VAR
-#         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-#         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-#     unset(ENV{PYTHONNOUSERSITE})
-#     if(RES_VAR EQUAL 0)
-#         if(ERR_VAR)
-#             # Success, but there might be some warnings.
-#             message("")
-#             message("---------- RES ----------")
-#             message("")
-#             message("${RES_VAR}")
-#             message("")
-#             message("---------- ERR ----------")
-#             message("")
-#             message("${ERR_VAR}")
-#             message("")
-#             message("-------------------------")
-#         endif()
-#     else()
-#         message("---------- RES ----------")
-#         message("")
-#         message("${RES_VAR}")
-#         message("")
-#         message("---------- ERR ----------")
-#         message("")
-#         message("${ERR_VAR}")
-#         message("")
-#         message("-------------------------")
-#         message("")
-#         message(FATAL_ERROR "Fatal error occurred.")
-#     endif()
-#     message("")
-#     restore_cmake_message_indent()
-# endif()
-
-
-if(VERSION MATCHES "^git-master$")
-    set(SPHINX_VERSION "6.2.1")
-elseif(VERSION MATCHES "^latest$")
-    set(SPHINX_VERSION "6.2.1")
-elseif(VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
-    string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
-    if(VERSION_NO_V VERSION_LESS "3.9")
-        set(SPHINX_VERSION "1.6.1")    # For v3.0~v3.8
-    elseif(VERSION_NO_V VERSION_LESS "3.19")
-        set(SPHINX_VERSION "2.4.5")    # For v3.9~v3.18
-    elseif(VERSION_NO_V VERSION_LESS "3.28")
-        set(SPHINX_VERSION "5.3.0")    # For v3.19~v3.27
+    # if(CMAKE_HOST_WIN32)
+    #     set(ENV{PATH} "${PROJ_VENV_DIR}/Scripts;$ENV{PATH}")
+    # else()
+    #     set(ENV{PATH} "${PROJ_VENV_DIR}/bin:$ENV{PATH}")
+    # endif()
+    execute_process(
+        COMMAND ${Python_EXECUTABLE} -m pip install
+                --progress-bar off
+                --force-reinstall
+                --requirement ${REQUIREMENTS_PATH}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+        if(ERR_VAR)
+            # Success, but there might be some warnings.
+            message("")
+            message("---------- RES ----------")
+            message("")
+            message("${RES_VAR}")
+            message("")
+            message("---------- ERR ----------")
+            message("")
+            message("${ERR_VAR}")
+            message("")
+            message("-------------------------")
+        endif()
     else()
-        set(SPHINX_VERSION "6.2.1")    # For v3.28~
-    endif()
-endif()
-set(PIP_SPHINX_VERSION "sphinx==${SPHINX_VERSION}")
-
-
-set(REQUIREMENTS_PATH "${PROJ_SOURCE_DIR}/requirements/sphinx-${SPHINX_VERSION}.txt")
-file(READ "${REQUIREMENTS_PATH}" REQUIREMENTS_CNT)
-message(STATUS "The requirements.txt to install:")
-remove_cmake_message_indent()
-message("")
-message("${REQUIREMENTS_PATH}")
-message("${REQUIREMENTS_CNT}")
-message("")
-restore_cmake_message_indent()
-
-
-message(STATUS "Running 'pip install' command to install the requirements...")
-remove_cmake_message_indent()
-message("")
-set(ENV{PYTHONNOUSERSITE} "1")
-# if(CMAKE_HOST_WIN32)
-#     set(ENV{PATH} "${PROJ_VENV_DIR}/Scripts;$ENV{PATH}")
-# else()
-#     set(ENV{PATH} "${PROJ_VENV_DIR}/bin:$ENV{PATH}")
-# endif()
-execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip install
-            --progress-bar off
-            --force-reinstall
-            --requirement ${REQUIREMENTS_PATH}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-unset(ENV{PYTHONNOUSERSITE})
-if(RES_VAR EQUAL 0)
-    if(ERR_VAR)
-        # Success, but there might be some warnings.
-        message("")
         message("---------- RES ----------")
         message("")
         message("${RES_VAR}")
@@ -644,31 +402,25 @@ if(RES_VAR EQUAL 0)
         message("${ERR_VAR}")
         message("")
         message("-------------------------")
+        message("")
+        message(FATAL_ERROR "Fatal error occurred.")
     endif()
-else()
-    message("---------- RES ----------")
     message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
+    restore_cmake_message_indent()
+
+
+    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+    find_package(Sphinx   MODULE REQUIRED)
+
+
+    file(WRITE "${PREVIOUS_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
+    execute_process(
+        COMMAND ${Python_EXECUTABLE} -m pip freeze
+        OUTPUT_FILE "${PREVIOUS_FREEZE_TXT_PATH}")
+    # execute_process(
+    #     COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
+    #     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/environments.yml")
+    execute_process(
+        COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
+        OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")
 endif()
-message("")
-restore_cmake_message_indent()
-
-
-set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Sphinx   MODULE REQUIRED)
-
-
-file(WRITE "${PREVIOUS_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
-set(ENV{PYTHONNOUSERSITE} "1")
-execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip freeze
-    OUTPUT_FILE "${PREVIOUS_FREEZE_TXT_PATH}")
-unset(ENV{PYTHONNOUSERSITE})

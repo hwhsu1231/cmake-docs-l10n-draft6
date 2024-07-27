@@ -14,7 +14,7 @@ set(CMAKE_MODULE_PATH
 set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
 find_package(Git      MODULE ${FIND_PACKAGE_GIT_ARGS}     REQUIRED)
 find_package(Gettext  MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
-find_package(Sphinx   MODULE REQUIRED)
+find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
 include(JsonUtils)
 include(LogUtils)
 set(ENV{LANG} "${SPHINX_CONSOLE_LOCALE}")
