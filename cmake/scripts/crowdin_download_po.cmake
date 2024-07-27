@@ -11,8 +11,8 @@ message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 set(CMAKE_MODULE_PATH 
     "${PROJ_CMAKE_MODULES_DIR}"
     "${PROJ_CMAKE_MODULES_DIR}/common")
-find_package(Gettext MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
-find_package(Crowdin MODULE ${FIND_PACKAGE_CROWDIN_ARGS} REQUIRED)
+find_package(Gettext MODULE REQUIRED COMPONENTS Msgmerge)
+find_package(Crowdin MODULE REQUIRED)
 include(JsonUtils)
 include(LogUtils)
 
@@ -26,6 +26,7 @@ foreach(_LANGUAGE ${LANGUAGES_LIST})
         IN_JSON_OBJECT    "${LANGUAGES_JSON_CNT}"
         IN_DOT_NOTATION   ".${_LANGUAGE}.crowdin"
         OUT_JSON_VALUE    _LANGUAGE_CROWDIN)
+
 
     message(STATUS "Running 'crowdin download' command to download .po files for '${_LANGUAGE_CROWDIN}' language...")
     remove_cmake_message_indent()

@@ -223,17 +223,6 @@ endif()
   Check prerequisites.
 #]====================]
 
-set(FIND_PACKAGE_PYTHON_ARGS)
-if(VERSION_OF_PYTHON)
-    set(VERSION_OF_PYTHON_ARGS ${VERSION_OF_PYTHON} EXACT)
-else()
-    set(VERSION_OF_PYTHON_ARGS)
-endif()
-set(FIND_PACKAGE_PYTHON_ARGS
-    ${VERSION_OF_PYTHON_ARGS})
-
-
-
 find_package(Git      MODULE QUIET)
 find_package(Conda    MODULE QUIET)
 find_package(Gettext  MODULE QUIET)

@@ -18,7 +18,7 @@ include(JsonUtils)
 include(LogUtils)
 
 
-message(STATUS "Determining which reference to checkout...")
+message(STATUS "Determining which reference to switch to...")
 file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
 get_json_value_by_dot_notation(
     IN_JSON_OBJECT      "${REFERENCES_JSON_CNT}"
@@ -67,17 +67,17 @@ else()
 endif()
 if(UPDATE_MODE STREQUAL "COMPARE")
     if(NOT CURRENT_POT_REFERENCE STREQUAL LATEST_POT_REFERENCE)
-        set(CHECKOUT_REFERENCE  "${LATEST_POT_REFERENCE}")
+        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
     else()
-        set(CHECKOUT_REFERENCE  "${CURRENT_POT_REFERENCE}")
+        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
     endif()
 elseif(UPDATE_MODE STREQUAL "ALWAYS")
-    set(CHECKOUT_REFERENCE      "${LATEST_POT_REFERENCE}")
+    set(SWITCH_REFERENCE        "${LATEST_POT_REFERENCE}")
 elseif(UPDATE_MODE STREQUAL "NEVER")
     if(NOT CURRENT_POT_REFERENCE)
-        set(CHECKOUT_REFERENCE  "${LATEST_POT_REFERENCE}")
+        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
     else()
-        set(CHECKOUT_REFERENCE  "${CURRENT_POT_REFERENCE}")
+        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
     endif()
 else()
     message(FATAL_ERROR "Invalid UNPDATE_MODE value. (${UPDATE_MODE})")
@@ -89,12 +89,12 @@ message("pot = ${CURRENT_POT_OBJECT}")
 message("UPDATE_MODE            = ${UPDATE_MODE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
-message("CHECKOUT_REFERENCE     = ${CHECKOUT_REFERENCE}")
+message("SWITCH_REFERENCE       = ${SWITCH_REFERENCE}")
 message("")
 restore_cmake_message_indent()
 
 
-message(STATUS "Switching to the '${CHECKOUT_REFERENCE}' reference on the 'current' branch...")
+message(STATUS "Switching to the '${SWITCH_REFERENCE}' reference on the 'current' branch...")
 remove_cmake_message_indent()
 message("")
 execute_process(
@@ -106,9 +106,9 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 execute_process(
-    # Run 'git fetch' command to fetch the '${CHECKOUT_REFERENCE}' commit to FETCH_HEAD.
+    # Run 'git fetch' command to fetch the '${SWITCH_REFERENCE}' commit to FETCH_HEAD.
     COMMAND ${Git_EXECUTABLE} fetch origin
-            ${CHECKOUT_REFERENCE}
+            ${SWITCH_REFERENCE}
             --depth=1
             --verbose
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
@@ -127,10 +127,11 @@ message("")
 restore_cmake_message_indent()
 
 
+#[[
 #[======================================================================[
-1. Determining whether to (re)create the virtual environment.
-2. Run 'conda create' command to (re)create the virtual environemnt.
-3. Create 'pyvenv.cfg' in the virtual environment.
+  1. Determining whether to (re)create the virtual environment.
+  2. Run 'conda create' command to (re)create the virtual environemnt.
+  3. Create 'pyvenv.cfg' in the virtual environment.
 #]======================================================================]
 
 
@@ -169,9 +170,117 @@ message("PREVIOUS_IS_REQUIRED     = ${PREVIOUS_IS_REQUIRED}")
 message("RECREATE_VENV_REQUIRED   = ${RECREATE_VENV_REQUIRED}")
 message("")
 restore_cmake_message_indent()
+if(NOT RECREATE_VENV_REQUIRED)
+    message(STATUS "No need to recreate the virtual environment.")
+else()
+    message(STATUS "Prepare to recreate the virtual environment.")
+    message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
+    remove_cmake_message_indent()
+    message("")
+    execute_process(
+        COMMAND ${Conda_EXECUTABLE} create
+                --prefix ${PROJ_VENV_DIR}
+                --channel conda-forge
+                --yes
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+        if(ERR_VAR)
+            message("")
+            message("---------- RES ----------")
+            message("")
+            message("${RES_VAR}")
+            message("")
+            message("---------- ERR ----------")
+            message("")
+            message("${ERR_VAR}")
+            message("")
+            message("-------------------------")
+        endif()
+    else()
+        message("")
+        message("---------- RES ----------")
+        message("")
+        message("${RES_VAR}")
+        message("")
+        message("---------- OUT ----------")
+        message("")
+        message("${OUT_VAR}")
+        message("")
+        message("---------- ERR ----------")
+        message("")
+        message("${ERR_VAR}")
+        message("")
+        message("-------------------------")
+        message("")
+        message(FATAL_ERROR "Fatal error occurred.")
+    endif()
+    message("")
+    restore_cmake_message_indent()
+    message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
+    set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
+    if(NOT EXISTS "${PYVENV_CFG_PATH}")
+        file(WRITE "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+    else()
+        file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
+        if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
+            if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages[ ]*=[ ]*true")
+                string(REGEX REPLACE 
+                    "include-system-site-packages[ ]*=[ ]*true"
+                    "include-system-site-packages = false" 
+                    PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
+                file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
+            endif()
+        else()
+            file(APPEND "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+        endif()
+    endif()
+endif()
+#]]
 
 
-if(RECREATE_VENV_REQUIRED)
+#[======================================================================[
+  1. Determining whether to install the requirements.
+  2. Run 'conda install' command to intall dependencies.
+  3. Run 'pip install' command to install the requirements.
+#]======================================================================]
+
+
+message(STATUS "Determining whether to install the requirements...")
+set(CURRENT_REFERENCE "${SWITCH_REFERENCE}")
+if(EXISTS "${PREVIOUS_REFERENCE_TXT_PATH}")
+    file(READ "${PREVIOUS_REFERENCE_TXT_PATH}" PREVIOUS_REFERENCE)
+else()
+    set(PREVIOUS_REFERENCE "")
+endif()
+if(INSTALL_MODE STREQUAL "COMPARE")
+    if(NOT CURRENT_REFERENCE STREQUAL PREVIOUS_REFERENCE)
+        set(INSTALL_REQUIRED ON)
+    else()
+        set(INSTALL_REQUIRED OFF)
+    endif()
+elseif(INSTALL_MODE STREQUAL "ALWAYS")
+    set(INSTALL_REQUIRED ON)
+else()
+    message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
+endif()
+remove_cmake_message_indent()
+message("")
+message("INSTALL_MODE       = ${INSTALL_MODE}")
+message("CURRENT_REFERENCE  = ${CURRENT_REFERENCE}")
+message("PREVIOUS_REFERENCE = ${PREVIOUS_REFERENCE}")
+message("INSTALL_REQUIRED   = ${INSTALL_REQUIRED}")
+message("")
+restore_cmake_message_indent()
+if(NOT INSTALL_REQUIRED)
+    message(STATUS "No need to install the requirements.")
+else()
+    message(STATUS "Prepare to install the requirements.")
+
+
     message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
     remove_cmake_message_indent()
     message("")
@@ -219,7 +328,7 @@ if(RECREATE_VENV_REQUIRED)
     message("")
     restore_cmake_message_indent()
 
-    
+
     message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
     set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
     if(NOT EXISTS "${PYVENV_CFG_PATH}")
@@ -238,54 +347,46 @@ if(RECREATE_VENV_REQUIRED)
             file(APPEND "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
         endif()
     endif()
-endif()
 
 
-#[[
-1. Determining whether to install the requirements.
-2. Run 'conda install' command to intall dependencies.
-3. Run 'pip install' command to install the requirements.
-#]]
-
-
-message(STATUS "Determining whether to install the requirements...")
-set(CURRENT_REFERENCE "${CHECKOUT_REFERENCE}")
-if(EXISTS "${PREVIOUS_REFERENCE_TXT_PATH}")
-    file(READ "${PREVIOUS_REFERENCE_TXT_PATH}" PREVIOUS_REFERENCE)
-else()
-    set(PREVIOUS_REFERENCE "")
-endif()
-if(INSTALL_MODE STREQUAL "COMPARE")
-    if(NOT CURRENT_REFERENCE STREQUAL PREVIOUS_REFERENCE)
-        set(INSTALL_REQUIRED ON)
-    else()
-        set(INSTALL_REQUIRED OFF)
+    message(STATUS "Determining versions of dependencies...")
+    if (VERSION MATCHES "^git-master$")
+        set(VERSION_OF_PYTHON "3.10")
+        set(VERSION_OF_SPHINX "6.2.1")
+    elseif (VERSION MATCHES "^latest$")
+        set(VERSION_OF_PYTHON "3.10")
+        set(VERSION_OF_SPHINX "6.2.1")
+    elseif (VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
+        string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
+        if (VERSION_NO_V VERSION_LESS "3.9")       # For v3.0~v3.8
+            set(VERSION_OF_PYTHON "3.6")
+            set(VERSION_OF_SPHINX "1.6.7")
+        elseif (VERSION_NO_V VERSION_LESS "3.19")  # For v3.9~v3.18
+            set(VERSION_OF_PYTHON "3.6")
+            set(VERSION_OF_SPHINX "2.4.4")
+        elseif (VERSION_NO_V VERSION_LESS "3.28")  # For v3.19~v3.27
+            set(VERSION_OF_PYTHON "3.10")
+            set(VERSION_OF_SPHINX "5.3.0")
+        else()                                    # For v3.28~
+            set(VERSION_OF_PYTHON "3.10")
+            set(VERSION_OF_SPHINX "6.2.1")
+        endif()
     endif()
-elseif(INSTALL_MODE STREQUAL "ALWAYS")
-    set(INSTALL_REQUIRED ON)
-else()
-    message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
-endif()
-remove_cmake_message_indent()
-message("")
-message("INSTALL_MODE       = ${INSTALL_MODE}")
-message("CURRENT_REFERENCE  = ${CURRENT_REFERENCE}")
-message("PREVIOUS_REFERENCE = ${PREVIOUS_REFERENCE}")
-message("INSTALL_REQUIRED   = ${INSTALL_REQUIRED}")
-message("")
-restore_cmake_message_indent()
+    remove_cmake_message_indent()
+    message("")
+    message("VERSION_OF_PYTHON  = ${VERSION_OF_PYTHON}")
+    message("VERSION_OF_SPHINX  = ${VERSION_OF_SPHINX}")
+    message("")
+    restore_cmake_message_indent()
 
 
-if(NOT INSTALL_REQUIRED)
-    message(STATUS "No need to install the requirements.")
-    return()
-else()
     message(STATUS "Running 'conda install' command to install dependencies...")
     remove_cmake_message_indent()
     message("")
     execute_process(
         COMMAND ${Conda_EXECUTABLE} install
                 python=${VERSION_OF_PYTHON}
+                sphinx=${VERSION_OF_SPHINX}
                 --prefix ${PROJ_VENV_DIR}
                 --channel conda-forge
                 --yes
@@ -334,7 +435,7 @@ else()
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE)
 
-
+#[[
     if(VERSION MATCHES "^git-master$")
         set(SPHINX_VERSION "6.2.1")
     elseif(VERSION MATCHES "^latest$")
@@ -411,7 +512,7 @@ else()
     endif()
     message("")
     restore_cmake_message_indent()
-
+#]]
 
     set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
     find_package(Sphinx   MODULE REQUIRED)

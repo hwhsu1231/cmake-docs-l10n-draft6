@@ -12,8 +12,8 @@ set(CMAKE_MODULE_PATH
     "${PROJ_CMAKE_MODULES_DIR}"
     "${PROJ_CMAKE_MODULES_DIR}/common")
 set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Git      MODULE ${FIND_PACKAGE_GIT_ARGS}     REQUIRED)
-find_package(Gettext  MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
+find_package(Git      MODULE REQUIRED)
+find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
 find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
 include(JsonUtils)
 include(LogUtils)

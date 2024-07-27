@@ -14,8 +14,8 @@ set(CMAKE_MODULE_PATH
 set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
 set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
 find_package(Git      MODULE REQUIRED)
-find_package(Gettext  MODULE REQUIRED)
-find_package(Python   MODULE ${FIND_PACKAGE_PYTHON_ARGS}  REQUIRED)
+find_package(Python   MODULE REQUIRED)
+find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
 find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
 include(GitUtils)
 include(JsonUtils)
@@ -72,21 +72,21 @@ else()
 endif()
 if(UPDATE_MODE STREQUAL "COMPARE")
     if(NOT CURRENT_POT_REFERENCE STREQUAL LATEST_POT_REFERENCE)
-        set(CHECKOUT_REFERENCE ${LATEST_POT_REFERENCE})
+        set(SWITCH_REFERENCE ${LATEST_POT_REFERENCE})
         set(UPDATE_REQUIRED ON)
     else()
-        set(CHECKOUT_REFERENCE ${CURRENT_POT_REFERENCE})
+        set(SWITCH_REFERENCE ${CURRENT_POT_REFERENCE})
         set(UPDATE_REQUIRED OFF)
     endif()
 elseif(UPDATE_MODE STREQUAL "ALWAYS")
-    set(CHECKOUT_REFERENCE ${LATEST_POT_REFERENCE})
+    set(SWITCH_REFERENCE ${LATEST_POT_REFERENCE})
     set(UPDATE_REQUIRED ON)
 elseif(UPDATE_MODE STREQUAL "NEVER")
     if(NOT CURRENT_POT_REFERENCE)
-        set(CHECKOUT_REFERENCE ${LATEST_POT_REFERENCE})
+        set(SWITCH_REFERENCE ${LATEST_POT_REFERENCE})
         set(UPDATE_REQUIRED ON)
     else()
-        set(CHECKOUT_REFERENCE ${CURRENT_POT_REFERENCE})
+        set(SWITCH_REFERENCE ${CURRENT_POT_REFERENCE})
         set(UPDATE_REQUIRED OFF)
     endif()
 else()
@@ -100,7 +100,7 @@ message("UPDATE_MODE            = ${UPDATE_MODE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
 message("UPDATE_REQUIRED        = ${UPDATE_REQUIRED}")
-message("CHECKOUT_REFERENCE     = ${CHECKOUT_REFERENCE}")
+message("SWITCH_REFERENCE       = ${SWITCH_REFERENCE}")
 message("")
 restore_cmake_message_indent()
 
@@ -117,12 +117,12 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 restore_cmake_message_indent()
-message(STATUS "Running 'git fetch' command to fetch the '${CHECKOUT_REFERENCE}' commit to FETCH_HEAD...")
+message(STATUS "Running 'git fetch' command to fetch the '${SWITCH_REFERENCE}' commit to FETCH_HEAD...")
 remove_cmake_message_indent()
 message("")
 execute_process(
     COMMAND ${Git_EXECUTABLE} fetch origin
-            ${CHECKOUT_REFERENCE}
+            ${SWITCH_REFERENCE}
             --depth=1
             --verbose
     WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
@@ -144,7 +144,7 @@ execute_process(
 message("")
 restore_cmake_message_indent()
 #]]
-message(STATUS "Switching to the '${CHECKOUT_REFERENCE}' reference on the 'current' branch...")
+message(STATUS "Switching to the '${SWITCH_REFERENCE}' reference on the 'current' branch...")
 remove_cmake_message_indent()
 message("")
 execute_process(
@@ -156,7 +156,7 @@ execute_process(
 message("")
 execute_process(
     COMMAND ${Git_EXECUTABLE} fetch origin
-            ${CHECKOUT_REFERENCE}
+            ${SWITCH_REFERENCE}
             --depth=1
             --verbose
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}

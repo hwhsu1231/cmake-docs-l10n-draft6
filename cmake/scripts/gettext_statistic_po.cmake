@@ -11,7 +11,7 @@ message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 set(CMAKE_MODULE_PATH 
     "${PROJ_CMAKE_MODULES_DIR}"
     "${PROJ_CMAKE_MODULES_DIR}/common")
-find_package(Gettext  MODULE ${FIND_PACKAGE_GETTEXT_ARGS} REQUIRED)
+find_package(Gettext  MODULE REQUIRED COMPONENTS Msgattrib)
 include(JsonUtils)
 include(LogUtils)
 
