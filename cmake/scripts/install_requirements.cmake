@@ -169,6 +169,8 @@ message("PREVIOUS_IS_REQUIRED     = ${PREVIOUS_IS_REQUIRED}")
 message("RECREATE_VENV_REQUIRED   = ${RECREATE_VENV_REQUIRED}")
 message("")
 restore_cmake_message_indent()
+
+
 if(RECREATE_VENV_REQUIRED)
     message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
     remove_cmake_message_indent()
@@ -216,6 +218,8 @@ if(RECREATE_VENV_REQUIRED)
     endif()
     message("")
     restore_cmake_message_indent()
+
+    
     message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
     set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
     if(NOT EXISTS "${PYVENV_CFG_PATH}")
