@@ -1,7 +1,0 @@
-#
-# For v3.28~
-#
-git+https://github.com/n-peugnet/sphinx@new-inline-parse-i18n-logic
-# sphinx==6.2.1
-# docutils==0.18.1
-# jinja2==3.1.2

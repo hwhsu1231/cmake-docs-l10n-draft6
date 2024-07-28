@@ -1,4 +1,0 @@
-#
-# Without version specified
-#
-sphinx
