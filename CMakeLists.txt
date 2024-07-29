@@ -201,24 +201,6 @@ if (NOT INSTALL_MODE STREQUAL "COMPARE" AND
     message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
 endif()
 
-# #[======================================================[
-#   Set SPHINX_VERBOSE_ARGS based on SPHINX_VERBOSE_LEVEL.
-# #]======================================================]
-
-# if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
-#     set(SPHINX_VERBOSE_LEVEL 0)
-# endif()
-# set(SPHINX_VERBOSE_ARGS "")
-# if(SPHINX_VERBOSE_LEVEL GREATER 0)
-#     set(SPHINX_VERBOSE_ARGS "-")
-#     math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
-#     foreach(INDEX RANGE ${REPEAT_COUNT})
-#         set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
-#     endforeach()
-#     unset(INDEX)
-#     unset(REPEAT_COUNT)
-# endif()
-
 #[========================================================================[
   Initialize VERSION_OF_XXX if CACHE{VERSION_OF_XXX} is an empty string.
   Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not en empty string.
