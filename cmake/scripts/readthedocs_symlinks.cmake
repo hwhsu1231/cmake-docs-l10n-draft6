@@ -36,11 +36,11 @@ endif()
 
 file(READ "${LANGUAGES_JSON_PATH}" LANGUAGES_JSON_CNT)
 if(NOT LANGUAGE STREQUAL "all")
-    set(LANGUAGES_LIST "${LANGUAGE}")
+    set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
 remove_cmake_message_indent()
 message("")
-foreach(_LANGUAGE ${LANGUAGES_LIST})
+foreach(_LANGUAGE ${LANGUAGE_LIST})
     get_json_value_by_dot_notation(
         IN_JSON_OBJECT    "${LANGUAGES_JSON_CNT}"
         IN_DOT_NOTATION   ".${_LANGUAGE}.readthedocs"

@@ -128,13 +128,13 @@ include(JsonUtils)
 include(LogUtils)
 
 #[========================================[
-  Read LANGUAGES_LIST from languages.json.
+  Read LANGUAGE_LIST from languages.json.
 #]========================================]
 
 file(READ "${LANGUAGES_JSON_PATH}"  LANGUAGES_JSON_CNT)
 get_members_of_json_object(
     IN_JSON_OBJECT      "${LANGUAGES_JSON_CNT}"
-    OUT_MEMBER_NAMES    LANGUAGES_LIST)
+    OUT_MEMBER_NAMES    LANGUAGE_LIST)
 
 #[====================================[
   Validate the VERSION cache variable.
@@ -171,7 +171,7 @@ set(LANGUAGE_IS_VALID FALSE)
 if(LANGUAGE STREQUAL "all")
     set(LANGUAGE_IS_VALID TRUE)
 else()
-    foreach(_LANGUAGE ${LANGUAGES_LIST})
+    foreach(_LANGUAGE ${LANGUAGE_LIST})
         if(LANGUAGE STREQUAL _LANGUAGE)
             set(LANGUAGE_IS_VALID TRUE)
         endif()
@@ -380,7 +380,7 @@ init_references_json_file(
     IN_VERSION      "${VERSION}"
     IN_TYPE         "${VERSION_TYPE}"
     IN_MODE         "language"
-    IN_LANGUAGE     "${LANGUAGES_LIST}")
+    IN_LANGUAGE     "${LANGUAGE_LIST}")
 
 #[=========================================================[
   Configure a crowdin.yml file in ${PROJ_L10N_VERSION_DIR}.
@@ -439,7 +439,7 @@ message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
 message(STATUS "PREVIOUS_FREEZE_TXT_PATH      = ${PREVIOUS_FREEZE_TXT_PATH}")
 message(STATUS "PREVIOUS_REFERENCE_TXT_PATH   = ${PREVIOUS_REFERENCE_TXT_PATH}")
 message(STATUS "---------- Other Variables ----------")
-message(STATUS "LANGUAGES_LIST                = ${LANGUAGES_LIST}")
+message(STATUS "LANGUAGE_LIST                = ${LANGUAGE_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
 message(STATUS "TAG_PATTERN                   = ${TAG_PATTERN}")
@@ -465,7 +465,7 @@ message(STATUS "----------------------------------------")
   Escape ';' characters for list variables.
 #]=========================================]
 
-string(REPLACE ";" "\\\\;" LANGUAGES_LIST "${LANGUAGES_LIST}")
+string(REPLACE ";" "\\\\;" LANGUAGE_LIST "${LANGUAGE_LIST}")
 
 #[===========================================[
   Cache variables passed to script mode '-E'.
@@ -516,7 +516,7 @@ set(SCRIPT_MODE_CACHE
     -D PREVIOUS_FREEZE_TXT_PATH=${PREVIOUS_FREEZE_TXT_PATH}
     -D PREVIOUS_REFERENCE_TXT_PATH=${PREVIOUS_REFERENCE_TXT_PATH}
     # [Other Variables]
-    -D LANGUAGES_LIST=${LANGUAGES_LIST}
+    -D LANGUAGE_LIST=${LANGUAGE_LIST}
     -D VERSION_TYPE=${VERSION_TYPE}
     -D BRANCH_NAME=${BRANCH_NAME}
     -D TAG_PATTERN=${TAG_PATTERN})

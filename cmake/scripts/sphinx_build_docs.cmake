@@ -66,9 +66,9 @@ endif()
 
 
 if(NOT LANGUAGE STREQUAL "all")
-    set(LANGUAGES_LIST "${LANGUAGE}")
+    set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
-foreach(_LANGUAGE ${LANGUAGES_LIST})
+foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Running 'sphinx-build' command with '${SPHINX_BUILDER}' builder to build HTML documentation for '${_LANGUAGE}' language...")
     remove_cmake_message_indent()
     message("")

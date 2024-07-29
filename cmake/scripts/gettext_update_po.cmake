@@ -19,9 +19,9 @@ include(LogUtils)
 
 file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
 if(NOT LANGUAGE STREQUAL "all")
-    set(LANGUAGES_LIST "${LANGUAGE}")
+    set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
-foreach(_LANGUAGE ${LANGUAGES_LIST})
+foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Comparing the version of '.pot' and '.po.${_LANGUAGE}' object...")
     get_json_value_by_dot_notation(
         IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
