@@ -332,7 +332,7 @@ else()
     message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
     set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
     if(NOT EXISTS "${PYVENV_CFG_PATH}")
-        file(WRITE "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+        set(PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
     else()
         file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
         if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
@@ -341,41 +341,16 @@ else()
                     "include-system-site-packages[ ]*=[ ]*true"
                     "include-system-site-packages = false" 
                     PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
-                file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
             endif()
         else()
-            file(APPEND "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
+            string(APPEND PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
         endif()
     endif()
-
-
-    message(STATUS "Determining versions of dependencies...")
-    if (VERSION MATCHES "^git-master$")
-        set(VERSION_OF_PYTHON "3.10")
-        set(VERSION_OF_SPHINX "6.2.1")
-    elseif (VERSION MATCHES "^latest$")
-        set(VERSION_OF_PYTHON "3.10")
-        set(VERSION_OF_SPHINX "6.2.1")
-    elseif (VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
-        string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
-        if (VERSION_NO_V VERSION_LESS "3.9")       # For v3.0~v3.8
-            set(VERSION_OF_PYTHON "3.6")
-            set(VERSION_OF_SPHINX "1.6.7")
-        elseif (VERSION_NO_V VERSION_LESS "3.19")  # For v3.9~v3.18
-            set(VERSION_OF_PYTHON "3.6")
-            set(VERSION_OF_SPHINX "2.4.4")
-        elseif (VERSION_NO_V VERSION_LESS "3.28")  # For v3.19~v3.27
-            set(VERSION_OF_PYTHON "3.10")
-            set(VERSION_OF_SPHINX "5.3.0")
-        else()                                    # For v3.28~
-            set(VERSION_OF_PYTHON "3.10")
-            set(VERSION_OF_SPHINX "6.2.1")
-        endif()
-    endif()
+    file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
     remove_cmake_message_indent()
     message("")
-    message("VERSION_OF_PYTHON  = ${VERSION_OF_PYTHON}")
-    message("VERSION_OF_SPHINX  = ${VERSION_OF_SPHINX}")
+    message("${PYVENV_CFG_PATH}")
+    message("${PYVENV_CFG_CONTENTS}")
     message("")
     restore_cmake_message_indent()
 
@@ -429,102 +404,24 @@ else()
     unset(Python_EXECUTABLE)
     unset(_Python_EXECUTABLE CACHE)
     set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-    find_package(Python MODULE ${FIND_PACKAGE_PYTHON_ARGS} REQUIRED)
+    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+    find_package(Python   MODULE REQUIRED)
+    find_package(Sphinx   MODULE REQUIRED)
+    message(STATUS "Running 'python -c \"import sys; print('\\n'.join(sys.path))\"' command to check python system paths...")
+    remove_cmake_message_indent()
+    message("")
     execute_process(
         COMMAND ${Python_EXECUTABLE} -c "import sys; print('\\n'.join(sys.path))"
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE)
-
-#[[
-    if(VERSION MATCHES "^git-master$")
-        set(SPHINX_VERSION "6.2.1")
-    elseif(VERSION MATCHES "^latest$")
-        set(SPHINX_VERSION "6.2.1")
-    elseif(VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
-        string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
-        if(VERSION_NO_V VERSION_LESS "3.9")
-            # set(SPHINX_VERSION "1.6.1")    # For v3.0~v3.8
-            # set(SPHINX_VERSION "1.6.7")    # For v3.0~v3.8
-            set(SPHINX_VERSION "2.4.5")
-        elseif(VERSION_NO_V VERSION_LESS "3.19")
-            set(SPHINX_VERSION "2.4.5")    # For v3.9~v3.18
-        elseif(VERSION_NO_V VERSION_LESS "3.28")
-            set(SPHINX_VERSION "5.3.0")    # For v3.19~v3.27
-        else()
-            set(SPHINX_VERSION "6.2.1")    # For v3.28~
-        endif()
-    endif()
-    set(REQUIREMENTS_PATH "${PROJ_SOURCE_DIR}/requirements/sphinx-${SPHINX_VERSION}.txt")
-    file(READ "${REQUIREMENTS_PATH}" REQUIREMENTS_CNT)
-    message(STATUS "The requirements.txt to install:")
-    remove_cmake_message_indent()
-    message("")
-    message("${REQUIREMENTS_PATH}")
-    message("${REQUIREMENTS_CNT}")
     message("")
     restore_cmake_message_indent()
-
-
-    message(STATUS "Running 'pip install' command to install the requirements...")
-    remove_cmake_message_indent()
-    message("")
-    # if(CMAKE_HOST_WIN32)
-    #     set(ENV{PATH} "${PROJ_VENV_DIR}/Scripts;$ENV{PATH}")
-    # else()
-    #     set(ENV{PATH} "${PROJ_VENV_DIR}/bin:$ENV{PATH}")
-    # endif()
-    execute_process(
-        COMMAND ${Python_EXECUTABLE} -m pip install
-                --progress-bar off
-                --force-reinstall
-                --requirement ${REQUIREMENTS_PATH}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(RES_VAR EQUAL 0)
-        if(ERR_VAR)
-            # Success, but there might be some warnings.
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-        endif()
-    else()
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
-    endif()
-    message("")
-    restore_cmake_message_indent()
-#]]
-
-    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
-    find_package(Sphinx   MODULE REQUIRED)
 
 
     file(WRITE "${PREVIOUS_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
     execute_process(
-        COMMAND ${Python_EXECUTABLE} -m pip freeze
-        OUTPUT_FILE "${PREVIOUS_FREEZE_TXT_PATH}")
-    # execute_process(
-    #     COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
-    #     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/environments.yml")
+        COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
+        OUTPUT_FILE "${PROJ_VENV_DIR}/prev/environments.yml")
     execute_process(
         COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
         OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")

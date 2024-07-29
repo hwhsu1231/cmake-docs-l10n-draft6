@@ -210,6 +210,19 @@ if(NOT UPDATE_REQUIRED)
 endif()
 
 
+if(SPHINX_VERBOSE_LEVEL GREATER 0)
+    set(SPHINX_VERBOSE_ARGS "-")
+    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+    foreach(INDEX RANGE ${REPEAT_COUNT})
+        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+    endforeach()
+    unset(INDEX)
+    unset(REPEAT_COUNT)
+else()
+    set(SPHINX_VERBOSE_ARGS "")
+endif()
+
+
 message(STATUS "Running 'sphinx-build' command with 'gettext' builder to generate .pot files...")
 remove_cmake_message_indent()
 message("")

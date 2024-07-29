@@ -50,6 +50,21 @@ restore_cmake_message_indent()
 file(RELATIVE_PATH LOCALE_TO_SOURCE_DIR
     "${PROJ_OUT_REPO_DOCS_SOURCE_DIR}"
     "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
+
+
+if(SPHINX_VERBOSE_LEVEL GREATER 0)
+    set(SPHINX_VERBOSE_ARGS "-")
+    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+    foreach(INDEX RANGE ${REPEAT_COUNT})
+        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+    endforeach()
+    unset(INDEX)
+    unset(REPEAT_COUNT)
+else()
+    set(SPHINX_VERBOSE_ARGS "")
+endif()
+
+
 if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGES_LIST "${LANGUAGE}")
 endif()

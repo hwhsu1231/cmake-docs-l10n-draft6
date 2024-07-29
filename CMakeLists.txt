@@ -201,22 +201,56 @@ if (NOT INSTALL_MODE STREQUAL "COMPARE" AND
     message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
 endif()
 
-#[======================================================[
-  Set SPHINX_VERBOSE_ARGS based on SPHINX_VERBOSE_LEVEL.
-#]======================================================]
+# #[======================================================[
+#   Set SPHINX_VERBOSE_ARGS based on SPHINX_VERBOSE_LEVEL.
+# #]======================================================]
 
-if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
-    set(SPHINX_VERBOSE_LEVEL 0)
+# if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
+#     set(SPHINX_VERBOSE_LEVEL 0)
+# endif()
+# set(SPHINX_VERBOSE_ARGS "")
+# if(SPHINX_VERBOSE_LEVEL GREATER 0)
+#     set(SPHINX_VERBOSE_ARGS "-")
+#     math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+#     foreach(INDEX RANGE ${REPEAT_COUNT})
+#         set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+#     endforeach()
+#     unset(INDEX)
+#     unset(REPEAT_COUNT)
+# endif()
+
+#[========================================================================[
+  Initialize VERSION_OF_XXX if CACHE{VERSION_OF_XXX} is an empty string.
+  Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not en empty string.
+#]========================================================================]
+
+if (VERSION MATCHES "^git-master$")
+    set(VERSION_OF_PYTHON "3.10")
+    set(VERSION_OF_SPHINX "6.2")
+elseif (VERSION MATCHES "^latest$")
+    set(VERSION_OF_PYTHON "3.10")
+    set(VERSION_OF_SPHINX "6.2")
+elseif (VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
+    string(SUBSTRING "${VERSION}" 1 -1 VERSION_NO_V)
+    if (VERSION_NO_V VERSION_LESS "3.9")        # For v3.0~v3.8
+        set(VERSION_OF_PYTHON "3.6")
+        set(VERSION_OF_SPHINX "1.6")
+    elseif (VERSION_NO_V VERSION_LESS "3.19")   # For v3.9~v3.18
+        set(VERSION_OF_PYTHON "3.6")
+        set(VERSION_OF_SPHINX "2.4")
+    elseif (VERSION_NO_V VERSION_LESS "3.28")   # For v3.19~v3.27
+        set(VERSION_OF_PYTHON "3.10")
+        set(VERSION_OF_SPHINX "5.3")
+    else()                                      # For v3.28~
+        set(VERSION_OF_PYTHON "3.10")
+        set(VERSION_OF_SPHINX "6.2")
+    endif()
 endif()
-set(SPHINX_VERBOSE_ARGS "")
-if(SPHINX_VERBOSE_LEVEL GREATER 0)
-    set(SPHINX_VERBOSE_ARGS "-")
-    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
-    foreach(INDEX RANGE ${REPEAT_COUNT})
-        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
-    endforeach()
-    unset(INDEX)
-    unset(REPEAT_COUNT)
+if(NOT "$CACHE{VERSION_OF_PYTHON}" STREQUAL "")
+    set(VERSION_OF_PYTHON "$CACHE{VERSION_OF_PYTHON}")
+endif()
+if(NOT "$CACHE{VERSION_OF_SPHINX}" STREQUAL "")
+    set(VERSION_OF_SPHINX "$CACHE{VERSION_OF_SPHINX}")
 endif()
 
 #[====================[
@@ -389,8 +423,8 @@ message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
 message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
-message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON}")
-message(STATUS "VERSION_OF_SPHINX             = ${VERSION_OF_SPHINX}")
+message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON} (CACHE: $CACHE{VERSION_OF_PYTHON})")
+message(STATUS "VERSION_OF_SPHINX             = ${VERSION_OF_SPHINX} (CACHE: $CACHE{VERSION_OF_SPHINX})")
 message(STATUS "GETTEXT_WRAP_WIDTH            = ${GETTEXT_WRAP_WIDTH}")
 message(STATUS "GETTEXT_ADDITIONAL_TARGETS    = ${GETTEXT_ADDITIONAL_TARGETS}")
 message(STATUS "SPHINX_BUILDER                = ${SPHINX_BUILDER}")
@@ -427,12 +461,6 @@ message(STATUS "LANGUAGES_LIST                = ${LANGUAGES_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
 message(STATUS "TAG_PATTERN                   = ${TAG_PATTERN}")
-message(STATUS "SPHINX_VERBOSE_ARGS           = ${SPHINX_VERBOSE_ARGS}")
-message(STATUS "FIND_PACKAGE_GIT_ARGS         = ${FIND_PACKAGE_GIT_ARGS}")
-message(STATUS "FIND_PACKAGE_CONDA_ARGS       = ${FIND_PACKAGE_CONDA_ARGS}")
-message(STATUS "FIND_PACKAGE_PYTHON_ARGS      = ${FIND_PACKAGE_PYTHON_ARGS}")
-message(STATUS "FIND_PACKAGE_GETTEXT_ARGS     = ${FIND_PACKAGE_GETTEXT_ARGS}")
-message(STATUS "FIND_PACKAGE_CROWDIN_ARGS     = ${FIND_PACKAGE_CROWDIN_ARGS}")
 message(STATUS "---------- Prerequisites ----------")
 message(STATUS "CMAKE_VERSION                 = ${CMAKE_VERSION}")
 message(STATUS "CMAKE_COMMAND                 = ${CMAKE_COMMAND}")
@@ -456,11 +484,6 @@ message(STATUS "----------------------------------------")
 #]=========================================]
 
 string(REPLACE ";" "\\\\;" LANGUAGES_LIST "${LANGUAGES_LIST}")
-string(REPLACE ";" "\\\\;" FIND_PACKAGE_GIT_ARGS "${FIND_PACKAGE_GIT_ARGS}")
-string(REPLACE ";" "\\\\;" FIND_PACKAGE_CONDA_ARGS "${FIND_PACKAGE_CONDA_ARGS}")
-string(REPLACE ";" "\\\\;" FIND_PACKAGE_PYTHON_ARGS "${FIND_PACKAGE_PYTHON_ARGS}")
-string(REPLACE ";" "\\\\;" FIND_PACKAGE_GETTEXT_ARGS "${FIND_PACKAGE_GETTEXT_ARGS}")
-string(REPLACE ";" "\\\\;" FIND_PACKAGE_CROWDIN_ARGS "${FIND_PACKAGE_CROWDIN_ARGS}")
 
 #[===========================================[
   Cache variables passed to script mode '-E'.
@@ -514,13 +537,7 @@ set(SCRIPT_MODE_CACHE
     -D LANGUAGES_LIST=${LANGUAGES_LIST}
     -D VERSION_TYPE=${VERSION_TYPE}
     -D BRANCH_NAME=${BRANCH_NAME}
-    -D TAG_PATTERN=${TAG_PATTERN}
-    -D SPHINX_VERBOSE_ARGS=${SPHINX_VERBOSE_ARGS}
-    -D FIND_PACKAGE_GIT_ARGS=${FIND_PACKAGE_GIT_ARGS}
-    -D FIND_PACKAGE_CONDA_ARGS=${FIND_PACKAGE_CONDA_ARGS}
-    -D FIND_PACKAGE_PYTHON_ARGS=${FIND_PACKAGE_PYTHON_ARGS}
-    -D FIND_PACKAGE_GETTEXT_ARGS=${FIND_PACKAGE_GETTEXT_ARGS}
-    -D FIND_PACKAGE_CROWDIN_ARGS=${FIND_PACKAGE_CROWDIN_ARGS})
+    -D TAG_PATTERN=${TAG_PATTERN})
 
 #[====================[
   Fundamental targets.
@@ -655,22 +672,22 @@ endif()
 # message(STATUS "_Sphinx_VERSION_ERROR  = ${_Sphinx_VERSION_ERROR}")
 
 
-set(SPHINX_VERBOSE_LEVEL "3")
-# Set the default value for SPHINX_VERBOSE_LEVEL if not set
-if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
-    set(SPHINX_VERBOSE_LEVEL 0)
-endif()
-set(SPHINX_VERBOSE_ARGS "")
-if(SPHINX_VERBOSE_LEVEL GREATER 0)
-    set(SPHINX_VERBOSE_ARGS "-")
-    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
-    foreach(INDEX RANGE ${REPEAT_COUNT})
-        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
-    endforeach()
-    unset(INDEX)
-    unset(REPEAT_COUNT)
-endif()
-message(STATUS "SPHINX_VERBOSE_ARGS = ${SPHINX_VERBOSE_ARGS}")
+# set(SPHINX_VERBOSE_LEVEL "3")
+# # Set the default value for SPHINX_VERBOSE_LEVEL if not set
+# if(NOT DEFINED SPHINX_VERBOSE_LEVEL OR SPHINX_VERBOSE_LEVEL STREQUAL "")
+#     set(SPHINX_VERBOSE_LEVEL 0)
+# endif()
+# set(SPHINX_VERBOSE_ARGS "")
+# if(SPHINX_VERBOSE_LEVEL GREATER 0)
+#     set(SPHINX_VERBOSE_ARGS "-")
+#     math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+#     foreach(INDEX RANGE ${REPEAT_COUNT})
+#         set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+#     endforeach()
+#     unset(INDEX)
+#     unset(REPEAT_COUNT)
+# endif()
+# message(STATUS "SPHINX_VERBOSE_ARGS = ${SPHINX_VERBOSE_ARGS}")
 
 
 # set(SPHINX_VERBOSE_LEVEL "2")
@@ -702,3 +719,55 @@ message(STATUS "SPHINX_VERBOSE_ARGS = ${SPHINX_VERBOSE_ARGS}")
 # message(STATUS "TAG_PATTERN = ${TAG_PATTERN}")
 # list(FILTER TAG_LIST INCLUDE REGEX "${TAG_PATTERN}")
 # message(STATUS "TAG_LIST = ${TAG_LIST}")
+
+
+# message(STATUS "Before:")
+# message(STATUS "CACHE{VERSION_OF_PYTHON}  = $CACHE{VERSION_OF_PYTHON}")
+# message(STATUS "VERSION_OF_PYTHON         = ${VERSION_OF_PYTHON}")
+# message(STATUS "CACHE{VERSION_OF_SPHINX}  = $CACHE{VERSION_OF_SPHINX}")
+# message(STATUS "VERSION_OF_SPHINX         = ${VERSION_OF_SPHINX}")
+# set(VERSION_OF_PYTHON XXX)
+# set(VERSION_OF_SPHINX YYY)
+# message(STATUS "After:")
+# message(STATUS "CACHE{VERSION_OF_PYTHON}  = $CACHE{VERSION_OF_PYTHON}")
+# message(STATUS "VERSION_OF_PYTHON         = ${VERSION_OF_PYTHON}")
+# message(STATUS "CACHE{VERSION_OF_SPHINX}  = $CACHE{VERSION_OF_SPHINX}")
+# message(STATUS "VERSION_OF_SPHINX         = ${VERSION_OF_SPHINX}")
+
+
+# set(CACHE{VERSION_OF_PYTHON} "")
+# if(NOT DEFINED CACHE{VERSION_OF_PYTHON})
+#     message(STATUS "NOT DEFINED CACHE{VERSION_OF_PYTHON}")
+# endif()
+# if(NOT CACHE{VERSION_OF_PYTHON})
+#     message(STATUS "NOT CACHE{VERSION_OF_PYTHON}")
+# endif()
+
+if(NOT DEFINED CACHE{VERSION_OF_PYTHON})
+    message(STATUS "NOT DEFINED CACHE{VERSION_OF_PYTHON}")
+else()
+    message(STATUS "DEFINED CACHE{VERSION_OF_PYTHON}")
+endif()
+if(NOT CACHE{VERSION_OF_PYTHON})
+    message(STATUS "NOT CACHE{VERSION_OF_PYTHON}")
+else()
+    message(STATUS "CACHE{VERSION_OF_PYTHON}")
+endif()
+if(NOT "$CACHE{VERSION_OF_PYTHON}" STREQUAL "")
+    message(STATUS "NOT \"\$CACHE\{VERSION_OF_PYTHON\}\" STREQUAL \"\"")
+else()
+    message(STATUS "\"\$CACHE\{VERSION_OF_PYTHON\}\" STREQUAL \"\"")
+endif()
+
+# set(VERSION_OF_PYTHON "")
+# set(VERSION_OF_PYTHON)
+# if(NOT DEFINED VERSION_OF_PYTHON)
+#     message(STATUS "NOT DEFINED VERSION_OF_PYTHON")
+# else()
+#     message(STATUS "DEFINED VERSION_OF_PYTHON")
+# endif()
+# if(NOT VERSION_OF_PYTHON)
+#     message(STATUS "NOT VERSION_OF_PYTHON")
+# else()
+#     message(STATUS "VERSION_OF_PYTHON")
+# endif()

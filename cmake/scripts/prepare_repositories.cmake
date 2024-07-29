@@ -81,21 +81,8 @@ message("")
 restore_cmake_message_indent()
 
 
-execute_process(
-    COMMAND ${Git_EXECUTABLE} remote
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR
-    ERROR_VARIABLE  ERR_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE)
-if(RES_VAR EQUAL 0)
-    set(REMOTE_NAME "${OUT_VAR}")
-else()
-    message(FATAL_ERROR "${ERR_VAR}")
-endif()
 if(VERSION_TYPE STREQUAL "branch")
-    message(STATUS "Getting the latest commit of '${BRANCH_NAME}' from the '${REMOTE_NAME}' remote...")
+    message(STATUS "Getting the latest commit of the branch '${BRANCH_NAME}' from the remote...")
     get_git_latest_commit_on_branch_name(
         IN_REPO_PATH        "${PROJ_OUT_REPO_DIR}"
         IN_SOURCE_TYPE      "remote"
@@ -106,56 +93,18 @@ if(VERSION_TYPE STREQUAL "branch")
     message("LATEST_COMMIT_HASH = ${LATEST_COMMIT_HASH}")
     message("")
     restore_cmake_message_indent()
-#[[
-    message(STATUS "Running 'git checkout -B' command to checkout/reset to the '${BRANCH_NAME}' branch...")
+    message(STATUS "Fetching the latest commit '${LATEST_COMMIT_HASH}' to the local branch '${BRANCH_NAME}'...")
     remove_cmake_message_indent()
     message("")
     execute_process(
         COMMAND ${Git_EXECUTABLE} checkout -B ${BRANCH_NAME}
-        WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    restore_cmake_message_indent()
-    message(STATUS "Running 'git fetch' command to fetch the latest commit to FETCH_HEAD...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME}
-                ${LATEST_COMMIT_HASH}
-                --depth=1
-                --verbose
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
     message("")
-    restore_cmake_message_indent()
-    message(STATUS "Running 'git reset --hard' command to reset the '${BRANCH_NAME}' branch from FETCH_HEAD...")
-    remove_cmake_message_indent()
-    message("")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    restore_cmake_message_indent()
-#]]
-    message(STATUS "Fetching the '${LATEST_COMMIT_HASH}' commit to the '${BRANCH_NAME}' branch...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} checkout -B ${BRANCH_NAME}
-        WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME}
+        COMMAND ${Git_EXECUTABLE} fetch origin
                 ${LATEST_COMMIT_HASH}
                 --depth=1
                 --verbose
@@ -173,7 +122,7 @@ if(VERSION_TYPE STREQUAL "branch")
     message("")
     restore_cmake_message_indent()
 elseif(VERSION_TYPE STREQUAL "tag")
-    message(STATUS "Getting the latest tag of '${TAG_PATTERN}' from the '${REMOTE_NAME}' remote...")
+    message(STATUS "Getting the latest tag of '${TAG_PATTERN}' from the remote...")
     get_git_latest_tag_on_tag_pattern(
         IN_REPO_PATH        "${PROJ_OUT_REPO_DIR}"
         IN_SOURCE_TYPE      "remote"
@@ -184,27 +133,11 @@ elseif(VERSION_TYPE STREQUAL "tag")
     message("LATEST_TAG = ${LATEST_TAG}")
     message("")
     restore_cmake_message_indent()
-#[[
-    message(STATUS "Running 'git fetch' command to fetch the latest tag '${LATEST_TAG}' from the '${REMOTE_NAME}' remote...")
+    message(STATUS "Fetching the latest tag '${LATEST_TAG}' to the local tag '${LATEST_TAG}'...")
     remove_cmake_message_indent()
     message("")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME}
-                refs/tags/${LATEST_TAG}:refs/tags/${LATEST_TAG}
-                --depth=1
-                --verbose
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    restore_cmake_message_indent()
-#]]
-    message(STATUS "Fetching the latest tag '${LATEST_TAG}' to the local...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME}
+        COMMAND ${Git_EXECUTABLE} fetch origin
                 refs/tags/${LATEST_TAG}:refs/tags/${LATEST_TAG}
                 --depth=1
                 --verbose
