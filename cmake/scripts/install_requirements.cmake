@@ -127,121 +127,6 @@ message("")
 restore_cmake_message_indent()
 
 
-#[[
-#[======================================================================[
-  1. Determining whether to (re)create the virtual environment.
-  2. Run 'conda create' command to (re)create the virtual environemnt.
-  3. Create 'pyvenv.cfg' in the virtual environment.
-#]======================================================================]
-
-
-message(STATUS "Determining whether to (re)create the virtual environment...")
-set(REQUIRED_PYTHON_VERSION "${VERSION_OF_PYTHON}")
-set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Python QUIET MODULE)
-string(FIND "${Python_EXECUTABLE}" "${Python_ROOT_DIR}" EXECUTABLE_IS_IN_ROOT)
-if(EXECUTABLE_IS_IN_ROOT EQUAL 0)
-    set(PREVIOUS_PYTHON_VERSION "${Python_VERSION}")
-else()
-    set(PREVIOUS_PYTHON_VERSION "")
-endif()
-if (PREVIOUS_PYTHON_VERSION STREQUAL "")
-    set(RECREATE_VENV_REQUIRED ON)
-else()
-    if (REQUIRED_PYTHON_VERSION STREQUAL "")
-        set(RECREATE_VENV_REQUIRED OFF)
-    else()
-        string(FIND "${PREVIOUS_PYTHON_VERSION}" "${REQUIRED_PYTHON_VERSION}" PREVIOUS_IS_REQUIRED)
-        if(PREVIOUS_IS_REQUIRED EQUAL 0)
-            set(RECREATE_VENV_REQUIRED OFF)
-        else()
-            set(RECREATE_VENV_REQUIRED ON)
-        endif()
-    endif()
-endif()
-remove_cmake_message_indent()
-message("")
-message("Python_ROOT_DIR          = ${Python_ROOT_DIR}")
-message("Python_EXECUTABLE        = ${Python_EXECUTABLE}")
-message("EXECUTABLE_IS_IN_ROOT    = ${EXECUTABLE_IS_IN_ROOT}")
-message("REQUIRED_PYTHON_VERSION  = ${REQUIRED_PYTHON_VERSION}")
-message("PREVIOUS_PYTHON_VERSION  = ${PREVIOUS_PYTHON_VERSION}")
-message("PREVIOUS_IS_REQUIRED     = ${PREVIOUS_IS_REQUIRED}")
-message("RECREATE_VENV_REQUIRED   = ${RECREATE_VENV_REQUIRED}")
-message("")
-restore_cmake_message_indent()
-if(NOT RECREATE_VENV_REQUIRED)
-    message(STATUS "No need to recreate the virtual environment.")
-else()
-    message(STATUS "Prepare to recreate the virtual environment.")
-    message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Conda_EXECUTABLE} create
-                --prefix ${PROJ_VENV_DIR}
-                --channel conda-forge
-                --yes
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(RES_VAR EQUAL 0)
-        if(ERR_VAR)
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-        endif()
-    else()
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- OUT ----------")
-        message("")
-        message("${OUT_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
-    endif()
-    message("")
-    restore_cmake_message_indent()
-    message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
-    set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
-    if(NOT EXISTS "${PYVENV_CFG_PATH}")
-        file(WRITE "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
-    else()
-        file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
-        if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
-            if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages[ ]*=[ ]*true")
-                string(REGEX REPLACE 
-                    "include-system-site-packages[ ]*=[ ]*true"
-                    "include-system-site-packages = false" 
-                    PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
-                file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
-            endif()
-        else()
-            file(APPEND "${PYVENV_CFG_PATH}" "include-system-site-packages = false\n")
-        endif()
-    endif()
-endif()
-#]]
-
-
 #[======================================================================[
   1. Determining whether to install the requirements.
   2. Run 'conda install' command to intall dependencies.
@@ -401,12 +286,8 @@ else()
     restore_cmake_message_indent()
 
 
-    unset(Python_EXECUTABLE)
-    unset(_Python_EXECUTABLE CACHE)
     set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
     find_package(Python   MODULE REQUIRED)
-    find_package(Sphinx   MODULE REQUIRED)
     message(STATUS "Running 'python -c \"import sys; print('\\n'.join(sys.path))\"' command to check python system paths...")
     remove_cmake_message_indent()
     message("")
@@ -416,13 +297,15 @@ else()
         ECHO_ERROR_VARIABLE)
     message("")
     restore_cmake_message_indent()
+    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+    find_package(Sphinx   MODULE REQUIRED)
 
 
     file(WRITE "${PREVIOUS_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
     execute_process(
         COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
         OUTPUT_FILE "${PROJ_VENV_DIR}/prev/environments.yml")
-    execute_process(
-        COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
-        OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")
+    # execute_process(
+    #     COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
+    #     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")
 endif()
