@@ -45,9 +45,6 @@ set(VERSION_OF_PYTHON ""
 set(VERSION_OF_SPHINX ""
     CACHE STRING "Sphinx version to install.")
 
-set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
-    CACHE STRING "Locale setting for the console.")
-
 set(CMAKE_JOB_NUMBER "1"
     CACHE STRING "")
     # See https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j for details.
@@ -65,6 +62,9 @@ set(SPHINX_BUILDER "html"
     CACHE STRING "Builder for the Sphinx documentation system.")
     # Possible values are "html".
     # See https://www.sphinx-doc.org/en/master/usage/builders/index.html for details.
+
+set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
+    CACHE STRING "Locale setting for the console.")
 
 set(SPHINX_VERBOSE_LEVEL "1"
     CACHE STRING "")
