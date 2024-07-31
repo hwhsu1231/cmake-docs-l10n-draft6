@@ -39,10 +39,10 @@ set(REMOVE_REDUNDANT ON
 set(VERSION_COMPENDIUM "git-master"
     CACHE STRING "Version of compendium that the current version merges translations from.")
 
-set(VERSION_OF_PYTHON ""
+set(VERSION_OF_PYTHON "[default]"
     CACHE STRING "Python version to install.")
 
-set(VERSION_OF_SPHINX ""
+set(VERSION_OF_SPHINX "[default]"
     CACHE STRING "Sphinx version to install.")
 
 set(CMAKE_JOB_NUMBER "1"
@@ -201,10 +201,10 @@ if (NOT INSTALL_MODE STREQUAL "COMPARE" AND
     message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
 endif()
 
-#[========================================================================[
-  Initialize VERSION_OF_XXX if CACHE{VERSION_OF_XXX} is an empty string.
-  Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not en empty string.
-#]========================================================================]
+#[====================================================================[
+  Initialize VERSION_OF_XXX if CACHE{VERSION_OF_XXX} is "[default]".
+  Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not "[default]".
+#]====================================================================]
 
 if (VERSION MATCHES "^git-master$")
     set(VERSION_OF_PYTHON "3.10")
@@ -228,10 +228,10 @@ elseif (VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
         set(VERSION_OF_SPHINX "6.2")
     endif()
 endif()
-if(NOT "$CACHE{VERSION_OF_PYTHON}" STREQUAL "")
+if(NOT "$CACHE{VERSION_OF_PYTHON}" STREQUAL "[default]")
     set(VERSION_OF_PYTHON "$CACHE{VERSION_OF_PYTHON}")
 endif()
-if(NOT "$CACHE{VERSION_OF_SPHINX}" STREQUAL "")
+if(NOT "$CACHE{VERSION_OF_SPHINX}" STREQUAL "[default]")
     set(VERSION_OF_SPHINX "$CACHE{VERSION_OF_SPHINX}")
 endif()
 
@@ -467,9 +467,16 @@ message(STATUS "----------------------------------------")
 
 string(REPLACE ";" "\\\\;" LANGUAGE_LIST "${LANGUAGE_LIST}")
 
-#[===========================================[
-  Cache variables passed to script mode '-E'.
-#]===========================================]
+#[============================================[
+  Environment variables passed to script mode.
+#]============================================]
+
+set(SCRIPT_MODE_ENV
+    PYTHONNOUSERSITE=1)
+
+#[======================================[
+  Cache variables passed to script mode.
+#]======================================]
 
 set(SCRIPT_MODE_CACHE
     # [Cache Variables]
@@ -526,32 +533,32 @@ set(SCRIPT_MODE_CACHE
 #]====================]
 
 add_custom_target(prepare_repositories
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/prepare_repositories.cmake
     VERBATIM)
 
 add_custom_target(install_requirements
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/install_requirements.cmake
     VERBATIM)
 
 add_custom_target(sphinx_update_pot
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/sphinx_update_pot.cmake
     VERBATIM)
 
 add_custom_target(gettext_update_po
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_update_po.cmake
     VERBATIM)
 
 add_custom_target(sphinx_build_docs
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/sphinx_build_docs.cmake
     VERBATIM)
 
@@ -560,32 +567,32 @@ add_custom_target(sphinx_build_docs
 #]=================]
 
 add_custom_target(gettext_statistic_po
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE}
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_statistic_po.cmake
     VERBATIM)
 
 add_custom_target(crowdin_upload_pot
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_upload_pot.cmake
     VERBATIM)
 
 add_custom_target(crowdin_download_po
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE} 
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_download_po.cmake
     VERBATIM)
 
 add_custom_target(gettext_compend_po
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE}
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_compend_po.cmake
     VERBATIM)
 
 add_custom_target(readthedocs_symlinks
-    COMMAND ${CMAKE_COMMAND}
-            ${SCRIPT_MODE_CACHE}
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/readthedocs_symlinks.cmake
     VERBATIM)
 
