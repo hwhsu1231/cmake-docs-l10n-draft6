@@ -114,7 +114,7 @@ msgstr ""
 
 #: ../../../command/try_run.rst:85
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../command/try_run.rst:87
 msgid "The options specific to ``try_run`` are:"
