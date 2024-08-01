@@ -52,7 +52,7 @@ msgstr ""
 
 #: ../../../manual/ccmake.1.rst:28
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/OPTIONS_BUILD.txt:3
 msgid "Path to root directory of the CMake project to build."
