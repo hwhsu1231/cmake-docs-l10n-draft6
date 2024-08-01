@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       TYPE:
-        description: 'Set TYPE input'
+        description: 'TYPE input'
         required: true
         type: choice
         default: 'matrix'
@@ -17,17 +17,17 @@ on:
           - 'matrix'
           - 'single'
       VERSION:
-        description: 'Set VERSION input (for single type)'
+        description: 'VERSION input (for single type)'
         required: true
         type: string
         default: 'git-master'
       LANGUAGE:
-        description: 'Set LANGUAGE input (for single type)'
+        description: 'LANGUAGE input (for single type)'
         required: true
         type: string
         default: 'all'
       UPDATE_MODE:
-        description: 'Set UPDATE_MODE input'
+        description: 'UPDATE_MODE input'
         required: true
         type: choice
         default: 'COMPARE'
@@ -36,7 +36,7 @@ on:
           - 'ALWAYS'
           - 'NEVER'
       VERSION_GROUP:
-        description: 'Set VERSION_GROUP input (for matrix type)'
+        description: 'VERSION_GROUP input (for matrix type)'
         required: true
         type: choice
         default: 'include'

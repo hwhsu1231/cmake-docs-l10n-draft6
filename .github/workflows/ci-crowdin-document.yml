@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     # inputs:
     #   LANGUAGE:
-    #     description: 'Set LANGUAGE input'
+    #     description: 'LANGUAGE input'
     #     required: true
     #     type: string
     #     default: 'all'
