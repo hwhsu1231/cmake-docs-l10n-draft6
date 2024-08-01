@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,30 +37,30 @@ msgstr "目錄的屬性"
 msgid "Properties on Targets"
 msgstr "目標的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:507
+#: ../../../manual/cmake-properties.7.rst:508
 msgid "Properties on Tests"
 msgstr "測試的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:545
+#: ../../../manual/cmake-properties.7.rst:546
 msgid "Properties on Source Files"
 msgstr "來源檔的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:607
+#: ../../../manual/cmake-properties.7.rst:608
 msgid "Properties on Cache Entries"
 msgstr "快取條目的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:622
+#: ../../../manual/cmake-properties.7.rst:623
 msgid "Properties on Installed Files"
 msgstr "安裝檔案的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:636
+#: ../../../manual/cmake-properties.7.rst:637
 msgid "Deprecated Properties on Directories"
 msgstr "已棄用的目錄的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:649
+#: ../../../manual/cmake-properties.7.rst:650
 msgid "Deprecated Properties on Targets"
 msgstr "已棄用的目標的屬性"
 
-#: ../../../manual/cmake-properties.7.rst:663
+#: ../../../manual/cmake-properties.7.rst:664
 msgid "Deprecated Properties on Source Files"
 msgstr "已棄用的來源檔的屬性"

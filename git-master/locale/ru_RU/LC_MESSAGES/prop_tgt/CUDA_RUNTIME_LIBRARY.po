@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "The allowed case insensitive values are:"
 msgstr ""
 
-#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:1
+#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:2
 msgid "``None``"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgid ""
 "library."
 msgstr ""
 
-#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:4
+#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:5
 msgid "``Shared``"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgid ""
 "linked CUDA runtime library."
 msgstr ""
 
-#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:7
+#: ../../../prop_tgt/CUDA_RUNTIME_LIBRARY-VALUES.txt:9
 msgid "``Static``"
 msgstr ""
 

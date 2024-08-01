@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgid ""
 "configured into the file:"
 msgstr ""
 
-#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:15
+#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:18
 msgid "``MACOSX_FRAMEWORK_BUNDLE_NAME``"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Sets ``CFBundleName``."
 msgstr ""
 
-#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:20
+#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:21
 msgid "``MACOSX_FRAMEWORK_BUNDLE_VERSION``"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Sets ``CFBundleVersion``."
 msgstr ""
 
-#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:23
+#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:24
 msgid "``MACOSX_FRAMEWORK_ICON_FILE``"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Sets ``CFBundleIconFile``."
 msgstr ""
 
-#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:26
+#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:27
 msgid "``MACOSX_FRAMEWORK_IDENTIFIER``"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Sets ``CFBundleIdentifier``."
 msgstr ""
 
-#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:29
+#: ../../../prop_tgt/MACOSX_FRAMEWORK_INFO_PLIST.rst:30
 msgid "``MACOSX_FRAMEWORK_SHORT_VERSION_STRING``"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 msgid "High level meta features indicating C standard support"
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:23
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:24
 msgid "``c_std_90``"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Compiler mode is at least C 90."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:26
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:27
 msgid "``c_std_99``"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Compiler mode is at least C 99."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:29
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:30
 msgid "``c_std_11``"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Compiler mode is at least C 11."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:32
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:35
 msgid "``c_std_17``"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Compiler mode is at least C 17."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:37
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:40
 msgid "``c_std_23``"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "Low level individual compile features"
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:47
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:48
 msgid "``c_function_prototypes``"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Function prototypes, as defined in ``ISO/IEC 9899:1990``."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:50
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:51
 msgid "``c_restrict``"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 msgid "``restrict`` keyword, as defined in ``ISO/IEC 9899:1999``."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:53
+#: ../../../prop_gbl/CMAKE_C_KNOWN_FEATURES.rst:54
 msgid "``c_static_assert``"
 msgstr ""
 

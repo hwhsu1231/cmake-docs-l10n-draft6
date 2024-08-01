@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "This \"extra\" generator may be specified as:"
 msgstr ""
 
-#: ../../../generator/CodeLite.rst:26
+#: ../../../generator/CodeLite.rst:27
 msgid "``CodeLite - MinGW Makefiles``"
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Generate with :generator:`MinGW Makefiles`."
 msgstr ""
 
-#: ../../../generator/CodeLite.rst:29
+#: ../../../generator/CodeLite.rst:30
 msgid "``CodeLite - NMake Makefiles``"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Generate with :generator:`NMake Makefiles`."
 msgstr ""
 
-#: ../../../generator/CodeLite.rst:32
+#: ../../../generator/CodeLite.rst:33
 msgid "``CodeLite - Ninja``"
 msgstr ""
 

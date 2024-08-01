@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,13 @@ msgid ""
 "`CMP0133`."
 msgstr ""
 
-#: ../../../variable/CMAKE_POLICY_WARNING_CMPNNNN.rst:42
+#: ../../../variable/CMAKE_POLICY_WARNING_CMPNNNN.rst:41
+msgid ""
+"``CMAKE_POLICY_WARNING_CMP0172`` controls the warning for policy :policy:"
+"`CMP0172`."
+msgstr ""
+
+#: ../../../variable/CMAKE_POLICY_WARNING_CMPNNNN.rst:44
 msgid ""
 "This variable should not be set by a project in CMake code.  Project "
 "developers running CMake may set this variable in their cache to enable the "

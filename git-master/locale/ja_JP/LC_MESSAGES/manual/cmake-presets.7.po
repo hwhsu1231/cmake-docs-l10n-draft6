@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,7 +194,7 @@ msgstr ""
 msgid "The root object recognizes the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:47
+#: ../../../manual/cmake-presets.7.rst:54
 msgid "``$schema``"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgid ""
 "files specifying version ``8`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:56
+#: ../../../manual/cmake-presets.7.rst:88
 msgid "``version``"
 msgstr ""
 
@@ -219,47 +219,47 @@ msgid ""
 "supported versions are:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:60
+#: ../../../manual/cmake-presets.7.rst:61
 msgid "``1``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:63
+#: ../../../manual/cmake-presets.7.rst:64
 msgid "``2``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:66
+#: ../../../manual/cmake-presets.7.rst:67
 msgid "``3``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:69
+#: ../../../manual/cmake-presets.7.rst:70
 msgid "``4``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:72
+#: ../../../manual/cmake-presets.7.rst:73
 msgid "``5``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:75
+#: ../../../manual/cmake-presets.7.rst:76
 msgid "``6``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:78
+#: ../../../manual/cmake-presets.7.rst:79
 msgid "``7``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:81
+#: ../../../manual/cmake-presets.7.rst:82
 msgid "``8``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:84
+#: ../../../manual/cmake-presets.7.rst:85
 msgid "``9``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:87
+#: ../../../manual/cmake-presets.7.rst:88
 msgid "``10``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:90
+#: ../../../manual/cmake-presets.7.rst:101
 msgid "``cmakeMinimumRequired``"
 msgstr ""
 
@@ -269,7 +269,7 @@ msgid ""
 "this project. This object consists of the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:94
+#: ../../../manual/cmake-presets.7.rst:95
 msgid "``major``"
 msgstr ""
 
@@ -277,7 +277,7 @@ msgstr ""
 msgid "An optional integer representing the major version."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:97
+#: ../../../manual/cmake-presets.7.rst:98
 msgid "``minor``"
 msgstr ""
 
@@ -285,7 +285,7 @@ msgstr ""
 msgid "An optional integer representing the minor version."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:100
+#: ../../../manual/cmake-presets.7.rst:101
 msgid "``patch``"
 msgstr ""
 
@@ -293,8 +293,8 @@ msgstr ""
 msgid "An optional integer representing the patch version."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:103
-#: ../../../manual/cmake-presets.7.rst:783
+#: ../../../manual/cmake-presets.7.rst:107
+#: ../../../manual/cmake-presets.7.rst:820
 msgid "``include``"
 msgstr ""
 
@@ -306,12 +306,12 @@ msgid ""
 "for discussion of the constraints on included files."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:109
-#: ../../../manual/cmake-presets.7.rst:206
-#: ../../../manual/cmake-presets.7.rst:482
-#: ../../../manual/cmake-presets.7.rst:643
-#: ../../../manual/cmake-presets.7.rst:984
-#: ../../../manual/cmake-presets.7.rst:1087
+#: ../../../manual/cmake-presets.7.rst:115
+#: ../../../manual/cmake-presets.7.rst:212
+#: ../../../manual/cmake-presets.7.rst:488
+#: ../../../manual/cmake-presets.7.rst:649
+#: ../../../manual/cmake-presets.7.rst:990
+#: ../../../manual/cmake-presets.7.rst:1091
 msgid "``vendor``"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgid ""
 "desired by the vendor, though will typically be a map."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:117
+#: ../../../manual/cmake-presets.7.rst:119
 msgid "``configurePresets``"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgid ""
 "files specifying version ``1`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:121
+#: ../../../manual/cmake-presets.7.rst:123
 msgid "``buildPresets``"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgid ""
 "files specifying version ``2`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:125
+#: ../../../manual/cmake-presets.7.rst:127
 msgid "``testPresets``"
 msgstr ""
 
@@ -355,7 +355,7 @@ msgid ""
 "specifying version ``2`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:129
+#: ../../../manual/cmake-presets.7.rst:131
 msgid "``packagePresets``"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgid ""
 "files specifying version ``6`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:133
+#: ../../../manual/cmake-presets.7.rst:135
 msgid "``workflowPresets``"
 msgstr ""
 
@@ -424,14 +424,14 @@ msgid ""
 "contain the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:169
-#: ../../../manual/cmake-presets.7.rst:444
-#: ../../../manual/cmake-presets.7.rst:606
-#: ../../../manual/cmake-presets.7.rst:787
-#: ../../../manual/cmake-presets.7.rst:826
-#: ../../../manual/cmake-presets.7.rst:948
-#: ../../../manual/cmake-presets.7.rst:1078
-#: ../../../manual/cmake-presets.7.rst:1109
+#: ../../../manual/cmake-presets.7.rst:175
+#: ../../../manual/cmake-presets.7.rst:451
+#: ../../../manual/cmake-presets.7.rst:612
+#: ../../../manual/cmake-presets.7.rst:791
+#: ../../../manual/cmake-presets.7.rst:829
+#: ../../../manual/cmake-presets.7.rst:954
+#: ../../../manual/cmake-presets.7.rst:1085
+#: ../../../manual/cmake-presets.7.rst:1111
 msgid "``name``"
 msgstr ""
 
@@ -445,10 +445,10 @@ msgid ""
 "package, or workflow preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:177
-#: ../../../manual/cmake-presets.7.rst:453
-#: ../../../manual/cmake-presets.7.rst:614
-#: ../../../manual/cmake-presets.7.rst:956
+#: ../../../manual/cmake-presets.7.rst:183
+#: ../../../manual/cmake-presets.7.rst:459
+#: ../../../manual/cmake-presets.7.rst:620
+#: ../../../manual/cmake-presets.7.rst:962
 msgid "``hidden``"
 msgstr ""
 
@@ -462,10 +462,10 @@ msgid ""
 "inherit via the ``inherits`` field."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:185
-#: ../../../manual/cmake-presets.7.rst:461
-#: ../../../manual/cmake-presets.7.rst:622
-#: ../../../manual/cmake-presets.7.rst:964
+#: ../../../manual/cmake-presets.7.rst:200
+#: ../../../manual/cmake-presets.7.rst:476
+#: ../../../manual/cmake-presets.7.rst:637
+#: ../../../manual/cmake-presets.7.rst:979
 msgid "``inherits``"
 msgstr ""
 
@@ -502,11 +502,11 @@ msgid ""
 "json``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:202
-#: ../../../manual/cmake-presets.7.rst:478
-#: ../../../manual/cmake-presets.7.rst:639
-#: ../../../manual/cmake-presets.7.rst:981
-#: ../../../manual/cmake-presets.7.rst:1192
+#: ../../../manual/cmake-presets.7.rst:204
+#: ../../../manual/cmake-presets.7.rst:480
+#: ../../../manual/cmake-presets.7.rst:641
+#: ../../../manual/cmake-presets.7.rst:982
+#: ../../../manual/cmake-presets.7.rst:1193
 msgid "``condition``"
 msgstr ""
 
@@ -530,11 +530,11 @@ msgid ""
 "should implement inheritance in a sensible manner when appropriate."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:214
-#: ../../../manual/cmake-presets.7.rst:490
-#: ../../../manual/cmake-presets.7.rst:651
-#: ../../../manual/cmake-presets.7.rst:992
-#: ../../../manual/cmake-presets.7.rst:1093
+#: ../../../manual/cmake-presets.7.rst:215
+#: ../../../manual/cmake-presets.7.rst:491
+#: ../../../manual/cmake-presets.7.rst:652
+#: ../../../manual/cmake-presets.7.rst:993
+#: ../../../manual/cmake-presets.7.rst:1094
 msgid "``displayName``"
 msgstr ""
 
@@ -546,11 +546,11 @@ msgstr ""
 msgid "An optional string with a human-friendly name of the preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:217
-#: ../../../manual/cmake-presets.7.rst:493
-#: ../../../manual/cmake-presets.7.rst:654
-#: ../../../manual/cmake-presets.7.rst:995
-#: ../../../manual/cmake-presets.7.rst:1096
+#: ../../../manual/cmake-presets.7.rst:218
+#: ../../../manual/cmake-presets.7.rst:494
+#: ../../../manual/cmake-presets.7.rst:655
+#: ../../../manual/cmake-presets.7.rst:996
+#: ../../../manual/cmake-presets.7.rst:1097
 msgid "``description``"
 msgstr ""
 
@@ -562,7 +562,7 @@ msgstr ""
 msgid "An optional string with a human-friendly description of the preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:220
+#: ../../../manual/cmake-presets.7.rst:229
 msgid "``generator``"
 msgstr ""
 
@@ -581,7 +581,7 @@ msgid ""
 "generator name. Use the ``architecture`` field instead."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:231
+#: ../../../manual/cmake-presets.7.rst:260
 msgid "``architecture``, ``toolset``"
 msgstr ""
 
@@ -601,9 +601,9 @@ msgstr ""
 msgid "Each may be either a string or an object with the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:240
-#: ../../../manual/cmake-presets.7.rst:299
-#: ../../../manual/cmake-presets.7.rst:1134
+#: ../../../manual/cmake-presets.7.rst:241
+#: ../../../manual/cmake-presets.7.rst:302
+#: ../../../manual/cmake-presets.7.rst:1136
 msgid "``value``"
 msgstr ""
 
@@ -611,7 +611,7 @@ msgstr ""
 msgid "An optional string representing the value."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:243
+#: ../../../manual/cmake-presets.7.rst:260
 msgid "``strategy``"
 msgstr ""
 
@@ -621,7 +621,7 @@ msgid ""
 "``toolset`` field. Valid values are:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:247
+#: ../../../manual/cmake-presets.7.rst:249
 msgid "``\"set\"``"
 msgstr ""
 
@@ -631,7 +631,7 @@ msgid ""
 "do not support the respective field."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:251
+#: ../../../manual/cmake-presets.7.rst:257
 msgid "``\"external\"``"
 msgstr ""
 
@@ -650,7 +650,7 @@ msgid ""
 "rather than the object form, the behavior is the same as ``\"set\"``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:262
+#: ../../../manual/cmake-presets.7.rst:268
 msgid "``toolchainFile``"
 msgstr ""
 
@@ -664,7 +664,7 @@ msgid ""
 "version ``3`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:270
+#: ../../../manual/cmake-presets.7.rst:276
 msgid "``binaryDir``"
 msgstr ""
 
@@ -677,7 +677,7 @@ msgid ""
 "preset is ``hidden``). In version ``3`` or above, this field may be omitted."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:278
+#: ../../../manual/cmake-presets.7.rst:282
 msgid "``installDir``"
 msgstr ""
 
@@ -689,7 +689,7 @@ msgid ""
 "specifying version ``3`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:284
+#: ../../../manual/cmake-presets.7.rst:287
 msgid "``cmakeExecutable``"
 msgstr ""
 
@@ -700,7 +700,7 @@ msgid ""
 "itself. IDEs that use this field should expand any macros in it."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:289
+#: ../../../manual/cmake-presets.7.rst:309
 msgid "``cacheVariables``"
 msgstr ""
 
@@ -713,9 +713,9 @@ msgid ""
 "`macro expansion`_), or an object with the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:296
-#: ../../../manual/cmake-presets.7.rst:1105
-#: ../../../manual/cmake-presets.7.rst:1126
+#: ../../../manual/cmake-presets.7.rst:297
+#: ../../../manual/cmake-presets.7.rst:1107
+#: ../../../manual/cmake-presets.7.rst:1193
 msgid "``type``"
 msgstr ""
 
@@ -740,10 +740,10 @@ msgid ""
 "inherited from another preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:311
-#: ../../../manual/cmake-presets.7.rst:496
-#: ../../../manual/cmake-presets.7.rst:657
-#: ../../../manual/cmake-presets.7.rst:998
+#: ../../../manual/cmake-presets.7.rst:326
+#: ../../../manual/cmake-presets.7.rst:524
+#: ../../../manual/cmake-presets.7.rst:672
+#: ../../../manual/cmake-presets.7.rst:1013
 msgid "``environment``"
 msgstr ""
 
@@ -772,7 +772,7 @@ msgid ""
 "inherited from another preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:328
+#: ../../../manual/cmake-presets.7.rst:357
 msgid "``warnings``"
 msgstr ""
 
@@ -782,8 +782,8 @@ msgid ""
 "the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:332
-#: ../../../manual/cmake-presets.7.rst:363
+#: ../../../manual/cmake-presets.7.rst:335
+#: ../../../manual/cmake-presets.7.rst:366
 msgid "``dev``"
 msgstr ""
 
@@ -794,8 +794,8 @@ msgid ""
 "to ``false`` if ``errors.dev`` is set to ``true``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:337
-#: ../../../manual/cmake-presets.7.rst:368
+#: ../../../manual/cmake-presets.7.rst:342
+#: ../../../manual/cmake-presets.7.rst:373
 msgid "``deprecated``"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgid ""
 "set to ``true``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:344
+#: ../../../manual/cmake-presets.7.rst:347
 msgid "``uninitialized``"
 msgstr ""
 
@@ -818,7 +818,7 @@ msgid ""
 "line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:349
+#: ../../../manual/cmake-presets.7.rst:352
 msgid "``unusedCli``"
 msgstr ""
 
@@ -829,7 +829,7 @@ msgid ""
 "line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:354
+#: ../../../manual/cmake-presets.7.rst:357
 msgid "``systemVars``"
 msgstr ""
 
@@ -839,7 +839,7 @@ msgid ""
 "option:`--check-system-vars <cmake --check-system-vars>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:359
+#: ../../../manual/cmake-presets.7.rst:373
 msgid "``errors``"
 msgstr ""
 
@@ -864,9 +864,9 @@ msgid ""
 "set to ``false``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:375
-#: ../../../manual/cmake-presets.7.rst:721
-#: ../../../manual/cmake-presets.7.rst:1047
+#: ../../../manual/cmake-presets.7.rst:390
+#: ../../../manual/cmake-presets.7.rst:723
+#: ../../../manual/cmake-presets.7.rst:1050
 msgid "``debug``"
 msgstr ""
 
@@ -876,9 +876,9 @@ msgid ""
 "following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:379
-#: ../../../manual/cmake-presets.7.rst:698
-#: ../../../manual/cmake-presets.7.rst:1044
+#: ../../../manual/cmake-presets.7.rst:381
+#: ../../../manual/cmake-presets.7.rst:777
+#: ../../../manual/cmake-presets.7.rst:1055
 msgid "``output``"
 msgstr ""
 
@@ -888,7 +888,7 @@ msgid ""
 "option:`--debug-output <cmake --debug-output>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:383
+#: ../../../manual/cmake-presets.7.rst:386
 msgid "``tryCompile``"
 msgstr ""
 
@@ -898,7 +898,7 @@ msgid ""
 "option:`--debug-trycompile <cmake --debug-trycompile>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:388
+#: ../../../manual/cmake-presets.7.rst:390
 msgid "``find``"
 msgstr ""
 
@@ -908,7 +908,7 @@ msgid ""
 "option:`--debug-find <cmake --debug-find>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:392
+#: ../../../manual/cmake-presets.7.rst:436
 msgid "``trace``"
 msgstr ""
 
@@ -918,8 +918,8 @@ msgid ""
 "specifying version ``7``. The object may contain the following fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:396
-#: ../../../manual/cmake-presets.7.rst:898
+#: ../../../manual/cmake-presets.7.rst:410
+#: ../../../manual/cmake-presets.7.rst:905
 msgid "``mode``"
 msgstr ""
 
@@ -927,8 +927,8 @@ msgstr ""
 msgid "An optional string that specifies the trace mode. Valid values are:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:399
-#: ../../../manual/cmake-presets.7.rst:567
+#: ../../../manual/cmake-presets.7.rst:402
+#: ../../../manual/cmake-presets.7.rst:568
 msgid "``on``"
 msgstr ""
 
@@ -938,8 +938,8 @@ msgid ""
 "passing :option:`--trace <cmake --trace>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:404
-#: ../../../manual/cmake-presets.7.rst:570
+#: ../../../manual/cmake-presets.7.rst:405
+#: ../../../manual/cmake-presets.7.rst:572
 msgid "``off``"
 msgstr ""
 
@@ -947,7 +947,7 @@ msgstr ""
 msgid "A trace of all calls will not be printed."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:407
+#: ../../../manual/cmake-presets.7.rst:410
 msgid "``expand``"
 msgstr ""
 
@@ -958,7 +958,7 @@ msgid ""
 "expand>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:412
+#: ../../../manual/cmake-presets.7.rst:425
 msgid "``format``"
 msgstr ""
 
@@ -968,7 +968,7 @@ msgid ""
 "values are:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:416
+#: ../../../manual/cmake-presets.7.rst:420
 #: ../../../manual/cmake-presets.7.rst:889
 msgid "``human``"
 msgstr ""
@@ -980,7 +980,7 @@ msgid ""
 "format>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:422
+#: ../../../manual/cmake-presets.7.rst:425
 #: ../../../manual/cmake-presets.7.rst:891
 msgid "``json-v1``"
 msgstr ""
@@ -991,7 +991,7 @@ msgid ""
 "`--trace-format=json-v1 <cmake --trace-format>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:427
+#: ../../../manual/cmake-presets.7.rst:431
 msgid "``source``"
 msgstr ""
 
@@ -1003,7 +1003,7 @@ msgid ""
 "--trace-source>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:433
+#: ../../../manual/cmake-presets.7.rst:436
 msgid "``redirect``"
 msgstr ""
 
@@ -1070,9 +1070,9 @@ msgid ""
 "than the top-level CMake project."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:526
-#: ../../../manual/cmake-presets.7.rst:674
-#: ../../../manual/cmake-presets.7.rst:1015
+#: ../../../manual/cmake-presets.7.rst:532
+#: ../../../manual/cmake-presets.7.rst:680
+#: ../../../manual/cmake-presets.7.rst:1021
 msgid "``configurePreset``"
 msgstr ""
 
@@ -1085,9 +1085,9 @@ msgid ""
 "place in the same ``binaryDir`` that the configuration did."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:534
-#: ../../../manual/cmake-presets.7.rst:682
-#: ../../../manual/cmake-presets.7.rst:1023
+#: ../../../manual/cmake-presets.7.rst:538
+#: ../../../manual/cmake-presets.7.rst:686
+#: ../../../manual/cmake-presets.7.rst:1027
 msgid "``inheritConfigureEnvironment``"
 msgstr ""
 
@@ -1099,8 +1099,8 @@ msgid ""
 "explicitly specified in this build preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:540
-#: ../../../manual/cmake-presets.7.rst:871
+#: ../../../manual/cmake-presets.7.rst:542
+#: ../../../manual/cmake-presets.7.rst:873
 msgid "``jobs``"
 msgstr ""
 
@@ -1110,7 +1110,7 @@ msgid ""
 "--parallel>` or ``-j`` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:544
+#: ../../../manual/cmake-presets.7.rst:548
 msgid "``targets``"
 msgstr ""
 
@@ -1122,8 +1122,8 @@ msgid ""
 "targets. This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:550
-#: ../../../manual/cmake-presets.7.rst:688
+#: ../../../manual/cmake-presets.7.rst:552
+#: ../../../manual/cmake-presets.7.rst:690
 msgid "``configuration``"
 msgstr ""
 
@@ -1133,7 +1133,7 @@ msgid ""
 "config>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:554
+#: ../../../manual/cmake-presets.7.rst:556
 msgid "``cleanFirst``"
 msgstr ""
 
@@ -1143,7 +1143,7 @@ msgid ""
 "<cmake--build --clean-first>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:558
+#: ../../../manual/cmake-presets.7.rst:590
 msgid "``resolvePackageReferences``"
 msgstr ""
 
@@ -1171,7 +1171,7 @@ msgid ""
 "some build environments, such as .NET SDK style projects."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:574
+#: ../../../manual/cmake-presets.7.rst:575
 msgid "``only``"
 msgstr ""
 
@@ -1197,9 +1197,9 @@ msgid ""
 "done from within a configure preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:592
-#: ../../../manual/cmake-presets.7.rst:713
-#: ../../../manual/cmake-presets.7.rst:1052
+#: ../../../manual/cmake-presets.7.rst:594
+#: ../../../manual/cmake-presets.7.rst:715
+#: ../../../manual/cmake-presets.7.rst:1055
 msgid "``verbose``"
 msgstr ""
 
@@ -1209,7 +1209,7 @@ msgid ""
 "build --verbose>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:596
+#: ../../../manual/cmake-presets.7.rst:598
 msgid "``nativeToolOptions``"
 msgstr ""
 
@@ -1271,7 +1271,7 @@ msgid ""
 "build-config>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:692
+#: ../../../manual/cmake-presets.7.rst:696
 msgid "``overwriteConfigurationFile``"
 msgstr ""
 
@@ -1289,7 +1289,7 @@ msgid ""
 "following fields."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:702
+#: ../../../manual/cmake-presets.7.rst:704
 msgid "``shortProgress``"
 msgstr ""
 
@@ -1299,7 +1299,7 @@ msgid ""
 "--progress>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:706
+#: ../../../manual/cmake-presets.7.rst:719
 msgid "``verbosity``"
 msgstr ""
 
@@ -1308,8 +1308,8 @@ msgid ""
 "An optional string specifying verbosity level. Must be one of the following:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:710
-#: ../../../manual/cmake-presets.7.rst:930
+#: ../../../manual/cmake-presets.7.rst:711
+#: ../../../manual/cmake-presets.7.rst:931
 msgid "``default``"
 msgstr ""
 
@@ -1323,7 +1323,7 @@ msgid ""
 "line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:717
+#: ../../../manual/cmake-presets.7.rst:719
 msgid "``extra``"
 msgstr ""
 
@@ -1339,7 +1339,7 @@ msgid ""
 "debug>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:725
+#: ../../../manual/cmake-presets.7.rst:728
 msgid "``outputOnFailure``"
 msgstr ""
 
@@ -1349,7 +1349,7 @@ msgid ""
 "failure <ctest --output-on-failure>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:730
+#: ../../../manual/cmake-presets.7.rst:732
 msgid "``quiet``"
 msgstr ""
 
@@ -1359,7 +1359,7 @@ msgid ""
 "quiet>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:734
+#: ../../../manual/cmake-presets.7.rst:737
 msgid "``outputLogFile``"
 msgstr ""
 
@@ -1370,7 +1370,7 @@ msgid ""
 "supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:739
+#: ../../../manual/cmake-presets.7.rst:743
 msgid "``outputJUnitFile``"
 msgstr ""
 
@@ -1382,7 +1382,7 @@ msgid ""
 "version ``6`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:745
+#: ../../../manual/cmake-presets.7.rst:748
 msgid "``labelSummary``"
 msgstr ""
 
@@ -1392,7 +1392,7 @@ msgid ""
 "summary <ctest --no-label-summary>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:750
+#: ../../../manual/cmake-presets.7.rst:753
 msgid "``subprojectSummary``"
 msgstr ""
 
@@ -1402,7 +1402,7 @@ msgid ""
 "summary <ctest --no-subproject-summary>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:755
+#: ../../../manual/cmake-presets.7.rst:759
 msgid "``maxPassedTestOutputSize``"
 msgstr ""
 
@@ -1413,7 +1413,7 @@ msgid ""
 "output-size-passed>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:761
+#: ../../../manual/cmake-presets.7.rst:765
 msgid "``maxFailedTestOutputSize``"
 msgstr ""
 
@@ -1424,7 +1424,7 @@ msgid ""
 "output-size-failed>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:767
+#: ../../../manual/cmake-presets.7.rst:772
 msgid "``testOutputTruncation``"
 msgstr ""
 
@@ -1436,7 +1436,7 @@ msgid ""
 "``5`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:774
+#: ../../../manual/cmake-presets.7.rst:777
 msgid "``maxTestNameWidth``"
 msgstr ""
 
@@ -1447,7 +1447,7 @@ msgid ""
 "command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:779
+#: ../../../manual/cmake-presets.7.rst:856
 msgid "``filter``"
 msgstr ""
 
@@ -1471,8 +1471,8 @@ msgid ""
 "`string(REGEX) <Regex Specification>`."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:793
-#: ../../../manual/cmake-presets.7.rst:831
+#: ../../../manual/cmake-presets.7.rst:796
+#: ../../../manual/cmake-presets.7.rst:834
 msgid "``label``"
 msgstr ""
 
@@ -1483,7 +1483,7 @@ msgid ""
 "This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:798
+#: ../../../manual/cmake-presets.7.rst:800
 msgid "``useUnion``"
 msgstr ""
 
@@ -1493,7 +1493,7 @@ msgid ""
 "the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:802
+#: ../../../manual/cmake-presets.7.rst:820
 msgid "``index``"
 msgstr ""
 
@@ -1506,7 +1506,7 @@ msgid ""
 "expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:809
+#: ../../../manual/cmake-presets.7.rst:810
 msgid "``start``"
 msgstr ""
 
@@ -1514,7 +1514,7 @@ msgstr ""
 msgid "An optional integer specifying a test index to start testing at."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:812
+#: ../../../manual/cmake-presets.7.rst:813
 msgid "``end``"
 msgstr ""
 
@@ -1522,7 +1522,7 @@ msgstr ""
 msgid "An optional integer specifying a test index to stop testing at."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:815
+#: ../../../manual/cmake-presets.7.rst:816
 msgid "``stride``"
 msgstr ""
 
@@ -1530,7 +1530,7 @@ msgstr ""
 msgid "An optional integer specifying the increment."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:818
+#: ../../../manual/cmake-presets.7.rst:820
 msgid "``specificTests``"
 msgstr ""
 
@@ -1538,7 +1538,7 @@ msgstr ""
 msgid "An optional array of integers specifying specific test indices to run."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:822
+#: ../../../manual/cmake-presets.7.rst:856
 msgid "``exclude``"
 msgstr ""
 
@@ -1562,7 +1562,7 @@ msgid ""
 "line. This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:836
+#: ../../../manual/cmake-presets.7.rst:856
 msgid "``fixtures``"
 msgstr ""
 
@@ -1572,7 +1572,7 @@ msgid ""
 "The object may contain the following fields."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:840
+#: ../../../manual/cmake-presets.7.rst:844
 msgid "``any``"
 msgstr ""
 
@@ -1584,7 +1584,7 @@ msgid ""
 "expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:846
+#: ../../../manual/cmake-presets.7.rst:850
 msgid "``setup``"
 msgstr ""
 
@@ -1596,7 +1596,7 @@ msgid ""
 "expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:852
+#: ../../../manual/cmake-presets.7.rst:856
 msgid "``cleanup``"
 msgstr ""
 
@@ -1608,7 +1608,7 @@ msgid ""
 "macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:858
+#: ../../../manual/cmake-presets.7.rst:939
 msgid "``execution``"
 msgstr ""
 
@@ -1618,7 +1618,7 @@ msgid ""
 "contain the following fields."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:862
+#: ../../../manual/cmake-presets.7.rst:865
 msgid "``stopOnFailure``"
 msgstr ""
 
@@ -1628,7 +1628,7 @@ msgid ""
 "<ctest --stop-on-failure>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:867
+#: ../../../manual/cmake-presets.7.rst:869
 msgid "``enableFailover``"
 msgstr ""
 
@@ -1644,7 +1644,7 @@ msgid ""
 "parallel>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:875
+#: ../../../manual/cmake-presets.7.rst:878
 msgid "``resourceSpecFile``"
 msgstr ""
 
@@ -1655,7 +1655,7 @@ msgid ""
 "expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:880
+#: ../../../manual/cmake-presets.7.rst:882
 msgid "``testLoad``"
 msgstr ""
 
@@ -1665,7 +1665,7 @@ msgid ""
 "test-load>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:884
+#: ../../../manual/cmake-presets.7.rst:891
 msgid "``showOnly``"
 msgstr ""
 
@@ -1675,7 +1675,7 @@ msgid ""
 "only>` on the command line. The string must be one of the following values:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:893
+#: ../../../manual/cmake-presets.7.rst:908
 msgid "``repeat``"
 msgstr ""
 
@@ -1702,7 +1702,7 @@ msgstr ""
 msgid "``after-timeout``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:907
+#: ../../../manual/cmake-presets.7.rst:908
 msgid "``count``"
 msgstr ""
 
@@ -1710,7 +1710,7 @@ msgstr ""
 msgid "A required integer."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:910
+#: ../../../manual/cmake-presets.7.rst:915
 msgid "``interactiveDebugging``"
 msgstr ""
 
@@ -1722,7 +1722,7 @@ msgid ""
 "interactive-debug-mode>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:917
+#: ../../../manual/cmake-presets.7.rst:920
 msgid "``scheduleRandom``"
 msgstr ""
 
@@ -1732,7 +1732,7 @@ msgid ""
 "<ctest --schedule-random>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:922
+#: ../../../manual/cmake-presets.7.rst:924
 msgid "``timeout``"
 msgstr ""
 
@@ -1742,7 +1742,7 @@ msgid ""
 "timeout>` on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:926
+#: ../../../manual/cmake-presets.7.rst:939
 msgid "``noTestsAction``"
 msgstr ""
 
@@ -1756,7 +1756,7 @@ msgstr ""
 msgid "Equivalent to not passing any value on the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:933
+#: ../../../manual/cmake-presets.7.rst:935
 msgid "``error``"
 msgstr ""
 
@@ -1766,7 +1766,7 @@ msgid ""
 "command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:937
+#: ../../../manual/cmake-presets.7.rst:939
 msgid "``ignore``"
 msgstr ""
 
@@ -1827,7 +1827,7 @@ msgid ""
 "explicitly specified in this package preset."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1029
+#: ../../../manual/cmake-presets.7.rst:1030
 msgid "``generators``"
 msgstr ""
 
@@ -1835,7 +1835,7 @@ msgstr ""
 msgid "An optional array of strings representing generators for CPack to use."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1032
+#: ../../../manual/cmake-presets.7.rst:1034
 msgid "``configurations``"
 msgstr ""
 
@@ -1845,7 +1845,7 @@ msgid ""
 "package."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1036
+#: ../../../manual/cmake-presets.7.rst:1039
 msgid "``variables``"
 msgstr ""
 
@@ -1856,7 +1856,7 @@ msgid ""
 "the string to assign to that variable."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1041
+#: ../../../manual/cmake-presets.7.rst:1042
 msgid "``configFile``"
 msgstr ""
 
@@ -1882,7 +1882,7 @@ msgid ""
 "the command line."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1057
+#: ../../../manual/cmake-presets.7.rst:1058
 msgid "``packageName``"
 msgstr ""
 
@@ -1890,7 +1890,7 @@ msgstr ""
 msgid "An optional string representing the package name."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1060
+#: ../../../manual/cmake-presets.7.rst:1061
 msgid "``packageVersion``"
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgstr ""
 msgid "An optional string representing the package version."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1063
+#: ../../../manual/cmake-presets.7.rst:1064
 msgid "``packageDirectory``"
 msgstr ""
 
@@ -1907,7 +1907,7 @@ msgid ""
 "An optional string representing the directory in which to place the package."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1066
+#: ../../../manual/cmake-presets.7.rst:1067
 msgid "``vendorName``"
 msgstr ""
 
@@ -1944,7 +1944,7 @@ msgid ""
 "``vendor`` field."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1099
+#: ../../../manual/cmake-presets.7.rst:1111
 msgid "``steps``"
 msgstr ""
 
@@ -1990,7 +1990,7 @@ msgstr ""
 msgid "A required string with one of the following values:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1129
+#: ../../../manual/cmake-presets.7.rst:1136
 msgid "``\"const\"``"
 msgstr ""
 
@@ -2011,7 +2011,7 @@ msgstr ""
 msgid "``\"equals\"``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1140
+#: ../../../manual/cmake-presets.7.rst:1149
 msgid "``\"notEquals\"``"
 msgstr ""
 
@@ -2022,7 +2022,7 @@ msgid ""
 "fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1145
+#: ../../../manual/cmake-presets.7.rst:1146
 msgid "``lhs``"
 msgstr ""
 
@@ -2030,7 +2030,7 @@ msgstr ""
 msgid "First string to compare. This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1148
+#: ../../../manual/cmake-presets.7.rst:1149
 msgid "``rhs``"
 msgstr ""
 
@@ -2042,7 +2042,7 @@ msgstr ""
 msgid "``\"inList\"``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1153
+#: ../../../manual/cmake-presets.7.rst:1162
 msgid "``\"notInList\"``"
 msgstr ""
 
@@ -2052,8 +2052,8 @@ msgid ""
 "condition object will have the following additional fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1157
-#: ../../../manual/cmake-presets.7.rst:1170
+#: ../../../manual/cmake-presets.7.rst:1158
+#: ../../../manual/cmake-presets.7.rst:1171
 msgid "``string``"
 msgstr ""
 
@@ -2061,7 +2061,7 @@ msgstr ""
 msgid "A required string to search for. This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1160
+#: ../../../manual/cmake-presets.7.rst:1162
 msgid "``list``"
 msgstr ""
 
@@ -2075,7 +2075,7 @@ msgstr ""
 msgid "``\"matches\"``"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1166
+#: ../../../manual/cmake-presets.7.rst:1175
 msgid "``\"notMatches\"``"
 msgstr ""
 
@@ -2089,7 +2089,7 @@ msgstr ""
 msgid "A required string to search. This field supports macro expansion."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1173
+#: ../../../manual/cmake-presets.7.rst:1175
 msgid "``regex``"
 msgstr ""
 
@@ -2113,7 +2113,7 @@ msgid ""
 "conditions. The condition object will have the following additional fields:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1184
+#: ../../../manual/cmake-presets.7.rst:1186
 msgid "``conditions``"
 msgstr ""
 
@@ -2123,7 +2123,7 @@ msgid ""
 "evaluation."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1188
+#: ../../../manual/cmake-presets.7.rst:1193
 msgid "``\"not\"``"
 msgstr ""
 
@@ -2164,7 +2164,7 @@ msgstr ""
 msgid "Recognized macros include:"
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1213
+#: ../../../manual/cmake-presets.7.rst:1215
 msgid "``${sourceDir}``"
 msgstr ""
 
@@ -2174,7 +2174,7 @@ msgid ""
 "`CMAKE_SOURCE_DIR`)."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1217
+#: ../../../manual/cmake-presets.7.rst:1218
 msgid "``${sourceParentDir}``"
 msgstr ""
 
@@ -2182,7 +2182,7 @@ msgstr ""
 msgid "Path to the project source directory's parent directory."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1220
+#: ../../../manual/cmake-presets.7.rst:1222
 msgid "``${sourceDirName}``"
 msgstr ""
 
@@ -2192,7 +2192,7 @@ msgid ""
 "``${sourceDir}`` is ``/path/to/source``, this would be ``source``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1224
+#: ../../../manual/cmake-presets.7.rst:1227
 msgid "``${presetName}``"
 msgstr ""
 
@@ -2205,7 +2205,7 @@ msgstr ""
 msgid "This is a preset-specific macro."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1229
+#: ../../../manual/cmake-presets.7.rst:1234
 msgid "``${generator}``"
 msgstr ""
 
@@ -2216,7 +2216,7 @@ msgid ""
 "``configurePreset``."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1236
+#: ../../../manual/cmake-presets.7.rst:1239
 msgid "``${hostSystemName}``"
 msgstr ""
 
@@ -2227,7 +2227,7 @@ msgid ""
 "``3`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1241
+#: ../../../manual/cmake-presets.7.rst:1243
 msgid "``${fileDir}``"
 msgstr ""
 
@@ -2237,7 +2237,7 @@ msgid ""
 "This is allowed in preset files specifying version ``4`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1245
+#: ../../../manual/cmake-presets.7.rst:1246
 msgid "``${dollar}``"
 msgstr ""
 
@@ -2245,7 +2245,7 @@ msgstr ""
 msgid "A literal dollar sign (``$``)."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1248
+#: ../../../manual/cmake-presets.7.rst:1256
 msgid "``${pathListSep}``"
 msgstr ""
 
@@ -2264,7 +2264,7 @@ msgstr ""
 msgid "This is allowed in preset files specifying version ``5`` or above."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1258
+#: ../../../manual/cmake-presets.7.rst:1268
 msgid "``$env{<variable-name>}``"
 msgstr ""
 
@@ -2285,7 +2285,7 @@ msgid ""
 "the casing of environment variable names consistent."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1270
+#: ../../../manual/cmake-presets.7.rst:1277
 msgid "``$penv{<variable-name>}``"
 msgstr ""
 
@@ -2299,7 +2299,7 @@ msgid ""
 "needed because ``$env{<variable-name>}`` does not allow circular references."
 msgstr ""
 
-#: ../../../manual/cmake-presets.7.rst:1279
+#: ../../../manual/cmake-presets.7.rst:1289
 msgid "``$vendor{<macro-name>}``"
 msgstr ""
 

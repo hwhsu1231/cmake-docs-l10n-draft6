@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/add_executable.rst:22
+#: ../../../command/add_executable.rst:24
 msgid "``WIN32``"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgid ""
 "documentation of that target property for details."
 msgstr ""
 
-#: ../../../command/add_executable.rst:26
+#: ../../../command/add_executable.rst:28
 msgid "``MACOSX_BUNDLE``"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgid ""
 "documentation of that target property for details."
 msgstr ""
 
-#: ../../../command/add_executable.rst:30
+#: ../../../command/add_executable.rst:31
 msgid "``EXCLUDE_FROM_ALL``"
 msgstr ""
 

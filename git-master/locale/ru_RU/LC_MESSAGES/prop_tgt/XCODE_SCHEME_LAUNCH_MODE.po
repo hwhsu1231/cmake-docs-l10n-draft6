@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Possible values are:"
 msgstr ""
 
-#: ../../../prop_tgt/XCODE_SCHEME_LAUNCH_MODE.rst:11
+#: ../../../prop_tgt/XCODE_SCHEME_LAUNCH_MODE.rst:12
 msgid "``AUTO``"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Launch automatically. This is the default."
 msgstr ""
 
-#: ../../../prop_tgt/XCODE_SCHEME_LAUNCH_MODE.rst:14
+#: ../../../prop_tgt/XCODE_SCHEME_LAUNCH_MODE.rst:15
 msgid "``WAIT``"
 msgstr ""
 

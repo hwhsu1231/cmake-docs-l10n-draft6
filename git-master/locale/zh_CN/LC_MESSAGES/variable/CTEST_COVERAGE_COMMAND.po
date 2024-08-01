@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgid ""
 "report program requires some named arguments."
 msgstr ""
 
-#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:49
+#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:50
 msgid "``--datafila``"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "path to the merged ``.ser`` file"
 msgstr ""
 
-#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:52
+#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:53
 msgid "``--destination``"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "path to put the output files(s)"
 msgstr ""
 
-#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:55
+#: ../../../variable/CTEST_COVERAGE_COMMAND.rst:56
 msgid "``--format``"
 msgstr ""
 

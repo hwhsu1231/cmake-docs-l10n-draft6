@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,7 +180,7 @@ msgstr ""
 msgid "The following built-in group features are pre-defined by CMake:"
 msgstr ""
 
-#: ../../../variable/LINK_GROUP_PREDEFINED_FEATURES.txt:1
+#: ../../../variable/LINK_GROUP_PREDEFINED_FEATURES.txt:22
 msgid "``RESCAN``"
 msgstr ""
 

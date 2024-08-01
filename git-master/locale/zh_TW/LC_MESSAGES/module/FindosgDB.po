@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Locate osgDB This module defines:"
 msgstr ""
 
-#: ../../../../Modules/FindosgDB.cmake:23
+#: ../../../../Modules/FindosgDB.cmake:24
 msgid "``OSGDB_FOUND``"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Was osgDB found?"
 msgstr ""
 
-#: ../../../../Modules/FindosgDB.cmake:26
+#: ../../../../Modules/FindosgDB.cmake:27
 msgid "``OSGDB_INCLUDE_DIR``"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Where to find the headers"
 msgstr ""
 
-#: ../../../../Modules/FindosgDB.cmake:29
+#: ../../../../Modules/FindosgDB.cmake:30
 msgid "``OSGDB_LIBRARIES``"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "The libraries to link against for the osgDB"
 msgstr ""
 
-#: ../../../../Modules/FindosgDB.cmake:32
+#: ../../../../Modules/FindosgDB.cmake:33
 msgid "``OSGDB_LIBRARY``"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "The osgDB library"
 msgstr ""
 
-#: ../../../../Modules/FindosgDB.cmake:35
+#: ../../../../Modules/FindosgDB.cmake:36
 msgid "``OSGDB_LIBRARY_DEBUG``"
 msgstr ""
 

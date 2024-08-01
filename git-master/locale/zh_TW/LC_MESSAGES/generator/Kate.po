@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "This \"extra\" generator may be specified as:"
 msgstr ""
 
-#: ../../../generator/Kate.rst:22
+#: ../../../generator/Kate.rst:23
 msgid "``Kate - MinGW Makefiles``"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Generate with :generator:`MinGW Makefiles`."
 msgstr ""
 
-#: ../../../generator/Kate.rst:25
+#: ../../../generator/Kate.rst:26
 msgid "``Kate - NMake Makefiles``"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Generate with :generator:`NMake Makefiles`."
 msgstr ""
 
-#: ../../../generator/Kate.rst:28
+#: ../../../generator/Kate.rst:29
 msgid "``Kate - Ninja``"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Generate with :generator:`Ninja`."
 msgstr ""
 
-#: ../../../generator/Kate.rst:31
+#: ../../../generator/Kate.rst:32
 msgid "``Kate - Ninja Multi-Config``"
 msgstr ""
 

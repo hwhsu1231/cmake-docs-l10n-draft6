@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "This module defines the following variables:"
 msgstr ""
 
-#: ../../../../Modules/FindPerl.cmake:12
+#: ../../../../Modules/FindPerl.cmake:13
 msgid "``PERL_EXECUTABLE``"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "The full path to Perl."
 msgstr ""
 
-#: ../../../../Modules/FindPerl.cmake:15
+#: ../../../../Modules/FindPerl.cmake:16
 msgid "``PERL_FOUND``"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "True if the Perl executable was found."
 msgstr ""
 
-#: ../../../../Modules/FindPerl.cmake:18
+#: ../../../../Modules/FindPerl.cmake:94
 msgid "``PERL_VERSION_STRING``"
 msgstr ""
 

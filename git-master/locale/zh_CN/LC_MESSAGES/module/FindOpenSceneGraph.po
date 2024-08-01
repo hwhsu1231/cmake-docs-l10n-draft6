@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid ""
 "for this (see :command:`find_library` CMake documentation)."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSceneGraph.cmake:47
+#: ../../../../Modules/FindOpenSceneGraph.cmake:48
 msgid "``<MODULE>_DIR``"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "``OSGDIR``"
 msgstr ""
 
-#: ../../../../Modules/FindOpenSceneGraph.cmake:54
+#: ../../../../Modules/FindOpenSceneGraph.cmake:56
 msgid "``OSG_ROOT``"
 msgstr ""
 

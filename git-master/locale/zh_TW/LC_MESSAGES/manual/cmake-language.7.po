@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -538,7 +538,7 @@ msgid ""
 "binding in the current scope:"
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:533
+#: ../../../manual/cmake-language.7.rst:534
 msgid "Block Scope"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgid ""
 "The :command:`block` command may create a new scope for variable bindings."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:536
+#: ../../../manual/cmake-language.7.rst:541
 msgid "Function Scope"
 msgstr ""
 
@@ -560,7 +560,7 @@ msgid ""
 "after the function returns."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:543
+#: ../../../manual/cmake-language.7.rst:552
 msgid "Directory Scope"
 msgstr ""
 
@@ -579,7 +579,7 @@ msgid ""
 "current directory scope."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:554
+#: ../../../manual/cmake-language.7.rst:559
 msgid "Persistent Cache"
 msgstr ""
 
@@ -637,7 +637,7 @@ msgid ""
 "differences:"
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:585
+#: ../../../manual/cmake-language.7.rst:587
 msgid "Scope"
 msgstr ""
 
@@ -647,7 +647,7 @@ msgid ""
 "cached."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:589
+#: ../../../manual/cmake-language.7.rst:591
 msgid "References"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgid ""
 "variable:`ENV` operator."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:593
+#: ../../../manual/cmake-language.7.rst:604
 msgid "Initialization"
 msgstr ""
 
@@ -676,7 +676,7 @@ msgid ""
 "command in a modified environment."
 msgstr ""
 
-#: ../../../manual/cmake-language.7.rst:606
+#: ../../../manual/cmake-language.7.rst:608
 msgid "Inspection"
 msgstr ""
 
