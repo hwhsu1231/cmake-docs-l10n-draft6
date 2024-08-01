@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../../command/project.rst:39
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../command/project.rst:41
 msgid "The options are:"
