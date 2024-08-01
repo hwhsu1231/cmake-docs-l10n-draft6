@@ -206,6 +206,8 @@ restore_cmake_message_indent()
 if(NOT UPDATE_REQUIRED)
     message(STATUS "No need to update .pot files.")
     return()
+else()
+    message(STATUS "Prepare to update .pot files.")
 endif()
 
 
@@ -268,7 +270,7 @@ execute_process(
     OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if(RES_VAR EQUAL 0)
-    get_filename_component(SPHINX_LIB_DIR ${OUT_VAR} DIRECTORY)
+    get_filename_component(SPHINX_LIB_DIR "${OUT_VAR}" DIRECTORY)
 else()
     string(APPEND FAILURE_REASON
     "The command failed with fatal errors.\n"

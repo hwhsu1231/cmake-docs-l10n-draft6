@@ -74,6 +74,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     if(NOT UPDATE_REQUIRED)
         message(STATUS "No need to update .po files for '${_LANGUAGE}' language.")
         continue()
+    else()
+        message(STATUS "Prepare to update .po files for '${_LANGUAGE}' language.")
     endif()
 
 

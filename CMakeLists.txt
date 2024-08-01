@@ -115,7 +115,7 @@ set(PROJ_L10N_VERSION_CROWDIN_DIR   "${PROJ_L10N_VERSION_DIR}/.crowdin")
 #]====================]
 
 set(LANGUAGES_JSON_PATH             "${PROJ_SOURCE_DIR}/languages.json")
-set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/reference.json")
+set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/references.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
 set(PREV_ENVIRONMENTS_YML_PATH      "${PROJ_VENV_DIR}/prev/environments.yml")
@@ -371,9 +371,9 @@ else()
     endif()
 endif()
 
-#[=============================================================[
-  Initialize a reference.json file in ${PROJ_L10N_VERSION_DIR}.
-#]=============================================================]
+#[==============================================================[
+  Initialize a references.json file in ${PROJ_L10N_VERSION_DIR}.
+#]==============================================================]
 
 init_references_json_file(
     IN_FILEPATH     "${REFERENCES_JSON_PATH}"

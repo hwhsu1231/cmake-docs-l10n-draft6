@@ -102,7 +102,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
-          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Build the 'gettext_update_po' target
         uses: ./.github/actions/cmake-build-target
@@ -116,7 +116,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.po'
-          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Get the Current Job's ID
         id: gcji

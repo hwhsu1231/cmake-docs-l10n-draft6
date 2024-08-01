@@ -123,11 +123,11 @@ jobs:
           cache-version-of-python: '[default]'
 
 
-      - name: Get Version Reference from reference.json
+      - name: Get Version Reference from references.json
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
-          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Get the Crowdin Language List
         id: gcll

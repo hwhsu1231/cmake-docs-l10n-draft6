@@ -104,7 +104,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
-          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Build the 'prepare_repositories' target
         uses: ./.github/actions/cmake-build-target
@@ -132,7 +132,7 @@ jobs:
         uses: ./.github/actions/get-version-ref-from-reference
         with:
           jq-filter: '.pot'
-          jq-file: 'l10n/${{ inputs.VERSION }}/reference.json'
+          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Set the Label List for the Pull Request
         id: sllpr

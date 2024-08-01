@@ -3,7 +3,7 @@
 
 name: get-version-ref-from-reference
 
-description: Get the Version Reference from reference.json
+description: Get the Version Reference from references.json
 
 inputs:
   jq-filter:
@@ -29,7 +29,7 @@ runs:
     # - https://github.com/peter-evans/create-pull-request/issues/2634#issuecomment-1870136711
     # - https://github.com/github/docs/issues/21529
     # - https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-    - name: Get the Version Reference from reference.json
+    - name: Get the Version Reference from references.json
       id: gvi
       shell: bash
       run: |
