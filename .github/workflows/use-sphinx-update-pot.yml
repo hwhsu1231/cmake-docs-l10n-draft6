@@ -71,8 +71,6 @@ jobs:
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
-        with:
-          cmake-version: '3.23'
 
       - name: Install Conda
         uses: ./.github/actions/install-conda

@@ -62,6 +62,9 @@ jobs:
           token: ${{ steps.ggat.outputs.token }}
           submodules: true
 
+      - name: Install CMake
+        uses: ./.github/actions/install-cmake
+
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
         with:
