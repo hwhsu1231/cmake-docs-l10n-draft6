@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../../../../Modules/FindCUDAToolkit.cmake:79
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../../Modules/FindCUDAToolkit.cmake:82
 msgid "``VERSION``"
