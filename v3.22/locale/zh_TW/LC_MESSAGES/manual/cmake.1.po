@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../../manual/cmake.1.rst:82
 msgid "Source Tree"
-msgstr ""
+msgstr "來源樹"
 
 #: ../../../manual/cmake.1.rst:78
 msgid ""
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../../../manual/cmake.1.rst:94
 msgid "Build Tree"
-msgstr ""
+msgstr "建置樹"
 
 #: ../../../manual/cmake.1.rst:85
 msgid ""
@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../../manual/cmake.1.rst:169
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/OPTIONS_BUILD.txt:2
 msgid "``-S <path-to-source>``"
