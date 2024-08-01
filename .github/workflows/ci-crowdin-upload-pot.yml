@@ -47,8 +47,57 @@ jobs:
       VERSION: ${{ github.event.client_payload.VERSION }}
       ENABLE_JOB: true
 
+  get-matrix:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION_LIST: ${{ steps.gvl.outputs.VERSION_LIST }}
+    steps:
+      - name: Checkout to '${{ github.ref }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Get VERSION_GROUP from Inputs or Schedule
+        id: gvg
+        shell: bash
+        run: |
+          INPUTS_VERSION_GROUP="${{ inputs.VERSION_GROUP }}"
+          GITHUB_EVENT_NAME="${{ github.event_name }}"
+          if [[ ${GITHUB_EVENT_NAME} == "workflow_dispatch" ]]; then
+            VERSION_GROUP="${INPUTS_VERSION_GROUP}"
+          fi
+          echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
+      - name: Get VERSION_LIST from versions.json
+        id: gvl
+        run: |
+          VERSION_GROUP="${{ steps.gvg.outputs.VERSION_GROUP }}"
+          JQ_FILE="versions.json"
+          JQ_FILTER=".${VERSION_GROUP} | map(select(.VERSION_COMPENDIUM == \"\") | .VERSION)"
+          VERSION_LIST=$(jq -c "${JQ_FILTER}" "${JQ_FILE}")
+          echo "VERSION_LIST=${VERSION_LIST}" >> ${GITHUB_OUTPUT}
+          echo "VERSION_LIST:"
+          echo "${VERSION_LIST}" | jq "."
+
+  matrix:
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
+    needs: get-matrix
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.VERSION }}
+      cancel-in-progress: true
+    strategy:
+      matrix: 
+        VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
+      fail-fast: false
+    uses: ./.github/workflows/use-crowdin-upload-pot.yml
+    with:
+      RUNNER: 'ubuntu-latest'
+      CHECKOUT: ${{ github.ref }}
+      VERSION: ${{ matrix.VERSION }}
+      ENABLE_JOB: true
+
   single:
-    if: (github.event_name == 'workflow_dispatch')
+    if: (github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}
