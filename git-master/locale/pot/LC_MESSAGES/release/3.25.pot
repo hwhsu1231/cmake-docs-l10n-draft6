@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,7 +322,7 @@ msgstr ""
 msgid "The :module:`FindVulkan` module gained support for new components:"
 msgstr ""
 
-#: ../../../release/3.25.rst:188
+#: ../../../release/3.25.rst:189
 msgid "``dxc``"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "DirectX Shader Compiler."
 msgstr ""
 
-#: ../../../release/3.25.rst:191
+#: ../../../release/3.25.rst:192
 msgid "``volk``"
 msgstr ""
 

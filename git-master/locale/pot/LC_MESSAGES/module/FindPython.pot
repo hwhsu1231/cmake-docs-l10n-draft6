@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,7 +136,7 @@ msgid ""
 "`CMAKE_ROLE` is ``PROJECT``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:79
+#: ../../../../Modules/FindPython.cmake:80
 msgid "``Python::Interpreter``"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgid ""
 "component is found."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:82
+#: ../../../../Modules/FindPython.cmake:87
 msgid "``Python::InterpreterDebug``"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid ""
 "The target is only defined on the ``Windows`` platform."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:89
+#: ../../../../Modules/FindPython.cmake:94
 msgid "``Python::InterpreterMultiConfig``"
 msgstr ""
 
@@ -168,7 +168,7 @@ msgid ""
 "only if the ``Interpreter`` component is found"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:96
+#: ../../../../Modules/FindPython.cmake:98
 msgid "``Python::Compiler``"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgid ""
 "is found."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:100
+#: ../../../../Modules/FindPython.cmake:104
 msgid "``Python::Module``"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgid ""
 "Module`` is found."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:106
+#: ../../../../Modules/FindPython.cmake:110
 msgid "``Python::SABIModule``"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgid ""
 "Interface. Target defined if component ``Development.SABIModule`` is found."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:112
+#: ../../../../Modules/FindPython.cmake:114
 msgid "``Python::Python``"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgid ""
 "``Development.Embed`` is found."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:116
+#: ../../../../Modules/FindPython.cmake:119
 msgid "``Python::NumPy``"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgid "System has the Python interpreter."
 msgstr ""
 
 #: ../../../../Modules/FindPython.cmake:131
-#: ../../../../Modules/FindPython.cmake:494
+#: ../../../../Modules/FindPython.cmake:495
 msgid "``Python_EXECUTABLE``"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Path to the Python interpreter."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:133
+#: ../../../../Modules/FindPython.cmake:137
 msgid "``Python_EXECUTABLE_DEBUG``"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgid ""
 "platform."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:139
+#: ../../../../Modules/FindPython.cmake:145
 msgid "``Python_INTERPRETER``"
 msgstr ""
 
@@ -273,11 +273,11 @@ msgid ""
 "configuration)."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:147
+#: ../../../../Modules/FindPython.cmake:153
 msgid "``Python_INTERPRETER_ID``"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:148
+#: ../../../../Modules/FindPython.cmake:153
 msgid "A short string unique to the interpreter. Possible values include:"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "PyPy"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:155
+#: ../../../../Modules/FindPython.cmake:157
 msgid "``Python_STDLIB``"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Information returned by ``sysconfig.get_path('stdlib')``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:159
+#: ../../../../Modules/FindPython.cmake:161
 msgid "``Python_STDARCH``"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Information returned by ``sysconfig.get_path('platstdlib')``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:163
+#: ../../../../Modules/FindPython.cmake:165
 msgid "``Python_SITELIB``"
 msgstr ""
 
@@ -342,7 +342,7 @@ msgstr ""
 msgid "Information returned by ``sysconfig.get_path('purelib')``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:167
+#: ../../../../Modules/FindPython.cmake:170
 msgid "``Python_SITEARCH``"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Information returned by ``sysconfig.get_path('platlib')``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:172
+#: ../../../../Modules/FindPython.cmake:179
 msgid "``Python_SOABI``"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgid ""
 "suffix``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:181
+#: ../../../../Modules/FindPython.cmake:189
 msgid "``Python_SOSABI``"
 msgstr ""
 
@@ -395,7 +395,7 @@ msgid "System has the Python compiler."
 msgstr ""
 
 #: ../../../../Modules/FindPython.cmake:193
-#: ../../../../Modules/FindPython.cmake:497
+#: ../../../../Modules/FindPython.cmake:498
 msgid "``Python_COMPILER``"
 msgstr ""
 
@@ -403,16 +403,16 @@ msgstr ""
 msgid "Path to the Python compiler. Only offered by IronPython."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:195
+#: ../../../../Modules/FindPython.cmake:197
 msgid "``Python_COMPILER_ID``"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:196
+#: ../../../../Modules/FindPython.cmake:197
 msgid "A short string unique to the compiler. Possible values include:"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:199
-#: ../../../../Modules/FindPython.cmake:500
+#: ../../../../Modules/FindPython.cmake:202
+#: ../../../../Modules/FindPython.cmake:503
 msgid "``Python_DOTNET_LAUNCHER``"
 msgstr ""
 
@@ -421,7 +421,7 @@ msgstr ""
 msgid "The ``.Net`` interpreter. Only used by ``IronPython`` implementation."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:204
+#: ../../../../Modules/FindPython.cmake:205
 msgid "``Python_Development_FOUND``"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgstr ""
 msgid "System has the Python development artifacts."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:207
+#: ../../../../Modules/FindPython.cmake:210
 msgid "``Python_Development.Module_FOUND``"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "System has the Python development artifacts for Python module."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:212
+#: ../../../../Modules/FindPython.cmake:216
 msgid "``Python_Development.SABIModule_FOUND``"
 msgstr ""
 
@@ -447,7 +447,7 @@ msgid ""
 "Stable Application Binary Interface."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:218
+#: ../../../../Modules/FindPython.cmake:221
 msgid "``Python_Development.Embed_FOUND``"
 msgstr ""
 
@@ -463,7 +463,7 @@ msgstr ""
 msgid "The Python include directories."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:227
+#: ../../../../Modules/FindPython.cmake:231
 msgid "``Python_DEBUG_POSTFIX``"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgid ""
 "prop_tgt:`DEBUG_POSTFIX` target property."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:233
+#: ../../../../Modules/FindPython.cmake:237
 msgid "``Python_LINK_OPTIONS``"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgstr ""
 msgid "The Python runtime library directories."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:245
+#: ../../../../Modules/FindPython.cmake:247
 msgid "``Python_SABI_LIBRARIES``"
 msgstr ""
 
@@ -515,7 +515,7 @@ msgstr ""
 msgid "The Python libraries for the Stable Application Binary Interface."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:249
+#: ../../../../Modules/FindPython.cmake:251
 msgid "``Python_SABI_LIBRARY_DIRS``"
 msgstr ""
 
@@ -523,7 +523,7 @@ msgstr ""
 msgid "The Python ``SABI`` library directories."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:253
+#: ../../../../Modules/FindPython.cmake:255
 msgid "``Python_RUNTIME_SABI_LIBRARY_DIRS``"
 msgstr ""
 
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Python minor version."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:263
+#: ../../../../Modules/FindPython.cmake:264
 msgid "``Python_VERSION_PATCH``"
 msgstr ""
 
@@ -563,7 +563,7 @@ msgstr ""
 msgid "Python patch version."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:266
+#: ../../../../Modules/FindPython.cmake:269
 msgid "``Python_PyPy_VERSION``"
 msgstr ""
 
@@ -571,7 +571,7 @@ msgstr ""
 msgid "Python PyPy version."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:271
+#: ../../../../Modules/FindPython.cmake:274
 msgid "``Python_NumPy_FOUND``"
 msgstr ""
 
@@ -579,7 +579,7 @@ msgstr ""
 msgid "System has the NumPy."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:276
+#: ../../../../Modules/FindPython.cmake:279
 msgid "``Python_NumPy_INCLUDE_DIRS``"
 msgstr ""
 
@@ -587,7 +587,7 @@ msgstr ""
 msgid "The NumPy include directories."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:281
+#: ../../../../Modules/FindPython.cmake:284
 msgid "``Python_NumPy_VERSION``"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Hints"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:289
+#: ../../../../Modules/FindPython.cmake:290
 msgid "``Python_ROOT_DIR``"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "Define the root directory of a Python installation."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:292
+#: ../../../../Modules/FindPython.cmake:301
 msgid "``Python_USE_STATIC_LIBS``"
 msgstr ""
 
@@ -631,7 +631,7 @@ msgid ""
 "available on this platform."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:303
+#: ../../../../Modules/FindPython.cmake:359
 msgid "``Python_FIND_ABI``"
 msgstr ""
 
@@ -724,7 +724,7 @@ msgid ""
 "except for the fourth one (``gil_disabled``)."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:361
+#: ../../../../Modules/FindPython.cmake:375
 msgid "``Python_FIND_STRATEGY``"
 msgstr ""
 
@@ -752,7 +752,7 @@ msgstr ""
 msgid "See also ``Python_FIND_UNVERSIONED_NAMES``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:377
+#: ../../../../Modules/FindPython.cmake:387
 msgid "``Python_FIND_REGISTRY``"
 msgstr ""
 
@@ -777,7 +777,7 @@ msgstr ""
 msgid "``NEVER``: Never try to use registry."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:389
+#: ../../../../Modules/FindPython.cmake:402
 msgid "``Python_FIND_FRAMEWORK``"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgid ""
 "`CMAKE_FIND_FRAMEWORK` variable will be used, if any."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:404
+#: ../../../../Modules/FindPython.cmake:432
 msgid "``Python_FIND_VIRTUALENV``"
 msgstr ""
 
@@ -844,7 +844,7 @@ msgid ""
 "result."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:434
+#: ../../../../Modules/FindPython.cmake:467
 msgid "``Python_FIND_IMPLEMENTATIONS``"
 msgstr ""
 
@@ -872,7 +872,7 @@ msgstr ""
 msgid ""
 "``PyPy``: This implementation use ``RPython`` language and ``RPython "
 "translation toolchain`` to produce the python interpreter. See `PyPy "
-"<https://www.pypy.org>`_."
+"<https://pypy.org>`_."
 msgstr ""
 
 #: ../../../../Modules/FindPython.cmake:450
@@ -903,7 +903,7 @@ msgid ""
 "through the ``PATH`` variable."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:469
+#: ../../../../Modules/FindPython.cmake:484
 msgid "``Python_FIND_UNVERSIONED_NAMES``"
 msgstr ""
 
@@ -953,7 +953,7 @@ msgstr ""
 msgid "The path to the compiler."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:505
+#: ../../../../Modules/FindPython.cmake:508
 msgid "``Python_LIBRARY``"
 msgstr ""
 
@@ -964,7 +964,7 @@ msgid ""
 "``Python_RUNTIME_LIBRARY_DIRS``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:510
+#: ../../../../Modules/FindPython.cmake:515
 msgid "``Python_SABI_LIBRARY``"
 msgstr ""
 
@@ -975,7 +975,7 @@ msgid ""
 "``Python_SABI_LIBRARY_DIRS`` and ``Python_RUNTIME_SABI_LIBRARY_DIRS``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:517
+#: ../../../../Modules/FindPython.cmake:519
 msgid "``Python_INCLUDE_DIR``"
 msgstr ""
 
@@ -985,7 +985,7 @@ msgid ""
 "compute the variable ``Python_INCLUDE_DIRS``."
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:521
+#: ../../../../Modules/FindPython.cmake:523
 msgid "``Python_NumPy_INCLUDE_DIR``"
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgid ""
 "module behavior can be controlled with the following variable:"
 msgstr ""
 
-#: ../../../../Modules/FindPython.cmake:545
+#: ../../../../Modules/FindPython.cmake:554
 msgid "``Python_ARTIFACTS_INTERACTIVE``"
 msgstr ""
 
