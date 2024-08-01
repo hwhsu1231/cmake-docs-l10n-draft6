@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "This module defines the following :prop_tgt:`IMPORTED` targets:"
 msgstr ""
 
-#: ../../../../Modules/FindXercesC.cmake:19
+#: ../../../../Modules/FindXercesC.cmake:20
 msgid "``XercesC::XercesC``"
 msgstr ""
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "the directory containing the Xerces headers"
 msgstr ""
 
-#: ../../../../Modules/FindXercesC.cmake:33
+#: ../../../../Modules/FindXercesC.cmake:34
 msgid "``XercesC_LIBRARIES``"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "``XercesC_INCLUDE_DIR``"
 msgstr ""
 
-#: ../../../../Modules/FindXercesC.cmake:43
+#: ../../../../Modules/FindXercesC.cmake:44
 msgid "``XercesC_LIBRARY``"
 msgstr ""
 

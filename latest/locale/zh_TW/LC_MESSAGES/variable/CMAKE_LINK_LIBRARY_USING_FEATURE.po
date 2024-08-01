@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,7 +297,7 @@ msgstr ""
 msgid "The following built-in library features are pre-defined by CMake:"
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:1
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:5
 msgid "``DEFAULT``"
 msgstr ""
 
@@ -309,7 +309,7 @@ msgid ""
 "target properties."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:7
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:22
 msgid "``WHOLE_ARCHIVE``"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "MSYS."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:24
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:65
 msgid "``FRAMEWORK``"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgid ""
 "the ``FRAMEWORK`` features."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:67
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:71
 msgid "``NEEDED_FRAMEWORK``"
 msgstr ""
 
@@ -436,7 +436,7 @@ msgid ""
 "``FRAMEWORK``."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:73
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:77
 msgid "``REEXPORT_FRAMEWORK``"
 msgstr ""
 
@@ -448,7 +448,7 @@ msgid ""
 "linker constraints as ``FRAMEWORK``."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:79
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:83
 msgid "``WEAK_FRAMEWORK``"
 msgstr ""
 
@@ -459,7 +459,7 @@ msgid ""
 "weak_framework`` option and has the same linker constraints as ``FRAMEWORK``."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:85
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:89
 msgid "``NEEDED_LIBRARY``"
 msgstr ""
 
@@ -471,7 +471,7 @@ msgid ""
 "linker constraints as ``NEEDED_FRAMEWORK``."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:91
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:95
 msgid "``REEXPORT_LIBRARY``"
 msgstr ""
 
@@ -483,7 +483,7 @@ msgid ""
 "same linker constraints as ``REEXPORT_FRAMEWORK``."
 msgstr ""
 
-#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:97
+#: ../../../variable/LINK_LIBRARY_PREDEFINED_FEATURES.txt:101
 msgid "``WEAK_LIBRARY``"
 msgstr ""
 

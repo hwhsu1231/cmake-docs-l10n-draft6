@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "The libraries needed to use Curses."
 msgstr ""
 
-#: ../../../../Modules/FindCurses.cmake:21
+#: ../../../../Modules/FindCurses.cmake:23
 msgid "``CURSES_CFLAGS``"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "True if ``ncurses/ncurses.h`` is available."
 msgstr ""
 
-#: ../../../../Modules/FindCurses.cmake:31
+#: ../../../../Modules/FindCurses.cmake:32
 msgid "``CURSES_HAVE_NCURSES_CURSES_H``"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Path to Curses include.  Use ``CURSES_INCLUDE_DIRS`` instead."
 msgstr ""
 
-#: ../../../../Modules/FindCurses.cmake:48
+#: ../../../../Modules/FindCurses.cmake:276
 msgid "``CURSES_LIBRARY``"
 msgstr ""
 

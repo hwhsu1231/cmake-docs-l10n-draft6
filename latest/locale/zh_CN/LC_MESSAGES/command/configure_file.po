@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/configure_file.rst:31
+#: ../../../command/configure_file.rst:34
 msgid "``<input>``"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid ""
 "file, not a directory."
 msgstr ""
 
-#: ../../../command/configure_file.rst:36
+#: ../../../command/configure_file.rst:41
 msgid "``<output>``"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgid ""
 "directories, they are created."
 msgstr ""
 
-#: ../../../command/configure_file.rst:43
+#: ../../../command/configure_file.rst:48
 msgid "``NO_SOURCE_PERMISSIONS``"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgid ""
 "copied file permissions default to the standard 644 value (-rw-r--r--)."
 msgstr ""
 
-#: ../../../command/configure_file.rst:50
+#: ../../../command/configure_file.rst:57
 msgid "``USE_SOURCE_PERMISSIONS``"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid ""
 "as a way of making the intended behavior clearer at the call site."
 msgstr ""
 
-#: ../../../command/configure_file.rst:59
+#: ../../../command/configure_file.rst:63
 msgid "``FILE_PERMISSIONS <permissions>...``"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgid ""
 "for the output file instead."
 msgstr ""
 
-#: ../../../command/configure_file.rst:65
+#: ../../../command/configure_file.rst:67
 msgid "``COPYONLY``"
 msgstr ""
 
@@ -127,7 +127,7 @@ msgid ""
 "This option may not be used with ``NEWLINE_STYLE``."
 msgstr ""
 
-#: ../../../command/configure_file.rst:69
+#: ../../../command/configure_file.rst:70
 msgid "``ESCAPE_QUOTES``"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Escape any substituted quotes with backslashes (C-style)."
 msgstr ""
 
-#: ../../../command/configure_file.rst:72
+#: ../../../command/configure_file.rst:74
 msgid "``@ONLY``"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid ""
 "useful for configuring scripts that use ``${VAR}`` syntax."
 msgstr ""
 
-#: ../../../command/configure_file.rst:76
+#: ../../../command/configure_file.rst:80
 msgid "``NEWLINE_STYLE <style>``"
 msgstr ""
 

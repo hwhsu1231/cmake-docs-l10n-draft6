@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid ""
 "It can assume one of the following values:"
 msgstr ""
 
-#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:9
+#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:11
 msgid "``NONE``"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgid ""
 "will be selected."
 msgstr ""
 
-#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:13
+#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:14
 msgid "``NAME``"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Sort packages lexicographically before selecting one."
 msgstr ""
 
-#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:16
+#: ../../../variable/CMAKE_FIND_PACKAGE_SORT_ORDER.rst:18
 msgid "``NATURAL``"
 msgstr ""
 

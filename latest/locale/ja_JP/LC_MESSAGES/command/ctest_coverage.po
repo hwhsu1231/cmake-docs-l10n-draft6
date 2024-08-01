@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:20
+#: ../../../command/ctest_coverage.rst:22
 msgid "``BUILD <build-dir>``"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgid ""
 "`CTEST_BINARY_DIRECTORY` variable is used."
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:24
+#: ../../../command/ctest_coverage.rst:29
 msgid "``APPEND``"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid ""
 "this command."
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:31
+#: ../../../command/ctest_coverage.rst:33
 msgid "``LABELS``"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgid ""
 "least one of the labels specified."
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:35
+#: ../../../command/ctest_coverage.rst:37
 msgid "``RETURN_VALUE <result-var>``"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgid ""
 "error and non-zero otherwise."
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:39
+#: ../../../command/ctest_coverage.rst:43
 msgid "``CAPTURE_CMAKE_ERROR <result-var>``"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid ""
 "the command and prevent ctest from returning non-zero if an error occurs."
 msgstr ""
 
-#: ../../../command/ctest_coverage.rst:45
+#: ../../../command/ctest_coverage.rst:49
 msgid "``QUIET``"
 msgstr ""
 

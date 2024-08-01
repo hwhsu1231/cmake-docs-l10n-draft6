@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Also sets the variables:"
 msgstr ""
 
-#: ../../../command/project.rst:25
+#: ../../../command/project.rst:26
 msgid ":variable:`PROJECT_SOURCE_DIR`, :variable:`<PROJECT-NAME>_SOURCE_DIR`"
 msgstr ""
 
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Absolute path to the source directory for the project."
 msgstr ""
 
-#: ../../../command/project.rst:28
+#: ../../../command/project.rst:29
 msgid ":variable:`PROJECT_BINARY_DIR`, :variable:`<PROJECT-NAME>_BINARY_DIR`"
 msgstr ""
 
@@ -66,7 +66,7 @@ msgstr ""
 msgid "Absolute path to the binary directory for the project."
 msgstr ""
 
-#: ../../../command/project.rst:31
+#: ../../../command/project.rst:34
 msgid ""
 ":variable:`PROJECT_IS_TOP_LEVEL`, :variable:`<PROJECT-NAME>_IS_TOP_LEVEL`"
 msgstr ""
@@ -90,7 +90,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/project.rst:45
+#: ../../../command/project.rst:67
 msgid "``VERSION <version>``"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgid ""
 "`CMAKE_PROJECT_VERSION`."
 msgstr ""
 
-#: ../../../command/project.rst:69
+#: ../../../command/project.rst:85
 msgid "``DESCRIPTION <project-description-string>``"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Added the ``<PROJECT-NAME>_DESCRIPTION`` variable."
 msgstr ""
 
-#: ../../../command/project.rst:87
+#: ../../../command/project.rst:98
 msgid "``HOMEPAGE_URL <url-string>``"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid ""
 "`CMAKE_PROJECT_HOMEPAGE_URL`."
 msgstr ""
 
-#: ../../../command/project.rst:100
+#: ../../../command/project.rst:104
 msgid "``LANGUAGES <language-name>...``"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/ctest_upload.rst:12
+#: ../../../command/ctest_upload.rst:14
 msgid "``FILES <file>...``"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgid ""
 "dashboard server."
 msgstr ""
 
-#: ../../../command/ctest_upload.rst:16
+#: ../../../command/ctest_upload.rst:20
 msgid "``QUIET``"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgid ""
 "the console otherwise."
 msgstr ""
 
-#: ../../../command/ctest_upload.rst:22
+#: ../../../command/ctest_upload.rst:25
 msgid "``CAPTURE_CMAKE_ERROR <result-var>``"
 msgstr ""
 

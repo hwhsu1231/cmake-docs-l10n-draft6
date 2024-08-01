@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "The allowed values are:"
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:1
+#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:2
 msgid "``Embedded``"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgid ""
 "symbolic debugging information."
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:4
+#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:5
 msgid "``ProgramDatabase``"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgid ""
 "that contains all the symbolic debugging information."
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:7
+#: ../../../prop_tgt/MSVC_DEBUG_INFORMATION_FORMAT-VALUES.txt:9
 msgid "``EditAndContinue``"
 msgstr ""
 

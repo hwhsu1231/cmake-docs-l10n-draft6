@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -409,4 +409,23 @@ msgid ""
 "`FetchContent_Populate` require that the dependency's source directory has "
 "already been populated. CMake 3.29 and earlier did not check this "
 "requirement, but it is now enforced, subject to policy :policy:`CMP0170`."
+msgstr ""
+
+#: ../../../release/3.30.rst:247
+msgid "Updates"
+msgstr ""
+
+#: ../../../release/3.30.rst:249
+msgid "Changes made since CMake 3.30.0 include the following."
+msgstr ""
+
+#: ../../../release/3.30.rst:252
+msgid "3.30.1"
+msgstr ""
+
+#: ../../../release/3.30.rst:254
+msgid ""
+"This version made no changes to documented features or interfaces. Some "
+"implementation updates were made to support ecosystem changes and/or fix "
+"regressions."
 msgstr ""

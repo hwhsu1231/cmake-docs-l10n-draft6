@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgid ""
 "following fields in the root:"
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:64 ../../../cpack_gen/external.rst:147
+#: ../../../cpack_gen/external.rst:115 ../../../cpack_gen/external.rst:150
 msgid "``components``"
 msgstr ""
 
@@ -118,8 +118,8 @@ msgid ""
 "the following fields:"
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:69 ../../../cpack_gen/external.rst:122
-#: ../../../cpack_gen/external.rst:161
+#: ../../../cpack_gen/external.rst:71 ../../../cpack_gen/external.rst:124
+#: ../../../cpack_gen/external.rst:163
 msgid "``name``"
 msgstr ""
 
@@ -129,8 +129,8 @@ msgid ""
 "``components`` object."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:73 ../../../cpack_gen/external.rst:126
-#: ../../../cpack_gen/external.rst:165
+#: ../../../cpack_gen/external.rst:75 ../../../cpack_gen/external.rst:128
+#: ../../../cpack_gen/external.rst:167
 msgid "``displayName``"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgid ""
 "`cpack_add_component`."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:77 ../../../cpack_gen/external.rst:130
+#: ../../../cpack_gen/external.rst:79 ../../../cpack_gen/external.rst:132
 msgid "``description``"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgid ""
 "`cpack_add_component`."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:81
+#: ../../../cpack_gen/external.rst:83
 msgid "``isHidden``"
 msgstr ""
 
@@ -160,7 +160,7 @@ msgid ""
 "was not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:85
+#: ../../../cpack_gen/external.rst:87
 msgid "``isRequired``"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgid ""
 "it was not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:89
+#: ../../../cpack_gen/external.rst:91
 msgid "``isDisabledByDefault``"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgid ""
 "it was not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:93
+#: ../../../cpack_gen/external.rst:95
 msgid "``group``"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid ""
 "so, this field is a string value containing the component's group."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:97
+#: ../../../cpack_gen/external.rst:100
 msgid "``dependencies``"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid ""
 "``DEPENDS`` argument was passed, this is an empty list."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:102 ../../../cpack_gen/external.rst:156
+#: ../../../cpack_gen/external.rst:106 ../../../cpack_gen/external.rst:170
 msgid "``installationTypes``"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgid ""
 "an empty list."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:108
+#: ../../../cpack_gen/external.rst:110
 msgid "``isDownloaded``"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid ""
 "if it was not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:112
+#: ../../../cpack_gen/external.rst:115
 msgid "``archiveFile``"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgid ""
 "this is an empty string."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:117
+#: ../../../cpack_gen/external.rst:154
 msgid "``componentGroups``"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid ""
 "`cpack_add_component_group`."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:134
+#: ../../../cpack_gen/external.rst:137
 msgid "``parentGroup``"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgid ""
 "the component group's parent group."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:139
+#: ../../../cpack_gen/external.rst:141
 msgid "``isExpandedByDefault``"
 msgstr ""
 
@@ -284,7 +284,7 @@ msgid ""
 "false if it was not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:143
+#: ../../../cpack_gen/external.rst:145
 msgid "``isBold``"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgid ""
 "subgroups are not included."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:152
+#: ../../../cpack_gen/external.rst:154
 msgid "``subgroups``"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgid ""
 "`cpack_add_install_type`."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:169
+#: ../../../cpack_gen/external.rst:170
 msgid "``index``"
 msgstr ""
 
@@ -338,7 +338,7 @@ msgstr ""
 msgid "The integer index of the installation type in the list."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:172
+#: ../../../cpack_gen/external.rst:189
 msgid "``projects``"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgid ""
 "single project. The project objects have the following fields:"
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:178
+#: ../../../cpack_gen/external.rst:179
 msgid "``projectName``"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "The project name passed to :variable:`CPACK_INSTALL_CMAKE_PROJECTS`."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:181
+#: ../../../cpack_gen/external.rst:182
 msgid "``component``"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "The name of the component or component set which comprises the project."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:184
+#: ../../../cpack_gen/external.rst:186
 msgid "``directory``"
 msgstr ""
 
@@ -376,7 +376,7 @@ msgid ""
 "contains the ``cmake_install.cmake`` script."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:188
+#: ../../../cpack_gen/external.rst:189
 msgid "``subDirectory``"
 msgstr ""
 
@@ -384,7 +384,7 @@ msgstr ""
 msgid "The subdirectory to install the project into inside the CPack package."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:191
+#: ../../../cpack_gen/external.rst:193
 msgid "``packageName``"
 msgstr ""
 
@@ -394,7 +394,7 @@ msgid ""
 "this option is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:195
+#: ../../../cpack_gen/external.rst:197
 msgid "``packageVersion``"
 msgstr ""
 
@@ -404,7 +404,7 @@ msgid ""
 "if this option is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:199
+#: ../../../cpack_gen/external.rst:202
 msgid "``packageDescriptionFile``"
 msgstr ""
 
@@ -414,7 +414,7 @@ msgid ""
 "`CPACK_PACKAGE_DESCRIPTION_FILE`. Only present if this option is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:204
+#: ../../../cpack_gen/external.rst:207
 msgid "``packageDescriptionSummary``"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgid ""
 "`CPACK_PACKAGE_DESCRIPTION_SUMMARY`. Only present if this option is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:209
+#: ../../../cpack_gen/external.rst:211
 msgid "``buildConfig``"
 msgstr ""
 
@@ -434,7 +434,7 @@ msgid ""
 "Only present if this option is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:213
+#: ../../../cpack_gen/external.rst:216
 msgid "``defaultDirectoryPermissions``"
 msgstr ""
 
@@ -445,7 +445,7 @@ msgid ""
 "is set."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:218
+#: ../../../cpack_gen/external.rst:219
 msgid "``setDestdir``"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgstr ""
 msgid "True if :variable:`CPACK_SET_DESTDIR` is true, false if it is not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:221
+#: ../../../cpack_gen/external.rst:223
 msgid "``packagingInstallPrefix``"
 msgstr ""
 
@@ -463,7 +463,7 @@ msgid ""
 "present if :variable:`CPACK_SET_DESTDIR` is true."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:225
+#: ../../../cpack_gen/external.rst:226
 msgid "``stripFiles``"
 msgstr ""
 
@@ -471,7 +471,7 @@ msgstr ""
 msgid "True if :variable:`CPACK_STRIP_FILES` is true, false if it is not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:228
+#: ../../../cpack_gen/external.rst:230
 msgid "``warnOnAbsoluteInstallDestination``"
 msgstr ""
 
@@ -481,7 +481,7 @@ msgid ""
 "false if it is not."
 msgstr ""
 
-#: ../../../cpack_gen/external.rst:232
+#: ../../../cpack_gen/external.rst:234
 msgid "``errorOnAbsoluteInstallDestination``"
 msgstr ""
 

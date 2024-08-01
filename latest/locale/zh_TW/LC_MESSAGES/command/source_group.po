@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/source_group.rst:19
+#: ../../../command/source_group.rst:26
 msgid "``TREE``"
 msgstr ""
 
@@ -58,7 +58,7 @@ msgid ""
 "paths within ``src`` do not start with ``root``."
 msgstr ""
 
-#: ../../../command/source_group.rst:28
+#: ../../../command/source_group.rst:32
 msgid "``PREFIX``"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid ""
 "in ``<prefix>`` source groups."
 msgstr ""
 
-#: ../../../command/source_group.rst:34
+#: ../../../command/source_group.rst:37
 msgid "``FILES``"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgid ""
 "Relative paths are interpreted with respect to the current source directory."
 msgstr ""
 
-#: ../../../command/source_group.rst:39
+#: ../../../command/source_group.rst:41
 msgid "``REGULAR_EXPRESSION``"
 msgstr ""
 

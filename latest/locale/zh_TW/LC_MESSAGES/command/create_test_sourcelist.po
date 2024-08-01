@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "The options are:"
 msgstr ""
 
-#: ../../../command/create_test_sourcelist.rst:17
+#: ../../../command/create_test_sourcelist.rst:25
 msgid "``<sourceListName>``"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgid ""
 "Previously it was listed only as ``<driverName>``."
 msgstr ""
 
-#: ../../../command/create_test_sourcelist.rst:27
+#: ../../../command/create_test_sourcelist.rst:30
 msgid "``<driverName>``"
 msgstr ""
 
@@ -66,7 +66,7 @@ msgid ""
 "whatever test is named on the command line."
 msgstr ""
 
-#: ../../../command/create_test_sourcelist.rst:32
+#: ../../../command/create_test_sourcelist.rst:39
 msgid "``<test>...``"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgstr ""
 msgid "int foo(int argc, char** argv)"
 msgstr ""
 
-#: ../../../command/create_test_sourcelist.rst:41
+#: ../../../command/create_test_sourcelist.rst:42
 msgid "``EXTRA_INCLUDE <header>``"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgid ""
 "Specify a header file to ``#include`` in the generated test driver source."
 msgstr ""
 
-#: ../../../command/create_test_sourcelist.rst:44
+#: ../../../command/create_test_sourcelist.rst:51
 msgid "``FUNCTION <function>``"
 msgstr ""
 

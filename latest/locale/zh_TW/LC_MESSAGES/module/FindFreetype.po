@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "This module defines the following :prop_tgt:`IMPORTED` target:"
 msgstr ""
 
-#: ../../../../Modules/FindFreetype.cmake:17
+#: ../../../../Modules/FindFreetype.cmake:18
 msgid "``Freetype::Freetype``"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "true if the Freetype headers and libraries were found"
 msgstr ""
 
-#: ../../../../Modules/FindFreetype.cmake:27
+#: ../../../../Modules/FindFreetype.cmake:33
 msgid "``FREETYPE_INCLUDE_DIRS``"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "the library to link against"
 msgstr ""
 
-#: ../../../../Modules/FindFreetype.cmake:37
+#: ../../../../Modules/FindFreetype.cmake:38
 msgid "``FREETYPE_VERSION_STRING``"
 msgstr ""
 

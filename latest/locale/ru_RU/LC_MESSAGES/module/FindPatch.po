@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Path to patch command-line executable."
 msgstr ""
 
-#: ../../../../Modules/FindPatch.cmake:14
+#: ../../../../Modules/FindPatch.cmake:15
 msgid "``Patch_FOUND``"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "The following :prop_tgt:`IMPORTED` targets are also defined:"
 msgstr ""
 
-#: ../../../../Modules/FindPatch.cmake:19
+#: ../../../../Modules/FindPatch.cmake:20
 msgid "``Patch::patch``"
 msgstr ""
 
