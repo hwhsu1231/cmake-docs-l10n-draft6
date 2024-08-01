@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +44,7 @@ msgstr ""
 msgid "The following variables may be set to influence this module's behavior:"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:22
+#: ../../../../Modules/FindBLAS.cmake:23
 msgid "``BLA_STATIC``"
 msgstr ""
 
@@ -51,7 +52,7 @@ msgstr ""
 msgid "if ``ON`` use static linkage"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:25
+#: ../../../../Modules/FindBLAS.cmake:27
 msgid "``BLA_VENDOR``"
 msgstr ""
 
@@ -61,7 +62,7 @@ msgid ""
 "the specified vendor.  If not set, all vendors are considered."
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:29
+#: ../../../../Modules/FindBLAS.cmake:30
 msgid "``BLA_F95``"
 msgstr ""
 
@@ -69,7 +70,7 @@ msgstr ""
 msgid "if ``ON`` tries to find the BLAS95 interfaces"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:32
+#: ../../../../Modules/FindBLAS.cmake:36
 msgid "``BLA_PREFER_PKGCONFIG``"
 msgstr ""
 
@@ -79,7 +80,7 @@ msgid ""
 "one is found that is preferred"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:38
+#: ../../../../Modules/FindBLAS.cmake:42
 msgid "``BLA_PKGCONFIG_BLAS``"
 msgstr ""
 
@@ -89,7 +90,7 @@ msgid ""
 "just ``blas``."
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:44
+#: ../../../../Modules/FindBLAS.cmake:55
 msgid "``BLA_SIZEOF_INTEGER``"
 msgstr ""
 
@@ -113,7 +114,7 @@ msgstr ""
 msgid "Search for a BLAS/LAPACK with 64-bit integer interfaces."
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:53
+#: ../../../../Modules/FindBLAS.cmake:55
 msgid "``ANY``"
 msgstr ""
 
@@ -131,7 +132,7 @@ msgstr ""
 msgid "This module defines the following :prop_tgt:`IMPORTED` targets:"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:62
+#: ../../../../Modules/FindBLAS.cmake:65
 msgid "``BLAS::BLAS``"
 msgstr ""
 
@@ -163,7 +164,7 @@ msgstr ""
 msgid "uncached list of required linker flags (excluding ``-l`` and ``-L``)."
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:76
+#: ../../../../Modules/FindBLAS.cmake:77
 msgid "``BLAS_LIBRARIES``"
 msgstr ""
 
@@ -173,7 +174,7 @@ msgid ""
 "BLAS (may be empty if compiler implicitly links BLAS)"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:79
+#: ../../../../Modules/FindBLAS.cmake:80
 msgid "``BLAS95_LIBRARIES``"
 msgstr ""
 
@@ -183,7 +184,7 @@ msgid ""
 "BLAS95 interface"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:82
+#: ../../../../Modules/FindBLAS.cmake:83
 msgid "``BLAS95_FOUND``"
 msgstr ""
 
@@ -195,7 +196,7 @@ msgstr ""
 msgid "BLAS/LAPACK Vendors"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:90
+#: ../../../../Modules/FindBLAS.cmake:91
 msgid "``Generic``"
 msgstr ""
 
@@ -203,7 +204,7 @@ msgstr ""
 msgid "Generic reference implementation"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:93
+#: ../../../../Modules/FindBLAS.cmake:94
 msgid "``ACML``, ``ACML_MP``, ``ACML_GPU``"
 msgstr ""
 
@@ -211,7 +212,7 @@ msgstr ""
 msgid "AMD Core Math Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:96
+#: ../../../../Modules/FindBLAS.cmake:99
 msgid "``AOCL``, ``AOCL_mt``"
 msgstr ""
 
@@ -219,7 +220,7 @@ msgstr ""
 msgid "AMD Optimizing CPU Libraries"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:101
+#: ../../../../Modules/FindBLAS.cmake:102
 msgid "``Apple``, ``NAS``"
 msgstr ""
 
@@ -227,7 +228,7 @@ msgstr ""
 msgid "Apple BLAS (Accelerate), and Apple NAS (vecLib)"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:104
+#: ../../../../Modules/FindBLAS.cmake:107
 msgid "``Arm``, ``Arm_mp``, ``Arm_ilp64``, ``Arm_ilp64_mp``"
 msgstr ""
 
@@ -235,7 +236,7 @@ msgstr ""
 msgid "Arm Performance Libraries"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:109
+#: ../../../../Modules/FindBLAS.cmake:110
 msgid "``ATLAS``"
 msgstr ""
 
@@ -243,7 +244,7 @@ msgstr ""
 msgid "Automatically Tuned Linear Algebra Software"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:112
+#: ../../../../Modules/FindBLAS.cmake:113
 msgid "``CXML``, ``DXML``"
 msgstr ""
 
@@ -251,7 +252,7 @@ msgstr ""
 msgid "Compaq/Digital Extended Math Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:115
+#: ../../../../Modules/FindBLAS.cmake:118
 msgid "``EML``, ``EML_mt``"
 msgstr ""
 
@@ -259,7 +260,7 @@ msgstr ""
 msgid "Elbrus Math Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:120
+#: ../../../../Modules/FindBLAS.cmake:123
 msgid "``FLAME``"
 msgstr ""
 
@@ -267,11 +268,11 @@ msgstr ""
 msgid "BLIS Framework"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:125
+#: ../../../../Modules/FindBLAS.cmake:126
 msgid "``FlexiBLAS``"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:128
+#: ../../../../Modules/FindBLAS.cmake:131
 msgid ""
 "``Fujitsu_SSL2``, ``Fujitsu_SSL2BLAMP``, ``Fujitsu_SSL2SVE``, "
 "``Fujitsu_SSL2BLAMPSVE``"
@@ -281,7 +282,7 @@ msgstr ""
 msgid "Fujitsu SSL2 serial and parallel blas/lapack with SVE instructions"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:133
+#: ../../../../Modules/FindBLAS.cmake:134
 msgid "``Goto``"
 msgstr ""
 
@@ -297,7 +298,7 @@ msgstr ""
 msgid "IBM Engineering and Scientific Subroutine Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:140
+#: ../../../../Modules/FindBLAS.cmake:141
 msgid "``Intel``"
 msgstr ""
 
@@ -305,7 +306,7 @@ msgstr ""
 msgid "Intel MKL 32 bit and 64 bit obsolete versions"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:143
+#: ../../../../Modules/FindBLAS.cmake:144
 msgid "``Intel10_32``"
 msgstr ""
 
@@ -313,7 +314,7 @@ msgstr ""
 msgid "Intel MKL v10 32 bit, threaded code"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:146
+#: ../../../../Modules/FindBLAS.cmake:147
 msgid "``Intel10_64lp``"
 msgstr ""
 
@@ -321,7 +322,7 @@ msgstr ""
 msgid "Intel MKL v10+ 64 bit, threaded code, lp64 model"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:149
+#: ../../../../Modules/FindBLAS.cmake:150
 msgid "``Intel10_64lp_seq``"
 msgstr ""
 
@@ -329,7 +330,7 @@ msgstr ""
 msgid "Intel MKL v10+ 64 bit, sequential code, lp64 model"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:152
+#: ../../../../Modules/FindBLAS.cmake:155
 msgid "``Intel10_64ilp``"
 msgstr ""
 
@@ -337,7 +338,7 @@ msgstr ""
 msgid "Intel MKL v10+ 64 bit, threaded code, ilp64 model"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:157
+#: ../../../../Modules/FindBLAS.cmake:160
 msgid "``Intel10_64ilp_seq``"
 msgstr ""
 
@@ -345,7 +346,7 @@ msgstr ""
 msgid "Intel MKL v10+ 64 bit, sequential code, ilp64 model"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:162
+#: ../../../../Modules/FindBLAS.cmake:165
 msgid "``Intel10_64_dyn``"
 msgstr ""
 
@@ -353,7 +354,7 @@ msgstr ""
 msgid "Intel MKL v10+ 64 bit, single dynamic library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:167
+#: ../../../../Modules/FindBLAS.cmake:170
 msgid "``libblastrampoline``"
 msgstr ""
 
@@ -361,7 +362,7 @@ msgstr ""
 msgid "A BLAS/LAPACK demuxing library using PLT trampolines"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:172
+#: ../../../../Modules/FindBLAS.cmake:175
 msgid "``NVHPC``"
 msgstr ""
 
@@ -369,11 +370,11 @@ msgstr ""
 msgid "NVIDIA HPC SDK"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:177
+#: ../../../../Modules/FindBLAS.cmake:178
 msgid "``OpenBLAS``"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:180
+#: ../../../../Modules/FindBLAS.cmake:181
 msgid "``PhiPACK``"
 msgstr ""
 
@@ -381,7 +382,7 @@ msgstr ""
 msgid "Portable High Performance ANSI C (PHiPAC)"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:183
+#: ../../../../Modules/FindBLAS.cmake:184
 msgid "``SCSL``, ``SCSL_mp``"
 msgstr ""
 
@@ -389,7 +390,7 @@ msgstr ""
 msgid "Scientific Computing Software Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:186
+#: ../../../../Modules/FindBLAS.cmake:187
 msgid "``SGIMATH``"
 msgstr ""
 
@@ -397,7 +398,7 @@ msgstr ""
 msgid "SGI Scientific Mathematical Library"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:189
+#: ../../../../Modules/FindBLAS.cmake:190
 msgid "``SunPerf``"
 msgstr ""
 
@@ -429,7 +430,7 @@ msgid ""
 "establish an Intel MKL environment:"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:210
+#: ../../../../Modules/FindBLAS.cmake:221
 msgid "Intel oneAPI"
 msgstr ""
 
@@ -451,7 +452,7 @@ msgstr ""
 msgid ". /opt/intel/oneapi/mkl/latest/env/vars.sh"
 msgstr ""
 
-#: ../../../../Modules/FindBLAS.cmake:223
+#: ../../../../Modules/FindBLAS.cmake:234
 msgid "Intel Classic"
 msgstr ""
 

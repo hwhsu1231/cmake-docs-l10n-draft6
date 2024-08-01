@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgid ""
 "This is initialized based on the value of :variable:`CMAKE_HIP_PLATFORM`:"
 msgstr ""
 
-#: ../../../variable/CMAKE_HIP_ARCHITECTURES.rst:11
+#: ../../../variable/CMAKE_HIP_ARCHITECTURES.rst:13
 msgid "``amd``"
 msgstr ""
 

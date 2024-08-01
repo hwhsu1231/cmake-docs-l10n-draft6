@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,7 +47,7 @@ msgstr ""
 msgid "This module defines the following variables:"
 msgstr ""
 
-#: ../../../../Modules/FindALSA.cmake:25
+#: ../../../../Modules/FindALSA.cmake:26
 msgid "``ALSA_FOUND``"
 msgstr ""
 
@@ -54,7 +55,7 @@ msgstr ""
 msgid "True if ALSA_INCLUDE_DIR & ALSA_LIBRARY are found"
 msgstr ""
 
-#: ../../../../Modules/FindALSA.cmake:28
+#: ../../../../Modules/FindALSA.cmake:29
 msgid "``ALSA_LIBRARIES``"
 msgstr ""
 
@@ -62,7 +63,7 @@ msgstr ""
 msgid "List of libraries when using ALSA."
 msgstr ""
 
-#: ../../../../Modules/FindALSA.cmake:31
+#: ../../../../Modules/FindALSA.cmake:32
 msgid "``ALSA_INCLUDE_DIRS``"
 msgstr ""
 
@@ -78,7 +79,7 @@ msgstr ""
 msgid "The following cache variables may also be set:"
 msgstr ""
 
-#: ../../../../Modules/FindALSA.cmake:39
+#: ../../../../Modules/FindALSA.cmake:40
 msgid "``ALSA_INCLUDE_DIR``"
 msgstr ""
 
@@ -86,7 +87,7 @@ msgstr ""
 msgid "the ALSA include directory"
 msgstr ""
 
-#: ../../../../Modules/FindALSA.cmake:42
+#: ../../../../Modules/FindALSA.cmake:81
 msgid "``ALSA_LIBRARY``"
 msgstr ""
 
