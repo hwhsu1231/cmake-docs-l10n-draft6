@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgid ""
 "`pkg_search_module` commands. The following variables will also be set:"
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:14
+#: ../../../../Modules/FindPkgConfig.cmake:15
 msgid "``PKG_CONFIG_FOUND``"
 msgstr ""
 
@@ -39,7 +40,7 @@ msgstr ""
 msgid "True if a pkg-config executable was found."
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:17
+#: ../../../../Modules/FindPkgConfig.cmake:20
 msgid "``PKG_CONFIG_VERSION_STRING``"
 msgstr ""
 
@@ -47,7 +48,7 @@ msgstr ""
 msgid "The version of pkg-config that was found."
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:22
+#: ../../../../Modules/FindPkgConfig.cmake:23
 msgid "``PKG_CONFIG_EXECUTABLE``"
 msgstr ""
 
@@ -55,7 +56,7 @@ msgstr ""
 msgid "The pathname of the pkg-config program."
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:25
+#: ../../../../Modules/FindPkgConfig.cmake:28
 msgid "``PKG_CONFIG_ARGN``"
 msgstr ""
 
@@ -230,7 +231,7 @@ msgstr ""
 msgid "all required cflags"
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:797
+#: ../../../../Modules/FindPkgConfig.cmake:798
 msgid "``<XXX>_CFLAGS_OTHER``"
 msgstr ""
 
@@ -283,7 +284,7 @@ msgstr ""
 msgid "include directory of the module"
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:819
+#: ../../../../Modules/FindPkgConfig.cmake:820
 msgid "``<YYY>_LIBDIR``"
 msgstr ""
 
@@ -411,7 +412,7 @@ msgstr ""
 msgid "Options:"
 msgstr ""
 
-#: ../../../../Modules/FindPkgConfig.cmake:966
+#: ../../../../Modules/FindPkgConfig.cmake:970
 msgid "``DEFINE_VARIABLES <key>=<value>...``"
 msgstr ""
 

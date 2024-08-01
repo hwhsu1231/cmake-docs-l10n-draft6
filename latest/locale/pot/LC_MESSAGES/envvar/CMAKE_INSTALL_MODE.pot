@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,7 +79,7 @@ msgstr ""
 msgid "The following values are allowed for ``CMAKE_INSTALL_MODE``:"
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:35
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:36
 msgid "``COPY``, empty or unset"
 msgstr ""
 
@@ -86,7 +87,7 @@ msgstr ""
 msgid "Duplicate the file at its destination.  This is the default behavior."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:38
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:40
 msgid "``ABS_SYMLINK``"
 msgstr ""
 
@@ -96,7 +97,7 @@ msgid ""
 "Halt with an error if the link cannot be created."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:42
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:44
 msgid "``ABS_SYMLINK_OR_COPY``"
 msgstr ""
 
@@ -106,7 +107,7 @@ msgid ""
 "couldn't be created."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:46
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:48
 msgid "``REL_SYMLINK``"
 msgstr ""
 
@@ -116,7 +117,7 @@ msgid ""
 "Halt with an error if the link cannot be created."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:50
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:52
 msgid "``REL_SYMLINK_OR_COPY``"
 msgstr ""
 
@@ -126,7 +127,7 @@ msgid ""
 "couldn't be created."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:54
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:57
 msgid "``SYMLINK``"
 msgstr ""
 
@@ -137,7 +138,7 @@ msgid ""
 "error if the link cannot be created."
 msgstr ""
 
-#: ../../../envvar/CMAKE_INSTALL_MODE.rst:59
+#: ../../../envvar/CMAKE_INSTALL_MODE.rst:61
 msgid "``SYMLINK_OR_COPY``"
 msgstr ""
 

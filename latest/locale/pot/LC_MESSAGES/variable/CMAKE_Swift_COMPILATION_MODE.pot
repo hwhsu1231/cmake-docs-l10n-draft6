@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgstr ""
 msgid "The allowed values are:"
 msgstr ""
 
-#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:1
+#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:6
 msgid "``incremental``"
 msgstr ""
 
@@ -44,7 +45,7 @@ msgid ""
 "on changes in a project."
 msgstr ""
 
-#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:8
+#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:11
 msgid "``wholemodule``"
 msgstr ""
 
@@ -55,7 +56,7 @@ msgid ""
 "compiler, so there is no parallelism across source files in the module."
 msgstr ""
 
-#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:13
+#: ../../../prop_tgt/Swift_COMPILATION_MODE-VALUES.txt:19
 msgid "``singlefile``"
 msgstr ""
 

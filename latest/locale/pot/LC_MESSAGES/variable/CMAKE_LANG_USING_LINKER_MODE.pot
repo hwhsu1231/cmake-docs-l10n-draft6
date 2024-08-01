@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +28,7 @@ msgid ""
 "supported linker mode values are:"
 msgstr ""
 
-#: ../../../variable/CMAKE_LANG_USING_LINKER_MODE.rst:9
+#: ../../../variable/CMAKE_LANG_USING_LINKER_MODE.rst:13
 msgid "``FLAG``"
 msgstr ""
 
@@ -39,7 +40,7 @@ msgid ""
 "``CMAKE_<LANG>_USING_LINKER_MODE`` is not set."
 msgstr ""
 
-#: ../../../variable/CMAKE_LANG_USING_LINKER_MODE.rst:15
+#: ../../../variable/CMAKE_LANG_USING_LINKER_MODE.rst:16
 msgid "``TOOL``"
 msgstr ""
 

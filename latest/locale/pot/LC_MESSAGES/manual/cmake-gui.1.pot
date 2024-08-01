@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 02:38+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -297,7 +298,7 @@ msgstr ""
 msgid "The following resources are available to get help using CMake:"
 msgstr ""
 
-#: ../../../manual/LINKS.txt:3
+#: ../../../manual/LINKS.txt:6
 msgid "Home Page"
 msgstr ""
 
@@ -309,7 +310,7 @@ msgstr ""
 msgid "The primary starting point for learning about CMake."
 msgstr ""
 
-#: ../../../manual/LINKS.txt:8
+#: ../../../manual/LINKS.txt:12
 msgid "Online Documentation and Community Resources"
 msgstr ""
 
@@ -323,7 +324,7 @@ msgid ""
 "this web page."
 msgstr ""
 
-#: ../../../manual/LINKS.txt:14
+#: ../../../manual/LINKS.txt:17
 msgid "Discourse Forum"
 msgstr ""
 
