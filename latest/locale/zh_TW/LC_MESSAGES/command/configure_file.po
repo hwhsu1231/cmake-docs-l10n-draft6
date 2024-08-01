@@ -54,7 +54,7 @@ msgstr ""
 
 #: ../../../command/configure_file.rst:27
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../command/configure_file.rst:29
 msgid "The options are:"

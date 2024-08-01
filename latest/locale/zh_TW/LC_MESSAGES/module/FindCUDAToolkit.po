@@ -169,7 +169,7 @@ msgstr ""
 
 #: ../../../../Modules/FindCUDAToolkit.cmake:91
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../../Modules/FindCUDAToolkit.cmake:95
 msgid "``REQUIRED``"
