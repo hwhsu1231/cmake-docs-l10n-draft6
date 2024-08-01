@@ -54,7 +54,7 @@ msgstr ""
 
 #: ../../../manual/cmake-gui.1.rst:29
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/cmake-gui.1.rst:32
 msgid "``-S <path-to-source>``"
