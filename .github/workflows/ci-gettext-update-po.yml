@@ -84,11 +84,10 @@ jobs:
         id: gvg
         shell: bash
         run: |
-          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
-          GITHUB_EVENT_NAME=${{ github.event_name }}
-          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
-          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
-            VERSION_GROUP=${INPUTS_VERSION_GROUP}
+          INPUTS_VERSION_GROUP="${{ inputs.VERSION_GROUP }}"
+          GITHUB_EVENT_NAME="${{ github.event_name }}"
+          if [[ ${GITHUB_EVENT_NAME} == "workflow_dispatch" ]]; then
+            VERSION_GROUP="${INPUTS_VERSION_GROUP}"
           fi
           echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
       - name: Get VERSION_LIST from versions.json

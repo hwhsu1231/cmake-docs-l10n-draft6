@@ -54,14 +54,14 @@ jobs:
         id: gvg
         shell: bash
         run: |
-          INPUTS_VERSION_GROUP=${{ inputs.VERSION_GROUP }}
-          GITHUB_EVENT_NAME=${{ github.event_name }}
-          GITHUB_EVENT_SCHEDULE=${{ github.event.schedule }}
-          if [[ ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
-            VERSION_GROUP=${INPUTS_VERSION_GROUP}
-          elif [[ ${GITHUB_EVENT_NAME} == 'schedule' ]]; then
+          INPUTS_VERSION_GROUP="${{ inputs.VERSION_GROUP }}"
+          GITHUB_EVENT_NAME="${{ github.event_name }}"
+          GITHUB_EVENT_SCHEDULE="${{ github.event.schedule }}"
+          if [[ ${GITHUB_EVENT_NAME} == "workflow_dispatch" ]]; then
+            VERSION_GROUP="${INPUTS_VERSION_GROUP}"
+          elif [[ ${GITHUB_EVENT_NAME} == "schedule" ]]; then
             if [[ ${GITHUB_EVENT_SCHEDULE} == "${{ env.CRON_V3 }}" ]]; then
-              VERSION_GROUP=v3
+              VERSION_GROUP="v3"
             fi
           fi
           echo "VERSION_GROUP=${VERSION_GROUP}" >> ${GITHUB_OUTPUT}
