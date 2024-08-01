@@ -602,3 +602,23 @@ if(AUTO_DEPEND)
     add_dependencies(gettext_update_po      sphinx_update_pot)
     add_dependencies(sphinx_build_docs      gettext_update_po)
 endif()
+
+find_package(Python MODULE REQUIRED)
+message(STATUS "Running 'msgcat' command to update 'sphinx.pot' file...")
+execute_process(
+    COMMAND ${Python_EXECUTABLE} -c "import sphinx; print(sphinx.__file__);"
+    RESULT_VARIABLE RES_VAR
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+message(STATUS "RES_VAR = ${RES_VAR}")
+message(STATUS "OUT_VAR = ${OUT_VAR}")
+message(STATUS "ERR_VAR = ${ERR_VAR}")
+if(RES_VAR EQUAL 0)
+else()
+    string(APPEND FAILURE_REASON
+    "Failed with\n"
+    "    result:\n${RES_VAR}\n"
+    "    stdout:\n${OUT_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
+endif()

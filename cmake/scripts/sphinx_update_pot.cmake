@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -20,7 +20,6 @@ find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
 include(GitUtils)
 include(JsonUtils)
 include(LogUtils)
-set(ENV{LANG} "${SPHINX_CONSOLE_LOCALE}")
 
 
 message(STATUS "Determining whether it is required to update .pot files...")
@@ -227,7 +226,8 @@ message(STATUS "Running 'sphinx-build' command with 'gettext' builder to generat
 remove_cmake_message_indent()
 message("")
 execute_process(
-    COMMAND ${Sphinx_BUILD_EXECUTABLE}
+    COMMAND ${CMAKE_COMMAND} -E env LANG=${SPHINX_CONSOLE_LOCALE}
+            ${Sphinx_BUILD_EXECUTABLE}
             -b gettext
             -D version=${VERSION}                               # Specify 'Project-Id-Version' in .pot files.
             -D gettext_compact=0
@@ -238,35 +238,24 @@ execute_process(
             ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                    # <sourcedir>, where index.rst locates.
             ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES    # <outputdir>, where .pot generates.
     ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
     RESULT_VARIABLE RES_VAR
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if(RES_VAR EQUAL 0)
     if(ERR_VAR)
-        # Success, but there may be some warnings.
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
+        string(APPEND WARNING_REASON
+        "The command succeeded with warnings.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message("${WARNING_REASON}")
     endif()
 else()
-    message("")
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
+    string(APPEND FAILURE_REASON
+    "The command failed with fatal errors.\n"
+    "    result:\n${RES_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 message("")
 restore_cmake_message_indent()
@@ -274,12 +263,20 @@ restore_cmake_message_indent()
 
 message(STATUS "Running 'msgcat' command to update 'sphinx.pot' file...")
 execute_process(
-    COMMAND ${Python_EXECUTABLE} -c
-            "import sphinx; print(sphinx.__file__);"
+    COMMAND ${Python_EXECUTABLE} -c "import sphinx; print(sphinx.__file__);"
     RESULT_VARIABLE RES_VAR
     OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-get_filename_component(SPHINX_LIB_DIR ${OUT_VAR} DIRECTORY)
+if(RES_VAR EQUAL 0)
+    get_filename_component(SPHINX_LIB_DIR ${OUT_VAR} DIRECTORY)
+else()
+    string(APPEND FAILURE_REASON
+    "The command failed with fatal errors.\n"
+    "    result:\n${RES_VAR}\n"
+    "    stdout:\n${OUT_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
+endif()
 set(DEFAULT_SPHINX_POT_PATH "${SPHINX_LIB_DIR}/locale/sphinx.pot")
 set(PACKAGE_SPHINX_POT_PATH "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES/sphinx.pot")
 remove_cmake_message_indent()
@@ -309,22 +306,12 @@ if(EXISTS "${PACKAGE_SPHINX_POT_PATH}")
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
     else()
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- OUT ----------")
-        message("")
-        message("${OUT_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
 else()
     #
@@ -345,22 +332,12 @@ else()
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
     else()
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- OUT ----------")
-        message("")
-        message("${OUT_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
 endif()
 message("")
@@ -405,22 +382,12 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
         if(RES_VAR EQUAL 0)
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${OUT_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     else()
         # If the ${DST_POT_FILE} doesn't exist, then create it using msgcat.
@@ -430,7 +397,7 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
         message("  [inputfile]    ${SRC_POT_FILE}")
         execute_process(
             COMMAND ${Gettext_MSGCAT_EXECUTABLE}
-                    --width ${GETTEXT_WRAP_WIDTH} 
+                    --width ${GETTEXT_WRAP_WIDTH}
                     --output-file ${DST_POT_FILE}
                     ${SRC_POT_FILE}   # [inputfile]
             RESULT_VARIABLE RES_VAR
@@ -438,22 +405,12 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
         if(RES_VAR EQUAL 0)
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${OUT_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endif()
 endforeach()

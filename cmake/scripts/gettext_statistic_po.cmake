@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
 # file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -45,13 +45,11 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         execute_process(
             COMMAND ${Gettext_MSGATTRIB_EXECUTABLE} --no-fuzzy --no-obsolete ${PO_FILE}
             RESULT_VARIABLE TOTAL_MSGID_RES
-            OUTPUT_VARIABLE TOTAL_MSGID_OUT
-            ERROR_VARIABLE  TOTAL_MSGID_ERR
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_STRIP_TRAILING_WHITESPACE)
+            OUTPUT_VARIABLE TOTAL_MSGID_OUT OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_VARIABLE  TOTAL_MSGID_ERR ERROR_STRIP_TRAILING_WHITESPACE)
         if(TOTAL_MSGID_RES EQUAL 0)
             if(TOTAL_MSGID_OUT)
-                string(REGEX MATCHALL "msgid" TOTAL_MSGID_MATCHES ${TOTAL_MSGID_OUT})
+                string(REGEX MATCHALL "msgid" TOTAL_MSGID_MATCHES "${TOTAL_MSGID_OUT}")
                 list(LENGTH TOTAL_MSGID_MATCHES TOTAL_MSGID_COUNT)
                 math(EXPR TOTAL_MSGID_COUNT "${TOTAL_MSGID_COUNT} - 1") # Subtract 1 for the header msgid
                 math(EXPR NUM_OF_MSGID_TOTAL "${NUM_OF_MSGID_TOTAL} + ${TOTAL_MSGID_COUNT}")
@@ -59,22 +57,12 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 set(TOTAL_MSGID_COUNT 0)
             endif()
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${TOTAL_MSGID_RES}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${TOTAL_MSGID_OUT}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${TOTAL_MSGID_ERR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${TOTAL_MSGID_RES}\n"
+            "    stdout:\n${TOTAL_MSGID_OUT}\n"
+            "    stderr:\n${TOTAL_MSGID_ERR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
         # Calculate the "translated" msgid entries
@@ -82,13 +70,11 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         execute_process(
             COMMAND ${Gettext_MSGATTRIB_EXECUTABLE} --translated ${PO_FILE}
             RESULT_VARIABLE TRANSLATED_MSGID_RES
-            OUTPUT_VARIABLE TRANSLATED_MSGID_OUT
-            ERROR_VARIABLE  TRANSLATED_MSGID_ERR
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_STRIP_TRAILING_WHITESPACE)
+            OUTPUT_VARIABLE TRANSLATED_MSGID_OUT OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_VARIABLE  TRANSLATED_MSGID_ERR ERROR_STRIP_TRAILING_WHITESPACE)
         if(TRANSLATED_MSGID_RES EQUAL 0)
             if(TRANSLATED_MSGID_OUT)
-                string(REGEX MATCHALL "msgid" TRANSLATED_MSGID_MATCHES ${TRANSLATED_MSGID_OUT})
+                string(REGEX MATCHALL "msgid" TRANSLATED_MSGID_MATCHES "${TRANSLATED_MSGID_OUT}")
                 list(LENGTH TRANSLATED_MSGID_MATCHES TRANSLATED_MSGID_COUNT)
                 math(EXPR TRANSLATED_MSGID_COUNT "${TRANSLATED_MSGID_COUNT} - 1") # Subtract 1 for the header msgid
                 math(EXPR NUM_OF_MSGID_TRANSLATED "${NUM_OF_MSGID_TRANSLATED} + ${TRANSLATED_MSGID_COUNT}")
@@ -96,22 +82,12 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 set(TRANSLATED_MSGID_COUNT 0)
             endif()
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${TRANSLATED_MSGID_RES}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${TRANSLATED_MSGID_OUT}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${TRANSLATED_MSGID_ERR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${TRANSLATED_MSGID_RES}\n"
+            "    stdout:\n${TRANSLATED_MSGID_OUT}\n"
+            "    stderr:\n${TRANSLATED_MSGID_ERR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
         # Calculate the "fuzzy" msgid entries.
@@ -119,10 +95,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         execute_process(
             COMMAND ${Gettext_MSGATTRIB_EXECUTABLE} --only-fuzzy --no-obsolete ${PO_FILE}
             RESULT_VARIABLE FUZZY_MSGID_RES
-            OUTPUT_VARIABLE FUZZY_MSGID_OUT
-            ERROR_VARIABLE  FUZZY_MSGID_ERR
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_STRIP_TRAILING_WHITESPACE)
+            OUTPUT_VARIABLE FUZZY_MSGID_OUT OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_VARIABLE  FUZZY_MSGID_ERR ERROR_STRIP_TRAILING_WHITESPACE)
         if(FUZZY_MSGID_RES EQUAL 0)
             if(FUZZY_MSGID_OUT)
                 string(REGEX MATCHALL "msgid" FUZZY_MSGID_MATCHES ${FUZZY_MSGID_OUT})
@@ -134,22 +108,12 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 set(FUZZY_MSGID_COUNT 0)
             endif()
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${FUZZY_MSGID_RES}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${FUZZY_MSGID_OUT}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${FUZZY_MSGID_ERR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${FUZZY_MSGID_RES}\n"
+            "    stdout:\n${FUZZY_MSGID_OUT}\n"
+            "    stderr:\n${FUZZY_MSGID_ERR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
 
         if(NOT TOTAL_MSGID_RES AND NOT TRANSLATED_MSGID_RES)
@@ -230,5 +194,6 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
 
     set(STATISTIC_TXT_CNT "${STATISTIC_TXT_CNT}${LOG_MESSAGES}\n")
 endforeach()
+unset(_LANGUAGE)
 
 file(WRITE "${STATISTIC_TXT_PATH}" "${STATISTIC_TXT_CNT}")

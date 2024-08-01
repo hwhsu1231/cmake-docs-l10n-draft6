@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -61,24 +61,15 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
         if(RES_VAR EQUAL 0)
         else()
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${OUT_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endif()
 endforeach()
+unset(_LANGUAGE)
 message("")
 restore_cmake_message_indent()

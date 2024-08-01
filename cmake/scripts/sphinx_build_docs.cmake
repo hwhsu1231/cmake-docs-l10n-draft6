@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -17,7 +17,6 @@ find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
 find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
 include(JsonUtils)
 include(LogUtils)
-set(ENV{LANG} "${SPHINX_CONSOLE_LOCALE}")
 
 
 if(NOT LANGUAGE STREQUAL "all")
@@ -73,7 +72,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     remove_cmake_message_indent()
     message("")
     execute_process(
-        COMMAND ${Sphinx_BUILD_EXECUTABLE}
+        COMMAND ${CMAKE_COMMAND} -E env LANG=${SPHINX_CONSOLE_LOCALE}
+                ${Sphinx_BUILD_EXECUTABLE}
                 -b ${SPHINX_BUILDER}
                 -D locale_dirs=${LOCALE_TO_SOURCE_DIR}            # Relative to <sourcedir>.
                 -D language=${_LANGUAGE}
@@ -85,6 +85,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 -c ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}               # <configdir>, where conf.py locates.
                 ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}                  # <sourcedir>, where index.rst locates.
                 ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}   # <outputdir>, where .html generates.
+        ENCODING AUTO
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         RESULT_VARIABLE RES_VAR
@@ -92,31 +93,18 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
         if(ERR_VAR)
-            # Success, but there might be some warnings.
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
+            string(APPEND WARNING_REASON
+            "The command succeeded but had some warnings with\n"
+            "    result:\n${RES_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message("${WARNING_REASON}")
         endif()
     else()
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     message("")
     restore_cmake_message_indent()

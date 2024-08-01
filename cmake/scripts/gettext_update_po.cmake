@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -24,26 +24,26 @@ endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Comparing the version of '.pot' and '.po.${_LANGUAGE}' object...")
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION   ".pot"
-        OUT_JSON_VALUE    CURRENT_POT_OBJECT)
+        IN_JSON_OBJECT          "${REFERENCES_JSON_CNT}"
+        IN_DOT_NOTATION         ".pot"
+        OUT_JSON_VALUE          CURRENT_POT_OBJECT)
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION   ".po.${_LANGUAGE}"
-        OUT_JSON_VALUE    CURRENT_PO_LOCALE_OBJECT)
+        IN_JSON_OBJECT          "${REFERENCES_JSON_CNT}"
+        IN_DOT_NOTATION         ".po.${_LANGUAGE}"
+        OUT_JSON_VALUE          CURRENT_PO_LOCALE_OBJECT)
     if(VERSION_TYPE STREQUAL "branch")
         set(DOT_NOTATION ".commit.hash")
     else()
         set(DOT_NOTATION ".tag")
     endif()
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION   "${DOT_NOTATION}"
-        OUT_JSON_VALUE    CURRENT_POT_REFERENCE)
+        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
+        IN_DOT_NOTATION         "${DOT_NOTATION}"
+        OUT_JSON_VALUE          CURRENT_POT_REFERENCE)
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT    "${CURRENT_PO_LOCALE_OBJECT}"
-        IN_DOT_NOTATION   "${DOT_NOTATION}"
-        OUT_JSON_VALUE    CURRENT_PO_REFERENCE)
+        IN_JSON_OBJECT          "${CURRENT_PO_LOCALE_OBJECT}"
+        IN_DOT_NOTATION         "${DOT_NOTATION}"
+        OUT_JSON_VALUE          CURRENT_PO_REFERENCE)
     if(UPDATE_MODE STREQUAL "COMPARE")
         if(NOT CURRENT_POT_REFERENCE STREQUAL CURRENT_PO_REFERENCE)
             set(UPDATE_REQUIRED ON)
@@ -105,37 +105,25 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             message("  [ref.pot]    ${POT_FILE}")
             execute_process(
                 COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
-                        --lang ${_LANGUAGE} 
-                        --width ${GETTEXT_WRAP_WIDTH} 
-                        --backup off 
-                        --update 
-                        --force-po 
+                        --lang ${_LANGUAGE}
+                        --width ${GETTEXT_WRAP_WIDTH}
+                        --backup off
+                        --update
+                        --force-po
                         --no-fuzzy-matching
                         ${PO_FILE}      # [def.po]
                         ${POT_FILE}     # [ref.pot]
                 RESULT_VARIABLE RES_VAR
-                OUTPUT_VARIABLE OUT_VAR
-                ERROR_VARIABLE  ERR_VAR
-                OUTPUT_STRIP_TRAILING_WHITESPACE
-                ERROR_STRIP_TRAILING_WHITESPACE)
+                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
             if(RES_VAR EQUAL 0)
             else()
-                message("")
-                message("---------- RES ----------")
-                message("")
-                message("${RES_VAR}")
-                message("")
-                message("---------- OUT ----------")
-                message("")
-                message("${OUT_VAR}")
-                message("")
-                message("---------- ERR ----------")
-                message("")
-                message("${ERR_VAR}")
-                message("")
-                message("-------------------------")
-                message("")
-                message(FATAL_ERROR "Fatal error occurred.")
+                string(APPEND FAILURE_REASON
+                "The command failed with fatal errors.\n"
+                "    result:\n${RES_VAR}\n"
+                "    stdout:\n${OUT_VAR}\n"
+                "    stderr:\n${ERR_VAR}")
+                message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         else()
             # If the ${PO_FILE} doesn't exist, then create it using msgcat.
@@ -151,28 +139,16 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                         --output-file ${PO_FILE}
                         ${POT_FILE}
                 RESULT_VARIABLE RES_VAR
-                OUTPUT_VARIABLE OUT_VAR
-                ERROR_VARIABLE  ERR_VAR
-                OUTPUT_STRIP_TRAILING_WHITESPACE
-                ERROR_STRIP_TRAILING_WHITESPACE)
+                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
             if(RES_VAR EQUAL 0)
             else()
-                message("")
-                message("---------- RES ----------")
-                message("")
-                message("${RES_VAR}")
-                message("")
-                message("---------- OUT ----------")
-                message("")
-                message("${OUT_VAR}")
-                message("")
-                message("---------- ERR ----------")
-                message("")
-                message("${ERR_VAR}")
-                message("")
-                message("-------------------------")
-                message("")
-                message(FATAL_ERROR "Fatal error occurred.")
+                string(APPEND FAILURE_REASON
+                "The command failed with fatal errors.\n"
+                "    result:\n${RES_VAR}\n"
+                "    stdout:\n${OUT_VAR}\n"
+                "    stderr:\n${ERR_VAR}")
+                message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         endif()
     endforeach()

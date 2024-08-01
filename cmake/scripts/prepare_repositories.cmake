@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
 set(CMAKE_MESSAGE_INDENT "[${VERSION}][${LANGUAGE}] ")
 set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
@@ -61,21 +61,12 @@ if(RES_VAR EQUAL 0)
         message("No need to clean file/directories.")
     endif()
 else()
-    message("---------- RES ----------")
-    message("")
-    message("${RES_VAR}")
-    message("")
-    message("---------- OUT ----------")
-    message("")
-    message("${OUT_VAR}")
-    message("")
-    message("---------- ERR ----------")
-    message("")
-    message("${ERR_VAR}")
-    message("")
-    message("-------------------------")
-    message("")
-    message(FATAL_ERROR "Fatal error occurred.")
+    string(APPEND FAILURE_REASON
+    "The command failed with\n"
+    "    result:\n${RES_VAR}\n"
+    "    stdout:\n${OUT_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 message("")
 restore_cmake_message_indent()
