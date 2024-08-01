@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../../manual/cpack.1.rst:41
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/cpack.1.rst:47
 msgid ""

@@ -191,7 +191,7 @@ msgstr ""
 
 #: ../../../command/try_compile.rst:150
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../command/try_compile.rst:152
 msgid "The options for the above signatures are:"
