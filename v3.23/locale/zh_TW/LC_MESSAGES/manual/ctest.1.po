@@ -54,7 +54,7 @@ msgstr ""
 
 #: ../../../manual/ctest.1.rst:31
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/ctest.1.rst:37
 msgid "``--preset <preset>``, ``--preset=<preset>``"
