@@ -23,11 +23,11 @@ msgstr ""
 
 #: ../../../guide/ide-integration/index.rst:5
 msgid "Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../../guide/ide-integration/index.rst:9
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../guide/ide-integration/index.rst:11
 msgid ""

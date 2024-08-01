@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../manual/cmake-gui.1.rst:7
 msgid "Synopsis"
-msgstr ""
+msgstr "概要"
 
 #: ../../../manual/cmake-gui.1.rst:11
 msgid ""
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../../../manual/cmake-gui.1.rst:30
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: ../../../manual/cmake-gui.1.rst:36
 msgid "Path to root directory of the CMake project to build."
