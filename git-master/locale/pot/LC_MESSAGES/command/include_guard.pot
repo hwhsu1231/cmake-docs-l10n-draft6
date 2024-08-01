@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-08-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgid ""
 "Possible values for the option are:"
 msgstr ""
 
-#: ../../../command/include_guard.rst:27
+#: ../../../command/include_guard.rst:32
 msgid "``DIRECTORY``"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgid ""
 "`include` from the current file or its children)."
 msgstr ""
 
-#: ../../../command/include_guard.rst:34
+#: ../../../command/include_guard.rst:36
 msgid "``GLOBAL``"
 msgstr ""
 
