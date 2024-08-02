@@ -3,53 +3,53 @@
   {
     "ja_JP" : 
     {
-      "branch" : "",
+      "branch" : "master",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2024-08-01 00:01:17 -0400",
+        "hash" : "bd8dc7775b685cba38235899b1eb31c3d57b1fa0",
+        "title" : "CMake Nightly Date Stamp"
       }
     },
     "ru_RU" : 
     {
-      "branch" : "",
+      "branch" : "master",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2024-08-01 00:01:17 -0400",
+        "hash" : "bd8dc7775b685cba38235899b1eb31c3d57b1fa0",
+        "title" : "CMake Nightly Date Stamp"
       }
     },
     "zh_CN" : 
     {
-      "branch" : "",
+      "branch" : "master",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2024-08-01 00:01:17 -0400",
+        "hash" : "bd8dc7775b685cba38235899b1eb31c3d57b1fa0",
+        "title" : "CMake Nightly Date Stamp"
       }
     },
     "zh_TW" : 
     {
-      "branch" : "",
+      "branch" : "master",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2024-08-01 00:01:17 -0400",
+        "hash" : "bd8dc7775b685cba38235899b1eb31c3d57b1fa0",
+        "title" : "CMake Nightly Date Stamp"
       }
     }
   },
   "pot" : 
   {
-    "branch" : "",
+    "branch" : "master",
     "commit" : 
     {
-      "date" : "",
-      "hash" : "",
-      "title" : ""
+      "date" : "2024-08-01 00:01:17 -0400",
+      "hash" : "bd8dc7775b685cba38235899b1eb31c3d57b1fa0",
+      "title" : "CMake Nightly Date Stamp"
     }
   },
   "type" : "branch",
