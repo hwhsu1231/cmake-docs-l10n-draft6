@@ -97,7 +97,7 @@ jobs:
       ENABLE_JOB: true
 
   single:
-    if: (github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
+    if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}
