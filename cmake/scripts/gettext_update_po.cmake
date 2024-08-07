@@ -22,7 +22,7 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
-    message(STATUS "Comparing the version of '.pot' and '.po.${_LANGUAGE}' object...")
+    message(STATUS "Determining whether it is required to update .pot files...")
     get_json_value_by_dot_notation(
         IN_JSON_OBJECT          "${REFERENCES_JSON_CNT}"
         IN_DOT_NOTATION         ".pot"
@@ -168,4 +168,4 @@ endforeach()
 unset(_LANGUAGE)
 
 
-file(WRITE "${REFERENCES_JSON_PATH}" ${REFERENCES_JSON_CNT})
+file(WRITE "${REFERENCES_JSON_PATH}" "${REFERENCES_JSON_CNT}")
