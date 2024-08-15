@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../manual/cmake-generators.7.rst:4
 msgid "cmake-generators(7)"
-msgstr "cmake-生成器(7)"
+msgstr ""
 
 #: ../../../manual/cmake-generators.7.rst:7
 msgid "Contents"

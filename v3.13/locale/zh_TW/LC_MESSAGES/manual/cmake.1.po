@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../../manual/cmake.1.rst:4
 msgid "cmake(1)"
-msgstr "cmake(1)"
+msgstr ""
 
 #: ../../../manual/cmake.1.rst:7
 msgid "Synopsis"
-msgstr "概要"
+msgstr ""
 
 #: ../../../manual/cmake.1.rst:11
 msgid ""

@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:4
 msgid "cmake-language(7)"
-msgstr "cmake-語言(7)"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:7
 msgid "Contents"
-msgstr "目次"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:11
 msgid "Organization"
-msgstr "組織"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:13
 msgid ""
@@ -41,19 +41,19 @@ msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:18
 msgid "`Directories`_ (``CMakeLists.txt``),"
-msgstr "`目錄 <Directories_>`_\\ （``CMakeLists.txt``）、"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:19
 msgid "`Scripts`_ (``<script>.cmake``), and"
-msgstr "`命令稿 <Scripts_>`_\\ （``<script>.cmake``）與"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:20
 msgid "`Modules`_ (``<module>.cmake``)."
-msgstr "`模組 <Modules_>`_\\ （``<module>.cmake``）。"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:23
 msgid "Directories"
-msgstr "目錄"
+msgstr ""
 
 #: ../../../manual/cmake-language.7.rst:25
 msgid ""

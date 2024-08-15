@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../../manual/cmake-modules.7.rst:4
 msgid "cmake-modules(7)"
-msgstr "cmake-模組(7)"
+msgstr ""
 
 #: ../../../manual/cmake-modules.7.rst:7
 msgid "Contents"
-msgstr "目次"
+msgstr ""
 
 #: ../../../manual/cmake-modules.7.rst:11
 msgid "All Modules"

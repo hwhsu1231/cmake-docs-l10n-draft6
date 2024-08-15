@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../../command/list.rst:7
 msgid "Synopsis"
-msgstr "概要"
+msgstr ""
 
 #: ../../../command/list.rst:11
 msgid ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../../command/list.rst:34
 msgid "Introduction"
-msgstr "介紹"
+msgstr ""
 
 #: ../../../command/list.rst:36
 msgid ""

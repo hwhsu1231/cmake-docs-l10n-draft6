@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../../manual/cmake-env-variables.7.rst:4
 msgid "cmake-env-variables(7)"
-msgstr "cmake-環境變數(7)"
+msgstr ""
 
 #: ../../../manual/cmake-env-variables.7.rst:7
 msgid "Contents"
-msgstr "目次"
+msgstr ""
 
 #: ../../../manual/cmake-env-variables.7.rst:11
 msgid "Environment Variables that Control the Build"

@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../manual/cmake-gui.1.rst:7
 msgid "Synopsis"
-msgstr "概要"
+msgstr ""
 
 #: ../../../manual/cmake-gui.1.rst:11
 msgid ""

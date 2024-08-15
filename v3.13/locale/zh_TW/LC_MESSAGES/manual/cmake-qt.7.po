@@ -23,11 +23,11 @@ msgstr ""
 
 #: ../../../manual/cmake-qt.7.rst:7
 msgid "Contents"
-msgstr "目次"
+msgstr ""
 
 #: ../../../manual/cmake-qt.7.rst:11
 msgid "Introduction"
-msgstr "介紹"
+msgstr ""
 
 #: ../../../manual/cmake-qt.7.rst:13
 msgid ""

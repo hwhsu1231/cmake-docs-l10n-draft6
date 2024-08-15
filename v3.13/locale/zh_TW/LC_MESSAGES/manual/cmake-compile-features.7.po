@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../../../manual/cmake-compile-features.7.rst:4
 msgid "cmake-compile-features(7)"
-msgstr "cmake-編譯功能(7)"
+msgstr ""
 
 #: ../../../manual/cmake-compile-features.7.rst:7
 msgid "Contents"
-msgstr "目次"
+msgstr ""
 
 #: ../../../manual/cmake-compile-features.7.rst:11
 msgid "Introduction"
-msgstr "介紹"
+msgstr ""
 
 #: ../../../manual/cmake-compile-features.7.rst:13
 msgid ""
