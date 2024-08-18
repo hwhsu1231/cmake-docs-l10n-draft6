@@ -46,12 +46,10 @@ endif()
 message(STATUS "Running 'git clean -xfdf' command to remove untracked files/directories...")
 execute_process(
     COMMAND ${Git_EXECUTABLE} clean -xfdf
-    WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR
-    ERROR_VARIABLE  ERR_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE)
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 remove_cmake_message_indent()
 message("")
 if(RES_VAR EQUAL 0)
@@ -88,24 +86,15 @@ if(VERSION_TYPE STREQUAL "branch")
     remove_cmake_message_indent()
     message("")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} checkout -B ${BRANCH_NAME}
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
         COMMAND ${Git_EXECUTABLE} fetch origin
-                ${LATEST_COMMIT_HASH}
+                ${LATEST_COMMIT_HASH}:refs/heads/${BRANCH_NAME}
                 --depth=1
                 --verbose
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
+                --force   # To sovle the following error message:
+                # POST git-upload-pack (102 bytes)
+                # POST git-upload-pack (gzip 2235 to 841 bytes)
+                # From https://gitlab.kitware.com/cmake/cmake
+                #  ! [rejected]            34146501ffe30f14d0ca5b999b3ec407d27450fb -> master  (non-fast-forward)
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
