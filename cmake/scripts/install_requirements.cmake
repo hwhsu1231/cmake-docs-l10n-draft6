@@ -97,8 +97,16 @@ restore_cmake_message_indent()
 message(STATUS "Switching to the reference '${SWITCH_REFERENCE}' on the local branch 'current'...")
 remove_cmake_message_indent()
 message("")
+if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule deinit --all --force
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+endif()
 execute_process(
-    # Run 'git checkout -B' command to checkout/reset to the 'current' branch.
     COMMAND ${Git_EXECUTABLE} checkout -B current
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
@@ -106,7 +114,6 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 execute_process(
-    # Run 'git fetch' command to fetch the '${SWITCH_REFERENCE}' commit to FETCH_HEAD.
     COMMAND ${Git_EXECUTABLE} fetch origin
             ${SWITCH_REFERENCE}
             --depth=1
@@ -117,13 +124,28 @@ execute_process(
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
 execute_process(
-    # Run 'git reset --hard' command to reset the 'current' branch from FETCH_HEAD.
     COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
+if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule init
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule update --recursive
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+endif()
 restore_cmake_message_indent()
 
 
@@ -160,124 +182,127 @@ message("PREVIOUS_REFERENCE = ${PREVIOUS_REFERENCE}")
 message("INSTALL_REQUIRED   = ${INSTALL_REQUIRED}")
 message("")
 restore_cmake_message_indent()
+
+
 if(NOT INSTALL_REQUIRED)
     message(STATUS "No need to install the requirements.")
+    return()
 else()
     message(STATUS "Prepare to install the requirements.")
+endif()
 
 
-    message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Conda_EXECUTABLE} create
-                --prefix ${PROJ_VENV_DIR}
-                --channel conda-forge
-                --yes
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(RES_VAR EQUAL 0)
-        if(ERR_VAR)
-            string(APPEND WARNING_REASON
-            "The command succeeded with warnings.\n"
-            "    result:\n${RES_VAR}\n"
-            "    stderr:\n${ERR_VAR}")
-            message("${WARNING_REASON}")
-        endif()
-    else()
-        string(APPEND FAILURE_REASON
-        "The command failed with fatal errors.\n"
+message(STATUS "Running 'conda create' command to (re)create the virtual environemnt...")
+remove_cmake_message_indent()
+message("")
+execute_process(
+    COMMAND ${Conda_EXECUTABLE} create
+            --prefix ${PROJ_VENV_DIR}
+            --channel conda-forge
+            --yes
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    RESULT_VARIABLE RES_VAR
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+if(RES_VAR EQUAL 0)
+    if(ERR_VAR)
+        string(APPEND WARNING_REASON
+        "The command succeeded with warnings.\n"
         "    result:\n${RES_VAR}\n"
         "    stderr:\n${ERR_VAR}")
-        message(FATAL_ERROR "${FAILURE_REASON}")
+        message("${WARNING_REASON}")
     endif()
-    message("")
-    restore_cmake_message_indent()
+else()
+    string(APPEND FAILURE_REASON
+    "The command failed with fatal errors.\n"
+    "    result:\n${RES_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
+endif()
+message("")
+restore_cmake_message_indent()
 
 #[[
-    message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
-    set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
-    if(NOT EXISTS "${PYVENV_CFG_PATH}")
-        set(PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
-    else()
-        file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
-        if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
-            if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages[ ]*=[ ]*true")
-                string(REGEX REPLACE 
-                    "include-system-site-packages[ ]*=[ ]*true"
-                    "include-system-site-packages = false" 
-                    PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
-            endif()
-        else()
-            string(APPEND PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
+message(STATUS "Creating 'pyvenv.cfg' in the virtual environment...")
+set(PYVENV_CFG_PATH "${PROJ_VENV_DIR}/pyvenv.cfg")
+if(NOT EXISTS "${PYVENV_CFG_PATH}")
+    set(PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
+else()
+    file(READ "${PYVENV_CFG_PATH}" PYVENV_CFG_CONTENTS)
+    if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages")
+        if(PYVENV_CFG_CONTENTS MATCHES "include-system-site-packages[ ]*=[ ]*true")
+            string(REGEX REPLACE 
+                "include-system-site-packages[ ]*=[ ]*true"
+                "include-system-site-packages = false" 
+                PYVENV_CFG_CONTENTS "${PYVENV_CFG_CONTENTS}")
         endif()
+    else()
+        string(APPEND PYVENV_CFG_CONTENTS "include-system-site-packages = false\n")
     endif()
-    file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
-    remove_cmake_message_indent()
-    message("")
-    message("${PYVENV_CFG_PATH}")
-    message("${PYVENV_CFG_CONTENTS}")
-    message("")
-    restore_cmake_message_indent()
+endif()
+file(WRITE "${PYVENV_CFG_PATH}" "${PYVENV_CFG_CONTENTS}")
+remove_cmake_message_indent()
+message("")
+message("${PYVENV_CFG_PATH}")
+message("${PYVENV_CFG_CONTENTS}")
+message("")
+restore_cmake_message_indent()
 #]]
 
-    message(STATUS "Running 'conda install' command to install dependencies...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Conda_EXECUTABLE} install
-                python=${VERSION_OF_PYTHON}
-                sphinx=${VERSION_OF_SPHINX}
-                --prefix ${PROJ_VENV_DIR}
-                --channel conda-forge
-                --yes
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(RES_VAR EQUAL 0)
-        if(ERR_VAR)
-            string(APPEND WARNING_REASON
-            "The command succeeded with warnings.\n"
-            "    result:\n${RES_VAR}\n"
-            "    stderr:\n${ERR_VAR}")
-            message("${WARNING_REASON}")
-        endif()
-    else()
-        string(APPEND FAILURE_REASON
-        "The command failed with fatal errors.\n"
+message(STATUS "Running 'conda install' command to install dependencies...")
+remove_cmake_message_indent()
+message("")
+execute_process(
+    COMMAND ${Conda_EXECUTABLE} install
+            python=${VERSION_OF_PYTHON}
+            sphinx=${VERSION_OF_SPHINX}
+            --prefix ${PROJ_VENV_DIR}
+            --channel conda-forge
+            --yes
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    RESULT_VARIABLE RES_VAR
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+if(RES_VAR EQUAL 0)
+    if(ERR_VAR)
+        string(APPEND WARNING_REASON
+        "The command succeeded with warnings.\n"
         "    result:\n${RES_VAR}\n"
         "    stderr:\n${ERR_VAR}")
-        message(FATAL_ERROR "${FAILURE_REASON}")
+        message("${WARNING_REASON}")
     endif()
-    message("")
-    restore_cmake_message_indent()
-
-
-    set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-    find_package(Python   MODULE REQUIRED)
-    message(STATUS "Running 'python -c \"import sys; print('\\n'.join(sys.path))\"' command to check python system paths...")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Python_EXECUTABLE} -c "import sys; print('\\n'.join(sys.path))"
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE)
-    message("")
-    restore_cmake_message_indent()
-    set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
-    find_package(Sphinx   MODULE REQUIRED)
-
-
-    file(WRITE "${PREV_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
-    execute_process(
-        COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
-        OUTPUT_FILE "${PREV_ENVIRONMENTS_YML_PATH}")
-    # execute_process(
-    #     COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
-    #     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")
+else()
+    string(APPEND FAILURE_REASON
+    "The command failed with fatal errors.\n"
+    "    result:\n${RES_VAR}\n"
+    "    stderr:\n${ERR_VAR}")
+    message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
+message("")
+restore_cmake_message_indent()
+
+
+set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
+find_package(Python   MODULE REQUIRED)
+message(STATUS "Running 'python -c \"import sys; print('\\n'.join(sys.path))\"' command to check python system paths...")
+remove_cmake_message_indent()
+message("")
+execute_process(
+    COMMAND ${Python_EXECUTABLE} -c "import sys; print('\\n'.join(sys.path))"
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE)
+message("")
+restore_cmake_message_indent()
+set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+find_package(Sphinx   MODULE REQUIRED)
+
+
+file(WRITE "${PREV_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
+execute_process(
+    COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
+    OUTPUT_FILE "${PREV_ENVIRONMENTS_YML_PATH}")
+# execute_process(
+#     COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
+#     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")

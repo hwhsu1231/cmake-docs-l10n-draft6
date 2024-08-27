@@ -26,9 +26,11 @@ if(NOT EXISTS "${PROJ_OUT_REPO_DIR}/.git")
         COMMAND ${Git_EXECUTABLE} clone
                 --depth=1
                 --single-branch
+                --recurse-submodules
+                --shallow-submodules
                 ${GIT_REMOTE_URL}
                 ${PROJ_OUT_REPO_DIR}
-        WORKING_DIRECTORY "${PROJ_OUT_REPO_DIR}"
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
@@ -43,30 +45,38 @@ else()
 endif()
 
 
+message(STATUS "Creating and switching to the local branch 'current'...")
+remove_cmake_message_indent()
+message("")
+execute_process(
+    COMMAND ${Git_EXECUTABLE} checkout -B current
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    COMMAND_ERROR_IS_FATAL ANY)
+message("")
+restore_cmake_message_indent()
+
+
 message(STATUS "Running 'git clean -xfdf' command to remove untracked files/directories...")
+remove_cmake_message_indent()
+message("")
 execute_process(
     COMMAND ${Git_EXECUTABLE} clean -xfdf
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-remove_cmake_message_indent()
+    ECHO_OUTPUT_VARIABLE
+    ECHO_ERROR_VARIABLE
+    COMMAND_ERROR_IS_FATAL ANY)
 message("")
-if(RES_VAR EQUAL 0)
-    if(OUT_VAR)
-        message("${OUT_VAR}")
-    else()
-        message("No need to clean file/directories.")
-    endif()
-else()
-    string(APPEND FAILURE_REASON
-    "The command failed with\n"
-    "    result:\n${RES_VAR}\n"
-    "    stdout:\n${OUT_VAR}\n"
-    "    stderr:\n${ERR_VAR}")
-    message(FATAL_ERROR "${FAILURE_REASON}")
+if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule foreach --recursive git clean -xfdf
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
 endif()
-message("")
 restore_cmake_message_indent()
 
 

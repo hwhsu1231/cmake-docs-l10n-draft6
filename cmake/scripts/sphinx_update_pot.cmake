@@ -107,6 +107,15 @@ restore_cmake_message_indent()
 message(STATUS "Switching to the reference '${SWITCH_REFERENCE}' on the local branch 'current'...")
 remove_cmake_message_indent()
 message("")
+if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule deinit --all --force
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+endif()
 execute_process(
     COMMAND ${Git_EXECUTABLE} checkout -B current
     WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
@@ -131,6 +140,22 @@ execute_process(
     ECHO_ERROR_VARIABLE
     COMMAND_ERROR_IS_FATAL ANY)
 message("")
+if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule init
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} submodule update --recursive
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("")
+endif()
 restore_cmake_message_indent()
 
 
