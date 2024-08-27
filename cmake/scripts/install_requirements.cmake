@@ -139,7 +139,9 @@ if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
         COMMAND_ERROR_IS_FATAL ANY)
     message("")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule update --recursive
+        COMMAND ${Git_EXECUTABLE} submodule update
+                --recursive
+                --depth 1
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
