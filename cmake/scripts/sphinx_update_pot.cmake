@@ -71,21 +71,16 @@ else()
 endif()
 if(UPDATE_MODE STREQUAL "COMPARE")
     if(NOT CURRENT_POT_REFERENCE STREQUAL LATEST_POT_REFERENCE)
-        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
         set(UPDATE_REQUIRED     ON)
     else()
-        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
         set(UPDATE_REQUIRED     OFF)
     endif()
 elseif(UPDATE_MODE STREQUAL "ALWAYS")
-    set(SWITCH_REFERENCE        "${LATEST_POT_REFERENCE}")
     set(UPDATE_REQUIRED         ON)
 elseif(UPDATE_MODE STREQUAL "NEVER")
     if(NOT CURRENT_POT_REFERENCE)
-        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
         set(UPDATE_REQUIRED     ON)
     else()
-        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
         set(UPDATE_REQUIRED     OFF)
     endif()
 else()
@@ -99,63 +94,7 @@ message("UPDATE_MODE            = ${UPDATE_MODE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
 message("UPDATE_REQUIRED        = ${UPDATE_REQUIRED}")
-message("SWITCH_REFERENCE       = ${SWITCH_REFERENCE}")
 message("")
-restore_cmake_message_indent()
-
-
-message(STATUS "Switching to the reference '${SWITCH_REFERENCE}' on the local branch 'current'...")
-remove_cmake_message_indent()
-message("")
-if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule deinit --all --force
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-endif()
-execute_process(
-    COMMAND ${Git_EXECUTABLE} checkout -B current
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} fetch origin
-            ${SWITCH_REFERENCE}
-            --depth=1
-            --verbose
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule init
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule update --recursive
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-endif()
 restore_cmake_message_indent()
 
 
