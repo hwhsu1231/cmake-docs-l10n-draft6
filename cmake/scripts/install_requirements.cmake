@@ -105,6 +105,14 @@ if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
     message("")
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -E rm -rf .git/modules
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+        ECHO_OUTPUT_VARIABLE
+        ECHO_ERROR_VARIABLE
+        COMMAND_ERROR_IS_FATAL ANY)
+    message("Remove directory '.git/modules'")
+    message("")
 endif()
 execute_process(
     COMMAND ${Git_EXECUTABLE} checkout -B current
@@ -132,7 +140,7 @@ execute_process(
 message("")
 if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule init
+        COMMAND ${Git_EXECUTABLE} submodule sync
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
@@ -140,8 +148,9 @@ if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
     message("")
     execute_process(
         COMMAND ${Git_EXECUTABLE} submodule update
+                --init
                 --recursive
-                --depth 1
+                --depth=1
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
