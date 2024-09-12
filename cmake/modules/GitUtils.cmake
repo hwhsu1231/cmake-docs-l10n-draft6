@@ -10,22 +10,23 @@ GitUtilities
   .. code-block:: cmake
 
     get_git_latest_commit_on_branch_name(
-        IN_REPO_PATH      "${GIT_CLONE_PATH}"
-        IN_SOURCE_TYPE    "local"
-        IN_BRANCH_NAME    "${BRANCH_NAME}"
-        OUT_COMMIT_DATE   LATEST_POT_COMMIT_DATE
-        OUT_COMMIT_HASH   LATEST_POT_COMMIT_HASH
-        OUT_COMMIT_TITLE  LATEST_POT_COMMIT_TITLE)
+        IN_REPO_PATH        "${PROJ_OUT_REPO_DIR}"
+        IN_SOURCE_TYPE      "local"
+        IN_BRANCH_NAME      "${BRANCH_NAME}"
+        OUT_COMMIT_DATE     LATEST_POT_COMMIT_DATE
+        OUT_COMMIT_HASH     LATEST_POT_COMMIT_HASH
+        OUT_COMMIT_TITLE    LATEST_POT_COMMIT_TITLE)
 
 .. command:: get_git_latest_tag_on_tag_pattern
 
   .. code-block:: cmake
 
     get_git_latest_tag_on_tag_pattern(
-        IN_REPO_PATH      "${GIT_CLONE_PATH}"
-        IN_SOURCE_TYPE    "local"
-        IN_TAG_PATTERN    "${TAG_PATTERN}"
-        OUT_TAG           LATEST_POT_TAG)
+        IN_REPO_PATH        "${PROJ_OUT_REPO_DIR}"
+        IN_SOURCE_TYPE      "local"
+        IN_TAG_PATTERN      "${TAG_PATTERN}"
+        IN_TAG_SORT_SUFFIX  "${TAG_SORT_SUFFIX}"
+        OUT_TAG             LATEST_POT_TAG)
 
 #]============================================================]
 
