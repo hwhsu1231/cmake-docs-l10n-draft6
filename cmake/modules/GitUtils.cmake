@@ -80,19 +80,12 @@ function(get_git_latest_commit_on_branch_name)
         if(RES_VAR EQUAL 0)
             set(GGLCBN_REPO_SOURCE "${OUT_VAR}")
         else()
-            set(CMAKE_MESSAGE_INDENT "")
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     else()
         message(FATAL_ERROR "Invalid IN_SOURCE_TYPE argument. (${GGLCBN_IN_SOURCE_TYPE})")
@@ -118,19 +111,12 @@ function(get_git_latest_commit_on_branch_name)
             message(FATAL_ERROR "No matching '${GGLCBN_IN_BRANCH_NAME}' branch pattern found.")
         endif()
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     #
     # Fetch the '${GGLCBN_HEAD_OID}' to FETCH_HEAD from the remote.
@@ -146,19 +132,12 @@ function(get_git_latest_commit_on_branch_name)
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     #
     # Get the 'hash' of the head commit from FETCH_HEAD.
@@ -175,19 +154,12 @@ function(get_git_latest_commit_on_branch_name)
     if(RES_VAR EQUAL 0)
         set(LATEST_COMMIT_HASH ${OUT_VAR})
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     #
     # Get the 'date'  of the latest commit from FETCH_HEAD.
@@ -204,19 +176,12 @@ function(get_git_latest_commit_on_branch_name)
     if(RES_VAR EQUAL 0)
         set(LATEST_COMMIT_DATE ${OUT_VAR})
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     #
     # Get the 'title' of the latest commit from FETCH_HEAD.
@@ -233,19 +198,12 @@ function(get_git_latest_commit_on_branch_name)
     if(RES_VAR EQUAL 0)
         set(LATEST_COMMIT_TITLE ${OUT_VAR})
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     #
     # Return OUT_COMMIT_DATE, OUT_COMMIT_HASH, and OUT_COMMIT_TITLE.
@@ -291,7 +249,7 @@ function(get_git_latest_tag_on_tag_pattern)
         find_package(Git QUIET MODULE REQUIRED)
     endif()
     #
-    # Set the repository source.
+    # Determine the repository source.
     # - If IN_SOURCE_TYPE is local,  then set GGLTTP_REPO_SOURCE to the local path of the repository.
     # - If IN_SOURCE_TYPE is remote, then set GGLTTP_REPO_SOURCE to the remote url of the repository.
     #
@@ -307,23 +265,12 @@ function(get_git_latest_tag_on_tag_pattern)
         if(RES_VAR EQUAL 0)
             set(GGLTTP_REPO_REMOTE_NAME "${OUT_VAR}")
         else()
-            set(CMAKE_MESSAGE_INDENT "")
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${OUT_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         execute_process(
             COMMAND ${Git_EXECUTABLE} remote get-url ${GGLTTP_REPO_REMOTE_NAME}
@@ -334,23 +281,12 @@ function(get_git_latest_tag_on_tag_pattern)
         if(RES_VAR EQUAL 0)
             set(GGLTTP_REPO_SOURCE "${OUT_VAR}")
         else()
-            set(CMAKE_MESSAGE_INDENT "")
-            message("")
-            message("---------- RES ----------")
-            message("")
-            message("${RES_VAR}")
-            message("")
-            message("---------- OUT ----------")
-            message("")
-            message("${OUT_VAR}")
-            message("")
-            message("---------- ERR ----------")
-            message("")
-            message("${ERR_VAR}")
-            message("")
-            message("-------------------------")
-            message("")
-            message(FATAL_ERROR "Fatal error occurred.")
+            string(APPEND FAILURE_REASON
+            "The command failed with fatal errors.\n"
+            "    result:\n${RES_VAR}\n"
+            "    stdout:\n${OUT_VAR}\n"
+            "    stderr:\n${ERR_VAR}")
+            message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     else()
         message(FATAL_ERROR "Invalid IN_SOURCE_TYPE argument. (${GGLTTP_IN_SOURCE_TYPE})")
@@ -369,23 +305,12 @@ function(get_git_latest_tag_on_tag_pattern)
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
     else()
-        set(CMAKE_MESSAGE_INDENT "")
-        message("")
-        message("---------- RES ----------")
-        message("")
-        message("${RES_VAR}")
-        message("")
-        message("---------- OUT ----------")
-        message("")
-        message("${OUT_VAR}")
-        message("")
-        message("---------- ERR ----------")
-        message("")
-        message("${ERR_VAR}")
-        message("")
-        message("-------------------------")
-        message("")
-        message(FATAL_ERROR "Fatal error occurred.")
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     string(REPLACE "\n" ";" TAG_LINES "${OUT_VAR}")
     set(TAG_LIST "")
