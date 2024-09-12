@@ -57,7 +57,7 @@ else()
         IN_REPO_PATH            "${PROJ_OUT_REPO_DIR}"
         IN_SOURCE_TYPE          "local"
         IN_TAG_PATTERN          "${TAG_PATTERN}"
-        IN_SORT_SUFFIX          "${TAG_SORT_SUFFIX}"
+        IN_TAG_SORT_SUFFIX          "${TAG_SORT_SUFFIX}"
         OUT_TAG                 LATEST_POT_TAG)
     set_members_of_reference_json_object(
         IN_TYPE                 "tag"

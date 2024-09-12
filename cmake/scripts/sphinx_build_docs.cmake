@@ -11,7 +11,7 @@ message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 set(CMAKE_MODULE_PATH 
     "${PROJ_CMAKE_MODULES_DIR}"
     "${PROJ_CMAKE_MODULES_DIR}/common")
-set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
+set(Sphinx_ROOT_DIR   "${PROJ_VENV_DIR}")
 find_package(Git      MODULE REQUIRED)
 find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
 find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
@@ -68,7 +68,7 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
-    message(STATUS "Running 'sphinx-build' command with '${SPHINX_BUILDER}' builder to build HTML documentation for '${_LANGUAGE}' language...")
+    message(STATUS "Running 'sphinx-build' command with '${SPHINX_BUILDER}' builder to build documentation for '${_LANGUAGE}' language...")
     remove_cmake_message_indent()
     message("")
     execute_process(
