@@ -100,6 +100,7 @@ function(get_git_latest_commit_on_branch_name)
                 --sort=-v:refname
                 ${GGLCBN_REPO_SOURCE}
                 ${GGLCBN_IN_BRANCH_NAME}
+        WORKING_DIRECTORY ${GGLCBN_IN_REPO_PATH}
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -222,6 +223,7 @@ function(get_git_latest_tag_on_tag_pattern)
     set(ONE_VALUE_ARGS      IN_REPO_PATH 
                             IN_SOURCE_TYPE
                             IN_TAG_PATTERN 
+                            IN_SORT_SUFFIX
                             OUT_TAG)
     set(MULTI_VALUE_ARGS)
     cmake_parse_arguments(GGLTTP 
@@ -258,7 +260,7 @@ function(get_git_latest_tag_on_tag_pattern)
     elseif(GGLTTP_IN_SOURCE_TYPE STREQUAL "remote")
         execute_process(
             COMMAND ${Git_EXECUTABLE} remote
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+            WORKING_DIRECTORY ${GGLTTP_IN_REPO_PATH}
             RESULT_VARIABLE RES_VAR
             OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -292,6 +294,24 @@ function(get_git_latest_tag_on_tag_pattern)
         message(FATAL_ERROR "Invalid IN_SOURCE_TYPE argument. (${GGLTTP_IN_SOURCE_TYPE})")
     endif()
     #
+    # Configures git version sort suffix.
+    #
+    execute_process(
+        COMMAND ${Git_EXECUTABLE} config versionsort.suffix "${GGLTTP_IN_SORT_SUFFIX}"
+        WORKING_DIRECTORY ${GGLTTP_IN_REPO_PATH}
+        RESULT_VARIABLE RES_VAR
+        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+    if(RES_VAR EQUAL 0)
+    else()
+        string(APPEND FAILURE_REASON
+        "The command failed with fatal errors.\n"
+        "    result:\n${RES_VAR}\n"
+        "    stdout:\n${OUT_VAR}\n"
+        "    stderr:\n${ERR_VAR}")
+        message(FATAL_ERROR "${FAILURE_REASON}")
+    endif()
+    #
     # Get the list of tags matching the tag pattern.
     #
     execute_process(
@@ -300,6 +320,7 @@ function(get_git_latest_tag_on_tag_pattern)
                 --tags 
                 --sort=-v:refname
                 ${GGLTTP_REPO_SOURCE}
+        WORKING_DIRECTORY ${GGLTTP_IN_REPO_PATH}
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -319,7 +340,8 @@ function(get_git_latest_tag_on_tag_pattern)
         list(APPEND TAG_LIST ${TAG_NAME})
     endforeach()
     list(FILTER TAG_LIST INCLUDE REGEX "${GGLTTP_IN_TAG_PATTERN}")
-    list(SORT TAG_LIST COMPARE "NATURAL" ORDER "DESCENDING")
+    message(STATUS "TAG_LIST = ${TAG_LIST}")
+    # list(SORT TAG_LIST COMPARE "NATURAL" ORDER "DESCENDING")
     list(GET TAG_LIST 0 LATEST_TAG)
 #[[
     #
