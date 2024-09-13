@@ -56,10 +56,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             endif()
         else()
             string(APPEND FAILURE_REASON
-            "The command failed with fatal errors.\n"
-            "    result:\n${TOTAL_MSGID_RES}\n"
-            "    stdout:\n${TOTAL_MSGID_OUT}\n"
-            "    stderr:\n${TOTAL_MSGID_ERR}")
+            "The command failed with fatal errors.\n\n"
+            "    result:\n\n${TOTAL_MSGID_RES}\n\n"
+            "    stdout:\n\n${TOTAL_MSGID_OUT}\n\n"
+            "    stderr:\n\n${TOTAL_MSGID_ERR}\n")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
@@ -81,10 +81,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             endif()
         else()
             string(APPEND FAILURE_REASON
-            "The command failed with fatal errors.\n"
-            "    result:\n${TRANSLATED_MSGID_RES}\n"
-            "    stdout:\n${TRANSLATED_MSGID_OUT}\n"
-            "    stderr:\n${TRANSLATED_MSGID_ERR}")
+            "The command failed with fatal errors.\n\n"
+            "    result:\n\n${TRANSLATED_MSGID_RES}\n\n"
+            "    stdout:\n\n${TRANSLATED_MSGID_OUT}\n\n"
+            "    stderr:\n\n${TRANSLATED_MSGID_ERR}\n")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
@@ -107,10 +107,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             endif()
         else()
             string(APPEND FAILURE_REASON
-            "The command failed with fatal errors.\n"
-            "    result:\n${FUZZY_MSGID_RES}\n"
-            "    stdout:\n${FUZZY_MSGID_OUT}\n"
-            "    stderr:\n${FUZZY_MSGID_ERR}")
+            "The command failed with fatal errors.\n\n"
+            "    result:\n\n${FUZZY_MSGID_RES}\n\n"
+            "    stdout:\n\n${FUZZY_MSGID_OUT}\n\n"
+            "    stderr:\n\n${FUZZY_MSGID_ERR}\n")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
 

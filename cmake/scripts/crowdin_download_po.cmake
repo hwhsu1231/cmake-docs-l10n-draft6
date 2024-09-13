@@ -30,14 +30,14 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     remove_cmake_message_indent()
     message("")
     execute_process(
-        COMMAND ${Crowdin_EXECUTABLE} download 
+        COMMAND ${Crowdin_EXECUTABLE} download
                 --language ${_LANGUAGE_CROWDIN}
                 --branch ${VERSION}
                 --config ${CROWDIN_YML_PATH}
                 --export-only-approved
                 --no-progress
                 --verbose
-        WORKING_DIRECTORY "${PROJ_L10N_VERSION_DIR}"
+        WORKING_DIRECTORY ${PROJ_L10N_VERSION_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
@@ -70,8 +70,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         message("  [ref.pot]      ${LOCALE_POT_FILE}")
         execute_process(
             COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
-                    --lang ${_LANGUAGE} 
-                    --width ${GETTEXT_WRAP_WIDTH} 
+                    --lang ${_LANGUAGE}
+                    --width ${GETTEXT_WRAP_WIDTH}
                     --compendium ${CROWDIN_PO_FILE}
                     --output-file ${LOCALE_PO_FILE}
                     ${LOCALE_POT_FILE}  # [def.po]
@@ -82,10 +82,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         if(RES_VAR EQUAL 0)
         else()
             string(APPEND FAILURE_REASON
-            "The command failed with fatal errors.\n"
-            "    result:\n${RES_VAR}\n"
-            "    stdout:\n${OUT_VAR}\n"
-            "    stderr:\n${ERR_VAR}")
+            "The command failed with fatal errors.\n\n"
+            "    result:\n\n${RES_VAR}\n\n"
+            "    stdout:\n\n${OUT_VAR}\n\n"
+            "    stderr:\n\n${ERR_VAR}\n")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endforeach()
