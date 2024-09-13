@@ -121,9 +121,7 @@ set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
 set(PREV_ENVIRONMENTS_YML_PATH      "${PROJ_VENV_DIR}/prev/environments.yml")
 set(PREV_REFERENCE_TXT_PATH         "${PROJ_VENV_DIR}/prev/reference.txt")
 
-set(CMAKE_MODULE_PATH 
-    "${PROJ_CMAKE_MODULES_DIR}"
-    "${PROJ_CMAKE_MODULES_DIR}/common")
+set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
 include(JsonUtils)
 include(LogUtils)
 
