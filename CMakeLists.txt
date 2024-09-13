@@ -139,16 +139,16 @@ get_members_of_json_object(
 #[====================================[
   Validate the VERSION cache variable.
   - For "git-master":
-    - Set VERSION_TYPE to "branch"
-    - Set BRANCH_NAME  to "master"
+    - Set VERSION_TYPE    to "branch"
+    - Set BRANCH_NAME     to "master"
   - For "latest":
     - Set VERSION_TYPE    to "tag"
     - Set TAG_PATTERN     to "^v([0-9]+)\\.([0-9]+)\\.([0-9]+)(-rc[1-9][0-9]*)?$"
-    - Set TAG_SORT_SUFFIX to "-rc"
+    - Set TAG_SUFFIX      to "-rc"
   - For "v3.x":
     - Set VERSION_TYPE    to "tag"
     - Set TAG_PATTERN     to "^v3\\.x\\.([0-9]+)(-rc[1-9][0-9]*)?$"
-    - Set TAG_SORT_SUFFIX to "-rc"
+    - Set TAG_SUFFIX      to "-rc"
 #]====================================]
 
 if (VERSION MATCHES     "^git-master$")
@@ -157,12 +157,12 @@ if (VERSION MATCHES     "^git-master$")
 elseif(VERSION MATCHES  "^latest$")
     set(VERSION_TYPE    "tag")
     set(TAG_PATTERN     "^v([0-9]+)\\.([0-9]+)\\.([0-9]+)(-rc[1-9][0-9]*)?$")
-    set(TAG_SORT_SUFFIX "-rc")
+    set(TAG_SUFFIX      "-rc")
 elseif(VERSION MATCHES  "^v([0-9]+)\\.([0-9]+)$")
     set(VERSION_TYPE    "tag")
     string(REGEX REPLACE "\\." "\\\\." VERSION_ESCAPED "${VERSION}")
     set(TAG_PATTERN     "^${VERSION_ESCAPED}\\.([0-9]+)(-rc[1-9][0-9]*)?$")
-    set(TAG_SORT_SUFFIX "-rc")
+    set(TAG_SUFFIX      "-rc")
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
 endif()
@@ -447,7 +447,7 @@ message(STATUS "LANGUAGE_LIST                 = ${LANGUAGE_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
 message(STATUS "TAG_PATTERN                   = ${TAG_PATTERN}")
-message(STATUS "TAG_SORT_SUFFIX               = ${TAG_SORT_SUFFIX}")
+message(STATUS "TAG_SUFFIX                    = ${TAG_SUFFIX}")
 message(STATUS "---------- Prerequisites ----------")
 message(STATUS "CMAKE_VERSION                 = ${CMAKE_VERSION}")
 message(STATUS "CMAKE_COMMAND                 = ${CMAKE_COMMAND}")
@@ -532,7 +532,7 @@ set(SCRIPT_MODE_CACHE
     -D VERSION_TYPE=${VERSION_TYPE}
     -D BRANCH_NAME=${BRANCH_NAME}
     -D TAG_PATTERN=${TAG_PATTERN}
-    -D TAG_SORT_SUFFIX=${TAG_SORT_SUFFIX})
+    -D TAG_SUFFIX=${TAG_SUFFIX})
 
 #[====================[
   Fundamental targets.
