@@ -117,7 +117,7 @@ elseif(VERSION_TYPE STREQUAL "tag")
         IN_REPO_PATH        "${PROJ_OUT_REPO_DIR}"
         IN_SOURCE_TYPE      "remote"
         IN_TAG_PATTERN      "${TAG_PATTERN}"
-        IN_TAG_SORT_SUFFIX      "${TAG_SORT_SUFFIX}"
+        IN_TAG_SORT_SUFFIX  "${TAG_SORT_SUFFIX}"
         OUT_TAG             LATEST_TAG)
     remove_cmake_message_indent()
     message("")
