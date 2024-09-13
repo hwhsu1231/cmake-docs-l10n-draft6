@@ -1,7 +1,3 @@
-[submodule "cmake/modules/common"]
-	path = cmake/modules/common
-	url = ../../hwhsu1231/l10n-cmake-modules.git
-	branch = master
 [submodule "cmake/modules"]
 	path = cmake/modules
 	url = ../../hwhsu1231/l10n-cmake-modules.git
