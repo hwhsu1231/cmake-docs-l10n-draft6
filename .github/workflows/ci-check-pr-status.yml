@@ -103,7 +103,7 @@ jobs:
       CHECKOUT: ${{ github.ref }}
       VERSION: 'git-master'
       LANGUAGE: 'all'
-      UPDATE_MODE: 'COMPARE'
+      MODE_OF_UPDATE: 'COMPARE'
       CALLER_JOB: 'check-deploy-gh-pages'
       ENABLE_JOB: ${{ needs.before-check.outputs.SCRIPT_CHANGE == 'true' }}
       DEPLOY_HTML: false

@@ -34,8 +34,8 @@ on:
         required: true
         type: string
         default: 'all'
-      UPDATE_MODE:
-        description: 'UPDATE_MODE input'
+      MODE_OF_UPDATE:
+        description: 'MODE_OF_UPDATE input'
         required: true
         type: choice
         default: 'COMPARE'
@@ -66,7 +66,7 @@ jobs:
       CHECKOUT: 'refs/heads/source'
       VERSION: ${{ github.event.client_payload.VERSION }}
       LANGUAGE: 'all'
-      UPDATE_MODE: 'ALWAYS'
+      MODE_OF_UPDATE: 'ALWAYS'
       CALLER_JOB: 'pr-merged'
       ENABLE_JOB: true
 
@@ -119,7 +119,7 @@ jobs:
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
-      UPDATE_MODE: ${{ inputs.UPDATE_MODE || 'COMPARE' }}
+      MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE || 'COMPARE' }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
 
@@ -135,6 +135,6 @@ jobs:
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
-      UPDATE_MODE: ${{ inputs.UPDATE_MODE }}
+      MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true

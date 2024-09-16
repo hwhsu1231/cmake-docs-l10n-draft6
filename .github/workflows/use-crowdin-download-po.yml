@@ -18,7 +18,7 @@ on:
       LANGUAGE:
         type: string
         required: true
-      UPDATE_MODE:
+      MODE_OF_UPDATE:
         type: string
         required: true
       CALLER_JOB:
@@ -48,7 +48,7 @@ jobs:
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
-          echo "inputs.UPDATE_MODE = ${{ inputs.UPDATE_MODE }}"
+          echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
@@ -98,7 +98,7 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
-          cache-update-mode: ${{ inputs.UPDATE_MODE }}
+          cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
           cache-auto-depend: 'OFF'
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
           cache-version-of-python: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}

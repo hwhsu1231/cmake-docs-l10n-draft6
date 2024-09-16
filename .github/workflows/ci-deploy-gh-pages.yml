@@ -104,7 +104,7 @@ jobs:
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
-      UPDATE_MODE: 'NEVER'
+      MODE_OF_UPDATE: 'NEVER'
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       DEPLOY_HTML: true
@@ -121,7 +121,7 @@ jobs:
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
-      UPDATE_MODE: 'NEVER'
+      MODE_OF_UPDATE: 'NEVER'
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       DEPLOY_HTML: true

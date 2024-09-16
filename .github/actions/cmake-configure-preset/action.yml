@@ -18,13 +18,13 @@ inputs:
     required: false
     description: 'Value passed to VERSION cache.'
     default: '[default]'
-  cache-update-mode:
+  cache-mode-of-update:
     required: false
-    description: 'Value passed to UPDATE_MODE cache.'
+    description: 'Value passed to MODE_OF_UPDATE cache.'
     default: '[default]'
-  cache-install-mode:
+  cache-mode-of-install:
     required: false
-    description: 'Value passed to INSTALL_MODE cache.'
+    description: 'Value passed to MODE_OF_INSTALL cache.'
     default: '[default]'
   cache-auto-depend:
     required: false

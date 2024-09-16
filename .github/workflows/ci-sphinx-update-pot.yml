@@ -26,8 +26,8 @@ on:
         required: true
         type: string
         default: 'all'
-      UPDATE_MODE:
-        description: 'UPDATE_MODE input'
+      MODE_OF_UPDATE:
+        description: 'MODE_OF_UPDATE input'
         required: true
         type: choice
         default: 'COMPARE'
@@ -103,7 +103,7 @@ jobs:
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
-      UPDATE_MODE: ${{ inputs.UPDATE_MODE || 'COMPARE' }}
+      MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE || 'COMPARE' }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       CREATE_PR: true
@@ -119,7 +119,7 @@ jobs:
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
-      UPDATE_MODE: ${{ inputs.UPDATE_MODE }}
+      MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       CREATE_PR: true

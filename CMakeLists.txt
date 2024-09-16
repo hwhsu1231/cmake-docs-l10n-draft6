@@ -17,14 +17,14 @@ set(VERSION "git-master"
     CACHE STRING "Current version for the CMake documentation.")
     # Possible values are "git-master", "latest", and "v3.x".
 
-set(UPDATE_MODE "NEVER"
+set(MODE_OF_UPDATE "NEVER"
     CACHE STRING "Mode of updating .pot/.po files.")
     # Possible values are "NEVER", "COMPARE", and "ALWAYS".
     # 1) NEVER:   Update .pot/.po files only if the current reference is missing.
     # 2) COMPARE: Update .pot/.po files only if the current reference is different than the latest one.
     # 3) ALWAYS:  Update .pot/.po files even if the current reference is the same as    the latest one.
 
-set(INSTALL_MODE "COMPARE"
+set(MODE_OF_INSTALL "COMPARE"
     CACHE STRING "Mode of installing the requirements.")
     # Possible values are "COMPARE" and "ALWAYS".
     # 1) COMPARE: Install the requirements only if the current reference is different than the previous one.
@@ -185,22 +185,22 @@ if(NOT LANGUAGE_IS_VALID)
 endif()
 
 #[========================================[
-  Validate the UPDATE_MODE cache variable.
+  Validate the MODE_OF_UPDATE cache variable.
 #]========================================]
 
-if (NOT UPDATE_MODE STREQUAL "COMPARE" AND 
-    NOT UPDATE_MODE STREQUAL "ALWAYS" AND 
-    NOT UPDATE_MODE STREQUAL "NEVER")
-    message(FATAL_ERROR "Invalid UPDATE_MODE value. (${UPDATE_MODE})")
+if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND 
+    NOT MODE_OF_UPDATE STREQUAL "ALWAYS" AND 
+    NOT MODE_OF_UPDATE STREQUAL "NEVER")
+    message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
 endif()
 
 #[=========================================[
-  Validate the INSTALL_MODE cache variable.
+  Validate the MODE_OF_INSTALL cache variable.
 #]=========================================]
 
-if (NOT INSTALL_MODE STREQUAL "COMPARE" AND 
-    NOT INSTALL_MODE STREQUAL "ALWAYS")
-    message(FATAL_ERROR "Invalid INSTALL_MODE value. (${INSTALL_MODE})")
+if (NOT MODE_OF_INSTALL STREQUAL "COMPARE" AND 
+    NOT MODE_OF_INSTALL STREQUAL "ALWAYS")
+    message(FATAL_ERROR "Invalid MODE_OF_INSTALL value. (${MODE_OF_INSTALL})")
 endif()
 
 #[====================================================================[
@@ -411,8 +411,8 @@ configure_file(
 message(STATUS "---------- Cache Variables ----------")
 message(STATUS "VERSION                       = ${VERSION}")
 message(STATUS "LANGUAGE                      = ${LANGUAGE}")
-message(STATUS "UPDATE_MODE                   = ${UPDATE_MODE}")
-message(STATUS "INSTALL_MODE                  = ${INSTALL_MODE}")
+message(STATUS "MODE_OF_UPDATE                   = ${MODE_OF_UPDATE}")
+message(STATUS "MODE_OF_INSTALL                  = ${MODE_OF_INSTALL}")
 message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
 message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
@@ -497,8 +497,8 @@ set(SCRIPT_MODE_CACHE
     -D LANGUAGE=${LANGUAGE}
     -D VERSION=${VERSION}
     -D AUTO_DEPEND=${AUTO_DEPEND}
-    -D UPDATE_MODE=${UPDATE_MODE}
-    -D INSTALL_MODE=${INSTALL_MODE}
+    -D MODE_OF_UPDATE=${MODE_OF_UPDATE}
+    -D MODE_OF_INSTALL=${MODE_OF_INSTALL}
     -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
     -D VERSION_OF_PYTHON=${VERSION_OF_PYTHON}
