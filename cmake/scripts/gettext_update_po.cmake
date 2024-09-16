@@ -8,9 +8,9 @@ set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
 message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 
 
-set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
-find_package(Git      MODULE REQUIRED)
-find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
+set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
+find_package(Git        MODULE REQUIRED)
+find_package(Gettext    MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
 include(JsonUtils)
 include(LogUtils)
 
@@ -119,10 +119,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             if(RES_VAR EQUAL 0)
             else()
                 string(APPEND FAILURE_REASON
-                "The command failed with fatal errors.\n"
-                "    result:\n${RES_VAR}\n"
-                "    stdout:\n${OUT_VAR}\n"
-                "    stderr:\n${ERR_VAR}")
+                "The command failed with fatal errors.\n\n"
+                "    result:\n\n${RES_VAR}\n\n"
+                "    stdout:\n\n${OUT_VAR}\n\n"
+                "    stderr:\n\n${ERR_VAR}\n")
                 message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         else()
@@ -144,10 +144,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             if(RES_VAR EQUAL 0)
             else()
                 string(APPEND FAILURE_REASON
-                "The command failed with fatal errors.\n"
-                "    result:\n${RES_VAR}\n"
-                "    stdout:\n${OUT_VAR}\n"
-                "    stderr:\n${ERR_VAR}")
+                "The command failed with fatal errors.\n\n"
+                "    result:\n\n${RES_VAR}\n\n"
+                "    stdout:\n\n${OUT_VAR}\n\n"
+                "    stderr:\n\n${ERR_VAR}\n")
                 message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         endif()

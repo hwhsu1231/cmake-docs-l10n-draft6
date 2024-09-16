@@ -8,9 +8,9 @@ set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
 message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 
 
-set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
-find_package(Git      MODULE REQUIRED)
-find_package(Conda    MODULE REQUIRED)
+set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
+find_package(Git        MODULE REQUIRED)
+find_package(Conda      MODULE REQUIRED)
 include(GitUtils)
 include(JsonUtils)
 include(LogUtils)

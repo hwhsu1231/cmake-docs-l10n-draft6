@@ -8,11 +8,11 @@ set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
 message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 
 
-set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
-set(Sphinx_ROOT_DIR   "${PROJ_VENV_DIR}")
-find_package(Git      MODULE REQUIRED)
-find_package(Gettext  MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
-find_package(Sphinx   MODULE REQUIRED COMPONENTS Build)
+set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
+set(Sphinx_ROOT_DIR     "${PROJ_VENV_DIR}")
+find_package(Git        MODULE REQUIRED)
+find_package(Gettext    MODULE REQUIRED COMPONENTS Msgcat Msgmerge)
+find_package(Sphinx     MODULE REQUIRED COMPONENTS Build)
 include(JsonUtils)
 include(LogUtils)
 

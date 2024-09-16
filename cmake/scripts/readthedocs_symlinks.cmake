@@ -8,7 +8,7 @@ set(CMAKE_MESSAGE_INDENT_BACKUP "${CMAKE_MESSAGE_INDENT}")
 message(STATUS "-------------------- ${SCRIPT_NAME} --------------------")
 
 
-set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
+set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
 include(JsonUtils)
 include(LogUtils)
 
