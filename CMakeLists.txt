@@ -250,126 +250,137 @@ find_package(Crowdin  MODULE QUIET)
   Create Git Worktree for 'l10n' branch in ${PROJ_L10N_DIR}.
 #]==========================================================]
 
-if(EXISTS "${PROJ_L10N_DIR}/.git")
-    message(STATUS "Git Working Tree exists: ${PROJ_L10N_DIR}")
-    remove_cmake_message_indent()
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} status
-        WORKING_DIRECTORY ${PROJ_L10N_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=%s
-        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=short
-        # COMMAND ${Git_EXECUTABLE} show --no-patch --format=medium
-        COMMAND ${Git_EXECUTABLE} show --no-patch --format=full
-        WORKING_DIRECTORY ${PROJ_L10N_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    restore_cmake_message_indent()
+execute_process(
+    COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_L10N_REMOTE_URL}
+    RESULT_VARIABLE RES_VAR
+    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+if(NOT RES_VAR EQUAL 0)
+    message(STATUS "The remote '${GIT_L10N_REMOTE_URL}' doesn't exist.")
 else()
-    message(STATUS "Git Working Tree doesn't exist: ${PROJ_L10N_DIR}")
+    message(STATUS "The remote '${GIT_L10N_REMOTE_URL}' exists. Check if 'l10n' branch exists.")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} ls-remote --heads ${GIT_L10N_REMOTE_URL} l10n
+        COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_L10N_REMOTE_URL} l10n
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(RES_VAR EQUAL 0 AND OUT_VAR)
-        message(STATUS "There exists 'l10n' branch in the remote. Prepare to create a worktree.")
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} remote
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            RESULT_VARIABLE RES_VAR
-            OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-        if(RES_VAR EQUAL 0)
-            set(REMOTE_NAME "${OUT_VAR}")
-        else()
-            message(FATAL_ERROR "${ERR_VAR}")
-        endif()
-        message(STATUS "Adding fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n'...")
-        remove_cmake_message_indent()
-        message("")
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} config --get-all
-                    remote.${REMOTE_NAME}.fetch
-                    refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            RESULT_VARIABLE RES_VAR
-            OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-        if(RES_VAR EQUAL 0)
-            # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' already exists.
-        elseif(RES_VAR EQUAL 1)
-            # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' doesn't exist.
+    if(NOT RES_VAR EQUAL 0)
+        message(STATUS "The branch 'l10n' doesn't exist in the remote.")
+    else()
+        message(STATUS "The branch 'l10n' exist in the remote. Check if the git working tree exist.")
+        if(EXISTS "${PROJ_L10N_DIR}/.git")
+            message(STATUS "The git working tree exists: ${PROJ_L10N_DIR}")
+            remove_cmake_message_indent()
+            message("")
             execute_process(
-                COMMAND ${Git_EXECUTABLE} config --add
-                        remote.${REMOTE_NAME}.fetch 
-                        +refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
+                COMMAND ${Git_EXECUTABLE} status
+                WORKING_DIRECTORY ${PROJ_L10N_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            message("")
+            execute_process(
+                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=%s
+                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=short
+                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=medium
+                COMMAND ${Git_EXECUTABLE} show --no-patch --format=full
+                WORKING_DIRECTORY ${PROJ_L10N_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            message("")
+            restore_cmake_message_indent()
+        else()
+            message(STATUS "The git working tree doesn't exist: ${PROJ_L10N_DIR}")
+            message(STATUS "There exists 'l10n' branch in the remote. Prepare to create a worktree.")
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} remote
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                RESULT_VARIABLE RES_VAR
+                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+            if(RES_VAR EQUAL 0)
+                set(REMOTE_NAME "${OUT_VAR}")
+            else()
+                message(FATAL_ERROR "${ERR_VAR}")
+            endif()
+            message(STATUS "Adding fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n'...")
+            remove_cmake_message_indent()
+            message("")
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} config --get-all
+                        remote.${REMOTE_NAME}.fetch
+                        refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                RESULT_VARIABLE RES_VAR
+                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
+                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
+            if(RES_VAR EQUAL 0)
+                # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' already exists.
+            elseif(RES_VAR EQUAL 1)
+                # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' doesn't exist.
+                execute_process(
+                    COMMAND ${Git_EXECUTABLE} config --add
+                            remote.${REMOTE_NAME}.fetch 
+                            +refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
+                    WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                    ECHO_OUTPUT_VARIABLE
+                    ECHO_ERROR_VARIABLE
+                    COMMAND_ERROR_IS_FATAL ANY)
+            else()
+                message(FATAL_ERROR "${ERR_VAR}")
+            endif()
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} config --get-all
+                        remote.${REMOTE_NAME}.fetch
                 WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
                 ECHO_OUTPUT_VARIABLE
                 ECHO_ERROR_VARIABLE
                 COMMAND_ERROR_IS_FATAL ANY)
-        else()
-            message(FATAL_ERROR "${ERR_VAR}")
+            message("")
+            restore_cmake_message_indent()
+            message(STATUS "Fetching/Tracking the remote branch 'l10n' to the local branch 'l10n'...")
+            remove_cmake_message_indent()
+            message("")
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME} l10n:l10n --verbose --update-head-ok
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} branch --set-upstream-to=${REMOTE_NAME}/l10n l10n
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            message("")
+            restore_cmake_message_indent()
+            message(STATUS "Creating a git worktree for 'l10n' branch in ${PROJ_L10N_DIR}...")
+            remove_cmake_message_indent()
+            message("")
+            execute_process(
+                COMMAND ${CMAKE_COMMAND} -E rm -rf ${PROJ_L10N_DIR}
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} worktree prune
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            execute_process(
+                COMMAND ${Git_EXECUTABLE} worktree add ${PROJ_L10N_DIR} l10n
+                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
+                ECHO_OUTPUT_VARIABLE
+                ECHO_ERROR_VARIABLE
+                COMMAND_ERROR_IS_FATAL ANY)
+            message("")
+            restore_cmake_message_indent()
+            unset(REMOTE_NAME)
         endif()
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} config --get-all
-                    remote.${REMOTE_NAME}.fetch
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        message("")
-        restore_cmake_message_indent()
-        message(STATUS "Fetching/Tracking the remote branch 'l10n' to the local branch 'l10n'...")
-        remove_cmake_message_indent()
-        message("")
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME} l10n:l10n --verbose --update-head-ok
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} branch --set-upstream-to=${REMOTE_NAME}/l10n l10n
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        message("")
-        restore_cmake_message_indent()
-        message(STATUS "Creating a git worktree for 'l10n' branch in ${PROJ_L10N_DIR}...")
-        remove_cmake_message_indent()
-        message("")
-        execute_process(
-            COMMAND ${CMAKE_COMMAND} -E rm -rf ${PROJ_L10N_DIR}
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} worktree prune
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        execute_process(
-            COMMAND ${Git_EXECUTABLE} worktree add ${PROJ_L10N_DIR} l10n
-            WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-            ECHO_OUTPUT_VARIABLE
-            ECHO_ERROR_VARIABLE
-            COMMAND_ERROR_IS_FATAL ANY)
-        message("")
-        restore_cmake_message_indent()
-        unset(REMOTE_NAME)
-    else()
-        message(STATUS "There is no 'l10n' branch in the remote. Need to create a worktree.")
     endif()
 endif()
 
