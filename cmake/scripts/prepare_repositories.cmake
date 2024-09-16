@@ -26,7 +26,7 @@ if(NOT EXISTS "${PROJ_OUT_REPO_DIR}/.git")
                 --single-branch
                 --recurse-submodules
                 --shallow-submodules
-                ${GIT_REMOTE_URL}
+                ${GIT_REMOTE_URL_OF_DOCS}
                 ${PROJ_OUT_REPO_DIR}
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE

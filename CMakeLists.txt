@@ -36,6 +36,15 @@ set(AUTO_DEPEND ON
 set(REMOVE_REDUNDANT ON
     CACHE BOOL "Removing redundant files after building documentation.")
 
+set(GIT_REMOTE_URL_OF_L10N "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
+    CACHE STRING "Remote URL of the l10n Git repository.")
+
+set(GIT_REMOTE_URL_OF_DOCS "https://gitlab.kitware.com/cmake/cmake.git"
+    CACHE STRING "Remote URL of the docs Git repository.")
+
+set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft6"
+    CACHE STRING "Base URL of the deployed documentation.")
+
 set(VERSION_COMPENDIUM "git-master"
     CACHE STRING "Version of compendium that the current version merges translations from.")
 
@@ -48,15 +57,6 @@ set(VERSION_OF_SPHINX "[default]"
 set(CMAKE_JOB_NUMBER "1"
     CACHE STRING "")
     # See https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j for details.
-
-set(GETTEXT_WRAP_WIDTH 79
-    CACHE STRING "Gettext wrap width for .pot/.po files.")
-
-set(GETTEXT_ADDITIONAL_TARGETS "index,literal-block"
-    CACHE STRING "Gettext additional targets for building the Sphinx documentation system.")
-    # Possible values are "index", "literal-block", "doctest-block", "raw", and "image".
-    # A comma-separated list
-    # See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-gettext_additional_targets for details.
 
 set(SPHINX_BUILDER "html"
     CACHE STRING "Builder for the Sphinx documentation system.")
@@ -76,17 +76,14 @@ set(SPHINX_JOB_NUMBER "1"
     # Possible values are "auto", "1", "2",...etc.
     # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-j for details.
 
-set(GIT_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
-    CACHE STRING "Remote URL of the upstream Git repository.")
+set(GETTEXT_WRAP_WIDTH 79
+    CACHE STRING "Gettext wrap width for .pot/.po files.")
 
-set(GIT_L10N_REMOTE_URL "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
-    CACHE STRING "Remote URL of the l10n Git repository.")
-
-set(GIT_DOCS_REMOTE_URL "https://gitlab.kitware.com/cmake/cmake.git"
-    CACHE STRING "Remote URL of the docs Git repository.")
-
-set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft6"
-    CACHE STRING "Base URL of the deployed documentation.")
+set(GETTEXT_ADDITIONAL_TARGETS "index,literal-block"
+    CACHE STRING "Gettext additional targets for building the Sphinx documentation system.")
+    # Possible values are "index", "literal-block", "doctest-block", "raw", and "image".
+    # A comma-separated list
+    # See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-gettext_additional_targets for details.
 
 #[============================[
   Directory-Related Variables.
@@ -251,16 +248,16 @@ find_package(Crowdin  MODULE QUIET)
 #]==========================================================]
 
 execute_process(
-    COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_L10N_REMOTE_URL}
+    COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N}
     RESULT_VARIABLE RES_VAR
     OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if(NOT RES_VAR EQUAL 0)
-    message(STATUS "The remote '${GIT_L10N_REMOTE_URL}' doesn't exist.")
+    message(STATUS "The remote '${GIT_REMOTE_URL_OF_L10N}' doesn't exist.")
 else()
-    message(STATUS "The remote '${GIT_L10N_REMOTE_URL}' exists. Check if 'l10n' branch exists.")
+    message(STATUS "The remote '${GIT_REMOTE_URL_OF_L10N}' exists. Check if 'l10n' branch exists.")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_L10N_REMOTE_URL} l10n
+        COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N} l10n
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -411,11 +408,12 @@ configure_file(
 message(STATUS "---------- Cache Variables ----------")
 message(STATUS "VERSION                       = ${VERSION}")
 message(STATUS "LANGUAGE                      = ${LANGUAGE}")
-message(STATUS "MODE_OF_UPDATE                = ${MODE_OF_UPDATE}")
-message(STATUS "MODE_OF_INSTALL               = ${MODE_OF_INSTALL}")
 message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
 message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
-message(STATUS "GIT_REMOTE_URL                = ${GIT_REMOTE_URL}")
+message(STATUS "MODE_OF_UPDATE                = ${MODE_OF_UPDATE}")
+message(STATUS "MODE_OF_INSTALL               = ${MODE_OF_INSTALL}")
+message(STATUS "GIT_REMOTE_URL_OF_L10N        = ${GIT_REMOTE_URL_OF_L10N}")
+message(STATUS "GIT_REMOTE_URL_OF_DOCS        = ${GIT_REMOTE_URL_OF_DOCS}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
 message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
 message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON} (CACHE: $CACHE{VERSION_OF_PYTHON})")
@@ -497,14 +495,15 @@ set(SCRIPT_MODE_CACHE
     -D LANGUAGE=${LANGUAGE}
     -D VERSION=${VERSION}
     -D AUTO_DEPEND=${AUTO_DEPEND}
+    -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D MODE_OF_UPDATE=${MODE_OF_UPDATE}
     -D MODE_OF_INSTALL=${MODE_OF_INSTALL}
-    -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
+    -D GIT_REMOTE_URL_OF_L10N=${GIT_REMOTE_URL_OF_L10N}
+    -D GIT_REMOTE_URL_OF_DOCS=${GIT_REMOTE_URL_OF_DOCS}
+    -D BASEURL_HREF=${BASEURL_HREF}
     -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
     -D VERSION_OF_PYTHON=${VERSION_OF_PYTHON}
     -D VERSION_OF_SPHINX=${VERSION_OF_SPHINX}
-    -D GIT_REMOTE_URL=${GIT_REMOTE_URL}
-    -D BASEURL_HREF=${BASEURL_HREF}
     -D SPHINX_BUILDER=${SPHINX_BUILDER}
     -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
     -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}

@@ -89,7 +89,7 @@ remove_cmake_message_indent()
 message("")
 message("latest = ${LATEST_POT_OBJECT}")
 message(".pot = ${CURRENT_POT_OBJECT}")
-message("MODE_OF_UPDATE            = ${MODE_OF_UPDATE}")
+message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
 message("UPDATE_REQUIRED        = ${UPDATE_REQUIRED}")
@@ -285,7 +285,9 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
     get_filename_component(DST_POT_FILE_DIR "${DST_POT_FILE}" DIRECTORY)
     file(MAKE_DIRECTORY "${DST_POT_FILE_DIR}")
     if(EXISTS "${DST_POT_FILE}")
+        #
         # If the ${DST_POT_FILE} exists, then merge it using msgmerge.
+        #
         message("msgmerge:")
         message("  --width      ${GETTEXT_WRAP_WIDTH}")
         message("  --backup     off")
@@ -316,7 +318,9 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     else()
+        #
         # If the ${DST_POT_FILE} doesn't exist, then create it using msgcat.
+        #
         message("msgcat:")
         message("  --width        ${GETTEXT_WRAP_WIDTH}")
         message("  --output-file  ${DST_POT_FILE}")
