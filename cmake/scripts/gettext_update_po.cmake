@@ -22,39 +22,39 @@ endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Determining whether it is required to update .pot files...")
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION         ".pot"
-        OUT_JSON_VALUE          CURRENT_POT_OBJECT)
+        IN_JSON_OBJECT              "${REFERENCES_JSON_CNT}"
+        IN_DOT_NOTATION             ".pot"
+        OUT_JSON_VALUE              CURRENT_POT_OBJECT)
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION         ".po.${_LANGUAGE}"
-        OUT_JSON_VALUE          CURRENT_PO_LOCALE_OBJECT)
+        IN_JSON_OBJECT              "${REFERENCES_JSON_CNT}"
+        IN_DOT_NOTATION             ".po.${_LANGUAGE}"
+        OUT_JSON_VALUE              CURRENT_PO_LANGUAGE_OBJECT)
     if(VERSION_TYPE STREQUAL "branch")
         set(DOT_NOTATION ".commit.hash")
     else()
         set(DOT_NOTATION ".tag")
     endif()
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION         "${DOT_NOTATION}"
-        OUT_JSON_VALUE          CURRENT_POT_REFERENCE)
+        IN_JSON_OBJECT              "${CURRENT_POT_OBJECT}"
+        IN_DOT_NOTATION             "${DOT_NOTATION}"
+        OUT_JSON_VALUE              CURRENT_POT_REFERENCE)
     get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_PO_LOCALE_OBJECT}"
-        IN_DOT_NOTATION         "${DOT_NOTATION}"
-        OUT_JSON_VALUE          CURRENT_PO_REFERENCE)
+        IN_JSON_OBJECT              "${CURRENT_PO_LANGUAGE_OBJECT}"
+        IN_DOT_NOTATION             "${DOT_NOTATION}"
+        OUT_JSON_VALUE              CURRENT_PO_REFERENCE)
     if(MODE_OF_UPDATE STREQUAL "COMPARE")
         if(NOT CURRENT_POT_REFERENCE STREQUAL CURRENT_PO_REFERENCE)
-            set(UPDATE_REQUIRED ON)
+            set(UPDATE_PO_REQUIRED  ON)
         else()
-            set(UPDATE_REQUIRED OFF)
+            set(UPDATE_PO_REQUIRED  OFF)
         endif()
     elseif(MODE_OF_UPDATE STREQUAL "ALWAYS")
-        set(UPDATE_REQUIRED ON)
+        set(UPDATE_PO_REQUIRED ON)
     elseif(MODE_OF_UPDATE STREQUAL "NEVER")
         if(NOT CURRENT_PO_REFERENCE)
-            set(UPDATE_REQUIRED ON)
+            set(UPDATE_PO_REQUIRED  ON)
         else()
-            set(UPDATE_REQUIRED OFF)
+            set(UPDATE_PO_REQUIRED  OFF)
         endif()
     else()
         message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
@@ -62,14 +62,16 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     remove_cmake_message_indent()
     message("")
     message(".pot = ${CURRENT_POT_OBJECT}")
-    message(".po.${_LANGUAGE} = ${CURRENT_PO_LOCALE_OBJECT}")
+    message(".po.${_LANGUAGE} = ${CURRENT_PO_LANGUAGE_OBJECT}")
     message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
     message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
     message("CURRENT_PO_REFERENCE   = ${CURRENT_PO_REFERENCE}")
-    message("UPDATE_REQUIRED        = ${UPDATE_REQUIRED}")
+    message("UPDATE_PO_REQUIRED     = ${UPDATE_PO_REQUIRED}")
     message("")
     restore_cmake_message_indent()
-    if(NOT UPDATE_REQUIRED)
+
+
+    if(NOT UPDATE_PO_REQUIRED)
         message(STATUS "No need to update .po files for '${_LANGUAGE}' language.")
         continue()
     else()
@@ -93,7 +95,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         get_filename_component(PO_FILE_DIR "${PO_FILE}" DIRECTORY)
         file(MAKE_DIRECTORY "${PO_FILE_DIR}")
         if(EXISTS "${PO_FILE}")
+            #
             # If the ${PO_FILE} exists, then merge it using msgmerge.
+            #
             message("msgmerge:")
             message("  --lang       ${_LANGUAGE}")
             message("  --width      ${GETTEXT_WRAP_WIDTH}")
@@ -126,7 +130,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         else()
+            #
             # If the ${PO_FILE} doesn't exist, then create it using msgcat.
+            #
             message("msgcat:")
             message("  --lang         ${_LANGUAGE}")
             message("  --width        ${GETTEXT_WRAP_WIDTH}")
@@ -134,9 +140,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             message("  [inputfile]    ${POT_FILE}")
             execute_process(
                 COMMAND ${Gettext_MSGCAT_EXECUTABLE}
-                        --lang ${_LANGUAGE}
-                        --width ${GETTEXT_WRAP_WIDTH}
-                        --output-file ${PO_FILE}
+                        --lang=${_LANGUAGE}
+                        --width=${GETTEXT_WRAP_WIDTH}
+                        --output-file=${PO_FILE}
                         ${POT_FILE}
                 RESULT_VARIABLE RES_VAR
                 OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE

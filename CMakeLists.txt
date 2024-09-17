@@ -112,19 +112,19 @@ set(PROJ_L10N_VERSION_CROWDIN_DIR   "${PROJ_L10N_VERSION_DIR}/.crowdin")
 #]====================]
 
 set(LANGUAGES_JSON_PATH             "${PROJ_SOURCE_DIR}/languages.json")
+set(PREV_PACKAGES_TXT_PATH          "${PROJ_VENV_DIR}/prev/packages.txt")
+set(PREV_REFERENCE_TXT_PATH         "${PROJ_VENV_DIR}/prev/reference.txt")
 set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/references.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
-set(PREV_ENVIRONMENTS_YML_PATH      "${PROJ_VENV_DIR}/prev/environments.yml")
-set(PREV_REFERENCE_TXT_PATH         "${PROJ_VENV_DIR}/prev/reference.txt")
 
 set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
 include(JsonUtils)
 include(LogUtils)
 
-#[========================================[
+#[=======================================[
   Read LANGUAGE_LIST from languages.json.
-#]========================================]
+#]=======================================]
 
 file(READ "${LANGUAGES_JSON_PATH}"  LANGUAGES_JSON_CNT)
 get_members_of_json_object(
@@ -181,9 +181,9 @@ if(NOT LANGUAGE_IS_VALID)
     message(FATAL_ERROR "Invalid LANGUAGE value. (${LANGUAGE})")
 endif()
 
-#[========================================[
+#[===========================================[
   Validate the MODE_OF_UPDATE cache variable.
-#]========================================]
+#]===========================================]
 
 if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND 
     NOT MODE_OF_UPDATE STREQUAL "ALWAYS" AND 
@@ -191,9 +191,9 @@ if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND
     message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
 endif()
 
-#[=========================================[
+#[============================================[
   Validate the MODE_OF_INSTALL cache variable.
-#]=========================================]
+#]============================================]
 
 if (NOT MODE_OF_INSTALL STREQUAL "COMPARE" AND 
     NOT MODE_OF_INSTALL STREQUAL "ALWAYS")
@@ -247,27 +247,47 @@ find_package(Crowdin  MODULE QUIET)
   Create Git Worktree for 'l10n' branch in ${PROJ_L10N_DIR}.
 #]==========================================================]
 
+message(STATUS "Checking if the remote '${GIT_REMOTE_URL_OF_L10N}' exists...")
 execute_process(
     COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N}
     RESULT_VARIABLE RES_VAR
     OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if(NOT RES_VAR EQUAL 0)
-    message(STATUS "The remote '${GIT_REMOTE_URL_OF_L10N}' doesn't exist.")
+    remove_cmake_message_indent()
+    message("")
+    message("The remote '${GIT_REMOTE_URL_OF_L10N}' doesn't exist.")
+    message("")
+    restore_cmake_message_indent()
 else()
-    message(STATUS "The remote '${GIT_REMOTE_URL_OF_L10N}' exists. Check if 'l10n' branch exists.")
+    remove_cmake_message_indent()
+    message("")
+    message("The remote '${GIT_REMOTE_URL_OF_L10N}' exists.")
+    message("")
+    restore_cmake_message_indent()
+    message(STATUS "Checking if the branch 'l10n' exists in the remote...")
     execute_process(
         COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N} l10n
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(NOT RES_VAR EQUAL 0)
-        message(STATUS "The branch 'l10n' doesn't exist in the remote.")
+        remove_cmake_message_indent()
+        message("")
+        message("The branch 'l10n' doesn't exist in the remote.")
+        message("")
+        restore_cmake_message_indent()
     else()
-        message(STATUS "The branch 'l10n' exist in the remote. Check if the git working tree exist.")
+        remove_cmake_message_indent()
+        message("")
+        message("The branch 'l10n' exist in the remote.")
+        message("")
+        restore_cmake_message_indent()
+        message(STATUS "Checking if the git worktree exists in '${PROJ_L10N_DIR}'...")
         if(EXISTS "${PROJ_L10N_DIR}/.git")
-            message(STATUS "The git working tree exists: ${PROJ_L10N_DIR}")
             remove_cmake_message_indent()
+            message("")
+            message("The git worktree exists in '${PROJ_L10N_DIR}'.")
             message("")
             execute_process(
                 COMMAND ${Git_EXECUTABLE} status
@@ -277,9 +297,6 @@ else()
                 COMMAND_ERROR_IS_FATAL ANY)
             message("")
             execute_process(
-                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=%s
-                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=short
-                # COMMAND ${Git_EXECUTABLE} show --no-patch --format=medium
                 COMMAND ${Git_EXECUTABLE} show --no-patch --format=full
                 WORKING_DIRECTORY ${PROJ_L10N_DIR}
                 ECHO_OUTPUT_VARIABLE
@@ -288,8 +305,12 @@ else()
             message("")
             restore_cmake_message_indent()
         else()
-            message(STATUS "The git working tree doesn't exist: ${PROJ_L10N_DIR}")
-            message(STATUS "There exists 'l10n' branch in the remote. Prepare to create a worktree.")
+            remove_cmake_message_indent()
+            message("")
+            message("The git worktree doesn't exist in '${PROJ_L10N_DIR}'.")
+            message("")
+            restore_cmake_message_indent()
+            message(STATUS "Prepare to create a git worktree.")
             execute_process(
                 COMMAND ${Git_EXECUTABLE} remote
                 WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
@@ -444,11 +465,11 @@ message(STATUS "PROJ_L10N_VERSION_LOCALE_DIR  = ${PROJ_L10N_VERSION_LOCALE_DIR}"
 message(STATUS "PROJ_L10N_VERSION_CROWDIN_DIR = ${PROJ_L10N_VERSION_CROWDIN_DIR}")
 message(STATUS "---------- Configuration Files ----------")
 message(STATUS "LANGUAGES_JSON_PATH           = ${LANGUAGES_JSON_PATH}")
+message(STATUS "PREV_PACKAGES_TXT_PATH        = ${PREV_PACKAGES_TXT_PATH}")
+message(STATUS "PREV_REFERENCE_TXT_PATH       = ${PREV_REFERENCE_TXT_PATH}")
 message(STATUS "REFERENCES_JSON_PATH          = ${REFERENCES_JSON_PATH}")
 message(STATUS "CROWDIN_YML_PATH              = ${CROWDIN_YML_PATH}")
 message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
-message(STATUS "PREV_ENVIRONMENTS_YML_PATH    = ${PREV_ENVIRONMENTS_YML_PATH}")
-message(STATUS "PREV_REFERENCE_TXT_PATH       = ${PREV_REFERENCE_TXT_PATH}")
 message(STATUS "---------- Other Variables ----------")
 message(STATUS "LANGUAGE_LIST                 = ${LANGUAGE_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
@@ -530,11 +551,11 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_L10N_VERSION_CROWDIN_DIR=${PROJ_L10N_VERSION_CROWDIN_DIR}
     # [Configuration Files]
     -D LANGUAGES_JSON_PATH=${LANGUAGES_JSON_PATH}
+    -D PREV_PACKAGES_TXT_PATH=${PREV_PACKAGES_TXT_PATH}
+    -D PREV_REFERENCE_TXT_PATH=${PREV_REFERENCE_TXT_PATH}
     -D REFERENCES_JSON_PATH=${REFERENCES_JSON_PATH}
     -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
     -D STATISTIC_TXT_PATH=${STATISTIC_TXT_PATH}
-    -D PREV_ENVIRONMENTS_YML_PATH=${PREV_ENVIRONMENTS_YML_PATH}
-    -D PREV_REFERENCE_TXT_PATH=${PREV_REFERENCE_TXT_PATH}
     # [Other Variables]
     -D LANGUAGE_LIST=${LANGUAGE_LIST}
     -D VERSION_TYPE=${VERSION_TYPE}

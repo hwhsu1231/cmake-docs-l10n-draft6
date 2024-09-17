@@ -285,8 +285,5 @@ find_package(Sphinx   MODULE REQUIRED)
 
 file(WRITE "${PREV_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")
 execute_process(
-    COMMAND ${Conda_EXECUTABLE} env export --prefix ${PROJ_VENV_DIR}
-    OUTPUT_FILE "${PREV_ENVIRONMENTS_YML_PATH}")
-# execute_process(
-#     COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
-#     OUTPUT_FILE "${PROJ_VENV_DIR}/prev/packages.txt")
+    COMMAND ${Conda_EXECUTABLE} list --export --prefix ${PROJ_VENV_DIR}
+    OUTPUT_FILE "${PREV_PACKAGES_TXT_PATH}")
