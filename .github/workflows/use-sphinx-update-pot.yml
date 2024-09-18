@@ -54,19 +54,20 @@ jobs:
           echo "[Secrets]"
           echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
           echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
 
-      - name: Get the GitHub App's Token
-        uses: tibdex/github-app-token@v2
-        id: ggat
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      # - name: Get the GitHub App's Token
+      #   uses: tibdex/github-app-token@v2
+      #   id: ggat
+      #   with:
+      #     app_id: ${{ secrets.APP_ID }}
+      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-          token: ${{ steps.ggat.outputs.token }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           submodules: true
 
       - name: Install CMake
@@ -84,7 +85,6 @@ jobs:
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
-          version-group: 'v2'
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
@@ -165,7 +165,7 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ steps.ggat.outputs.token }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
           per_page: 100
 
@@ -179,7 +179,7 @@ jobs:
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
           branch: mutex/l10n
-          repo-token: ${{ steps.ggat.outputs.token }}
+          repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
 
       - name: Add and Commit the Change
         id: acc
@@ -210,7 +210,7 @@ jobs:
         if: inputs.CREATE_PR && steps.acc.outputs.committed == 'true'
         uses: devops-infra/action-pull-request@v0.5.5
         with:
-          github_token: ${{ steps.ggat.outputs.token }}  # required
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}  # required
           source_branch: sphinx/pot/${{ inputs.VERSION }}
           target_branch: l10n
           label: ${{ steps.sllpr.outputs.PULL_REQUEST_LABEL_LIST }}
@@ -228,54 +228,3 @@ jobs:
         run: |
           echo "Pull Request's Number = ${{ steps.cpr.outputs.pr_number }}"
           echo "Pull Request's URL    = ${{ steps.cpr.outputs.url }}"
-
-      # - name: Checkout to 'refs/heads/l10n'
-      #   if: inputs.CREATE_PR
-      #   uses: actions/checkout@v4
-      #   with:
-      #     ref: 'refs/heads/l10n'
-      #     token: ${{ steps.ggat.outputs.token }}
-      #     clean: true
-
-      # - name: Create a Pull Request
-      #   id: cpr
-      #   if: inputs.CREATE_PR
-      #   uses: peter-evans/create-pull-request@v6
-      #   with:
-      #     token: ${{ steps.ggat.outputs.token }}  # required
-      #     path: '.'
-      #     base: 'l10n'
-      #     branch: 'sphinx/pot/${{ inputs.VERSION }}'
-      #     delete-branch: true   # Delete the branch if no need to create a PR
-      #     author: docs-l10n[bot] <157310748+docs-l10n[bot]@users.noreply.github.com>
-      #     title: |
-      #       pot(${{ inputs.VERSION }}): Update pot from Sphinx
-      #     body: |
-      #       Created by GitHub Workflows:
-      #       - File: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
-      #       - Run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-      #       - Job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
-      #     commit-message: |
-      #       pot(${{ inputs.VERSION }}): Update pot from Sphinx
-
-      #       Before: ${{ steps.pot-before.outputs.POT_BEFORE }}
-      #       After: ${{ steps.pot-after.outputs.POT_AFTER }}
-      #     draft: false
-      #     labels: |
-      #       gettext
-      #       ${{ steps.sllpr.outputs.CROWDIN_LABEL }}
-
-      # - name: Check Outputs of the Pull Request
-      #   if: steps.cpr.outputs.pull-request-number
-      #   run: |
-      #     echo "Pull Request Number = ${{ steps.cpr.outputs.pull-request-number }}"
-      #     echo "Pull Request URL    = ${{ steps.cpr.outputs.pull-request-url }}"
-
-      # - name: Print job info
-      #   run: |
-      #     echo "### ${{ inputs.CALLER_JOB }} / ${{ github.job }}"  >> $GITHUB_STEP_SUMMARY
-      #     echo "| Key        | Value           |" >> $GITHUB_STEP_SUMMARY
-      #     echo "| ---------- | --------------- |" >> $GITHUB_STEP_SUMMARY
-      #     echo "| Job Name   | Job 2           |" >> $GITHUB_STEP_SUMMARY
-      #     echo "| Status     | Success         |" >> $GITHUB_STEP_SUMMARY
-      #     echo ""                                 >> $GITHUB_STEP_SUMMARY
