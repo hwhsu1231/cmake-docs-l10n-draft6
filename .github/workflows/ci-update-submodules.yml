@@ -47,14 +47,18 @@ jobs:
           echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
 
       - name: Set old commit hash
+        shell: bash
         run: |
           git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
+          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g'
 
       - name: Update submodule from remote
+        shell: bash
         run: |
           git submodule update --init --remote ${{ matrix.SUBMODULE_DIR }}
 
       - name: Set new commit hash 1
+        shell: bash
         run: |
           git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
           git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g'
