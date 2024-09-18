@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,34 +42,35 @@ msgid ""
 "install(`SCRIPT`_ <file> [...])\n"
 "install(`CODE`_ <code> [...])\n"
 "install(`EXPORT`_ <export-name> [...])\n"
+"install(`PACKAGE_INFO`_ <package-name> [...])\n"
 "install(`RUNTIME_DEPENDENCY_SET`_ <set-name> [...])"
 msgstr ""
 
-#: ../../../command/install.rst:25
+#: ../../../command/install.rst:26
 msgid "Introduction"
 msgstr "介紹"
 
-#: ../../../command/install.rst:27
+#: ../../../command/install.rst:28
 msgid ""
 "This command generates installation rules for a project.  Install rules "
 "specified by calls to the ``install()`` command within a source directory "
 "are executed in order during installation."
 msgstr ""
 
-#: ../../../command/install.rst:31
+#: ../../../command/install.rst:32
 msgid ""
 "Install rules in subdirectories added by calls to the :command:"
 "`add_subdirectory` command are interleaved with those in the parent "
 "directory to run in the order declared (see policy :policy:`CMP0082`)."
 msgstr ""
 
-#: ../../../command/install.rst:37
+#: ../../../command/install.rst:38
 msgid ""
 "The environment variable :envvar:`CMAKE_INSTALL_MODE` can override the "
 "default copying behavior of ``install()``."
 msgstr ""
 
-#: ../../../command/install.rst:41
+#: ../../../command/install.rst:42
 msgid ""
 "Projects can enable :prop_gbl:`INSTALL_PARALLEL` to enable a parallel "
 "installation. When using the parallel install, subdirectories added by calls "
@@ -78,7 +79,7 @@ msgid ""
 "not guaranteed."
 msgstr ""
 
-#: ../../../command/install.rst:50
+#: ../../../command/install.rst:51
 msgid ""
 "There are multiple signatures for this command.  Some of them define "
 "installation options for files and targets.  Options common to multiple "
@@ -86,17 +87,17 @@ msgid ""
 "specify them.  The common options are:"
 msgstr ""
 
-#: ../../../command/install.rst:75
+#: ../../../command/install.rst:76
 msgid "``DESTINATION <dir>``"
 msgstr ""
 
-#: ../../../command/install.rst:56
+#: ../../../command/install.rst:57
 msgid ""
 "Specify the directory on disk to which a file will be installed. ``<dir>`` "
 "should be a relative path.  An absolute path is allowed, but not recommended."
 msgstr ""
 
-#: ../../../command/install.rst:60
+#: ../../../command/install.rst:61
 msgid ""
 "When a relative path is given it is interpreted relative to the value of "
 "the :variable:`CMAKE_INSTALL_PREFIX` variable. The prefix can be relocated "
@@ -104,7 +105,7 @@ msgid ""
 "`CMAKE_INSTALL_PREFIX` variable documentation."
 msgstr ""
 
-#: ../../../command/install.rst:66
+#: ../../../command/install.rst:67
 msgid ""
 "As absolute paths do not work with the ``cmake --install`` command's :option:"
 "`--prefix <cmake--install --prefix>` option, or with the :manual:`cpack "
@@ -115,17 +116,17 @@ msgid ""
 "a relative path."
 msgstr ""
 
-#: ../../../command/install.rst:74
+#: ../../../command/install.rst:75
 msgid ""
 "If an absolute path (with a leading slash or drive letter) is given it is "
 "used verbatim."
 msgstr ""
 
-#: ../../../command/install.rst:87
+#: ../../../command/install.rst:88
 msgid "``PERMISSIONS <permission>...``"
 msgstr ""
 
-#: ../../../command/install.rst:78
+#: ../../../command/install.rst:79
 msgid ""
 "Specify permissions for installed files.  Valid permissions are "
 "``OWNER_READ``, ``OWNER_WRITE``, ``OWNER_EXECUTE``, ``GROUP_READ``, "
@@ -134,7 +135,7 @@ msgid ""
 "sense on certain platforms are ignored on those platforms."
 msgstr ""
 
-#: ../../../command/install.rst:84
+#: ../../../command/install.rst:85
 msgid ""
 "If this option is used multiple times in a single call, its list of "
 "permissions accumulates.  If an :command:`install(TARGETS)` call uses "
@@ -142,17 +143,17 @@ msgid ""
 "accumulated for each kind of artifact."
 msgstr ""
 
-#: ../../../command/install.rst:96
+#: ../../../command/install.rst:97
 msgid "``CONFIGURATIONS <config>...``"
 msgstr ""
 
-#: ../../../command/install.rst:90
+#: ../../../command/install.rst:91
 msgid ""
 "Specify a list of build configurations for which the install rule applies "
 "(Debug, Release, etc.)."
 msgstr ""
 
-#: ../../../command/install.rst:93
+#: ../../../command/install.rst:94
 msgid ""
 "If this option is used multiple times in a single call, its list of "
 "configurations accumulates.  If an :command:`install(TARGETS)` call uses "
@@ -160,11 +161,11 @@ msgid ""
 "accumulated for each kind of artifact."
 msgstr ""
 
-#: ../../../command/install.rst:106
+#: ../../../command/install.rst:107
 msgid "``COMPONENT <component>``"
 msgstr ""
 
-#: ../../../command/install.rst:99
+#: ../../../command/install.rst:100
 msgid ""
 "Specify an installation component name with which the install rule is "
 "associated, such as ``Runtime`` or ``Development``.  During component-"
@@ -176,44 +177,33 @@ msgid ""
 "`CMAKE_INSTALL_DEFAULT_COMPONENT_NAME` variable."
 msgstr ""
 
-#: ../../../command/install.rst:112
+#: ../../../command/install.rst:113
 msgid "``EXCLUDE_FROM_ALL``"
 msgstr ""
 
-#: ../../../command/install.rst:111
+#: ../../../command/install.rst:112
 msgid ""
 "Specify that the file is excluded from a full installation and only "
 "installed as part of a component-specific installation"
 msgstr ""
 
 #: ../../../command/install.rst:117
-msgid "``RENAME <name>``"
-msgstr ""
-
-#: ../../../command/install.rst:115
-msgid ""
-"Specify a name for an installed file that may be different from the original "
-"file.  Renaming is allowed only when a single file is installed by the "
-"command."
-msgstr ""
-
-#: ../../../command/install.rst:121
 msgid "``OPTIONAL``"
 msgstr ""
 
-#: ../../../command/install.rst:120
+#: ../../../command/install.rst:116
 msgid ""
 "Specify that it is not an error if the file to be installed does not exist."
 msgstr ""
 
-#: ../../../command/install.rst:123
+#: ../../../command/install.rst:119
 msgid ""
 "Command signatures that install files may print messages during "
 "installation.  Use the :variable:`CMAKE_INSTALL_MESSAGE` variable to control "
 "which messages are printed."
 msgstr ""
 
-#: ../../../command/install.rst:128
+#: ../../../command/install.rst:124
 msgid ""
 "Many of the ``install()`` variants implicitly create the directories "
 "containing the installed files. If :variable:"
@@ -223,15 +213,15 @@ msgid ""
 "unaffected."
 msgstr ""
 
-#: ../../../command/install.rst:137
+#: ../../../command/install.rst:133
 msgid "Signatures"
 msgstr ""
 
-#: ../../../command/install.rst:142
+#: ../../../command/install.rst:138
 msgid "Install target :ref:`Output Artifacts` and associated files:"
 msgstr ""
 
-#: ../../../command/install.rst:144
+#: ../../../command/install.rst:140
 msgid ""
 "install(TARGETS <target>... [EXPORT <export-name>]\n"
 "        [RUNTIME_DEPENDENCIES <arg>...|RUNTIME_DEPENDENCY_SET <set-name>]\n"
@@ -241,11 +231,11 @@ msgid ""
 "        )"
 msgstr ""
 
-#: ../../../command/install.rst:153
+#: ../../../command/install.rst:149
 msgid "where ``<artifact-option>...`` group may contain:"
 msgstr ""
 
-#: ../../../command/install.rst:155
+#: ../../../command/install.rst:151
 msgid ""
 "[DESTINATION <dir>]\n"
 "[PERMISSIONS <permission>...]\n"
@@ -256,118 +246,118 @@ msgid ""
 "[NAMELINK_ONLY|NAMELINK_SKIP]"
 msgstr ""
 
-#: ../../../command/install.rst:165
+#: ../../../command/install.rst:161
 msgid ""
 "The first ``<artifact-option>...`` group applies to target :ref:`Output "
 "Artifacts` that do not have a dedicated group specified later in the same "
 "call."
 msgstr ""
 
-#: ../../../command/install.rst:171
+#: ../../../command/install.rst:167
 msgid ""
 "Each ``<artifact-kind> <artifact-option>...`` group applies to :ref:`Output "
 "Artifacts` of the specified artifact kind:"
 msgstr ""
 
-#: ../../../command/install.rst:186 ../../../command/install.rst:281
+#: ../../../command/install.rst:182 ../../../command/install.rst:277
 msgid "``ARCHIVE``"
 msgstr ""
 
-#: ../../../command/install.rst:175 ../../../command/install.rst:189
-#: ../../../command/install.rst:197
+#: ../../../command/install.rst:171 ../../../command/install.rst:185
+#: ../../../command/install.rst:193
 msgid "Target artifacts of this kind include:"
 msgstr ""
 
-#: ../../../command/install.rst:177
+#: ../../../command/install.rst:173
 msgid ""
 "*Static libraries* (except on macOS when marked as ``FRAMEWORK``, see below);"
 msgstr ""
 
-#: ../../../command/install.rst:179
+#: ../../../command/install.rst:175
 msgid ""
 "*DLL import libraries* (on all Windows-based systems including Cygwin; they "
 "have extension ``.lib``, in contrast to the ``.dll`` libraries that go to "
 "``RUNTIME``);"
 msgstr ""
 
-#: ../../../command/install.rst:182
+#: ../../../command/install.rst:178
 msgid ""
 "On AIX, the *linker import file* created for executables with :prop_tgt:"
 "`ENABLE_EXPORTS` enabled."
 msgstr ""
 
-#: ../../../command/install.rst:184
+#: ../../../command/install.rst:180
 msgid ""
 "On macOS, the *linker import file* created for shared libraries with :"
 "prop_tgt:`ENABLE_EXPORTS` enabled (except when marked as ``FRAMEWORK``, see "
 "below)."
 msgstr ""
 
-#: ../../../command/install.rst:194 ../../../command/install.rst:280
+#: ../../../command/install.rst:190 ../../../command/install.rst:276
 msgid "``LIBRARY``"
 msgstr ""
 
-#: ../../../command/install.rst:191
+#: ../../../command/install.rst:187
 msgid "*Shared libraries*, except"
 msgstr ""
 
-#: ../../../command/install.rst:193
+#: ../../../command/install.rst:189
 msgid "DLLs (these go to ``RUNTIME``, see below),"
 msgstr ""
 
-#: ../../../command/install.rst:194
+#: ../../../command/install.rst:190
 msgid "on macOS when marked as ``FRAMEWORK`` (see below)."
 msgstr ""
 
-#: ../../../command/install.rst:202 ../../../command/install.rst:279
+#: ../../../command/install.rst:198 ../../../command/install.rst:275
 msgid "``RUNTIME``"
 msgstr ""
 
-#: ../../../command/install.rst:199
+#: ../../../command/install.rst:195
 msgid ""
 "*Executables* (except on macOS when marked as ``MACOSX_BUNDLE``, see "
 "``BUNDLE`` below);"
 msgstr ""
 
-#: ../../../command/install.rst:201
+#: ../../../command/install.rst:197
 msgid ""
 "DLLs (on all Windows-based systems including Cygwin; note that the "
 "accompanying import libraries are of kind ``ARCHIVE``)."
 msgstr ""
 
-#: ../../../command/install.rst:207
+#: ../../../command/install.rst:203
 msgid "``OBJECTS``"
 msgstr ""
 
-#: ../../../command/install.rst:207
+#: ../../../command/install.rst:203
 msgid "Object files associated with *object libraries*."
 msgstr ""
 
-#: ../../../command/install.rst:211
+#: ../../../command/install.rst:207
 msgid "``FRAMEWORK``"
 msgstr ""
 
-#: ../../../command/install.rst:210
+#: ../../../command/install.rst:206
 msgid ""
 "Both static and shared libraries marked with the ``FRAMEWORK`` property are "
 "treated as ``FRAMEWORK`` targets on macOS."
 msgstr ""
 
-#: ../../../command/install.rst:215
+#: ../../../command/install.rst:211
 msgid "``BUNDLE``"
 msgstr ""
 
-#: ../../../command/install.rst:214
+#: ../../../command/install.rst:210
 msgid ""
 "Executables marked with the :prop_tgt:`MACOSX_BUNDLE` property are treated "
 "as ``BUNDLE`` targets on macOS."
 msgstr ""
 
-#: ../../../command/install.rst:223 ../../../command/install.rst:283
+#: ../../../command/install.rst:219 ../../../command/install.rst:279
 msgid "``PUBLIC_HEADER``"
 msgstr ""
 
-#: ../../../command/install.rst:218
+#: ../../../command/install.rst:214
 msgid ""
 "Any :prop_tgt:`PUBLIC_HEADER` files associated with a library are installed "
 "in the destination specified by the ``PUBLIC_HEADER`` argument on non-Apple "
@@ -377,31 +367,31 @@ msgid ""
 "prop_tgt:`PUBLIC_HEADER` for details."
 msgstr ""
 
-#: ../../../command/install.rst:227 ../../../command/install.rst:282
+#: ../../../command/install.rst:223 ../../../command/install.rst:278
 msgid "``PRIVATE_HEADER``"
 msgstr ""
 
-#: ../../../command/install.rst:226
+#: ../../../command/install.rst:222
 msgid ""
 "Similar to ``PUBLIC_HEADER``, but for ``PRIVATE_HEADER`` files. See :"
 "prop_tgt:`PRIVATE_HEADER` for details."
 msgstr ""
 
-#: ../../../command/install.rst:231
+#: ../../../command/install.rst:227
 msgid "``RESOURCE``"
 msgstr ""
 
-#: ../../../command/install.rst:230
+#: ../../../command/install.rst:226
 msgid ""
 "Similar to ``PUBLIC_HEADER`` and ``PRIVATE_HEADER``, but for ``RESOURCE`` "
 "files. See :prop_tgt:`RESOURCE` for details."
 msgstr ""
 
-#: ../../../command/install.rst:242
+#: ../../../command/install.rst:238
 msgid "``FILE_SET <set-name>``"
 msgstr ""
 
-#: ../../../command/install.rst:236
+#: ../../../command/install.rst:232
 msgid ""
 "File sets are defined by the :command:`target_sources(FILE_SET)` command. If "
 "the file set ``<set-name>`` exists and is ``PUBLIC`` or ``INTERFACE``, any "
@@ -412,11 +402,11 @@ msgid ""
 "to ``myproj/here.h`` below the destination."
 msgstr ""
 
-#: ../../../command/install.rst:251
+#: ../../../command/install.rst:247
 msgid "``CXX_MODULES_BMI``"
 msgstr ""
 
-#: ../../../command/install.rst:247
+#: ../../../command/install.rst:243
 msgid ""
 "Any module files from C++ modules from ``PUBLIC`` sources in a file set of "
 "type ``CXX_MODULES`` will be installed to the given ``DESTINATION``. All "
@@ -425,7 +415,7 @@ msgid ""
 "to suppress installing these files (for use in generic code)."
 msgstr ""
 
-#: ../../../command/install.rst:253
+#: ../../../command/install.rst:249
 msgid ""
 "For regular executables, static libraries and shared libraries, the "
 "``DESTINATION`` argument is not required.  For these target types, when "
@@ -440,7 +430,7 @@ msgid ""
 "discussion of this topic toward the end of this section)."
 msgstr ""
 
-#: ../../../command/install.rst:265
+#: ../../../command/install.rst:261
 msgid ""
 "For shared libraries on DLL platforms, if neither ``RUNTIME`` nor "
 "``ARCHIVE`` destinations are specified, both the ``RUNTIME`` and ``ARCHIVE`` "
@@ -451,63 +441,63 @@ msgid ""
 "components are installed to their respective destinations."
 msgstr ""
 
-#: ../../../command/install.rst:273
+#: ../../../command/install.rst:269
 msgid ""
 "The following table shows the target types with their associated variables "
 "and built-in defaults that apply when no destination is given:"
 msgstr ""
 
-#: ../../../command/install.rst:277
+#: ../../../command/install.rst:273
 msgid "Target Type"
 msgstr ""
 
-#: ../../../command/install.rst:277 ../../../command/install.rst:556
+#: ../../../command/install.rst:273 ../../../command/install.rst:556
 #: ../../../command/install.rst:708
 msgid "GNUInstallDirs Variable"
 msgstr ""
 
-#: ../../../command/install.rst:277 ../../../command/install.rst:556
+#: ../../../command/install.rst:273 ../../../command/install.rst:556
 #: ../../../command/install.rst:708
 msgid "Built-In Default"
 msgstr ""
 
-#: ../../../command/install.rst:279 ../../../command/install.rst:558
+#: ../../../command/install.rst:275 ../../../command/install.rst:558
 #: ../../../command/install.rst:710
 msgid "``${CMAKE_INSTALL_BINDIR}``"
 msgstr ""
 
-#: ../../../command/install.rst:279 ../../../command/install.rst:558
+#: ../../../command/install.rst:275 ../../../command/install.rst:558
 #: ../../../command/install.rst:710
 msgid "``bin``"
 msgstr ""
 
-#: ../../../command/install.rst:280 ../../../command/install.rst:281
+#: ../../../command/install.rst:276 ../../../command/install.rst:277
 #: ../../../command/install.rst:560 ../../../command/install.rst:712
 msgid "``${CMAKE_INSTALL_LIBDIR}``"
 msgstr ""
 
-#: ../../../command/install.rst:280 ../../../command/install.rst:281
+#: ../../../command/install.rst:276 ../../../command/install.rst:277
 #: ../../../command/install.rst:560 ../../../command/install.rst:712
 msgid "``lib``"
 msgstr ""
 
-#: ../../../command/install.rst:282 ../../../command/install.rst:283
-#: ../../../command/install.rst:284 ../../../command/install.rst:561
+#: ../../../command/install.rst:278 ../../../command/install.rst:279
+#: ../../../command/install.rst:280 ../../../command/install.rst:561
 #: ../../../command/install.rst:713
 msgid "``${CMAKE_INSTALL_INCLUDEDIR}``"
 msgstr ""
 
-#: ../../../command/install.rst:282 ../../../command/install.rst:283
-#: ../../../command/install.rst:284 ../../../command/install.rst:561
+#: ../../../command/install.rst:278 ../../../command/install.rst:279
+#: ../../../command/install.rst:280 ../../../command/install.rst:561
 #: ../../../command/install.rst:713
 msgid "``include``"
 msgstr ""
 
-#: ../../../command/install.rst:284
+#: ../../../command/install.rst:280
 msgid "``FILE_SET`` (type ``HEADERS``)"
 msgstr ""
 
-#: ../../../command/install.rst:287
+#: ../../../command/install.rst:283
 msgid ""
 "Projects wishing to follow the common practice of installing headers into a "
 "project-specific subdirectory may prefer using file sets with appropriate "
@@ -515,7 +505,7 @@ msgid ""
 "instead of being able to rely on the above (see next example below)."
 msgstr ""
 
-#: ../../../command/install.rst:292
+#: ../../../command/install.rst:288
 msgid ""
 "To make packages compliant with distribution filesystem layout policies, if "
 "projects must specify a ``DESTINATION``, it is strongly recommended that "
@@ -527,7 +517,7 @@ msgid ""
 "installed to a project-specific subdirectory without using file sets:"
 msgstr ""
 
-#: ../../../command/install.rst:301
+#: ../../../command/install.rst:297
 msgid ""
 "add_library(mylib STATIC ...)\n"
 "set_target_properties(mylib PROPERTIES PUBLIC_HEADER mylib.h)\n"
@@ -538,26 +528,26 @@ msgid ""
 ")"
 msgstr ""
 
-#: ../../../command/install.rst:311
+#: ../../../command/install.rst:307
 msgid ""
 "In addition to the `common options`_ listed above, each target can accept "
 "the following additional arguments:"
 msgstr ""
 
-#: ../../../command/install.rst:344
+#: ../../../command/install.rst:340
 msgid "``NAMELINK_COMPONENT``"
 msgstr ""
 
-#: ../../../command/install.rst:317
+#: ../../../command/install.rst:313
 msgid ""
 "On some platforms a versioned shared library has a symbolic link such as::"
 msgstr ""
 
-#: ../../../command/install.rst:320
+#: ../../../command/install.rst:316
 msgid "lib<name>.so -> lib<name>.so.1"
 msgstr ""
 
-#: ../../../command/install.rst:322
+#: ../../../command/install.rst:318
 msgid ""
 "where ``lib<name>.so.1`` is the soname of the library and ``lib<name>.so`` "
 "is a \"namelink\" allowing linkers to find the library when given ``-"
@@ -568,21 +558,21 @@ msgid ""
 "``LIBRARY`` block."
 msgstr ""
 
-#: ../../../command/install.rst:330 ../../../command/install.rst:353
-#: ../../../command/install.rst:371
+#: ../../../command/install.rst:326 ../../../command/install.rst:349
+#: ../../../command/install.rst:367
 msgid ""
 "This parameter is also usable for an ``ARCHIVE`` block to manage the linker "
 "import file created, on macOS, for shared libraries with :prop_tgt:"
 "`ENABLE_EXPORTS` enabled."
 msgstr ""
 
-#: ../../../command/install.rst:335
+#: ../../../command/install.rst:331
 msgid ""
 "See the `Example: Install Targets with Per-Artifact Components`_ for an "
 "example using ``NAMELINK_COMPONENT``."
 msgstr ""
 
-#: ../../../command/install.rst:338
+#: ../../../command/install.rst:334
 msgid ""
 "This option is typically used for package managers that have separate "
 "runtime and development packages. For example, on Debian systems, the "
@@ -590,17 +580,17 @@ msgid ""
 "namelink are expected to be in the development package."
 msgstr ""
 
-#: ../../../command/install.rst:343
+#: ../../../command/install.rst:339
 msgid ""
 "See the :prop_tgt:`VERSION` and :prop_tgt:`SOVERSION` target properties for "
 "details on creating versioned shared libraries."
 msgstr ""
 
-#: ../../../command/install.rst:360
+#: ../../../command/install.rst:356
 msgid "``NAMELINK_ONLY``"
 msgstr ""
 
-#: ../../../command/install.rst:347
+#: ../../../command/install.rst:343
 msgid ""
 "This option causes the installation of only the namelink when a library "
 "target is installed. On platforms where versioned shared libraries do not "
@@ -609,18 +599,18 @@ msgid ""
 "``LIBRARY`` block."
 msgstr ""
 
-#: ../../../command/install.rst:358
+#: ../../../command/install.rst:354
 msgid ""
 "When ``NAMELINK_ONLY`` is given, either ``NAMELINK_COMPONENT`` or "
 "``COMPONENT`` may be used to specify the installation component of the "
 "namelink, but ``COMPONENT`` should generally be preferred."
 msgstr ""
 
-#: ../../../command/install.rst:378
+#: ../../../command/install.rst:374
 msgid "``NAMELINK_SKIP``"
 msgstr ""
 
-#: ../../../command/install.rst:363
+#: ../../../command/install.rst:359
 msgid ""
 "Similar to ``NAMELINK_ONLY``, but it has the opposite effect: it causes the "
 "installation of library files other than the namelink when a library target "
@@ -631,24 +621,24 @@ msgid ""
 "``LIBRARY`` block."
 msgstr ""
 
-#: ../../../command/install.rst:376
+#: ../../../command/install.rst:372
 msgid ""
 "If ``NAMELINK_SKIP`` is specified, ``NAMELINK_COMPONENT`` has no effect. It "
 "is not recommended to use ``NAMELINK_SKIP`` in conjunction with "
 "``NAMELINK_COMPONENT``."
 msgstr ""
 
-#: ../../../command/install.rst:380
+#: ../../../command/install.rst:376
 msgid ""
 "The :command:`install(TARGETS)` command can also accept the following "
 "options at the top level:"
 msgstr ""
 
-#: ../../../command/install.rst:394
+#: ../../../command/install.rst:390
 msgid "``EXPORT``"
 msgstr ""
 
-#: ../../../command/install.rst:384
+#: ../../../command/install.rst:380
 msgid ""
 "This option associates the installed target files with an export called "
 "``<export-name>``.  It must appear before any target options. To actually "
@@ -657,7 +647,7 @@ msgid ""
 "change the name of the exported target."
 msgstr ""
 
-#: ../../../command/install.rst:391
+#: ../../../command/install.rst:387
 msgid ""
 "If ``EXPORT`` is used and the targets include ``PUBLIC`` or ``INTERFACE`` "
 "file sets, all of them must be specified with ``FILE_SET`` arguments. All "
@@ -665,11 +655,11 @@ msgid ""
 "in the export."
 msgstr ""
 
-#: ../../../command/install.rst:401
+#: ../../../command/install.rst:397
 msgid "``INCLUDES DESTINATION``"
 msgstr ""
 
-#: ../../../command/install.rst:397
+#: ../../../command/install.rst:393
 msgid ""
 "This option specifies a list of directories which will be added to the :"
 "prop_tgt:`INTERFACE_INCLUDE_DIRECTORIES` target property of the "
@@ -678,11 +668,11 @@ msgid ""
 "`$<INSTALL_PREFIX>`."
 msgstr ""
 
-#: ../../../command/install.rst:412
+#: ../../../command/install.rst:408
 msgid "``RUNTIME_DEPENDENCY_SET <set-name>``"
 msgstr ""
 
-#: ../../../command/install.rst:406
+#: ../../../command/install.rst:402
 msgid ""
 "This option causes all runtime dependencies of installed executable, shared "
 "library, and module targets to be added to the specified runtime dependency "
@@ -690,16 +680,16 @@ msgid ""
 "`install(RUNTIME_DEPENDENCY_SET)` command."
 msgstr ""
 
-#: ../../../command/install.rst:411
+#: ../../../command/install.rst:407
 msgid ""
 "This keyword and the ``RUNTIME_DEPENDENCIES`` keyword are mutually exclusive."
 msgstr ""
 
-#: ../../../command/install.rst:444
+#: ../../../command/install.rst:440
 msgid "``RUNTIME_DEPENDENCIES <arg>...``"
 msgstr ""
 
-#: ../../../command/install.rst:417
+#: ../../../command/install.rst:413
 msgid ""
 "This option causes all runtime dependencies of installed executable, shared "
 "library, and module targets to be installed along with the targets "
@@ -708,60 +698,60 @@ msgid ""
 "``COMPONENT``, etc.) of the installation of these dependencies."
 msgstr ""
 
-#: ../../../command/install.rst:423
+#: ../../../command/install.rst:419
 msgid ""
 "``RUNTIME_DEPENDENCIES`` is semantically equivalent to the following pair of "
 "calls:"
 msgstr ""
 
-#: ../../../command/install.rst:426
+#: ../../../command/install.rst:422
 msgid ""
 "install(TARGETS ... RUNTIME_DEPENDENCY_SET <set-name>)\n"
 "install(RUNTIME_DEPENDENCY_SET <set-name> <arg>...)"
 msgstr ""
 
-#: ../../../command/install.rst:431
+#: ../../../command/install.rst:427
 msgid ""
 "where ``<set-name>`` will be a randomly generated set name. ``<arg>...`` may "
 "include any of the following keywords supported by the :command:"
 "`install(RUNTIME_DEPENDENCY_SET)` command:"
 msgstr ""
 
-#: ../../../command/install.rst:435
+#: ../../../command/install.rst:431
 msgid "``DIRECTORIES``"
 msgstr ""
 
-#: ../../../command/install.rst:436
+#: ../../../command/install.rst:432
 msgid "``PRE_INCLUDE_REGEXES``"
 msgstr ""
 
-#: ../../../command/install.rst:437
+#: ../../../command/install.rst:433
 msgid "``PRE_EXCLUDE_REGEXES``"
 msgstr ""
 
-#: ../../../command/install.rst:438
+#: ../../../command/install.rst:434
 msgid "``POST_INCLUDE_REGEXES``"
 msgstr ""
 
-#: ../../../command/install.rst:439
+#: ../../../command/install.rst:435
 msgid "``POST_EXCLUDE_REGEXES``"
 msgstr ""
 
-#: ../../../command/install.rst:440
+#: ../../../command/install.rst:436
 msgid "``POST_INCLUDE_FILES``"
 msgstr ""
 
-#: ../../../command/install.rst:441
+#: ../../../command/install.rst:437
 msgid "``POST_EXCLUDE_FILES``"
 msgstr ""
 
-#: ../../../command/install.rst:443
+#: ../../../command/install.rst:439
 msgid ""
 "The ``RUNTIME_DEPENDENCIES`` and ``RUNTIME_DEPENDENCY_SET`` keywords are "
 "mutually exclusive."
 msgstr ""
 
-#: ../../../command/install.rst:446
+#: ../../../command/install.rst:442
 msgid ""
 ":ref:`Interface Libraries` may be listed among the targets to install. They "
 "install no artifacts but will be included in an associated ``EXPORT``. If :"
@@ -771,13 +761,13 @@ msgid ""
 "link to the object libraries in their implementation."
 msgstr ""
 
-#: ../../../command/install.rst:453
+#: ../../../command/install.rst:449
 msgid ""
 "Installing a target with the :prop_tgt:`EXCLUDE_FROM_ALL` target property "
 "set to ``TRUE`` has undefined behavior."
 msgstr ""
 
-#: ../../../command/install.rst:456 ../../../command/install.rst:599
+#: ../../../command/install.rst:452 ../../../command/install.rst:599
 #: ../../../command/install.rst:737
 msgid ""
 "An install destination given as a ``DESTINATION`` argument may use "
@@ -785,7 +775,7 @@ msgid ""
 "`cmake-generator-expressions(7)` manual for available expressions."
 msgstr ""
 
-#: ../../../command/install.rst:461
+#: ../../../command/install.rst:457
 msgid ""
 ":command:`install(TARGETS)` can install targets that were created in other "
 "directories.  When using such cross-directory install rules, running ``make "
@@ -796,11 +786,11 @@ msgid ""
 "rules are run."
 msgstr ""
 
-#: ../../../command/install.rst:475
+#: ../../../command/install.rst:471
 msgid "Install runtime artifacts of imported targets:"
 msgstr ""
 
-#: ../../../command/install.rst:477
+#: ../../../command/install.rst:473
 msgid ""
 "install(IMPORTED_RUNTIME_ARTIFACTS <target>...\n"
 "        [RUNTIME_DEPENDENCY_SET <set-name>]\n"
@@ -814,7 +804,7 @@ msgid ""
 "        )"
 msgstr ""
 
-#: ../../../command/install.rst:490
+#: ../../../command/install.rst:486
 msgid ""
 "The ``IMPORTED_RUNTIME_ARTIFACTS`` form specifies rules for installing the "
 "runtime artifacts of imported targets. Projects may do this if they want to "
@@ -829,7 +819,7 @@ msgid ""
 "CFBundles, the entire directory is installed."
 msgstr ""
 
-#: ../../../command/install.rst:502
+#: ../../../command/install.rst:498
 msgid ""
 "The ``RUNTIME_DEPENDENCY_SET`` option causes the runtime artifacts of the "
 "imported executable, shared library, and module library ``targets`` to be "
@@ -837,18 +827,18 @@ msgid ""
 "installed with an :command:`install(RUNTIME_DEPENDENCY_SET)` command."
 msgstr ""
 
-#: ../../../command/install.rst:513
+#: ../../../command/install.rst:509
 msgid ""
 "If installing header files, consider using file sets defined by :command:"
 "`target_sources(FILE_SET)` instead. File sets associate headers with a "
 "target and they install as part of the target."
 msgstr ""
 
-#: ../../../command/install.rst:517
+#: ../../../command/install.rst:513
 msgid "Install files or programs:"
 msgstr ""
 
-#: ../../../command/install.rst:519
+#: ../../../command/install.rst:515
 msgid ""
 "install(<FILES|PROGRAMS> <file>...\n"
 "        TYPE <type> | DESTINATION <dir>\n"
@@ -858,7 +848,7 @@ msgid ""
 "        [RENAME <name>] [OPTIONAL] [EXCLUDE_FROM_ALL])"
 msgstr ""
 
-#: ../../../command/install.rst:528
+#: ../../../command/install.rst:524
 msgid ""
 "The ``FILES`` form specifies rules for installing files for a project. File "
 "names given as relative paths are interpreted with respect to the current "
@@ -867,7 +857,7 @@ msgid ""
 "``WORLD_READ`` if no ``PERMISSIONS`` argument is given."
 msgstr ""
 
-#: ../../../command/install.rst:534
+#: ../../../command/install.rst:530
 msgid ""
 "The ``PROGRAMS`` form is identical to the ``FILES`` form except that the "
 "default permissions for the installed file also include ``OWNER_EXECUTE``, "
@@ -876,12 +866,19 @@ msgid ""
 "form to install targets built within the project."
 msgstr ""
 
-#: ../../../command/install.rst:540
+#: ../../../command/install.rst:536
 msgid ""
 "The list of ``files...`` given to ``FILES`` or ``PROGRAMS`` may use "
 "\"generator expressions\" with the syntax ``$<...>``.  See the :manual:"
 "`cmake-generator-expressions(7)` manual for available expressions. However, "
 "if any item begins in a generator expression it must evaluate to a full path."
+msgstr ""
+
+#: ../../../command/install.rst:542
+msgid ""
+"The optional ``RENAME <name>`` argument is used to specify a name for the "
+"installed file that is different from the original file name.  Renaming is "
+"allowed only when a single file is installed by the command."
 msgstr ""
 
 #: ../../../command/install.rst:546
@@ -1410,11 +1407,78 @@ msgid ""
 "in its own tree."
 msgstr ""
 
-#: ../../../command/install.rst:913
+#: ../../../command/install.rst:914
+msgid "Experimental. Gated by ``CMAKE_EXPERIMENTAL_EXPORT_PACKAGE_INFO``."
+msgstr ""
+
+#: ../../../command/install.rst:916
+msgid "Installs a |CPS|_ file exporting targets for dependent projects:"
+msgstr ""
+
+#: ../../../command/install.rst:918
+msgid ""
+"install(PACKAGE_INFO <package-name> EXPORT <export-name>\n"
+"        [APPENDIX <appendix-name>]\n"
+"        [DESTINATION <dir>]\n"
+"        [LOWER_CASE_FILE]\n"
+"        [VERSION <version>\n"
+"         [COMPAT_VERSION <version>]\n"
+"         [VERSION_SCHEMA <string>]]\n"
+"        [DEFAULT_TARGETS <target>...]\n"
+"        [DEFAULT_CONFIGURATIONS <config>...]\n"
+"        [PERMISSIONS <permission>...]\n"
+"        [CONFIGURATIONS <config>...]\n"
+"        [COMPONENT <component>]\n"
+"        [EXCLUDE_FROM_ALL])"
+msgstr ""
+
+#: ../../../command/install.rst:934
+msgid ""
+"The ``PACKAGE_INFO`` form generates and installs a |CPS| file which "
+"describes installed targets such that they can be consumed by another "
+"project. Target installations are associated with the export ``<export-"
+"name>`` using the ``EXPORT`` option of the :command:`install(TARGETS)` "
+"signature documented above.  Unlike :command:`install(EXPORT)`, this "
+"information is not expressed in CMake code, and can be consumed by tools "
+"other than CMake.  When imported into another CMake project, the imported "
+"targets will be prefixed with ``<package-name>::``.  By default, the "
+"generated file will be called ``<package-name>[-<appendix-name>].cps``.  If "
+"``LOWER_CASE_FILE`` is given, the package name as it appears on disk (in "
+"both the file name and install destination) will be first converted to lower "
+"case."
+msgstr ""
+
+#: ../../../command/install.rst:946
+msgid ""
+"If ``DESTINATION`` is not specified, a platform-specific default is used."
+msgstr ""
+
+#: ../../../command/install.rst:948
+msgid ""
+"If ``APPENDIX`` is specified, rather than generating a top level package "
+"specification, the specified targets will be exported as an appendix to the "
+"named package.  Appendices may be used to separate less commonly used "
+"targets (along with their external dependencies) from the rest of a "
+"package.  This enables consumers to ignore transitive dependencies for "
+"targets that they don't use, and also allows a single logical \"package\" to "
+"be composed of artifacts produced by multiple build trees."
+msgstr ""
+
+#: ../../../command/install.rst:956
+msgid ""
+"Appendices are not permitted to change basic package metadata; therefore, "
+"none of ``VERSION``, ``COMPAT_VERSION``, ``VERSION_SCHEMA``, "
+"``DEFAULT_TARGETS`` or ``DEFAULT_CONFIGURATIONS`` may be specified in "
+"combination with ``APPENDIX``.  Additionally, it is strongly recommended "
+"that use of ``LOWER_CASE_FILE`` should be consistent between the main "
+"package and any appendices."
+msgstr ""
+
+#: ../../../command/install.rst:968
 msgid "Installs a runtime dependency set:"
 msgstr ""
 
-#: ../../../command/install.rst:915
+#: ../../../command/install.rst:970
 msgid ""
 "install(RUNTIME_DEPENDENCY_SET <set-name>\n"
 "        [[LIBRARY|RUNTIME|FRAMEWORK]\n"
@@ -1435,7 +1499,7 @@ msgid ""
 "        )"
 msgstr ""
 
-#: ../../../command/install.rst:935
+#: ../../../command/install.rst:990
 msgid ""
 "Installs a runtime dependency set previously created by one or more :command:"
 "`install(TARGETS)` or :command:`install(IMPORTED_RUNTIME_ARTIFACTS)` "
@@ -1448,7 +1512,7 @@ msgid ""
 "are installed with :command:`install(TARGETS)`."
 msgstr ""
 
-#: ../../../command/install.rst:945
+#: ../../../command/install.rst:1000
 msgid ""
 "The generated install script calls :command:`file(GET_RUNTIME_DEPENDENCIES)` "
 "on the build-tree files to calculate the runtime dependencies. The build-"
@@ -1464,7 +1528,7 @@ msgid ""
 "``install(RUNTIME_DEPENDENCY_SET)`` has the same limitation."
 msgstr ""
 
-#: ../../../command/install.rst:958
+#: ../../../command/install.rst:1013
 msgid ""
 "The following sub-arguments are forwarded through as the corresponding "
 "arguments to :command:`file(GET_RUNTIME_DEPENDENCIES)` (for those that "
@@ -1473,35 +1537,35 @@ msgid ""
 "expressions(7)>`."
 msgstr ""
 
-#: ../../../command/install.rst:963
+#: ../../../command/install.rst:1018
 msgid "``DIRECTORIES <dir>...``"
 msgstr ""
 
-#: ../../../command/install.rst:964
+#: ../../../command/install.rst:1019
 msgid "``PRE_INCLUDE_REGEXES <regex>...``"
 msgstr ""
 
-#: ../../../command/install.rst:965
+#: ../../../command/install.rst:1020
 msgid "``PRE_EXCLUDE_REGEXES <regex>...``"
 msgstr ""
 
-#: ../../../command/install.rst:966
+#: ../../../command/install.rst:1021
 msgid "``POST_INCLUDE_REGEXES <regex>...``"
 msgstr ""
 
-#: ../../../command/install.rst:967
+#: ../../../command/install.rst:1022
 msgid "``POST_EXCLUDE_REGEXES <regex>...``"
 msgstr ""
 
-#: ../../../command/install.rst:968
+#: ../../../command/install.rst:1023
 msgid "``POST_INCLUDE_FILES <file>...``"
 msgstr ""
 
-#: ../../../command/install.rst:969
+#: ../../../command/install.rst:1024
 msgid "``POST_EXCLUDE_FILES <file>...``"
 msgstr ""
 
-#: ../../../command/install.rst:972
+#: ../../../command/install.rst:1027
 msgid ""
 "This command supersedes the :command:`install_targets` command and the :"
 "prop_tgt:`PRE_INSTALL_SCRIPT` and :prop_tgt:`POST_INSTALL_SCRIPT` target "
@@ -1512,19 +1576,19 @@ msgid ""
 "commands is not defined."
 msgstr ""
 
-#: ../../../command/install.rst:982
+#: ../../../command/install.rst:1037
 msgid "Examples"
 msgstr ""
 
-#: ../../../command/install.rst:985
+#: ../../../command/install.rst:1040
 msgid "Example: Install Targets with Per-Artifact Components"
 msgstr ""
 
-#: ../../../command/install.rst:987
+#: ../../../command/install.rst:1042
 msgid "Consider a project that defines targets with different artifact kinds:"
 msgstr ""
 
-#: ../../../command/install.rst:989
+#: ../../../command/install.rst:1044
 msgid ""
 "add_executable(myExe myExe.c)\n"
 "add_library(myStaticLib STATIC myStaticLib.c)\n"
@@ -1534,13 +1598,13 @@ msgid ""
 "set_property(TARGET mySharedLib PROPERTY SOVERSION 1)"
 msgstr ""
 
-#: ../../../command/install.rst:998
+#: ../../../command/install.rst:1053
 msgid ""
 "We may call :command:`install(TARGETS)` with `\\<artifact-kind\\>`_ "
 "arguments to specify different options for each kind of artifact:"
 msgstr ""
 
-#: ../../../command/install.rst:1001
+#: ../../../command/install.rst:1056
 msgid ""
 "install(TARGETS\n"
 "          myExe\n"
@@ -1559,67 +1623,67 @@ msgid ""
 "        )"
 msgstr ""
 
-#: ../../../command/install.rst:1019
+#: ../../../command/install.rst:1074
 msgid "This will:"
 msgstr ""
 
-#: ../../../command/install.rst:1021
+#: ../../../command/install.rst:1076
 msgid ""
 "Install ``myExe`` to ``<prefix>/bin``, the default RUNTIME artifact "
 "destination, as part of the ``Runtime`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1024
+#: ../../../command/install.rst:1079
 msgid "On non-DLL platforms:"
 msgstr ""
 
-#: ../../../command/install.rst:1026
+#: ../../../command/install.rst:1081
 msgid ""
 "Install ``libmySharedLib.so.1`` to ``<prefix>/lib``, the default LIBRARY "
 "artifact destination, as part of the ``Runtime`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1029
+#: ../../../command/install.rst:1084
 msgid ""
 "Install the ``libmySharedLib.so`` \"namelink\" (symbolic link) to ``<prefix>/"
 "lib``, the default LIBRARY artifact destination, as part of the "
 "``Development`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1033
+#: ../../../command/install.rst:1088
 msgid "On DLL platforms:"
 msgstr ""
 
-#: ../../../command/install.rst:1035
+#: ../../../command/install.rst:1090
 msgid ""
 "Install ``mySharedLib.dll`` to ``<prefix>/bin``, the default RUNTIME "
 "artifact destination, as part of the ``Runtime`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1038
+#: ../../../command/install.rst:1093
 msgid ""
 "Install ``mySharedLib.lib`` to ``<prefix>/lib/static``, the specified "
 "ARCHIVE artifact destination, as part of the ``Development`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1041
+#: ../../../command/install.rst:1096
 msgid ""
 "Install ``myStaticLib`` to ``<prefix>/lib/static``, the specified ARCHIVE "
 "artifact destination, as part of the ``Development`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1044
+#: ../../../command/install.rst:1099
 msgid ""
 "Install ``mySharedLib.h`` and ``myStaticLib.h`` to ``<prefix>/include``, the "
 "default destination for a file set of type HEADERS, as part of the "
 "``Development`` component."
 msgstr ""
 
-#: ../../../command/install.rst:1049
+#: ../../../command/install.rst:1104
 msgid "Example: Install Targets to Per-Config Destinations"
 msgstr ""
 
-#: ../../../command/install.rst:1051
+#: ../../../command/install.rst:1106
 msgid ""
 "Each :command:`install(TARGETS)` call installs a given target :ref:`output "
 "artifact <Output Artifacts>` to at most one ``DESTINATION``, but the install "
@@ -1628,7 +1692,7 @@ msgid ""
 "configuration is needed.  For example, the code:"
 msgstr ""
 
-#: ../../../command/install.rst:1057
+#: ../../../command/install.rst:1112
 msgid ""
 "install(TARGETS myExe\n"
 "        CONFIGURATIONS Debug\n"
@@ -1642,23 +1706,23 @@ msgid ""
 "        )"
 msgstr ""
 
-#: ../../../command/install.rst:1070
+#: ../../../command/install.rst:1125
 msgid ""
 "will install ``myExe`` to ``<prefix>/Debug/bin`` in the Debug configuration, "
 "and to ``<prefix>/Release/bin`` in the Release configuration."
 msgstr ""
 
-#: ../../../command/install.rst:1074
+#: ../../../command/install.rst:1129
 msgid "Generated Installation Script"
 msgstr ""
 
-#: ../../../command/install.rst:1078
+#: ../../../command/install.rst:1133
 msgid ""
 "Use of this feature is not recommended. Please consider using the :option:"
 "`cmake --install` instead."
 msgstr ""
 
-#: ../../../command/install.rst:1081
+#: ../../../command/install.rst:1136
 msgid ""
 "The ``install()`` command generates a file, ``cmake_install.cmake``, inside "
 "the build directory, which is used internally by the generated install "
@@ -1666,33 +1730,33 @@ msgid ""
 "`cmake -P`. This script accepts several variables:"
 msgstr ""
 
-#: ../../../command/install.rst:1089
+#: ../../../command/install.rst:1144
 msgid "``COMPONENT``"
 msgstr ""
 
-#: ../../../command/install.rst:1087
+#: ../../../command/install.rst:1142
 msgid ""
 "Set this variable to install only a single CPack component as opposed to all "
 "of them. For example, if you only want to install the ``Development`` "
 "component, run ``cmake -DCOMPONENT=Development -P cmake_install.cmake``."
 msgstr ""
 
-#: ../../../command/install.rst:1094
+#: ../../../command/install.rst:1149
 msgid "``BUILD_TYPE``"
 msgstr ""
 
-#: ../../../command/install.rst:1092
+#: ../../../command/install.rst:1147
 msgid ""
 "Set this variable to change the build type if you are using a multi-config "
 "generator. For example, to install with the ``Debug`` configuration, run "
 "``cmake -DBUILD_TYPE=Debug -P cmake_install.cmake``."
 msgstr ""
 
-#: ../../../command/install.rst:1098
+#: ../../../command/install.rst:1154
 msgid "``DESTDIR``"
 msgstr ""
 
-#: ../../../command/install.rst:1097
+#: ../../../command/install.rst:1152
 msgid ""
 "This is an environment variable rather than a CMake variable. It allows you "
 "to change the installation prefix on UNIX systems. See :envvar:`DESTDIR` for "

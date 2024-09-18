@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,27 +73,31 @@ msgid "``CXX``"
 msgstr ""
 
 #: ../../../prop_tgt/UNITY_BUILD.rst:42
-msgid "``OBJC``"
+msgid "``CUDA``"
 msgstr ""
 
 #: ../../../prop_tgt/UNITY_BUILD.rst:45
+msgid "``OBJC``"
+msgstr ""
+
+#: ../../../prop_tgt/UNITY_BUILD.rst:48
 msgid "``OBJCXX``"
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:47
+#: ../../../prop_tgt/UNITY_BUILD.rst:50
 msgid ""
 "For targets that mix source files from more than one language, CMake "
 "separates the languages such that each generated unity source file only "
 "contains sources for a single language."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:51
+#: ../../../prop_tgt/UNITY_BUILD.rst:54
 msgid ""
 "This property is initialized by the value of the :variable:"
 "`CMAKE_UNITY_BUILD` variable when a target is created."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:56
+#: ../../../prop_tgt/UNITY_BUILD.rst:59
 msgid ""
 "Projects should not directly set the ``UNITY_BUILD`` property or its "
 "associated :variable:`CMAKE_UNITY_BUILD` variable to true.  Depending on the "
@@ -107,18 +111,18 @@ msgid ""
 "problems."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:68
+#: ../../../prop_tgt/UNITY_BUILD.rst:71
 msgid "ODR (One definition rule) errors"
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:70
+#: ../../../prop_tgt/UNITY_BUILD.rst:73
 msgid ""
 "When multiple source files are included into one source file, as is done for "
 "unity builds, it can potentially lead to ODR errors.  CMake provides a "
 "number of measures to help address such problems:"
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:74
+#: ../../../prop_tgt/UNITY_BUILD.rst:77
 msgid ""
 "Any source file that has a non-empty :prop_sf:`COMPILE_OPTIONS`, :prop_sf:"
 "`COMPILE_DEFINITIONS`, :prop_sf:`COMPILE_FLAGS`, or :prop_sf:"
@@ -126,7 +130,7 @@ msgid ""
 "source."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:79
+#: ../../../prop_tgt/UNITY_BUILD.rst:82
 msgid ""
 "Any source file which is scanned for C++ module sources via :prop_tgt:"
 "`CXX_SCAN_FOR_MODULES`, :prop_sf:`CXX_SCAN_FOR_MODULES`, or membership of a "
@@ -134,7 +138,7 @@ msgid ""
 "manual:`cmake-cxxmodules(7)` for details."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:84
+#: ../../../prop_tgt/UNITY_BUILD.rst:87
 msgid ""
 "Projects can prevent an individual source file from being combined into a "
 "unity source by setting its :prop_sf:`SKIP_UNITY_BUILD_INCLUSION` source "
@@ -142,14 +146,14 @@ msgid ""
 "specific files than disabling unity builds for an entire target."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:90
+#: ../../../prop_tgt/UNITY_BUILD.rst:93
 msgid ""
 "Projects can set :prop_tgt:`UNITY_BUILD_UNIQUE_ID` to cause a valid C-"
 "identifier to be generated which is unique per file in a unity build.  This "
 "can be used to avoid problems with anonymous namespaces in unity builds."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:95
+#: ../../../prop_tgt/UNITY_BUILD.rst:98
 msgid ""
 "The :prop_tgt:`UNITY_BUILD_CODE_BEFORE_INCLUDE` and :prop_tgt:"
 "`UNITY_BUILD_CODE_AFTER_INCLUDE` target properties can be used to inject "
@@ -157,7 +161,7 @@ msgid ""
 "statement."
 msgstr ""
 
-#: ../../../prop_tgt/UNITY_BUILD.rst:100
+#: ../../../prop_tgt/UNITY_BUILD.rst:103
 msgid ""
 "The order of source files added to the target via commands like :command:"
 "`add_library`, :command:`add_executable` or :command:`target_sources` will "

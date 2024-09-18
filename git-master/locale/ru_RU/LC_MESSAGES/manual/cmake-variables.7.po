@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,39 +59,39 @@ msgstr ""
 msgid "Variables that Provide Information"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:171
+#: ../../../manual/cmake-variables.7.rst:172
 msgid "Variables that Change Behavior"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:310
+#: ../../../manual/cmake-variables.7.rst:312
 msgid "Variables that Describe the System"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:359
+#: ../../../manual/cmake-variables.7.rst:361
 msgid "Variables that Control the Build"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:571
+#: ../../../manual/cmake-variables.7.rst:573
 msgid "Variables for Languages"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:668
+#: ../../../manual/cmake-variables.7.rst:671
 msgid "Variables for CTest"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:749
+#: ../../../manual/cmake-variables.7.rst:752
 msgid "Variables for CPack"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:765
+#: ../../../manual/cmake-variables.7.rst:768
 msgid "Variable Expansion Operators"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:774
+#: ../../../manual/cmake-variables.7.rst:777
 msgid "Internal Variables"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:776
+#: ../../../manual/cmake-variables.7.rst:779
 msgid ""
 "CMake has many internal variables.  Most of them are undocumented. Some of "
 "them, however, were at some point described as normal variables, and "
@@ -99,26 +99,26 @@ msgid ""
 "not recommended for use in project code."
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:796
+#: ../../../manual/cmake-variables.7.rst:799
 msgid "Deprecated Variables that Provide Information"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:804
+#: ../../../manual/cmake-variables.7.rst:807
 msgid "Deprecated Variables that Change Behavior"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:815
+#: ../../../manual/cmake-variables.7.rst:818
 msgid "Deprecated Variables that Describe the System"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:831
+#: ../../../manual/cmake-variables.7.rst:834
 msgid "Deprecated Variables that Control the Build"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:840
+#: ../../../manual/cmake-variables.7.rst:843
 msgid "Deprecated Variables for Languages"
 msgstr ""
 
-#: ../../../manual/cmake-variables.7.rst:850
+#: ../../../manual/cmake-variables.7.rst:853
 msgid "Deprecated Variables for CTest"
 msgstr ""

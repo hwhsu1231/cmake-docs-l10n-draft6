@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2000-2024 Kitware, Inc. and Contributors
+# This file is distributed under the same license as the CMake package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CMake git-master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../release/dev/macro-required-link-directories.rst:2
+msgid "macro-required-link-directories"
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:4
+msgid ""
+"The :module:`CMakePushCheckState` module ``cmake_push_check_state``, "
+"``cmake_pop_check_state`` and ``cmake_reset_check_state`` macros learned to "
+"honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:8
+msgid ""
+"The :module:`CheckCCompilerFlag` module ``check_c_compiler_flag`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:11
+msgid ""
+"The :module:`CheckCSourceCompiles` module ``check_c_source_compiles`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:14
+msgid ""
+"The :module:`CheckCSourceRuns` module ``check_c_source_runs`` macro learned "
+"to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:17
+msgid ""
+"The :module:`CheckCXXCompilerFlag` module ``check_cxx_compiler_flag`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:20
+msgid ""
+"The :module:`CheckCXXSourceCompiles` module ``check_cxx_source_compiles`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:23
+msgid ""
+"The :module:`CheckCXXSourceRuns` module ``check_cxx_source_runs`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:26
+msgid ""
+"The :module:`CheckCXXSymbolExists` module ``check_cxx_symbol_exists`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:29
+msgid ""
+"The :module:`CheckCompilerFlag` module ``check_compiler_flag`` macro learned "
+"to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:32
+msgid ""
+"The :module:`CheckFortranCompilerFlag` module "
+"``check_fortran_compiler_flag`` macro learned to honor the "
+"``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:35
+msgid ""
+"The :module:`CheckFortranFunctionExists` module "
+"``check_fortran_function_exists`` macro learned to honor the "
+"``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:38
+msgid ""
+"The :module:`CheckFortranSourceCompiles` module "
+"``check_fortran_source_compiles`` macro learned to honor the "
+"``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:41
+msgid ""
+"The :module:`CheckFortranSourceRuns` module ``check_fortran_source_runs`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:44
+msgid ""
+"The :module:`CheckFunctionExists` module ``check_function_exists`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:47
+msgid ""
+"The :module:`CheckIncludeFile` module ``check_include_file`` macro learned "
+"to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:50
+msgid ""
+"The :module:`CheckIncludeFileCXX` module ``check_include_file_cxx`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:53
+msgid ""
+"The :module:`CheckIncludeFiles` module ``check_include_files`` macro learned "
+"to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:56
+#: ../../../release/dev/macro-required-link-directories.rst:62
+msgid ""
+"The :module:`CheckOBJCCompilerFlag` module ``check_objc_compiler_flag`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:59
+msgid ""
+"The :module:`CheckLibraryExists` module ``check_library_exists`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:65
+msgid ""
+"The :module:`CheckOBJCSourceCompiles` module ``check_objc_source_compiles`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:68
+msgid ""
+"The :module:`CheckOBJCSourceRuns` module ``check_objc_source_runs`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:71
+msgid ""
+"The :module:`CheckOBJCXXCompilerFlag` module ``check_objcxx_compiler_flag`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:74
+msgid ""
+"The :module:`CheckOBJCXXSourceCompiles` module "
+"``check_objcxx_source_compiles`` macro learned to honor the "
+"``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:77
+msgid ""
+"The :module:`CheckOBJCXXSourceRuns` module ``check_objcxx_source_runs`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:80
+msgid ""
+"The :module:`CheckPrototypeDefinition` module ``check_prototype_definition`` "
+"macro learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:83
+msgid ""
+"The :module:`CheckSourceCompiles` module ``check_source_compiles`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:86
+msgid ""
+"The :module:`CheckSourceRuns` module ``check_source_runs`` macro learned to "
+"honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:89
+msgid ""
+"The :module:`CheckStructHasMember` module ``check_struct_has_member`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:92
+msgid ""
+"The :module:`CheckSymbolExists` module ``check_symbol_exists`` macro learned "
+"to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:95
+msgid ""
+"The :module:`CheckTypeSize` module ``check_type_size`` macro learned to "
+"honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""
+
+#: ../../../release/dev/macro-required-link-directories.rst:98
+msgid ""
+"The :module:`CheckVariableExists` module ``check_variable_exists`` macro "
+"learned to honor the ``CMAKE_REQUIRED_LINK_DIRECTORIES`` variable."
+msgstr ""

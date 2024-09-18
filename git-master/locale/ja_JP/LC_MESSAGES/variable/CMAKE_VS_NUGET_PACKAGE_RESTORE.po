@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,22 +32,23 @@ msgstr ""
 
 #: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:12
 msgid ""
-"The command line option ``--resolve-package-references`` can be used "
-"alternatively to control the resolve behavior globally. This option will "
-"take precedence over the cache variable."
+"The command line option :option:`--resolve-package-references <cmake--build "
+"--resolve-package-references>` can be used alternatively to control the "
+"resolve behavior globally. This option will take precedence over the cache "
+"variable."
 msgstr ""
 
-#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:16
+#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:17
 msgid ""
 "Targets that use the :prop_tgt:`DOTNET_SDK` are required to run a restore "
 "before building. Disabling this option may cause the build to fail in such "
 "projects."
 msgstr ""
 
-#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:20
+#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:21
 msgid "This setting is stored as a cache entry. Default value is ``ON``."
 msgstr ""
 
-#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:22
+#: ../../../variable/CMAKE_VS_NUGET_PACKAGE_RESTORE.rst:23
 msgid "See also the :prop_tgt:`VS_PACKAGE_REFERENCES` property."
 msgstr ""

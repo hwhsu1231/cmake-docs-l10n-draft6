@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,12 +420,25 @@ msgid "Changes made since CMake 3.30.0 include the following."
 msgstr ""
 
 #: ../../../release/3.30.rst:252
-msgid "3.30.1"
+msgid "3.30.1, 3.30.2"
 msgstr ""
 
 #: ../../../release/3.30.rst:254
 msgid ""
-"This version made no changes to documented features or interfaces. Some "
+"These versions made no changes to documented features or interfaces. Some "
 "implementation updates were made to support ecosystem changes and/or fix "
 "regressions."
+msgstr ""
+
+#: ../../../release/3.30.rst:259
+msgid "3.30.3"
+msgstr ""
+
+#: ../../../release/3.30.rst:261
+msgid ""
+"The :module:`FindPython` and :module:`FindPython3` modules now define, "
+"respectively, the ``Python_DEFINITIONS`` and  ``Python3_DEFINITIONS`` "
+"variables on Windows to support development with the free threaded version "
+"of Python.  The :prop_tgt:`INTERFACE_COMPILE_DEFINITIONS` target property is "
+"also defined for the various targets provided by these modules."
 msgstr ""

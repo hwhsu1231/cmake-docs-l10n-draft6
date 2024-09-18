@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Link to these if you need to link against the exslt library."
 msgstr ""
 
-#: ../../../../Modules/FindLibXslt.cmake:140
+#: ../../../../Modules/FindLibXslt.cmake:144
 msgid "``LIBXSLT_XSLTPROC_EXECUTABLE``"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,14 +45,14 @@ msgstr ""
 msgid "Environment Variables that Control the Build"
 msgstr ""
 
-#: ../../../manual/cmake-env-variables.7.rst:72
+#: ../../../manual/cmake-env-variables.7.rst:74
 msgid "Environment Variables for Languages"
 msgstr ""
 
-#: ../../../manual/cmake-env-variables.7.rst:104
+#: ../../../manual/cmake-env-variables.7.rst:106
 msgid "Environment Variables for CTest"
 msgstr ""
 
-#: ../../../manual/cmake-env-variables.7.rst:119
+#: ../../../manual/cmake-env-variables.7.rst:121
 msgid "Environment Variables for the CMake curses interface"
 msgstr ""

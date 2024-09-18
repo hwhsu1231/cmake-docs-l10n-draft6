@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,8 +29,8 @@ msgstr ""
 
 #: ../../../envvar/CMAKE_MSVCIDE_RUN_PATH.rst:6
 msgid ""
-"Extra PATH locations for custom commands when using :generator:`Visual "
-"Studio 12 2013` (or above) generators."
+"Extra PATH locations for custom commands when using :ref:`Visual Studio "
+"Generators`."
 msgstr ""
 
 #: ../../../envvar/CMAKE_MSVCIDE_RUN_PATH.rst:9
