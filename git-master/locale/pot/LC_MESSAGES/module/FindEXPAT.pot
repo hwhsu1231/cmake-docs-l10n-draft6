@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,4 +85,8 @@ msgstr ""
 
 #: ../../../../Modules/FindEXPAT.cmake:40
 msgid "Set to ``TRUE`` to use static libraries."
+msgstr ""
+
+#: ../../../../Modules/FindEXPAT.cmake:44
+msgid "Implemented on non-Windows platforms."
 msgstr ""
