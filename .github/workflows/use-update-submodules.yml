@@ -111,16 +111,16 @@ jobs:
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "REPO_URL: ${REPO_URL}"
 
-      - name: Compare Commits of Old and New
-        id: ccon
-        run: |
-          if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
-            COMMITS_ARE_DIFFERENT=true
-          else
-            COMMITS_ARE_DIFFERENT=false
-          fi
-          echo "COMMITS_ARE_DIFFERENT=${COMMITS_ARE_DIFFERENT}" >> ${GITHUB_OUTPUT}
-          echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
+      # - name: Compare Commits of Old and New
+      #   id: ccon
+      #   run: |
+      #     if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
+      #       COMMITS_ARE_DIFFERENT=true
+      #     else
+      #       COMMITS_ARE_DIFFERENT=false
+      #     fi
+      #     echo "COMMITS_ARE_DIFFERENT=${COMMITS_ARE_DIFFERENT}" >> ${GITHUB_OUTPUT}
+      #     echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
 
       - name: Get the Current Job's ID
         id: gcji
@@ -132,7 +132,7 @@ jobs:
 
       - name: Add and Commit Changes
         id: acc
-        if: ${{ steps.ccon.outputs.COMMITS_ARE_DIFFERENT == 'true' }}
+        # if: ${{ steps.ccon.outputs.COMMITS_ARE_DIFFERENT == 'true' }}
         uses: EndBug/add-and-commit@v9
         with:
           cwd: '.'
