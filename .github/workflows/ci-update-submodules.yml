@@ -46,14 +46,6 @@ jobs:
         run: |
           echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
 
-      - name: Get Repository Url of the Submodule '${{ matrix.SUBMODULE_DIR }}'
-        id: grus
-        shell: bash
-        run: |
-          REPO_URL=$(git config --get submodule.${{ matrix.SUBMODULE_DIR }}.url)
-          echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
-          echo "REPO_URL: ${REPO_URL}"
-
       - name: Get Old Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
         id: gocs
         shell: bash
@@ -74,6 +66,14 @@ jobs:
           NEW_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
           echo "NEW_COMMIT=${NEW_COMMIT}" >> ${GITHUB_OUTPUT}
           echo "NEW_COMMIT: ${NEW_COMMIT}"
+
+      - name: Get Repository Url of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+        id: grus
+        shell: bash
+        run: |
+          REPO_URL=$(git config --get submodule.${{ matrix.SUBMODULE_DIR }}.url)
+          echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
+          echo "REPO_URL: ${REPO_URL}"
 
       - name: Add and Commit Changes
         id: acc
