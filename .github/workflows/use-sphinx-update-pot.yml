@@ -134,12 +134,21 @@ jobs:
           jq-filter: '.pot'
           jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
+      - name: Get the Version Group from versions.json
+        id: gvgv
+        uses: ./.github/actions/get-version-group-from-versions
+        with:
+          version: ${{ inputs.VERSION }}
+          versions-file: 'versions.json'
+          workspace: ${{ github.workspace }}
+
       - name: Set the Label List for the Pull Request
         id: sllpr
         shell: bash
         run: |
           VERSION="${{ inputs.VERSION }}"
-          FILTER=".v3 | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
+          VERSION_GROUP="${{ steps.gvgv.outputs.VERSION_GROUP }}"
+          FILTER=".${VERSION_GROUP} | map(select(.VERSION_COMPENDIUM == \"\")) | .[].VERSION"
           OUTPUT=$(jq -r "${FILTER}" versions.json)
           readarray -t CROWDIN_BRANCHES <<< "${OUTPUT}"
           PULL_REQUEST_LABEL_LIST="gettext"
