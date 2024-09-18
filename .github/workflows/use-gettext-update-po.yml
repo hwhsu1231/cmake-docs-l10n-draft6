@@ -54,19 +54,21 @@ jobs:
           echo "[Secrets]"
           echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
           echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
 
-      - name: Get the GitHub App's Token
-        id: ggat
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      # # generate ${{ steps.ggat.outputs.token }}
+      # - name: Get the GitHub App's Token
+      #   id: ggat
+      #   uses: tibdex/github-app-token@v2
+      #   with:
+      #     app_id: ${{ secrets.APP_ID }}
+      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.CHECKOUT }}
-          token: ${{ steps.ggat.outputs.token }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           submodules: true
           fetch-depth: 0
 
@@ -122,15 +124,15 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ steps.ggat.outputs.token }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
           per_page: 100
 
       - name: Set up mutex for 'l10n' branch
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
-          branch: mutex/l10n
-          repo-token: ${{ steps.ggat.outputs.token }}
+          branch: mutex/submodule
+          repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
           # Otherwise, the error message will show up:
           #   [8957344013-1714902604-928] Enqueuing to branch mutex/source, file mutex_queue
           #   [8957344013-1714902604-928] Adding ourself to the queue file mutex_queue
