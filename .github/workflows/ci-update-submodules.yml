@@ -57,6 +57,7 @@ jobs:
       - name: Set new commit hash 1
         run: |
           git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
+          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g'
 
       - name: Set new commit hash 2
         run: |
