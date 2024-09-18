@@ -84,7 +84,7 @@ jobs:
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
-          version_group: 'v2'
+          version-group: 'v2'
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
