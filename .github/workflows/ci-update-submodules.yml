@@ -79,9 +79,9 @@ jobs:
         id: ccon
         run: |
           if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
-            echo "COMMITS_ARE_DIFFERENT=true"
+            COMMITS_ARE_DIFFERENT=true
           else
-            echo "COMMITS_ARE_DIFFERENT=false"
+            COMMITS_ARE_DIFFERENT=false
           fi
           echo "COMMITS_ARE_DIFFERENT=${COMMITS_ARE_DIFFERENT}" >> ${GITHUB_OUTPUT}
           echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
