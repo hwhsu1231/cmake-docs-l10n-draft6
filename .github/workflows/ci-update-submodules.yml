@@ -89,7 +89,7 @@ jobs:
 
             Updated '${{ matrix.SUBMODULE_DIR }}' submodule to include the latest changes.
 
-            - Repository: ${{ steps.gncs.outputs.REPO_URL }}
+            - Repository: ${{ steps.grus.outputs.REPO_URL }}
             - Old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
             - New commit: ${{ steps.gncs.outputs.NEW_COMMIT }}
 
