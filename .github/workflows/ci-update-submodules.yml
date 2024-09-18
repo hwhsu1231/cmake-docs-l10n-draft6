@@ -16,10 +16,10 @@ jobs:
     outputs:
       SUBMODULE_LIST: ${{ steps.gsl.outputs.SUBMODULE_LIST }}
     steps:
-      - name: Checkout to '${{ inputs.CHECKOUT }}'
+      - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.CHECKOUT }}
+          ref: ${{ github.ref }}
           submodules: false
       - name: Get Submodule List
         id: gsl
