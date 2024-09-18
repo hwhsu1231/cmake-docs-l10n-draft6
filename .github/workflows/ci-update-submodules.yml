@@ -54,9 +54,13 @@ jobs:
         run: |
           git submodule update --init --remote ${{ matrix.SUBMODULE_DIR }}
 
-      - name: Set new commit hash
+      - name: Set new commit hash 1
         run: |
           git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
+
+      - name: Set new commit hash 2
+        run: |
+          git rev-parse HEAD:cmake/modules
 
       # - name: Add and Commit Changes
       #   id: acc
