@@ -83,6 +83,7 @@ jobs:
           else
             echo "COMMITS_ARE_DIFFERENT=false" >> ${GITHUB_OUTPUT}
           fi
+          echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
 
       - name: Add and Commit Changes
         id: acc
