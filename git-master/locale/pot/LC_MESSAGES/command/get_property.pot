@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-09-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../../../command/get_property.rst:32
 msgid ""
-"Scope defaults to the current directory but another directory (already "
+"Scope defaults to the current directory, but another directory (already "
 "processed by CMake) may be named by the full or relative path ``<dir>``. "
 "Relative paths are treated as relative to the current source directory. See "
 "also the :command:`get_directory_property` command."
@@ -175,41 +175,43 @@ msgstr ""
 #: ../../../command/get_property.rst:93
 msgid ""
 "The required ``PROPERTY`` option is immediately followed by the name of the "
-"property to get.  If the property is not set an empty value is returned, "
-"although some properties support inheriting from a parent scope if defined "
-"to behave that way (see :command:`define_property`)."
+"property to get.  If the property is not set, the named ``<variable>`` will "
+"be unset in the calling scope upon return, although some properties support "
+"inheriting from a parent scope if defined to behave that way (see :command:"
+"`define_property`)."
 msgstr ""
 
-#: ../../../command/get_property.rst:98
+#: ../../../command/get_property.rst:99
 msgid ""
-"If the ``SET`` option is given the variable is set to a boolean value "
+"If the ``SET`` option is given, the variable is set to a boolean value "
 "indicating whether the property has been set.  If the ``DEFINED`` option is "
-"given the variable is set to a boolean value indicating whether the property "
-"has been defined such as with the :command:`define_property` command."
+"given, the variable is set to a boolean value indicating whether the "
+"property has been defined, such as with the :command:`define_property` "
+"command."
 msgstr ""
 
-#: ../../../command/get_property.rst:104
+#: ../../../command/get_property.rst:105
 msgid ""
-"If ``BRIEF_DOCS`` or ``FULL_DOCS`` is given then the variable is set to a "
+"If ``BRIEF_DOCS`` or ``FULL_DOCS`` is given, then the variable is set to a "
 "string containing documentation for the requested property.  If "
-"documentation is requested for a property that has not been defined "
+"documentation is requested for a property that has not been defined, "
 "``NOTFOUND`` is returned."
 msgstr ""
 
-#: ../../../command/get_property.rst:111
+#: ../../../command/get_property.rst:112
 msgid ""
 "The :prop_sf:`GENERATED` source file property may be globally visible. See "
 "its documentation for details."
 msgstr ""
 
-#: ../../../command/get_property.rst:115
+#: ../../../command/get_property.rst:116
 msgid "See Also"
 msgstr ""
 
-#: ../../../command/get_property.rst:117
+#: ../../../command/get_property.rst:118
 msgid ":command:`define_property`"
 msgstr ""
 
-#: ../../../command/get_property.rst:118
+#: ../../../command/get_property.rst:119
 msgid ":command:`set_property`"
 msgstr ""
