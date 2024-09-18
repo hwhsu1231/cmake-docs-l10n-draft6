@@ -33,14 +33,18 @@ jobs:
 
   matrix:
     needs: get-matrix
+    secrets: inherit
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.SUBMODULE }}
+      cancel-in-progress: true
     strategy:
       matrix: 
-        SUBMODULE_DIR: ${{ fromJSON(needs.get-matrix.outputs.SUBMODULE_LIST) }}
+        SUBMODULE: ${{ fromJSON(needs.get-matrix.outputs.SUBMODULE_LIST) }}
       fail-fast: false
     uses: ./.github/workflows/use-update-submodules.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
-      SUBMODULE: ${{ matrix.SUBMODULE_DIR }}
-      CALLER_JOB: 'matrix (${{ matrix.SUBMODULE_DIR }})'
+      SUBMODULE: ${{ matrix.SUBMODULE }}
+      CALLER_JOB: 'matrix (${{ matrix.SUBMODULE }})'
       ENABLE_JOB: true
