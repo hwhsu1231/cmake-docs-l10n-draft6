@@ -75,8 +75,18 @@ jobs:
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "REPO_URL: ${REPO_URL}"
 
+      - name: Compare Commits of Old and New
+        id: ccon
+        run: |
+          if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
+            echo "COMMITS_ARE_DIFFERENT=true" >> ${GITHUB_OUTPUT}
+          else
+            echo "COMMITS_ARE_DIFFERENT=false" >> ${GITHUB_OUTPUT}
+          fi
+
       - name: Add and Commit Changes
         id: acc
+        if: ${{ steps.ccon.outputs.COMMITS_ARE_DIFFERENT == 'true' }}
         uses: EndBug/add-and-commit@v9
         with:
           cwd: '.'
