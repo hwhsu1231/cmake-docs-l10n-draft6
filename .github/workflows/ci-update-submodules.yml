@@ -46,7 +46,8 @@ jobs:
         run: |
           echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
 
-      - name: Set old commit hash
+      - name: Get Old Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+        id: gocs
         shell: bash
         run: |
           OLD_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
@@ -58,21 +59,27 @@ jobs:
         run: |
           git submodule update --init --remote ${{ matrix.SUBMODULE_DIR }}
 
-      - name: Set new commit hash 1
+      - name: Get New Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+        id: gncs
         shell: bash
         run: |
           NEW_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
           echo "NEW_COMMIT=${NEW_COMMIT}" >> ${GITHUB_OUTPUT}
           echo "NEW_COMMIT: ${NEW_COMMIT}"
 
-      # - name: Add and Commit Changes
-      #   id: acc
-      #   uses: EndBug/add-and-commit@v9
-      #   with:
-      #     cwd: '.'
-      #     add: '.'
-      #     pull: '--rebase --autostash'
-      #     author_name: docs-l10n[bot]
-      #     author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
-      #     message: |
+      - name: Add and Commit Changes
+        id: acc
+        uses: EndBug/add-and-commit@v9
+        with:
+          cwd: '.'
+          add: '.'
+          pull: '--rebase --autostash'
+          author_name: docs-l10n[bot]
+          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
+          message: |
+            feat: update '${{ matrix.SUBMODULE_DIR }}' submodule to ${{ steps.gncs.outputs.NEW_COMMIT }}
 
+            Updated '${{ matrix.SUBMODULE_DIR }}' submodule to include the latest changes.
+
+            - Old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
+            - New commit: ${{ steps.gncs.outputs.NEW_COMMIT }}
