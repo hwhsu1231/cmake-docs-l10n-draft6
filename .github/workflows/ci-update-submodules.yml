@@ -34,10 +34,10 @@ jobs:
   update-submodules:
     needs: get-submodules
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix: 
-    #     SUBMODULE_DIR: ${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}
-    #   fail-fast: false
+    strategy:
+      matrix: 
+        SUBMODULE_DIR: ${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}
+      fail-fast: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,6 +46,4 @@ jobs:
 
       - name: Print submodule directory
         run: |
-          echo "SUBMODULE_LIST:"
-          echo "${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}"
-          # echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
+          echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
