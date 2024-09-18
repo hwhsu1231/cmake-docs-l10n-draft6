@@ -12,6 +12,9 @@ on:
       CHECKOUT:
         type: string
         required: true
+      SUBMODULE:
+        type: string
+        required: true
       CALLER_JOB:
         type: string
         required: true
@@ -20,35 +23,8 @@ on:
         required: true
 
 jobs:
-  get-submodules:
-    if: inputs.ENABLE_JOB
-    runs-on: ${{ inputs.RUNNER }}
-    outputs:
-      SUBMODULE_LIST: ${{ steps.get-submodules.outputs.SUBMODULE_LIST }}
-    steps:
-      - name: Checkout to '${{ inputs.CHECKOUT }}'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.CHECKOUT }}
-          submodules: false
-
-      - name: Get submodule directories
-        id: get-submodules
-        shell: bash
-        run: |
-          SUBMODULE_PATHS=$(git config --file .gitmodules --get-regexp path | awk '{print $2}')
-          SUBMODULE_LIST=$(echo "${SUBMODULE_PATHS}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
-          echo "SUBMODULE_LIST=${SUBMODULE_LIST}" >> ${GITHUB_OUTPUT}
-          echo "SUBMODULE_LIST:"
-          echo "${SUBMODULE_LIST}" | jq "."
-
   update-submodules:
-    needs: get-submodules
     runs-on: ${{ inputs.RUNNER }}
-    strategy:
-      matrix: 
-        SUBMODULE_DIR: ${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}
-      fail-fast: false
     steps:
       - name: Check Contexts, Inputs, and Secrets
         shell: bash
@@ -64,88 +40,69 @@ jobs:
           echo "[Inputs]"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.SUBMODULE = ${{ inputs.SUBMODULE }}"
+          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
-
-      - name: Get the GitHub App's Token
-        uses: tibdex/github-app-token@v2
-        id: ggat
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.CHECKOUT }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           submodules: false
 
-      - name: Get Old Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+      - name: Get Old Commit of the Submodule '${{ inputs.SUBMODULE }}'
         id: gocs
         shell: bash
         run: |
-          OLD_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
+          OLD_COMMIT=$(git submodule status -- ${{ inputs.SUBMODULE }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
           echo "OLD_COMMIT=${OLD_COMMIT}" >> ${GITHUB_OUTPUT}
           echo "OLD_COMMIT: ${OLD_COMMIT}"
 
-      - name: Update submodule from remote
+      - name: Update the Submodule '${{ inputs.SUBMODULE }}' from remote
         shell: bash
         run: |
-          git submodule update --init --remote ${{ matrix.SUBMODULE_DIR }}
+          git submodule update --init --remote ${{ inputs.SUBMODULE }}
 
-      - name: Get New Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+      - name: Get New Commit of the Submodule '${{ inputs.SUBMODULE }}'
         id: gncs
         shell: bash
         run: |
-          NEW_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
+          NEW_COMMIT=$(git submodule status -- ${{ inputs.SUBMODULE }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
           echo "NEW_COMMIT=${NEW_COMMIT}" >> ${GITHUB_OUTPUT}
           echo "NEW_COMMIT: ${NEW_COMMIT}"
 
-      - name: Get Repository Url of the Submodule '${{ matrix.SUBMODULE_DIR }}'
+      - name: Get Repository Url of the Submodule '${{ inputs.SUBMODULE }}'
         id: grus
         shell: bash
         run: |
-          REPO_URL=$(git config --get submodule.${{ matrix.SUBMODULE_DIR }}.url)
+          REPO_URL=$(git config --get submodule.${{ inputs.SUBMODULE }}.url)
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "REPO_URL: ${REPO_URL}"
-
-      # - name: Compare Commits of Old and New
-      #   id: ccon
-      #   run: |
-      #     if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
-      #       COMMITS_ARE_DIFFERENT=true
-      #     else
-      #       COMMITS_ARE_DIFFERENT=false
-      #     fi
-      #     echo "COMMITS_ARE_DIFFERENT=${COMMITS_ARE_DIFFERENT}" >> ${GITHUB_OUTPUT}
-      #     echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
 
       - name: Get the Current Job's ID
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
           github_token: ${{ steps.ggat.outputs.token }}
-          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }} (${{ matrix.SUBMODULE_DIR }})'
+          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }} (${{ inputs.SUBMODULE }})'
           per_page: 100
 
       - name: Add and Commit Changes
         id: acc
-        # if: ${{ steps.ccon.outputs.COMMITS_ARE_DIFFERENT == 'true' }}
         uses: EndBug/add-and-commit@v9
         with:
           cwd: '.'
           add: '.'
           pull: '--rebase --autostash'
           author_name: docs-l10n[bot]
-          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
-          # author_name: ltdrobot
-          # author_email: 178366084+ltdrobot@users.noreply.github.com
+          author_email: docs-l10n[bot]@users.noreply.github.com
           message: |
-            feat: update '${{ matrix.SUBMODULE_DIR }}' submodule
+            feat: update submodule '${{ inputs.SUBMODULE }}'
 
-            Updated '${{ matrix.SUBMODULE_DIR }}' submodule to include the latest changes.
+            Updated submodule '${{ inputs.SUBMODULE }}' to include the latest changes.
 
             - Repository: ${{ steps.grus.outputs.REPO_URL }}
             - Old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}

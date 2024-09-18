@@ -9,122 +9,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  single:
+  get-matrix:
     if: ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )
-    secrets: inherit
-    concurrency:
-      group: ${{ github.workflow }}
-      cancel-in-progress: true
+    runs-on: ${{ inputs.RUNNER }}
+    outputs:
+      SUBMODULE_LIST: ${{ steps.gsl.outputs.SUBMODULE_LIST }}
+    steps:
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          submodules: false
+      - name: Get Submodule List
+        id: gsl
+        shell: bash
+        run: |
+          SUBMODULE_LINES=$(git config --file .gitmodules --get-regexp path | awk '{print $2}')
+          SUBMODULE_LIST=$(echo "${SUBMODULE_LINES}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "SUBMODULE_LIST=${SUBMODULE_LIST}" >> ${GITHUB_OUTPUT}
+          echo "SUBMODULE_LIST:"
+          echo "${SUBMODULE_LIST}" | jq "."
+
+  matrix:
+    needs: get-matrix
+    strategy:
+      matrix: 
+        SUBMODULE_DIR: ${{ fromJSON(needs.get-matrix.outputs.SUBMODULE_LIST) }}
+      fail-fast: false
     uses: ./.github/workflows/use-update-submodules.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
-      CALLER_JOB: 'single'
+      SUBMODULE: ${{ matrix.SUBMODULE_DIR }}
+      CALLER_JOB: 'matrix (${{ matrix.SUBMODULE_DIR }})'
       ENABLE_JOB: true
-
-# jobs:
-#   get-submodules:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       SUBMODULE_LIST: ${{ steps.get-submodules.outputs.SUBMODULE_LIST }}
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-#         with:
-#           submodules: false
-
-#       - name: Get submodule directories
-#         id: get-submodules
-#         shell: bash
-#         run: |
-#           SUBMODULE_PATHS=$(git config --file .gitmodules --get-regexp path | awk '{print $2}')
-#           SUBMODULE_LIST=$(echo "${SUBMODULE_PATHS}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
-#           echo "SUBMODULE_LIST=${SUBMODULE_LIST}" >> ${GITHUB_OUTPUT}
-#           echo "SUBMODULE_LIST:"
-#           echo "${SUBMODULE_LIST}" | jq "."
-
-#   update-submodules:
-#     needs: get-submodules
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix: 
-#         SUBMODULE_DIR: ${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}
-#       fail-fast: false
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-#         with:
-#           submodules: false
-
-#       - name: Print submodule directory
-#         run: |
-#           echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
-
-#       - name: Get Old Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
-#         id: gocs
-#         shell: bash
-#         run: |
-#           OLD_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
-#           echo "OLD_COMMIT=${OLD_COMMIT}" >> ${GITHUB_OUTPUT}
-#           echo "OLD_COMMIT: ${OLD_COMMIT}"
-
-#       - name: Update submodule from remote
-#         shell: bash
-#         run: |
-#           git submodule update --init --remote ${{ matrix.SUBMODULE_DIR }}
-
-#       - name: Get New Commit of the Submodule '${{ matrix.SUBMODULE_DIR }}'
-#         id: gncs
-#         shell: bash
-#         run: |
-#           NEW_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
-#           echo "NEW_COMMIT=${NEW_COMMIT}" >> ${GITHUB_OUTPUT}
-#           echo "NEW_COMMIT: ${NEW_COMMIT}"
-
-#       - name: Get Repository Url of the Submodule '${{ matrix.SUBMODULE_DIR }}'
-#         id: grus
-#         shell: bash
-#         run: |
-#           REPO_URL=$(git config --get submodule.${{ matrix.SUBMODULE_DIR }}.url)
-#           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
-#           echo "REPO_URL: ${REPO_URL}"
-
-#       - name: Compare Commits of Old and New
-#         id: ccon
-#         run: |
-#           if [ "${{ steps.gocs.outputs.OLD_COMMIT }}" != "${{ steps.gncs.outputs.NEW_COMMIT }}" ]; then
-#             COMMITS_ARE_DIFFERENT=true
-#           else
-#             COMMITS_ARE_DIFFERENT=false
-#           fi
-#           echo "COMMITS_ARE_DIFFERENT=${COMMITS_ARE_DIFFERENT}" >> ${GITHUB_OUTPUT}
-#           echo "COMMITS_ARE_DIFFERENT: ${COMMITS_ARE_DIFFERENT}"
-
-#       - name: Add and Commit Changes
-#         id: acc
-#         if: ${{ steps.ccon.outputs.COMMITS_ARE_DIFFERENT == 'true' }}
-#         uses: EndBug/add-and-commit@v9
-#         with:
-#           cwd: '.'
-#           add: '.'
-#           pull: '--rebase --autostash'
-#           author_name: docs-l10n[bot]
-#           author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
-#           # author_name: ltdrobot
-#           # author_email: 178366084+ltdrobot@users.noreply.github.com
-#           message: |
-#             feat: update '${{ matrix.SUBMODULE_DIR }}' submodule
-
-#             Updated '${{ matrix.SUBMODULE_DIR }}' submodule to include the latest changes.
-
-#             - Repository: ${{ steps.grus.outputs.REPO_URL }}
-#             - Old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
-#             - New commit: ${{ steps.gncs.outputs.NEW_COMMIT }}
-
-#       - name: Check Outputs of the Commit
-#         if: steps.acc.outputs.committed == 'true'
-#         shell: bash
-#         run: |
-#           echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
-#           echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"
