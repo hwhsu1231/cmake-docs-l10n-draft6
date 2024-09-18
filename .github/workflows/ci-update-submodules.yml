@@ -32,6 +32,7 @@ jobs:
           echo "${SUBMODULE_LIST}" | jq "."
 
   update-submodules:
+    needs: get-submodules
     runs-on: ubuntu-latest
     # strategy:
     #   matrix: 
