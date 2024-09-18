@@ -12,6 +12,10 @@ inputs:
   versions-file:
     required: true
     description: xxx
+  version-group:
+    required: false
+    description: xxx
+    default: ''
   workspace:
     required: false
     description: xxx
@@ -38,6 +42,7 @@ runs:
   using: composite
   steps:
     - name: Get the Version Group from versions.json
+      if: ${{ inputs.version-group == '' }}
       id: gvgv
       uses: ./.github/actions/get-version-group-from-versions
       with:
@@ -50,7 +55,7 @@ runs:
       shell: bash
       run: |
         VERSION="${{ inputs.version }}"
-        VERSION_GROUP="${{ steps.gvgv.outputs.VERSION_GROUP }}"
+        VERSION_GROUP="${{ steps.gvgv.outputs.VERSION_GROUP || inputs.version-group }}"
         VERSIONS_FILE=$(echo "${{ inputs.versions-file }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
         WORKSPACE=$(echo "${{ inputs.workspace }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
 
