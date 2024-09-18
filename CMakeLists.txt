@@ -39,8 +39,11 @@ set(REMOVE_REDUNDANT ON
 set(GIT_REMOTE_URL_OF_L10N "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
     CACHE STRING "Remote URL of the l10n Git repository.")
 
-set(GIT_REMOTE_URL_OF_DOCS "https://gitlab.kitware.com/cmake/cmake.git"
+set(GIT_REMOTE_URL_OF_DOCS "https://github.com/Kitware/CMake.git"
     CACHE STRING "Remote URL of the docs Git repository.")
+    # Possible values are:
+    # - https://github.com/Kitware/CMake.git
+    # - https://gitlab.kitware.com/cmake/cmake.git
 
 set(BASEURL_HREF "https://hwhsu1231.github.io/cmake-docs-l10n-draft6"
     CACHE STRING "Base URL of the deployed documentation.")
