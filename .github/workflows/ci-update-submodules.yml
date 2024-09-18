@@ -1,0 +1,48 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: ci-update-submodules
+
+on:
+  schedule:
+    - cron: '0 0 1,15 * *'  # Runs at 08:00 on day 1 and 15 of the month in UTC zone
+  workflow_dispatch:
+
+jobs:
+  get-submodules:
+    runs-on: ubuntu-latest
+    outputs:
+      SUBMODULE_LIST: ${{ steps.get-submodules.outputs.SUBMODULE_LIST }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: false
+
+      - name: Get submodule directories
+        id: get-submodules
+        shell: bash
+        run: |
+          # SUBMODULE_PATHS=$(git config --file .gitmodules --name-only --get-regexp path | cut -d. -f2-)
+          # SUBMODULE_LIST=$(echo "${SUBMODULE_PATHS}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          SUBMODULE_PATHS=$(git config --file .gitmodules --get-regexp path | awk '{print $2}')
+          SUBMODULE_LIST=$(echo "${SUBMODULE_PATHS}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "SUBMODULE_LIST=${SUBMODULE_LIST}" >> $GITHUB_OUTPUT
+          echo "Submodule List:"
+          echo "${SUBMODULE_LIST}" | jq "."
+
+  update-submodules:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        SUBMODULE_DIR: ${{ fromJSON(needs.get-submodules.outputs.SUBMODULE_LIST) }}
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: false
+
+      - name: Print submodule directory
+        run: |
+          echo "Processing submodule directory: ${{ matrix.SUBMODULE_DIR }}"
