@@ -84,6 +84,7 @@ jobs:
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
+          version_group: ''
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ./.github/actions/cmake-configure-preset
@@ -140,7 +141,6 @@ jobs:
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
-          workspace: ${{ github.workspace }}
 
       - name: Set the Label List for the Pull Request
         id: sllpr
@@ -158,8 +158,8 @@ jobs:
               break
             fi
           done
-          echo "PULL_REQUEST_LABEL_LIST: ${PULL_REQUEST_LABEL_LIST}"
           echo "PULL_REQUEST_LABEL_LIST=${PULL_REQUEST_LABEL_LIST}" >> ${GITHUB_OUTPUT}
+          echo "PULL_REQUEST_LABEL_LIST: ${PULL_REQUEST_LABEL_LIST}"
 
       - name: Get the Current Job's ID
         id: gcji
