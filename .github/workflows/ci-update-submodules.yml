@@ -49,8 +49,9 @@ jobs:
       - name: Set old commit hash
         shell: bash
         run: |
-          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
-          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g'
+          OLD_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
+          echo "OLD_COMMIT=${OLD_COMMIT}" >> ${GITHUB_OUTPUT}
+          echo "OLD_COMMIT: ${OLD_COMMIT}"
 
       - name: Update submodule from remote
         shell: bash
@@ -60,12 +61,9 @@ jobs:
       - name: Set new commit hash 1
         shell: bash
         run: |
-          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}'
-          git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g'
-
-      - name: Set new commit hash 2
-        run: |
-          git rev-parse HEAD:cmake/modules
+          NEW_COMMIT=$(git submodule status -- ${{ matrix.SUBMODULE_DIR }} | awk '{print $1}' | sed 's/[^a-f0-9]//g')
+          echo "NEW_COMMIT=${NEW_COMMIT}" >> ${GITHUB_OUTPUT}
+          echo "NEW_COMMIT: ${NEW_COMMIT}"
 
       # - name: Add and Commit Changes
       #   id: acc
