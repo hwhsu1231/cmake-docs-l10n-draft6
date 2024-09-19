@@ -89,7 +89,6 @@ jobs:
     needs: get-matrix
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
       cancel-in-progress: true
@@ -100,6 +99,7 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
@@ -107,15 +107,16 @@ jobs:
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       CREATE_PR: true
+    secrets: inherit
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
@@ -123,3 +124,4 @@ jobs:
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       CREATE_PR: true
+    secrets: inherit

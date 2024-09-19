@@ -6,6 +6,9 @@ name: use-sphinx-update-pot
 on:
   workflow_call:
     inputs:
+      ACTOR:
+        type: string
+        required: true
       RUNNER:
         type: string
         required: true
@@ -27,6 +30,9 @@ on:
       CREATE_PR:
         type: boolean
         required: true
+    secrets:
+      GH_PERSONAL_TOKEN:
+        required: true
 
 jobs:
   sphinx-update-pot:
@@ -44,6 +50,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
@@ -52,8 +59,6 @@ jobs:
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.CREATE_PR = ${{ inputs.CREATE_PR }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
           echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
 
       # - name: Get the GitHub App's Token
@@ -186,14 +191,12 @@ jobs:
         if: inputs.CREATE_PR
         uses: EndBug/add-and-commit@v9
         with:
-          cwd: ./l10n
-          add: ./${{ inputs.VERSION }}
+          cwd: './l10n'
+          add: './${{ inputs.VERSION }}'
           push: 'origin sphinx/pot/${{ inputs.VERSION }} --set-upstream --force'
           new_branch: sphinx/pot/${{ inputs.VERSION }}
-          # author_name: docs-l10n[bot]
-          # author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
-          author_name: docs-l10n[bot]
-          author_email: docs-l10n[bot]@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR }}
+          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
           message: |
             pot(${{ inputs.VERSION }}): Update pot from Sphinx
 
@@ -217,7 +220,7 @@ jobs:
           target_branch: l10n
           label: ${{ steps.sllpr.outputs.PULL_REQUEST_LABEL_LIST }}
           title: |
-            pot(${{ inputs.VERSION }}): Update pot from Sphinx
+            pot(${{ inputs.VERSION }}): update pot from sphinx
           body: |
             Created by GitHub Workflows:
 
