@@ -75,7 +75,6 @@ jobs:
     needs: get-matrix
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}
       cancel-in-progress: true
@@ -85,22 +84,25 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:
+      ACTOR: 'docs-l10n[bot]'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
       ENABLE_JOB: true
+    secrets: inherit
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:
+      ACTOR: 'docs-l10n[bot]'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+    secrets: inherit
