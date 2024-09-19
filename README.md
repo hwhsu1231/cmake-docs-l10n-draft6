@@ -438,31 +438,3 @@ Alternatively, you can sponsor the author through the following platforms and e-
     </tr>
   </tbody>
 </table>
-
-<h2 id="contributors-list"><a href="#table-of-contents">
-Contributors List
-</a></h2>
-
-<h3 id="code-contributors"><a href="#table-of-contents">
-Code Contributors
-</a></h3>
-
-<img alt="GitHub Contributors SVG" src="https://contrib.nn.ci/api?repo=hwhsu1231/cmake-docs-l10n-draft6&no_bot=true">
-
-<h3 id="translation-contributors"><a href="#table-of-contents">
-Translation Contributors
-</a></h3>
-
-See <a href="./docs/CROWDIN_CONTRIBUTORS.md">CROWDIN_CONTRIBUTORS</a>.
-
-<h3 id="financial-contributors"><a href="#table-of-contents">
-Financial Contributors
-</a></h3>
-
-TODO: Provided by <a href="https://github.com/antfu/sponsorkit">sponsorkit</a>.
-
-<h2 id="acknowledgements"><a href="#table-of-contents">
-Acknowledgements
-</a></h2>
-
-See <a href="./docs/ACKNOWLEDGEMENTS.md">ACKNOWLEDGEMENTS</a>.
