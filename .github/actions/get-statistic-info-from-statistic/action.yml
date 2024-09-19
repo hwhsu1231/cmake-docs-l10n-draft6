@@ -37,4 +37,5 @@ runs:
         echo "$(<${STATISTIC_TXT_PATH})"    >> ${GITHUB_OUTPUT}
         echo "${DELIMITER}"                 >> ${GITHUB_OUTPUT}
 
-        echo "STATISTIC_INFO=${STATISTIC_INFO}" >> ${GITHUB_OUTPUT}
+        echo "STATISTIC_INFO:"
+        echo "$(<${STATISTIC_TXT_PATH})"
