@@ -6,6 +6,9 @@ name: use-update-submodules
 on:
   workflow_call:
     inputs:
+      ACTOR:
+        type: string
+        required: true
       RUNNER:
         type: string
         required: true
@@ -20,6 +23,9 @@ on:
         required: true
       ENABLE_JOB:
         type: boolean
+        required: true
+    secrets:
+      GH_PERSONAL_TOKEN:
         required: true
 
 jobs:
@@ -38,6 +44,7 @@ jobs:
           echo "github.event_name = ${{ github.event_name }}"
           echo "github.run_id = ${{ github.run_id }}"
           echo "[Inputs]"
+          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.SUBMODULE = ${{ inputs.SUBMODULE }}"
@@ -86,7 +93,7 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ steps.ggat.outputs.token }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }} (${{ inputs.SUBMODULE }})'
           per_page: 100
 
@@ -97,8 +104,8 @@ jobs:
           cwd: '.'
           add: '.'
           pull: '--rebase --autostash'
-          author_name: docs-l10n[bot]
-          author_email: docs-l10n[bot]@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR }}
+          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
           message: |
             feat: update submodule '${{ inputs.SUBMODULE }}'
 

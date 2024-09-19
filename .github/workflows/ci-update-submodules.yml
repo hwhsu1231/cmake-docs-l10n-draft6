@@ -33,7 +33,6 @@ jobs:
 
   matrix:
     needs: get-matrix
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.SUBMODULE }}
       cancel-in-progress: true
@@ -43,8 +42,10 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-update-submodules.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       SUBMODULE: ${{ matrix.SUBMODULE }}
       CALLER_JOB: 'matrix (${{ matrix.SUBMODULE }})'
       ENABLE_JOB: true
+    secrets: inherit
