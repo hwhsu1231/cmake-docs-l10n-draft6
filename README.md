@@ -166,4 +166,5 @@ GitHub Worflows:
       <td><strong>0 8 1,15 * *</strong></td>
       <td>Update pot from Sphinx.</td>
     </tr>
+  </tbody>
 </table>
