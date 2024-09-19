@@ -198,7 +198,7 @@ jobs:
           author_name: ${{ inputs.ACTOR }}
           author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
           message: |
-            pot(${{ inputs.VERSION }}): Update pot from Sphinx
+            pot(${{ inputs.VERSION }}): update pot from sphinx
 
             Before: ${{ steps.pot-before.outputs.VERSION_REF }}
             After: ${{ steps.pot-after.outputs.VERSION_REF }}

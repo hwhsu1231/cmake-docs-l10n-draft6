@@ -27,15 +27,16 @@ jobs:
     if: ( github.event_name == 'push' ) ||
         ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-document.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: 'repo'
       LANGUAGE: 'all'
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+    secrets: inherit

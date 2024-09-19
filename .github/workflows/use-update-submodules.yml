@@ -97,6 +97,18 @@ jobs:
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
           per_page: 100
 
+      - name: Check Outputs of the Current Job's ID
+        shell: bash
+        run: |
+          echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
+          echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
+
+      - name: Set up mutex for 'source' branch
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: mutex/source
+          repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
+
       - name: Add and Commit Changes
         id: acc
         uses: EndBug/add-and-commit@v9

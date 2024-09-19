@@ -128,7 +128,7 @@ jobs:
       - name: Set up mutex for 'l10n' branch
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
-          branch: mutex/submodule
+          branch: mutex/l10n
           repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
           # Otherwise, the error message will show up:
           #   [8957344013-1714902604-928] Enqueuing to branch mutex/source, file mutex_queue

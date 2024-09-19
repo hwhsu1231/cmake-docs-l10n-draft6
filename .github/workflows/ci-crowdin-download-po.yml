@@ -97,7 +97,6 @@ jobs:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
     needs: get-matrix
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}
       cancel-in-progress: true
@@ -108,6 +107,7 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-crowdin-download-po.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
@@ -115,15 +115,16 @@ jobs:
       MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE || 'COMPARE' }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
+    secrets: inherit
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-download-po.yml
     with:
+      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
@@ -131,3 +132,4 @@ jobs:
       MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+    secrets: inherit

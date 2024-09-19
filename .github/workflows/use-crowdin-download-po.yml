@@ -27,6 +27,11 @@ on:
       ENABLE_JOB:
         type: boolean
         required: true
+    secrets:
+      GH_PERSONAL_TOKEN:
+        required: true
+      CROWDIN_PERSONAL_TOKEN:
+        required: true
 
 jobs:
   crowdin-download-po:
@@ -52,29 +57,16 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
           echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
-
-      - name: Get the GitHub App's Token
-        id: ggat
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.CHECKOUT }}
-          token: ${{ steps.ggat.outputs.token }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           submodules: true
           fetch-depth: 0
-
-      # - name: Set up Environment Variables
-      #   shell: bash
-      #   run: |
-      #     echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       - name: Get Other Caches from versions.json
         id: gocv
@@ -143,7 +135,7 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ steps.ggat.outputs.token }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
           per_page: 100
 
@@ -151,7 +143,7 @@ jobs:
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
           branch: mutex/l10n
-          repo-token: ${{ steps.ggat.outputs.token }}
+          repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
 
       - name: Add and Commit Changes
         id: acc
@@ -161,13 +153,14 @@ jobs:
           add: './${{ inputs.VERSION }}'
           pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
           author_name: docs-l10n[bot]
-          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
+          author_email: docs-l10n[bot]@users.noreply.github.com
           message: |
-            tr(${{ inputs.VERSION }}): Download ${{ inputs.LANGUAGE }} Translations from Crowdin
+            tr(${{ inputs.VERSION }}): download ${{ inputs.LANGUAGE }} translations from crowdin
 
             ${{ steps.gtpp.outputs.CROWDIN_STATUS_PROGRESS }}
 
             Created by GitHub Workflows:
+
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
             - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
@@ -176,5 +169,5 @@ jobs:
         if: steps.acc.outputs.committed == 'true'
         shell: bash
         run: |
-          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"
           echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
+          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"

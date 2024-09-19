@@ -137,7 +137,7 @@ jobs:
           author_name: ${{ inputs.ACTOR }}
           author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
           message: |
-            chore(${{ inputs.VERSION }}): Update Statistic Information
+            chore(${{ inputs.VERSION }}): update statistic information
 
             ${{ steps.gsi.outputs.STATISTIC_INFO }}
 

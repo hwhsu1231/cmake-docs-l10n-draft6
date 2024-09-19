@@ -6,6 +6,9 @@ name: use-crowdin-upload-pot
 on:
   workflow_call:
     inputs:
+      ACTOR:
+        type: string
+        required: true
       RUNNER:
         type: string
         required: true
@@ -17,6 +20,9 @@ on:
         required: true
       ENABLE_JOB:
         type: boolean
+        required: true
+    secrets:
+      CROWDIN_PERSONAL_TOKEN:
         required: true
 
 jobs:
@@ -35,13 +41,12 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
           echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'

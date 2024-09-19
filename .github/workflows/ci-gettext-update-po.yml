@@ -34,6 +34,13 @@ on:
         required: true
         type: string
         default: 'all'
+      VERSION_GROUP:
+        description: 'VERSION_GROUP input (for matrix type)'
+        required: true
+        type: choice
+        default: 'include'
+        options:
+          - 'v3'
       MODE_OF_UPDATE:
         description: 'MODE_OF_UPDATE input'
         required: true
@@ -43,13 +50,6 @@ on:
           - 'COMPARE'
           - 'ALWAYS'
           - 'NEVER'
-      VERSION_GROUP:
-        description: 'VERSION_GROUP input (for matrix type)'
-        required: true
-        type: choice
-        default: 'include'
-        options:
-          - 'v3'
 
 jobs:
   pr-merged:
