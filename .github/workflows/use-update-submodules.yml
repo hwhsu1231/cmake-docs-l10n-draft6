@@ -25,7 +25,7 @@ on:
         type: boolean
         required: true
     secrets:
-      GH_PERSONAL_TOKEN:
+      ACTOR_GITHUB_TOKEN:
         required: true
 
 jobs:
@@ -51,13 +51,13 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
+          echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.CHECKOUT }}
-          token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           submodules: false
 
       - name: Get Old Commit of the Submodule '${{ inputs.SUBMODULE }}'
@@ -93,7 +93,7 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
           per_page: 100
 
@@ -107,7 +107,7 @@ jobs:
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
         with:
           branch: mutex/source
-          repo-token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          repo-token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
       - name: Add and Commit Changes
         id: acc

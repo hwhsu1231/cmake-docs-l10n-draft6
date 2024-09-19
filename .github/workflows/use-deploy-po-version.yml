@@ -25,7 +25,7 @@ on:
         type: boolean
         required: true
     secrets:
-      GH_PERSONAL_TOKEN:
+      ACTOR_GITHUB_TOKEN:
         required: true
 
 jobs:
@@ -52,13 +52,13 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
+          echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.CHECKOUT }}
-          token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           submodules: true
 
       - name: Install CMake
@@ -86,7 +86,7 @@ jobs:
       - name: Deploy to 'po/${{ inputs.VERSION }}' branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           branch: 'po/${{ inputs.VERSION }}'
           folder: './l10n/${{ inputs.VERSION }}/locale'
           target-folder: '.'
