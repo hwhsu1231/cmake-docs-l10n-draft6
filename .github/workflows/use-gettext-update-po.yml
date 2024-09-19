@@ -6,6 +6,9 @@ name: use-gettext-update-po
 on:
   workflow_call:
     inputs:
+      ACTOR:
+        type: string
+        required: true
       RUNNER:
         type: string
         required: true
@@ -27,6 +30,9 @@ on:
       ENABLE_JOB:
         type: boolean
         required: true
+    secrets:
+      GH_PERSONAL_TOKEN:
+        required: true
 
 jobs:
   gettext-update-po:
@@ -44,6 +50,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
+          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
@@ -52,17 +59,7 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
           echo "secrets.GH_PERSONAL_TOKEN = ${{ secrets.GH_PERSONAL_TOKEN }}"
-
-      # # generate ${{ steps.ggat.outputs.token }}
-      # - name: Get the GitHub App's Token
-      #   id: ggat
-      #   uses: tibdex/github-app-token@v2
-      #   with:
-      #     app_id: ${{ secrets.APP_ID }}
-      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ inputs.CHECKOUT }}'
         uses: actions/checkout@v4
@@ -146,8 +143,8 @@ jobs:
           cwd: './l10n'
           add: './${{ inputs.VERSION }}'
           pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
-          author_name: docs-l10n[bot]
-          author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR }}
+          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
           message: |
             po(${{ inputs.VERSION }}): Update po from Gettext
 
@@ -155,6 +152,7 @@ jobs:
             After: ${{ steps.po-after.outputs.VERSION_REF }}
 
             Created by GitHub Workflows:
+
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
             - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
@@ -163,5 +161,5 @@ jobs:
         if: steps.acc.outputs.committed == 'true'
         shell: bash
         run: |
-          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"
           echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
+          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"
