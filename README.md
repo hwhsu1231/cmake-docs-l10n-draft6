@@ -71,10 +71,10 @@ Crowdin Project: https://org-test.crowdin.com/cmake-docs
 Git Repository:
 
 - GitHub (main): https://github.com/hwhsu1231/cmake-docs-l10n
-- GitLab (mirror): https://gitlab.com/hwhsu1231/cmake-docs-l10n
-- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
 - GitCode (mirror): https://gitcode.com/hwhsu1231/cmake-docs-l10n
 - GitFlic (mirror): https://gitflic.ru/project/hwhsu1231/cmake-docs-l10n
+- GitLab (mirror): https://gitlab.com/hwhsu1231/cmake-docs-l10n
+- Gitee (mirror): https://gitee.com/hwhsu1231/cmake-docs-l10n
 - Gitea (mirror): https://gitea.com/hwhsu1231/cmake-docs-l10n
 - Codeberg (mirror): https://codeberg.org/hwhsu1231/cmake-docs-l10n
 
@@ -447,7 +447,7 @@ Contributors List
 Code Contributors
 </a></h3>
 
-<img alt="GitHub Contributors SVG" src="https://contrib.nn.ci/api?repo=hwhsu1231/cmake-docs-l10n-draft2&no_bot=true">
+<img alt="GitHub Contributors SVG" src="https://contrib.nn.ci/api?repo=hwhsu1231/cmake-docs-l10n-draft6&no_bot=true">
 
 <h3 id="translation-contributors"><a href="#table-of-contents">
 Translation Contributors
@@ -466,5 +466,3 @@ Acknowledgements
 </a></h2>
 
 See <a href="./docs/ACKNOWLEDGEMENTS.md">ACKNOWLEDGEMENTS</a>.
-
-test1
