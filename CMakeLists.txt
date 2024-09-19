@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 project(cmake-docs-l10n NONE)
 
 #[================[
@@ -57,27 +57,23 @@ set(VERSION_OF_PYTHON "[default]"
 set(VERSION_OF_SPHINX "[default]"
     CACHE STRING "Sphinx version to install.")
 
-set(CMAKE_JOB_NUMBER "1"
-    CACHE STRING "")
-    # See https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j for details.
-
 set(SPHINX_BUILDER "html"
     CACHE STRING "Builder for the Sphinx documentation system.")
     # Possible values are "html".
     # See https://www.sphinx-doc.org/en/master/usage/builders/index.html for details.
 
-set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
-    CACHE STRING "Locale setting for the console.")
+set(SPHINX_JOB_NUMBER "1"
+    CACHE STRING "")
+    # Possible values are "auto", "1", "2",...etc.
+    # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-j for details.
 
 set(SPHINX_VERBOSE_LEVEL "1"
     CACHE STRING "")
     # Possible values are "0", "1", "2", and "3".
     # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-v for details.
 
-set(SPHINX_JOB_NUMBER "1"
-    CACHE STRING "")
-    # Possible values are "auto", "1", "2",...etc.
-    # See https://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-j for details.
+set(SPHINX_CONSOLE_LOCALE "en_US.UTF-8"
+    CACHE STRING "Locale setting for the console.")
 
 set(GETTEXT_WRAP_WIDTH 79
     CACHE STRING "Gettext wrap width for .pot/.po files.")
