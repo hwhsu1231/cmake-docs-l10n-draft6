@@ -15,12 +15,12 @@ on:
   schedule:
     - cron: '0 0 1,15 * *'  # Runs at 00:00 on day 1 and 15 of the month in UTC zone
   workflow_dispatch:
-    # inputs:
-    #   LANGUAGE:
-    #     description: 'LANGUAGE input'
-    #     required: true
-    #     type: string
-    #     default: 'all'
+    inputs:
+      LANGUAGE:
+        description: 'LANGUAGE input'
+        required: true
+        type: string
+        default: 'all'
 
 jobs:
   single:
@@ -36,7 +36,7 @@ jobs:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: 'repo'
-      LANGUAGE: 'all'
+      LANGUAGE: ${{ inputs.LANGUAGE || 'all' }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
     secrets: inherit
