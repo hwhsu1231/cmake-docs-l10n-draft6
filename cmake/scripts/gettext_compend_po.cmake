@@ -68,7 +68,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         "The command failed with fatal errors.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stdout:\n\n${OUT_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     message("")
@@ -108,7 +108,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${RES_VAR}\n\n"
             "    stdout:\n\n${OUT_VAR}\n\n"
-            "    stderr:\n\n${ERR_VAR}\n")
+            "    stderr:\n\n${ERR_VAR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endforeach()

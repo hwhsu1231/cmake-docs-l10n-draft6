@@ -118,11 +118,11 @@ restore_cmake_message_indent()
 message(STATUS "Copying the configuration file 'conf.py'...")
 file(COPY_FILE 
     "${PROJ_OUT_REPO_SPHINX_DIR}/build/conf.py"
-    "${PROJ_OUT_REPO_DOCS_SOURCE_DIR}/conf.py")
+    "${PROJ_OUT_REPO_DOCS_CONFIG_DIR}/conf.py")
 remove_cmake_message_indent()
 message("")
 message("From: ${PROJ_OUT_REPO_SPHINX_DIR}/build/conf.py")
-message("To:   ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}/conf.py")
+message("To:   ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}/conf.py")
 message("")
 restore_cmake_message_indent()
 
@@ -151,8 +151,10 @@ endif()
 message(STATUS "Running 'sphinx-build' command with 'gettext' builder to generate .pot files...")
 remove_cmake_message_indent()
 message("")
+set(ENV_LANG                "${SPHINX_CONSOLE_LOCALE}")
+set(ENV_KEY_VALUE_LIST      LANG=${ENV_LANG})
 execute_process(
-    COMMAND ${CMAKE_COMMAND} -E env LANG=${SPHINX_CONSOLE_LOCALE}
+    COMMAND ${CMAKE_COMMAND} -E env ${ENV_KEY_VALUE_LIST}
             ${Sphinx_BUILD_EXECUTABLE}
             -b gettext
             -D version=${VERSION}                               # Specify 'Project-Id-Version' in .pot files.
@@ -173,14 +175,14 @@ if(RES_VAR EQUAL 0)
         string(APPEND WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
     string(APPEND FAILURE_REASON
     "The command failed with fatal errors.\n\n"
     "    result:\n\n${RES_VAR}\n\n"
-    "    stderr:\n\n${ERR_VAR}\n")
+    "    stderr:\n\n${ERR_VAR}")
     message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 message("")
@@ -200,7 +202,7 @@ else()
     "The command failed with fatal errors.\n\n"
     "    result:\n\n${RES_VAR}\n\n"
     "    stdout:\n\n${OUT_VAR}\n\n"
-    "    stderr:\n\n${ERR_VAR}\n")
+    "    stderr:\n\n${ERR_VAR}")
     message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 set(DEFAULT_SPHINX_POT_PATH "${SPHINX_LIB_DIR}/locale/sphinx.pot")
@@ -236,7 +238,7 @@ if(EXISTS "${PACKAGE_SPHINX_POT_PATH}")
         "The command failed with fatal errors.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stdout:\n\n${OUT_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
 else()
@@ -262,7 +264,7 @@ else()
         "The command failed with fatal errors.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stdout:\n\n${OUT_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
 endif()
@@ -314,7 +316,7 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${RES_VAR}\n\n"
             "    stdout:\n\n${OUT_VAR}\n\n"
-            "    stderr:\n\n${ERR_VAR}\n")
+            "    stderr:\n\n${ERR_VAR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     else()
@@ -339,7 +341,7 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${RES_VAR}\n\n"
             "    stdout:\n\n${OUT_VAR}\n\n"
-            "    stderr:\n\n${ERR_VAR}\n")
+            "    stderr:\n\n${ERR_VAR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endif()

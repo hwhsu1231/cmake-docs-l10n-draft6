@@ -36,6 +36,9 @@ file(READ "${LANGUAGES_JSON_PATH}" LANGUAGES_JSON_CNT)
 if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
+
+
+message(STATUS "Creating ReadTheDocs symlinks for language directories...")
 remove_cmake_message_indent()
 message("")
 foreach(_LANGUAGE ${LANGUAGE_LIST})
@@ -43,8 +46,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         IN_JSON_OBJECT    "${LANGUAGES_JSON_CNT}"
         IN_DOT_NOTATION   ".${_LANGUAGE}.readthedocs"
         OUT_JSON_VALUE    _LANGUAGE_READTHEDOCS)
-    if(NOT "${_LANGUAGE}" STREQUAL "${_LANGUAGE_READTHEDOCS}")
-        message("Creating symlink '${_LANGUAGE_READTHEDOCS}' for directory '${_LANGUAGE}'...")
+    if("${_LANGUAGE}" STREQUAL "${_LANGUAGE_READTHEDOCS}")
+        message("No need to create ReadTheDocs symlink for language directory '${_LANGUAGE}'.")
+    else()
         if (NOT EXISTS "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
             message(FATAL_ERROR "'${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}' doesn't exist.")
         endif()
@@ -58,12 +62,13 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
         if(RES_VAR EQUAL 0)
+            message("Created ReadTheDocs symlink '${_LANGUAGE_READTHEDOCS}' for language directory '${_LANGUAGE}'.")
         else()
             string(APPEND FAILURE_REASON
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${RES_VAR}\n\n"
             "    stdout:\n\n${OUT_VAR}\n\n"
-            "    stderr:\n\n${ERR_VAR}\n")
+            "    stderr:\n\n${ERR_VAR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endif()

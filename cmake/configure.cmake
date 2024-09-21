@@ -10,9 +10,9 @@ set(VERSION_LIST
 foreach(_VERSION ${VERSION_LIST})
     message(STATUS "Configuring with '${_VERSION}' version...")
     execute_process(
-        COMMAND "${CMAKE_COMMAND}" 
-            --preset all
-            -D VERSION=${_VERSION}
+        COMMAND ${CMAKE_COMMAND}
+                --preset all
+                -D VERSION=${_VERSION}
         WORKING_DIRECTORY ${WORKING_DIRECTORY}
         OUTPUT_QUIET
         ERROR_QUIET)

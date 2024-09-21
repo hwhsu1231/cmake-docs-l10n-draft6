@@ -15,7 +15,7 @@ include(JsonUtils)
 include(LogUtils)
 
 
-message(STATUS "Running 'git clone' command to clone the upstream repository...")
+message(STATUS "Running 'git clone' command to clone the 'docs' repository...")
 if(NOT EXISTS "${PROJ_OUT_REPO_DIR}/.git")
     file(MAKE_DIRECTORY "${PROJ_OUT_REPO_DIR}")
     remove_cmake_message_indent()

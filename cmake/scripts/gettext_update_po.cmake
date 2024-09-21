@@ -30,9 +30,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         IN_DOT_NOTATION             ".po.${_LANGUAGE}"
         OUT_JSON_VALUE              CURRENT_PO_LANGUAGE_OBJECT)
     if(VERSION_TYPE STREQUAL "branch")
-        set(DOT_NOTATION ".commit.hash")
+        set(DOT_NOTATION            ".commit.hash")
     else()
-        set(DOT_NOTATION ".tag")
+        set(DOT_NOTATION            ".tag")
     endif()
     get_json_value_by_dot_notation(
         IN_JSON_OBJECT              "${CURRENT_POT_OBJECT}"
@@ -126,7 +126,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 "The command failed with fatal errors.\n\n"
                 "    result:\n\n${RES_VAR}\n\n"
                 "    stdout:\n\n${OUT_VAR}\n\n"
-                "    stderr:\n\n${ERR_VAR}\n")
+                "    stderr:\n\n${ERR_VAR}")
                 message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         else()
@@ -153,7 +153,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                 "The command failed with fatal errors.\n\n"
                 "    result:\n\n${RES_VAR}\n\n"
                 "    stdout:\n\n${OUT_VAR}\n\n"
-                "    stderr:\n\n${ERR_VAR}\n")
+                "    stderr:\n\n${ERR_VAR}")
                 message(FATAL_ERROR "${FAILURE_REASON}")
             endif()
         endif()

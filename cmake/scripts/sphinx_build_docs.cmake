@@ -69,8 +69,10 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Running 'sphinx-build' command with '${SPHINX_BUILDER}' builder to build documentation for '${_LANGUAGE}' language...")
     remove_cmake_message_indent()
     message("")
+    set(ENV_LANG                "${SPHINX_CONSOLE_LOCALE}")
+    set(ENV_KEY_VALUE_LIST      LANG=${ENV_LANG})
     execute_process(
-        COMMAND ${CMAKE_COMMAND} -E env LANG=${SPHINX_CONSOLE_LOCALE}
+        COMMAND ${CMAKE_COMMAND} -E env ${ENV_KEY_VALUE_LIST}
                 ${Sphinx_BUILD_EXECUTABLE}
                 -b ${SPHINX_BUILDER}
                 -D locale_dirs=${LOCALE_TO_SOURCE_DIR}            # Relative to <sourcedir>.
@@ -94,14 +96,14 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             string(APPEND WARNING_REASON
             "The command succeeded but had some warnings.\n\n"
             "    result:\n\n${RES_VAR}\n\n"
-            "    stderr:\n\n${ERR_VAR}\n")
+            "    stderr:\n\n${ERR_VAR}")
             message("${WARNING_REASON}")
         endif()
     else()
         string(APPEND FAILURE_REASON
         "The command failed with fatal errors.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message(FATAL_ERROR "${FAILURE_REASON}")
     endif()
     message("")
@@ -115,9 +117,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         file(REMOVE         "${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/objects.inv")
         remove_cmake_message_indent()
         message("")
-        message("Removing ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/.doctrees/...")
-        message("Removing ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/.buildinfo...")
-        message("Removing ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/objects.inv...")
+        message("Removed '${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/.doctrees/'.")
+        message("Removed '${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/.buildinfo'.")
+        message("Removed '${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/objects.inv'.")
         message("")
         restore_cmake_message_indent()
     endif()

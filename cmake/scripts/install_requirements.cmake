@@ -83,9 +83,9 @@ else()
 endif()
 remove_cmake_message_indent()
 message("")
-message("latest = ${LATEST_POT_OBJECT}")
-message("pot = ${CURRENT_POT_OBJECT}")
-message("MODE_OF_UPDATE            = ${MODE_OF_UPDATE}")
+message(".latest.pot = ${LATEST_POT_OBJECT}")
+message(".pot = ${CURRENT_POT_OBJECT}")
+message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
 message("SWITCH_REFERENCE       = ${SWITCH_REFERENCE}")
@@ -220,14 +220,14 @@ if(RES_VAR EQUAL 0)
         string(APPEND WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
     string(APPEND FAILURE_REASON
     "The command failed with fatal errors.\n\n"
     "    result:\n\n${RES_VAR}\n\n"
-    "    stderr:\n\n${ERR_VAR}\n")
+    "    stderr:\n\n${ERR_VAR}")
     message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 message("")
@@ -254,14 +254,14 @@ if(RES_VAR EQUAL 0)
         string(APPEND WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
-        "    stderr:\n\n${ERR_VAR}\n")
+        "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
     string(APPEND FAILURE_REASON
     "The command failed with fatal errors.\n\n"
     "    result:\n\n${RES_VAR}\n\n"
-    "    stderr:\n\n${ERR_VAR}\n")
+    "    stderr:\n\n${ERR_VAR}")
     message(FATAL_ERROR "${FAILURE_REASON}")
 endif()
 message("")

@@ -1,5 +1,5 @@
-# Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
-# file LICENSE.txt for details.
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
 
 cmake_minimum_required(VERSION 3.25)
 get_filename_component(SCRIPT_NAME "${CMAKE_CURRENT_LIST_FILE}" NAME_WE)
@@ -59,7 +59,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${TOTAL_MSGID_RES}\n\n"
             "    stdout:\n\n${TOTAL_MSGID_OUT}\n\n"
-            "    stderr:\n\n${TOTAL_MSGID_ERR}\n")
+            "    stderr:\n\n${TOTAL_MSGID_ERR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
@@ -84,7 +84,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${TRANSLATED_MSGID_RES}\n\n"
             "    stdout:\n\n${TRANSLATED_MSGID_OUT}\n\n"
-            "    stderr:\n\n${TRANSLATED_MSGID_ERR}\n")
+            "    stderr:\n\n${TRANSLATED_MSGID_ERR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
         #
@@ -110,7 +110,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             "The command failed with fatal errors.\n\n"
             "    result:\n\n${FUZZY_MSGID_RES}\n\n"
             "    stdout:\n\n${FUZZY_MSGID_OUT}\n\n"
-            "    stderr:\n\n${FUZZY_MSGID_ERR}\n")
+            "    stderr:\n\n${FUZZY_MSGID_ERR}")
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
 
