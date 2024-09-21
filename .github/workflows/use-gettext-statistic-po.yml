@@ -6,9 +6,6 @@ name: use-gettext-statistic-po
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:
         type: string
         required: true
@@ -23,6 +20,12 @@ on:
         required: true
       ENABLE_JOB:
         type: boolean
+        required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
         required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
@@ -44,7 +47,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
@@ -134,8 +137,8 @@ jobs:
           cwd: './l10n'
           add: './${{ inputs.VERSION }}'
           pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
-          author_name: ${{ inputs.ACTOR }}
-          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR_NAME }}
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           message: |
             chore(${{ inputs.VERSION }}): update statistic information
 

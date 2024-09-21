@@ -84,12 +84,13 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
 
   single:
@@ -99,10 +100,11 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-statistic-po.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
