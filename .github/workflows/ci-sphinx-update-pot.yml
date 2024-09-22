@@ -99,7 +99,6 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
@@ -107,6 +106,8 @@ jobs:
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       CREATE_PR: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
 
   single:
@@ -116,7 +117,6 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-sphinx-update-pot.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
@@ -124,4 +124,6 @@ jobs:
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       CREATE_PR: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit

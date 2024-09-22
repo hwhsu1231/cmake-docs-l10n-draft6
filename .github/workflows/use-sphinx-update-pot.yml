@@ -6,9 +6,6 @@ name: use-sphinx-update-pot
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:
         type: string
         required: true
@@ -29,6 +26,12 @@ on:
         required: true
       CREATE_PR:
         type: boolean
+        required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
         required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
@@ -195,8 +198,8 @@ jobs:
           add: './${{ inputs.VERSION }}'
           push: 'origin sphinx/pot/${{ inputs.VERSION }} --set-upstream --force'
           new_branch: sphinx/pot/${{ inputs.VERSION }}
-          author_name: ${{ inputs.ACTOR }}
-          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR_NAME }}
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           message: |
             pot(${{ inputs.VERSION }}): update pot from sphinx
 
