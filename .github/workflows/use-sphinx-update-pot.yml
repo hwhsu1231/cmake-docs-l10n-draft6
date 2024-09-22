@@ -53,7 +53,6 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
@@ -61,6 +60,8 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.CREATE_PR = ${{ inputs.CREATE_PR }}"
+          echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
@@ -77,6 +78,7 @@ jobs:
           ref: ${{ github.ref }}
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           submodules: true
+          fetch-depth: 0
 
       - name: Install CMake
         uses: ./.github/actions/install-cmake
@@ -201,7 +203,7 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           message: |
-            pot(${{ inputs.VERSION }}): update pot from sphinx
+            pot(${{ inputs.VERSION }}): update pot from Sphinx
 
             Before: ${{ steps.pot-before.outputs.VERSION_REF }}
             After: ${{ steps.pot-after.outputs.VERSION_REF }}

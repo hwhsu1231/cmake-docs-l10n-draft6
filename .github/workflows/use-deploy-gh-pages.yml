@@ -6,9 +6,6 @@ name: use-deploy-gh-pages
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:
         type: string
         required: true
@@ -33,6 +30,12 @@ on:
       DEPLOY_HTML:
         type: boolean
         required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
+        required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
         required: true
@@ -53,7 +56,6 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
@@ -62,6 +64,8 @@ jobs:
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.DEPLOY_HTML = ${{ inputs.DEPLOY_HTML }}"
+          echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
@@ -149,6 +153,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+          git-config-name: ${{ inputs.ACTOR_NAME }}
+          git-config-email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           branch: 'gh-pages'
           folder: './out/html'
           target-folder: '.'

@@ -6,9 +6,6 @@ name: use-deploy-po-version
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:
         type: string
         required: true
@@ -23,6 +20,12 @@ on:
         required: true
       ENABLE_JOB:
         type: boolean
+        required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
         required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
@@ -45,12 +48,13 @@ jobs:
           echo "github.event_name = ${{ github.event_name }}"
           echo "github.event.repository.default_branch = ${{ github.event.repository.default_branch }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 

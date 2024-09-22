@@ -36,17 +36,18 @@ jobs:
     if: ( github.event_name == 'repository_dispatch' && 
           github.event.action == 'pr-merged' &&
           github.event.client_payload.CROWDIN == 'true' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.client_payload.VERSION }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-upload-pot.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: 'refs/heads/source'
       VERSION: ${{ github.event.client_payload.VERSION }}
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
+    secrets: inherit
 
   get-matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
@@ -91,11 +92,12 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-crowdin-upload-pot.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
 
   single:
@@ -105,9 +107,10 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-upload-pot.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit

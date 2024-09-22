@@ -6,9 +6,6 @@ name: use-crowdin-document
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:           # required
         type: string
         required: true
@@ -26,6 +23,12 @@ on:
         required: true
       ENABLE_JOB:       # required
         type: boolean
+        required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
         required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
@@ -47,13 +50,14 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
           echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
@@ -157,10 +161,10 @@ jobs:
           cwd: '.'
           add: '.'
           pull: '--rebase --autostash'
-          author_name: ${{ inputs.ACTOR }}
-          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR_NAME }}
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           message: |
-            tr(repo): download document translations from crowdin
+            tr(repo): download document translations from Crowdin
 
             ${{ steps.gtpp.outputs.CROWDIN_STATUS_PROGRESS }}
 

@@ -62,7 +62,6 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: 'refs/heads/source'
       VERSION: ${{ github.event.client_payload.VERSION }}
@@ -70,6 +69,8 @@ jobs:
       MODE_OF_UPDATE: 'ALWAYS'
       CALLER_JOB: 'pr-merged'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
 
   get-matrix:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' )
@@ -115,7 +116,6 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
@@ -123,6 +123,8 @@ jobs:
       MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE || 'COMPARE' }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
 
   single:
@@ -132,7 +134,6 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-gettext-update-po.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
@@ -140,4 +141,6 @@ jobs:
       MODE_OF_UPDATE: ${{ inputs.MODE_OF_UPDATE }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit

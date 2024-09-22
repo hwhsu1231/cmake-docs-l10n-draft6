@@ -89,7 +89,6 @@ jobs:
     needs: get-matrix
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) || 
         ( github.event_name == 'schedule' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
       cancel-in-progress: true
@@ -100,7 +99,6 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-deploy-gh-pages.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
@@ -109,16 +107,17 @@ jobs:
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       DEPLOY_HTML: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
+    secrets: inherit
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
-    secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
       cancel-in-progress: true
     uses: ./.github/workflows/use-deploy-gh-pages.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
@@ -127,3 +126,6 @@ jobs:
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       DEPLOY_HTML: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
+    secrets: inherit

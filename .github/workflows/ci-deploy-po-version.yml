@@ -85,12 +85,13 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-deploy-po-version.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ matrix.VERSION }}
       CALLER_JOB: 'matrix (${{ matrix.VERSION }})'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
 
   single:
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
@@ -100,9 +101,10 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-deploy-po-version.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: ${{ inputs.VERSION }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'

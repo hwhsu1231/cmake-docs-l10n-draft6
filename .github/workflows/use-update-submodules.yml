@@ -6,9 +6,6 @@ name: use-update-submodules
 on:
   workflow_call:
     inputs:
-      ACTOR:
-        type: string
-        required: true
       RUNNER:
         type: string
         required: true
@@ -23,6 +20,12 @@ on:
         required: true
       ENABLE_JOB:
         type: boolean
+        required: true
+      ACTOR_ID:
+        type: string
+        required: true
+      ACTOR_NAME:
+        type: string
         required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
@@ -44,12 +47,13 @@ jobs:
           echo "github.event_name = ${{ github.event_name }}"
           echo "github.run_id = ${{ github.run_id }}"
           echo "[Inputs]"
-          echo "inputs.ACTOR = ${{ inputs.ACTOR }}"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.SUBMODULE = ${{ inputs.SUBMODULE }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
@@ -59,6 +63,7 @@ jobs:
           ref: ${{ inputs.CHECKOUT }}
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           submodules: false
+          fetch-depth: 0
 
       - name: Get Old Commit of the Submodule '${{ inputs.SUBMODULE }}'
         id: gocs
@@ -116,8 +121,8 @@ jobs:
           cwd: '.'
           add: '.'
           pull: '--rebase --autostash'
-          author_name: ${{ inputs.ACTOR }}
-          author_email: ${{ inputs.ACTOR }}@users.noreply.github.com
+          author_name: ${{ inputs.ACTOR_NAME }}
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
           message: |
             feat: update submodule '${{ inputs.SUBMODULE }}'
 

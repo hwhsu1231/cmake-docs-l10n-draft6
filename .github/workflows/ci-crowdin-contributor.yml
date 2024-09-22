@@ -24,22 +24,14 @@ jobs:
           echo "github.ref_name = ${{ github.ref_name }}"
           echo "github.event_name = ${{ github.event_name }}"
           echo "[Secrets]"
-          echo "secrets.APP_ID = ${{ secrets.APP_ID }}"
-          echo "secrets.APP_PRIVATE_KEY = ${{ secrets.APP_PRIVATE_KEY }}"
+          echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
           echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
-
-      - name: Get the GitHub App's Token
-        id: ggat
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-          token: ${{ steps.ggat.outputs.token }}
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Set up Environment Variables
@@ -63,7 +55,7 @@ jobs:
         id: gcji
         uses: Tiryoh/gha-jobid-action@v1
         with:
-          github_token: ${{ steps.ggat.outputs.token }}
+          github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           job_name: '${{ github.job }}'
           per_page: 100
 
@@ -77,7 +69,7 @@ jobs:
           author_name: docs-l10n[bot]
           author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
           message: |
-            docs: Update Crowdin Contributors Table
+            docs: update crowdin contributors table
 
             Created by GitHub Workflows:
             - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml

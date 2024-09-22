@@ -32,11 +32,12 @@ jobs:
       cancel-in-progress: true
     uses: ./.github/workflows/use-crowdin-document.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       VERSION: 'repo'
       LANGUAGE: ${{ inputs.LANGUAGE || 'all' }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
+      ACTOR_ID: '178366084'
+      ACTOR_NAME: 'ltdrobot'
     secrets: inherit
