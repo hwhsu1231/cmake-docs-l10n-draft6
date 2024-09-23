@@ -27,6 +27,9 @@ on:
       ACTOR_NAME:
         type: string
         required: true
+      ACTOR_LOGIN:
+        type: string
+        required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
         required: true
@@ -54,6 +57,7 @@ jobs:
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
+          echo "inputs.ACTOR_LOGIN = ${{ inputs.ACTOR_LOGIN }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
@@ -132,7 +136,7 @@ jobs:
           add: './${{ inputs.VERSION }}'
           pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
           author_name: ${{ inputs.ACTOR_NAME }}
-          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_LOGIN }}@users.noreply.github.com
           message: |
             chore(${{ inputs.VERSION }}): update statistic info from Gettext
 
