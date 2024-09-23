@@ -53,6 +53,10 @@ jobs:
             echo "env.ACTOR_NAME is missing."
             ENVVARS_EXIST=false
           fi
+          if [ -z "${{ env.ACTOR_LOGIN }}" ]; then
+            echo "env.ACTOR_NAME is missing."
+            ENVVARS_EXIST=false
+          fi
           if [ "$ENVVARS_EXIST" = "false" ]; then
             exit 1
           fi
