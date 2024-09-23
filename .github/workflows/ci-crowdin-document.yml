@@ -23,7 +23,7 @@ on:
         default: 'all'
 
 jobs:
-  check-secrets-and-env:
+  check-secrets-and-envvars:
     runs-on: ubuntu-latest
     steps:
       - name: Check Secrets
@@ -31,11 +31,11 @@ jobs:
         run: |
           SECRETS_EXIST=true
           if [ -z "${{ secrets.ACTOR_GITHUB_TOKEN }}" ]; then
-            echo "secrets.ACTOR_GITHUB_TOKEN is missing"
+            echo "secrets.ACTOR_GITHUB_TOKEN is missing."
             SECRETS_EXIST=false
           fi
           if [ -z "${{ secrets.CROWDIN_PERSONAL_TOKEN }}" ]; then
-            echo "secrets.CROWDIN_PERSONAL_TOKEN is missing"
+            echo "secrets.CROWDIN_PERSONAL_TOKEN is missing."
             SECRETS_EXIST=false
           fi
           echo "SECRETS_EXIST=$SECRETS_EXIST" >> ${GITHUB_OUTPUT}
@@ -44,25 +44,25 @@ jobs:
         run: |
           ENVVARS_EXIST=true
           if [ -z "${{ env.ACTOR_ID }}" ]; then
-            echo "env.ACTOR_ID is missing"
+            echo "env.ACTOR_ID is missing."
             ENVVARS_EXIST=false
           fi
           if [ -z "${{ env.ACTOR_NAME }}" ]; then
-            echo "env.ACTOR_NAME is missing, but it's optional"
+            echo "env.ACTOR_NAME is missing."
           fi
           echo "ENVVARS_EXIST=$ENVVARS_EXIST" >> $GITHUB_OUTPUT
-      - name: Summarize check results
+      - name: Summarize Results
         run: |
           if [ "${{ steps.check_secrets.outputs.SECRETS_EXIST }}" = "false" ] || \
              [ "${{ steps.check_envvars.outputs.ENVVARS_EXIST }}" = "false" ]; then
-            echo "One or more secrets/env variables are missing."
+            echo "One or more secrets/envvars are missing."
             exit 1
           else
             echo "All secrets and environment variables are set correctly!"
           fi
 
   single:
-    needs: [ 'check-secrets-and-env' ]
+    needs: [ 'check-secrets-and-envvars' ]
     if: ( github.event_name == 'push' ) ||
         ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )
