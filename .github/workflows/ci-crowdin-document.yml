@@ -38,7 +38,9 @@ jobs:
             echo "secrets.CROWDIN_PERSONAL_TOKEN is missing."
             SECRETS_EXIST=false
           fi
-          echo "SECRETS_EXIST=$SECRETS_EXIST" >> ${GITHUB_OUTPUT}
+          if [ "$SECRETS_EXIST" = "false" ]; then
+            exit 1
+          fi
       - name: Check Environment Variables
         id: check_envvars
         run: |
@@ -49,16 +51,10 @@ jobs:
           fi
           if [ -z "${{ env.ACTOR_NAME }}" ]; then
             echo "env.ACTOR_NAME is missing."
+            ENVVARS_EXIST=false
           fi
-          echo "ENVVARS_EXIST=$ENVVARS_EXIST" >> $GITHUB_OUTPUT
-      - name: Summarize Results
-        run: |
-          if [ "${{ steps.check_secrets.outputs.SECRETS_EXIST }}" = "false" ] || \
-             [ "${{ steps.check_envvars.outputs.ENVVARS_EXIST }}" = "false" ]; then
-            echo "One or more secrets/envvars are missing."
+          if [ "$ENVVARS_EXIST" = "false" ]; then
             exit 1
-          else
-            echo "All secrets and environment variables are set correctly!"
           fi
 
   single:
