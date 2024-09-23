@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Secrets
-        id: check_secrets
+        shell: bash
         run: |
           SECRETS_EXIST=true
           if [ -z "${{ secrets.ACTOR_GITHUB_TOKEN }}" ]; then
@@ -42,7 +42,7 @@ jobs:
             exit 1
           fi
       - name: Check Environment Variables
-        id: check_envvars
+        shell: bash
         run: |
           ENVVARS_EXIST=true
           if [ -z "${{ env.ACTOR_ID }}" ]; then
@@ -73,6 +73,7 @@ jobs:
       LANGUAGE: ${{ inputs.LANGUAGE || 'all' }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
-      ACTOR_ID: '178366084'
-      ACTOR_NAME: 'ltdrobot'
+      ACTOR_ID: ${{ env.ACTOR_ID }}
+      ACTOR_NAME: ${{ env.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ env.ACTOR_LOGIN }}
     secrets: inherit
