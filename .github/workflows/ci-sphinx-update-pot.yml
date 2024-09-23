@@ -47,6 +47,40 @@ env:
   CRON_V3: '0 8 1,15 * *'
 
 jobs:
+  check-secrets-and-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Secrets
+        shell: bash
+        run: |
+          SECRETS_EXIST=true
+          if [ -z "${{ secrets.ACTOR_GITHUB_TOKEN }}" ]; then
+            echo "secrets.ACTOR_GITHUB_TOKEN is missing."
+            SECRETS_EXIST=false
+          fi
+          if [ "$SECRETS_EXIST" = "false" ]; then
+            exit 1
+          fi
+      - name: Check Variables
+        shell: bash
+        run: |
+          VARIABLES_EXIST=true
+          if [ -z "${{ vars.ACTOR_ID }}" ]; then
+            echo "vars.ACTOR_ID is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ -z "${{ vars.ACTOR_NAME }}" ]; then
+            echo "vars.ACTOR_NAME is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ -z "${{ vars.ACTOR_LOGIN }}" ]; then
+            echo "vars.ACTOR_NAME is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ "$VARIABLES_EXIST" = "false" ]; then
+            exit 1
+          fi
+
   get-matrix:
     if: (github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix') ||
         (github.event_name == 'schedule')
@@ -86,7 +120,7 @@ jobs:
           echo "${VERSION_LIST}" | jq "."
 
   matrix:
-    needs: get-matrix
+    needs: [ 'check-secrets-and-vars', 'get-matrix' ]
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
     concurrency:
@@ -106,11 +140,14 @@ jobs:
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       CREATE_PR: true
-      ACTOR_ID: '178366084'
-      ACTOR_NAME: 'ltdrobot'
-    secrets: inherit
+      ACTOR_ID: ${{ vars.ACTOR_ID }}
+      ACTOR_NAME: ${{ vars.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ vars.ACTOR_LOGIN }}
+    secrets:
+      ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
   single:
+    needs: [ 'check-secrets-and-vars' ]
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
@@ -124,6 +161,8 @@ jobs:
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       CREATE_PR: true
-      ACTOR_ID: '178366084'
-      ACTOR_NAME: 'ltdrobot'
-    secrets: inherit
+      ACTOR_ID: ${{ vars.ACTOR_ID }}
+      ACTOR_NAME: ${{ vars.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ vars.ACTOR_LOGIN }}
+    secrets:
+      ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}

@@ -33,6 +33,9 @@ on:
       ACTOR_NAME:
         type: string
         required: true
+      ACTOR_LOGIN:
+        type: string
+        required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
         required: true
@@ -62,15 +65,9 @@ jobs:
           echo "inputs.CREATE_PR = ${{ inputs.CREATE_PR }}"
           echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
+          echo "inputs.ACTOR_LOGIN = ${{ inputs.ACTOR_LOGIN }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
-
-      # - name: Get the GitHub App's Token
-      #   uses: tibdex/github-app-token@v2
-      #   id: ggat
-      #   with:
-      #     app_id: ${{ secrets.APP_ID }}
-      #     private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
@@ -201,7 +198,7 @@ jobs:
           push: 'origin sphinx/pot/${{ inputs.VERSION }} --set-upstream --force'
           new_branch: sphinx/pot/${{ inputs.VERSION }}
           author_name: ${{ inputs.ACTOR_NAME }}
-          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
+          author_email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_LOGIN }}@users.noreply.github.com
           message: |
             pot(${{ inputs.VERSION }}): update pot from Sphinx
 
