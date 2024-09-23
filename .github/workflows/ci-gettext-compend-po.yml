@@ -65,7 +65,7 @@ jobs:
             VARIABLES_EXIST=false
           fi
           if [ -z "${{ vars.ACTOR_LOGIN }}" ]; then
-            echo "vars.ACTOR_NAME is missing."
+            echo "vars.ACTOR_LOGIN is missing."
             VARIABLES_EXIST=false
           fi
           if [ "$VARIABLES_EXIST" = "false" ]; then
