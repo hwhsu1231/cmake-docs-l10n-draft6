@@ -36,6 +36,8 @@ on:
     secrets:
       ACTOR_GITHUB_TOKEN:
         required: true
+      CROWDIN_PERSONAL_TOKEN:
+        required: true
 
 jobs:
   crowdin-document:

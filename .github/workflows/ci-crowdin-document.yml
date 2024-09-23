@@ -23,8 +23,12 @@ on:
         default: 'all'
 
 jobs:
-  check-secrets-and-envvars:
+  check-secrets-and-envs:
     runs-on: ubuntu-latest
+    outputs:
+      ACTOR_ID: ${{ steps.cev.outputs.ACTOR_ID }}
+      ACTOR_NAME: ${{ steps.cev.outputs.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ steps.cev.outputs.ACTOR_LOGIN }}
     steps:
       - name: Check Secrets
         shell: bash
@@ -42,6 +46,7 @@ jobs:
             exit 1
           fi
       - name: Check Environment Variables
+        id: cev
         shell: bash
         run: |
           ENVVARS_EXIST=true
@@ -60,9 +65,12 @@ jobs:
           if [ "$ENVVARS_EXIST" = "false" ]; then
             exit 1
           fi
+          echo "ACTOR_ID=${{ env.ACTOR_ID }}"       >> ${GITHUB_OUTPUT}
+          echo "ACTOR_NAME=${{ env.ACTOR_NAME }}"   >> ${GITHUB_OUTPUT}
+          echo "ACTOR_LOGIN=${{ env.ACTOR_LOGIN }}" >> ${GITHUB_OUTPUT}
 
   single:
-    needs: [ 'check-secrets-and-envvars' ]
+    needs: [ 'check-secrets-and-envs' ]
     if: ( github.event_name == 'push' ) ||
         ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )
@@ -77,7 +85,9 @@ jobs:
       LANGUAGE: ${{ inputs.LANGUAGE || 'all' }}
       CALLER_JOB: 'single'
       ENABLE_JOB: true
-      ACTOR_ID: ${{ env.ACTOR_ID }}
-      ACTOR_NAME: ${{ env.ACTOR_NAME }}
-      ACTOR_LOGIN: ${{ env.ACTOR_LOGIN }}
-    secrets: inherit
+      ACTOR_ID: ${{ needs.check-secrets-and-envs.outputs.ACTOR_ID }}
+      ACTOR_NAME: ${{ needs.check-secrets-and-envs.outputs.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ needs.check-secrets-and-envs.outputs.ACTOR_LOGIN }}
+    secrets:
+      ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
