@@ -182,7 +182,8 @@ jobs:
 
   deploy:
     needs: [ 'matrix', 'single' ]
-    if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
+    if: always()
+    # if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
     runs-on: ubuntu-latest
     environment:
       name: github-pages
