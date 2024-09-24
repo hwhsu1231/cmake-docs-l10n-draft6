@@ -185,10 +185,12 @@ jobs:
     if: always()
     # if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
     runs-on: ubuntu-latest
-    # Ensure GITHUB_TOKEN has permission "id-token: write".
     # https://stackoverflow.com/questions/75319573/failing-to-deploy-github-pages-because-of-write-permission
+    # Ensure GITHUB_TOKEN has permission "id-token: write".
+    # Error: Error: Failed to create deployment (status: 403) with build version 6f1cd567fe571176e3863b279bd5001f638edee7. Request ID 8940:26F7F0:BA9806:16549D3:66F325FB Ensure GITHUB_TOKEN has permission "pages: write".
     permissions:
       id-token: write
+      pages: write
     # environment:
     #   name: github-pages
     #   url: ${{ steps.deployment.outputs.page_url }}
