@@ -171,7 +171,7 @@ jobs:
 
   test-output:
     needs: [ 'matrix', 'single' ]
-    if: ${{ contains(needs.*.result, 'success') }}
+    if: ${{ always() && contains(needs.*.result, 'success') }}
     runs-on: ubuntu-latest
     env:
       NEEDS: ${{ toJSON(needs) }}
