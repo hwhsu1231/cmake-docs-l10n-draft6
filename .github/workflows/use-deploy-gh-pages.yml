@@ -73,94 +73,94 @@ jobs:
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
-      - name: Checkout to '${{ inputs.CHECKOUT }}'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.CHECKOUT }}
-          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
-          submodules: true
+      # - name: Checkout to '${{ inputs.CHECKOUT }}'
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: ${{ inputs.CHECKOUT }}
+      #     token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      #     submodules: true
 
-      - name: Install CMake
-        uses: ./.github/actions/install-cmake
+      # - name: Install CMake
+      #   uses: ./.github/actions/install-cmake
 
-      - name: Install Conda
-        uses: ./.github/actions/install-conda
+      # - name: Install Conda
+      #   uses: ./.github/actions/install-conda
 
-      - name: Install Gettext
-        uses: ./.github/actions/install-gettext
+      # - name: Install Gettext
+      #   uses: ./.github/actions/install-gettext
 
-      - name: Get Other Caches from versions.json
-        id: gocv
-        uses: ./.github/actions/get-other-caches-from-versions
-        with:
-          version: ${{ inputs.VERSION }}
-          versions-file: 'versions.json'
+      # - name: Get Other Caches from versions.json
+      #   id: gocv
+      #   uses: ./.github/actions/get-other-caches-from-versions
+      #   with:
+      #     version: ${{ inputs.VERSION }}
+      #     versions-file: 'versions.json'
 
-      - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        uses: ./.github/actions/cmake-configure-preset
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          cache-version: ${{ inputs.VERSION }}
-          cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
-          cache-auto-depend: 'OFF'
-          cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
-          cache-version-of-python: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}
-          cache-version-of-sphinx: ${{ steps.gocv.outputs.VERSION_OF_SPHINX }}
-          cache-version-of-doxygen: ${{ steps.gocv.outputs.VERSION_OF_DOXYGEN }}
-          cache-version-of-proj: ${{ steps.gocv.outputs.VERSION_OF_PROJ }}
+      # - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
+      #   uses: ./.github/actions/cmake-configure-preset
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     cache-version: ${{ inputs.VERSION }}
+      #     cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
+      #     cache-auto-depend: 'OFF'
+      #     cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
+      #     cache-version-of-python: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}
+      #     cache-version-of-sphinx: ${{ steps.gocv.outputs.VERSION_OF_SPHINX }}
+      #     cache-version-of-doxygen: ${{ steps.gocv.outputs.VERSION_OF_DOXYGEN }}
+      #     cache-version-of-proj: ${{ steps.gocv.outputs.VERSION_OF_PROJ }}
 
-      - name: Build the 'prepare_repositories' target
-        uses: ./.github/actions/cmake-build-target
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'prepare_repositories'
+      # - name: Build the 'prepare_repositories' target
+      #   uses: ./.github/actions/cmake-build-target
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     target: 'prepare_repositories'
 
-      - name: Build the 'install_requirements' target
-        uses: ./.github/actions/cmake-build-target
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'install_requirements'
+      # - name: Build the 'install_requirements' target
+      #   uses: ./.github/actions/cmake-build-target
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     target: 'install_requirements'
 
-      - name: Build the 'sphinx_update_pot' target
-        uses: ./.github/actions/cmake-build-target
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'sphinx_update_pot'
+      # - name: Build the 'sphinx_update_pot' target
+      #   uses: ./.github/actions/cmake-build-target
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     target: 'sphinx_update_pot'
 
-      - name: Build the 'gettext_update_po' target
-        uses: ./.github/actions/cmake-build-target
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'gettext_update_po'
+      # - name: Build the 'gettext_update_po' target
+      #   uses: ./.github/actions/cmake-build-target
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     target: 'gettext_update_po'
 
-      - name: Build the 'sphinx_build_docs' target
-        uses: ./.github/actions/cmake-build-target
-        with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'sphinx_build_docs'
+      # - name: Build the 'sphinx_build_docs' target
+      #   uses: ./.github/actions/cmake-build-target
+      #   with:
+      #     source-directory: ${{ github.workspace }}
+      #     preset: ${{ inputs.LANGUAGE }}
+      #     target: 'sphinx_build_docs'
 
-      - name: Set up mutex for the 'gh-pages' branch
-        if: inputs.DEPLOY_HTML
-        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
-        with:
-          branch: mutex/gh-pages
-          repo-token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      # - name: Set up mutex for the 'gh-pages' branch
+      #   if: inputs.DEPLOY_HTML
+      #   uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+      #   with:
+      #     branch: mutex/gh-pages
+      #     repo-token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
-      - name: Deploy to the 'gh-pages' branch
-        if: inputs.DEPLOY_HTML
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
-          git-config-name: ${{ inputs.ACTOR_NAME }}
-          git-config-email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_LOGIN }}@users.noreply.github.com
-          branch: 'gh-pages'
-          folder: './out/html'
-          target-folder: '.'
-          single-commit: true
-          clean: false
+      # - name: Deploy to the 'gh-pages' branch
+      #   if: inputs.DEPLOY_HTML
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      #     git-config-name: ${{ inputs.ACTOR_NAME }}
+      #     git-config-email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_LOGIN }}@users.noreply.github.com
+      #     branch: 'gh-pages'
+      #     folder: './out/html'
+      #     target-folder: '.'
+      #     single-commit: true
+      #     clean: false
