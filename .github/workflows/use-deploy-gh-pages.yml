@@ -36,6 +36,9 @@ on:
       ACTOR_NAME:
         type: string
         required: true
+      ACTOR_LOGIN:
+        type: string
+        required: true
     secrets:
       ACTOR_GITHUB_TOKEN:
         required: true
@@ -66,6 +69,7 @@ jobs:
           echo "inputs.DEPLOY_HTML = ${{ inputs.DEPLOY_HTML }}"
           echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
+          echo "inputs.ACTOR_LOGIN = ${{ inputs.ACTOR_LOGIN }}"
           echo "[Secrets]"
           echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
 
@@ -154,7 +158,7 @@ jobs:
         with:
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           git-config-name: ${{ inputs.ACTOR_NAME }}
-          git-config-email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_NAME }}@users.noreply.github.com
+          git-config-email: ${{ inputs.ACTOR_ID }}+${{ inputs.ACTOR_LOGIN }}@users.noreply.github.com
           branch: 'gh-pages'
           folder: './out/html'
           target-folder: '.'
