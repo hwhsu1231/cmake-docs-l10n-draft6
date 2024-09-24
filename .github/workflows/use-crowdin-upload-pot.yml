@@ -24,6 +24,9 @@ on:
       ACTOR_NAME:
         type: string
         required: true
+      ACTOR_LOGIN:
+        type: string
+        required: true
     secrets:
       CROWDIN_PERSONAL_TOKEN:
         required: true
@@ -50,6 +53,7 @@ jobs:
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.ACTOR_ID = ${{ inputs.ACTOR_ID }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
+          echo "inputs.ACTOR_LOGIN = ${{ inputs.ACTOR_LOGIN }}"
           echo "[Secrets]"
           echo "secrets.CROWDIN_PERSONAL_TOKEN = ${{ secrets.CROWDIN_PERSONAL_TOKEN }}"
 
@@ -59,10 +63,10 @@ jobs:
           ref: ${{ inputs.CHECKOUT }}
           submodules: true
 
-      - name: Set up Environment Variables
-        shell: bash
-        run: |
-          echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
+      # - name: Set up Environment Variables
+      #   shell: bash
+      #   run: |
+      #     echo "CROWDIN_PERSONAL_TOKEN=${{ secrets.CROWDIN_PERSONAL_TOKEN }}" >> ${GITHUB_ENV}
 
       # - name: Check whether '${{ inputs.VERSION }}' version should be uploaded to Crowdin
       #   shell: bash
@@ -121,3 +125,5 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: 'all'
           target: 'crowdin_upload_pot'
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
