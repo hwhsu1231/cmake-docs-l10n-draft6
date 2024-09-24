@@ -47,9 +47,10 @@ jobs:
   test-output:
     runs-on: ubuntu-latest
     needs: [job1,job2,job3]
-    if: ( needs.job1.result == 'success' || 
-          needs.job2.result == 'success' ||
-          needs.job3.result == 'success' ) && always()
+    if: always()
+    # if: ( needs.job1.result == 'success' || 
+    #       needs.job2.result == 'success' ||
+    #       needs.job3.result == 'success' ) && always()
     # if: ${{ contains(needs.*.result, 'success') }}
     # if: ${{ always() && contains(needs.*.result, 'success') }}
     env:
