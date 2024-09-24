@@ -3,6 +3,11 @@
 name: needs Test
 on:
   workflow_dispatch:
+    inputs:
+      job1:
+        description: 'Enable job1'
+        required: true
+        type: boolean
 
 jobs:
   prep:
