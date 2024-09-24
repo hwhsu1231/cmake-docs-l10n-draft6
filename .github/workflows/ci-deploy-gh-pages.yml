@@ -169,17 +169,28 @@ jobs:
     secrets:
       ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
-  test-output:
+  deploy:
     needs: [ 'matrix', 'single' ]
-    if: ${{ always() && contains(needs.*.result, 'success') }}
+    if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
     runs-on: ubuntu-latest
-    env:
-      NEEDS: ${{ toJSON(needs) }}
-      CONDITION: ${{ contains(needs.*.result, 'success') }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - run: |
-          echo "$NEEDS"
-          echo "$CONDITION"
+      - name: Checkout to 'refs/heads/gh-pages'
+        uses: actions/checkout@v4
+        with:
+          ref: 'refs/heads/gh-pages'
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # # Single deploy job since we're just deploying
   # deploy:
