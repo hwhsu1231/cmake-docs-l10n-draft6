@@ -8,29 +8,38 @@ on:
         description: 'Enable job1'
         required: true
         type: boolean
+      job2:
+        description: 'Enable job2'
+        required: true
+        type: boolean
+      job3:
+        description: 'Enable job3'
+        required: true
+        type: boolean
 
 jobs:
   prep:
     runs-on: ubuntu-latest
     steps:
       - run: echo prep
+
   job1:
     needs: prep
-    if: false
+    if: inputs.job1
     runs-on: ubuntu-latest
     steps:
       - run: echo Job1
 
   job2:
     needs: prep
-    if: false
+    if: inputs.job2
     runs-on: ubuntu-latest
     steps:
       - run: echo Job2
       
   job3:
     needs: prep
-    if: false
+    if: inputs.job3
     runs-on: ubuntu-latest
     steps:
       - run: echo Job3
