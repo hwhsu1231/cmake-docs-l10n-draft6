@@ -23,7 +23,7 @@ on:
         default: 'all'
 
 jobs:
-  check-secrets-and-vars:
+  precondition:
     runs-on: ubuntu-latest
     steps:
       - name: Check Secrets
@@ -62,7 +62,7 @@ jobs:
           fi
 
   single:
-    needs: [ 'check-secrets-and-vars' ]
+    needs: [ 'precondition' ]
     if: ( github.event_name == 'push' ) ||
         ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )

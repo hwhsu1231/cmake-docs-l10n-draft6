@@ -47,7 +47,7 @@ env:
   CRON_V3: '0 8 1,15 * *'
 
 jobs:
-  check-secrets-and-vars:
+  precondition:
     runs-on: ubuntu-latest
     steps:
       - name: Check Secrets
@@ -120,7 +120,7 @@ jobs:
           echo "${VERSION_LIST}" | jq "."
 
   matrix:
-    needs: [ 'check-secrets-and-vars', 'get-matrix' ]
+    needs: [ 'precondition', 'get-matrix' ]
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
         ( github.event_name == 'schedule' )
     concurrency:
@@ -147,7 +147,7 @@ jobs:
       ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
   single:
-    needs: [ 'check-secrets-and-vars' ]
+    needs: [ 'precondition' ]
     if: ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'single' )
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}-${{ inputs.LANGUAGE }}
