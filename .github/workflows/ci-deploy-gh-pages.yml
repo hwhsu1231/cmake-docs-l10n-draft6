@@ -185,11 +185,13 @@ jobs:
     if: always()
     # if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
     runs-on: ubuntu-latest
+    # Ensure GITHUB_TOKEN has permission "id-token: write".
+    # https://stackoverflow.com/questions/75319573/failing-to-deploy-github-pages-because-of-write-permission
     permissions:
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout to 'refs/heads/gh-pages'
         uses: actions/checkout@v4
@@ -204,8 +206,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+        # with:
+        #   token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
   # # Single deploy job since we're just deploying
   # deploy:
