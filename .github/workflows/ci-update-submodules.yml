@@ -9,6 +9,40 @@ on:
   workflow_dispatch:
 
 jobs:
+  precondition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Secrets
+        shell: bash
+        run: |
+          SECRETS_EXIST=true
+          if [ -z "${{ secrets.ACTOR_GITHUB_TOKEN }}" ]; then
+            echo "secrets.ACTOR_GITHUB_TOKEN is missing."
+            SECRETS_EXIST=false
+          fi
+          if [ "$SECRETS_EXIST" = "false" ]; then
+            exit 1
+          fi
+      - name: Check Variables
+        shell: bash
+        run: |
+          VARIABLES_EXIST=true
+          if [ -z "${{ vars.ACTOR_ID }}" ]; then
+            echo "vars.ACTOR_ID is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ -z "${{ vars.ACTOR_NAME }}" ]; then
+            echo "vars.ACTOR_NAME is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ -z "${{ vars.ACTOR_LOGIN }}" ]; then
+            echo "vars.ACTOR_LOGIN is missing."
+            VARIABLES_EXIST=false
+          fi
+          if [ "$VARIABLES_EXIST" = "false" ]; then
+            exit 1
+          fi
+
   get-matrix:
     if: ( github.event_name == 'schedule' ) ||
         ( github.event_name == 'workflow_dispatch' )
@@ -32,7 +66,7 @@ jobs:
           echo "${SUBMODULE_LIST}" | jq "."
 
   matrix:
-    needs: get-matrix
+    needs: [ 'precondition', 'get-matrix' ]
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.SUBMODULE }}
       cancel-in-progress: true
@@ -42,10 +76,13 @@ jobs:
       fail-fast: false
     uses: ./.github/workflows/use-update-submodules.yml
     with:
-      ACTOR: 'ltdrobot'
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
       SUBMODULE: ${{ matrix.SUBMODULE }}
       CALLER_JOB: 'matrix (${{ matrix.SUBMODULE }})'
       ENABLE_JOB: true
-    secrets: inherit
+      ACTOR_ID: ${{ vars.ACTOR_ID }}
+      ACTOR_NAME: ${{ vars.ACTOR_NAME }}
+      ACTOR_LOGIN: ${{ vars.ACTOR_LOGIN }}
+    secrets:
+      ACTOR_GITHUB_TOKEN: ${{ secrets.ACTOR_GITHUB_TOKEN }}
