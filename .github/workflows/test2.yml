@@ -53,7 +53,7 @@ jobs:
     #       needs.job3.result == 'success' ) && always()
     # if: ${{ contains(needs.*.result, 'success') }}
     # if: ${{ always() && contains(needs.*.result, 'success') }}
-    if: always() && ${{ contains(needs.*.result, 'success') }}
+    if: always() && ${{ contains(needs.*.result, 'success') == 'true' }}
     env:
       NEEDS: ${{ toJSON(needs) }}
       # CONDITION: |
