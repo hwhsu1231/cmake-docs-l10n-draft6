@@ -5,6 +5,7 @@
   const all_versions = {
     'git-master': 'git-master',
     'latest': 'latest release',
+    'v3.30': '3.30',
     'v3.29': '3.29',
     'v3.28': '3.28',
     'v3.27': '3.27',

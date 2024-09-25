@@ -9,6 +9,10 @@
       "VERSION_COMPENDIUM" : "git-master"
     },
     {
+      "VERSION" : "v3.30",
+      "VERSION_COMPENDIUM" : "git-master"
+    },
+    {
       "VERSION" : "v3.29",
       "VERSION_COMPENDIUM" : "git-master"
     },
