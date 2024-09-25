@@ -183,17 +183,11 @@ jobs:
   deploy:
     needs: [ 'matrix', 'single' ]
     if: always()
-    # if: always() && ( needs.matrix.result == 'success' || needs.single.result == 'success' )
     runs-on: ubuntu-latest
     # https://stackoverflow.com/questions/75319573/failing-to-deploy-github-pages-because-of-write-permission
-    # Ensure GITHUB_TOKEN has permission "id-token: write".
-    # Error: Error: Failed to create deployment (status: 403) with build version 6f1cd567fe571176e3863b279bd5001f638edee7. Request ID 8940:26F7F0:BA9806:16549D3:66F325FB Ensure GITHUB_TOKEN has permission "pages: write".
     permissions:
       id-token: write
       pages: write
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout to 'refs/heads/gh-pages'
         uses: actions/checkout@v4
@@ -208,25 +202,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        # with:
-        #   token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
-
-  # # Single deploy job since we're just deploying
-  # deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - name: Setup Pages
-  #       uses: actions/configure-pages@v5
-  #     - name: Upload artifact
-  #       uses: actions/upload-pages-artifact@v3
-  #       with:
-  #         # Upload entire repository
-  #         path: '.'
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
