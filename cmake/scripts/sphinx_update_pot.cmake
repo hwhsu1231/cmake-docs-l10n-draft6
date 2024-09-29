@@ -22,77 +22,43 @@ include(LogUtils)
 
 message(STATUS "Determining whether it is required to update .pot files...")
 file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
-get_json_value_by_dot_notation(
-    IN_JSON_OBJECT              "${REFERENCES_JSON_CNT}"
-    IN_DOT_NOTATION             ".pot"
-    OUT_JSON_VALUE              CURRENT_POT_OBJECT)
-if(VERSION_TYPE STREQUAL "branch")
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION         ".commit.hash"
-        OUT_JSON_VALUE          CURRENT_POT_COMMIT_HASH)
-    get_git_latest_commit_on_branch_name(
-        IN_REPO_PATH            "${PROJ_OUT_REPO_DIR}"
-        IN_SOURCE_TYPE          "local"
-        IN_BRANCH_NAME          "${BRANCH_NAME}"
-        OUT_COMMIT_DATE         LATEST_POT_COMMIT_DATE
-        OUT_COMMIT_HASH         LATEST_POT_COMMIT_HASH
-        OUT_COMMIT_TITLE        LATEST_POT_COMMIT_TITLE)
-    set_members_of_commit_json_object(
-        IN_MEMBER_DATE          "\"${LATEST_POT_COMMIT_DATE}\""
-        IN_MEMBER_HASH          "\"${LATEST_POT_COMMIT_HASH}\""
-        IN_MEMBER_TITLE         "\"${LATEST_POT_COMMIT_TITLE}\""
-        OUT_JSON_OBJECT         COMMIT_CNT)
-    set_members_of_reference_json_object(
-        IN_TYPE                 "branch"
-        IN_MEMBER_BRANCH        "\"${BRANCH_NAME}\""
-        IN_MEMBER_COMMIT        "${COMMIT_CNT}"
-        OUT_JSON_OBJECT         LATEST_POT_OBJECT)
-    set(CURRENT_POT_REFERENCE   "${CURRENT_POT_COMMIT_HASH}")
-    set(LATEST_POT_REFERENCE    "${LATEST_POT_COMMIT_HASH}")
-else()
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION         ".tag"
-        OUT_JSON_VALUE          CURRENT_POT_TAG)
-    get_git_latest_tag_on_tag_pattern(
-        IN_REPO_PATH            "${PROJ_OUT_REPO_DIR}"
-        IN_SOURCE_TYPE          "local"
-        IN_TAG_PATTERN          "${TAG_PATTERN}"
-        IN_TAG_SUFFIX           "${TAG_SUFFIX}"
-        OUT_TAG                 LATEST_POT_TAG)
-    set_members_of_reference_json_object(
-        IN_TYPE                 "tag"
-        IN_MEMBER_TAG           "\"${LATEST_POT_TAG}\""
-        OUT_JSON_OBJECT         LATEST_POT_OBJECT)
-    set(CURRENT_POT_REFERENCE   "${CURRENT_POT_TAG}")
-    set(LATEST_POT_REFERENCE    "${LATEST_POT_TAG}")
-endif()
+get_reference_of_latest_and_current_from_json(
+    IN_JSON_CNT                     "${REFERENCES_JSON_CNT}"
+    IN_REPO_PATH                    "${PROJ_OUT_REPO_DIR}"
+    IN_VERSION_TYPE                 "${VERSION_TYPE}"
+    IN_BRANCH_NAME                  "${BRANCH_NAME}"
+    IN_TAG_PATTERN                  "${TAG_PATTERN}"
+    IN_TAG_SUFFIX                   "${TAG_SUFFIX}"
+    IN_DOT_NOTATION                 ".pot"
+    OUT_LATEST_OBJECT               LATEST_POT_OBJECT
+    OUT_LATEST_REFERENCE            LATEST_POT_REFERENCE
+    OUT_CURRENT_OBJECT              CURRENT_POT_OBJECT
+    OUT_CURRENT_REFERENCE           CURRENT_POT_REFERENCE)
 if(MODE_OF_UPDATE STREQUAL "COMPARE")
     if(NOT CURRENT_POT_REFERENCE STREQUAL LATEST_POT_REFERENCE)
-        set(UPDATE_REQUIRED     ON)
+        set(UPDATE_POT_REQUIRED     ON)
     else()
-        set(UPDATE_REQUIRED     OFF)
+        set(UPDATE_POT_REQUIRED     OFF)
     endif()
 elseif(MODE_OF_UPDATE STREQUAL "ALWAYS")
-    set(UPDATE_REQUIRED         ON)
+    set(UPDATE_POT_REQUIRED         ON)
 elseif(MODE_OF_UPDATE STREQUAL "NEVER")
     if(NOT CURRENT_POT_REFERENCE)
-        set(UPDATE_REQUIRED     ON)
+        set(UPDATE_POT_REQUIRED     ON)
     else()
-        set(UPDATE_REQUIRED     OFF)
+        set(UPDATE_POT_REQUIRED     OFF)
     endif()
 else()
-    message(FATAL_ERROR "Invalid UNPDATE_MODE value. (${MODE_OF_UPDATE})")
+    message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
 endif()
 remove_cmake_message_indent()
 message("")
-message("latest = ${LATEST_POT_OBJECT}")
+message(".latest.pot = ${LATEST_POT_OBJECT}")
 message(".pot = ${CURRENT_POT_OBJECT}")
 message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
-message("UPDATE_REQUIRED        = ${UPDATE_REQUIRED}")
+message("UPDATE_POT_REQUIRED    = ${UPDATE_POT_REQUIRED}")
 message("")
 restore_cmake_message_indent()
 
@@ -101,13 +67,13 @@ message(STATUS "Generating the configuration file 'conf.py' by configuring proje
 remove_cmake_message_indent()
 message("")
 execute_process(
-    COMMAND ${CMAKE_COMMAND} 
+    COMMAND ${CMAKE_COMMAND}
             -S ${PROJ_OUT_REPO_SPHINX_DIR}
             -B ${PROJ_OUT_REPO_SPHINX_DIR}/build
             # Enable SPHINX_HTML option to configure conf.py.in into conf.py.
             -D SPHINX_HTML=ON
-            # Since find_program(SPHINX_EXECUTABLE) of CMake repo doesn't support to 
-            # find sphinx-build inside the virtual environment currently, I have to 
+            # Since find_program(SPHINX_EXECUTABLE) of CMake repo doesn't support to
+            # find sphinx-build inside the virtual environment currently, I have to
             # specify it in advanced.
             -D SPHINX_EXECUTABLE=${Sphinx_BUILD_EXECUTABLE}
     ECHO_OUTPUT_VARIABLE
@@ -127,7 +93,7 @@ message("")
 restore_cmake_message_indent()
 
 
-if(NOT UPDATE_REQUIRED)
+if(NOT UPDATE_POT_REQUIRED)
     message(STATUS "No need to update .pot files.")
     return()
 else()

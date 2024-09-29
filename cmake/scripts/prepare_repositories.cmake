@@ -68,7 +68,8 @@ execute_process(
 message("")
 if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
     execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule foreach --recursive git clean -xfdf
+        COMMAND ${Git_EXECUTABLE} submodule foreach --recursive
+                ${Git_EXECUTABLE} clean -xfdf
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE

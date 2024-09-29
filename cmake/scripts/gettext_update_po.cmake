@@ -21,27 +21,13 @@ if(NOT LANGUAGE STREQUAL "all")
 endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Determining whether it is required to update .pot files...")
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT              "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION             ".pot"
-        OUT_JSON_VALUE              CURRENT_POT_OBJECT)
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT              "${REFERENCES_JSON_CNT}"
-        IN_DOT_NOTATION             ".po.${_LANGUAGE}"
-        OUT_JSON_VALUE              CURRENT_PO_LANGUAGE_OBJECT)
-    if(VERSION_TYPE STREQUAL "branch")
-        set(DOT_NOTATION            ".commit.hash")
-    else()
-        set(DOT_NOTATION            ".tag")
-    endif()
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT              "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION             "${DOT_NOTATION}"
-        OUT_JSON_VALUE              CURRENT_POT_REFERENCE)
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT              "${CURRENT_PO_LANGUAGE_OBJECT}"
-        IN_DOT_NOTATION             "${DOT_NOTATION}"
-        OUT_JSON_VALUE              CURRENT_PO_REFERENCE)
+    get_reference_of_pot_and_po_from_json(
+        IN_JSON_CNT             "${REFERENCES_JSON_CNT}"
+        IN_VERSION_TYPE         "${VERSION_TYPE}"
+        OUT_POT_OBJECT          CURRENT_POT_OBJECT
+        OUT_POT_REFERENCE       CURRENT_POT_REFERENCE
+        OUT_PO_OBJECT           CURRENT_PO_OBJECT
+        OUT_PO_REFERENCE        CURRENT_PO_REFERENCE)
     if(MODE_OF_UPDATE STREQUAL "COMPARE")
         if(NOT CURRENT_POT_REFERENCE STREQUAL CURRENT_PO_REFERENCE)
             set(UPDATE_PO_REQUIRED  ON)
@@ -62,7 +48,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     remove_cmake_message_indent()
     message("")
     message(".pot = ${CURRENT_POT_OBJECT}")
-    message(".po.${_LANGUAGE} = ${CURRENT_PO_LANGUAGE_OBJECT}")
+    message(".po.${_LANGUAGE} = ${CURRENT_PO_OBJECT}")
     message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
     message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
     message("CURRENT_PO_REFERENCE   = ${CURRENT_PO_REFERENCE}")

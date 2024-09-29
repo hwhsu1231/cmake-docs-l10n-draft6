@@ -18,65 +18,31 @@ include(LogUtils)
 
 message(STATUS "Determining which reference to switch to...")
 file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
-get_json_value_by_dot_notation(
-    IN_JSON_OBJECT      "${REFERENCES_JSON_CNT}"
-    IN_DOT_NOTATION     ".pot"
-    OUT_JSON_VALUE      CURRENT_POT_OBJECT)
-if(VERSION_TYPE STREQUAL "branch")
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION         ".commit.hash"
-        OUT_JSON_VALUE          CURRENT_POT_COMMIT_HASH)
-    get_git_latest_commit_on_branch_name(
-        IN_REPO_PATH            "${PROJ_OUT_REPO_DIR}"
-        IN_SOURCE_TYPE          "local"
-        IN_BRANCH_NAME          "${BRANCH_NAME}"
-        OUT_COMMIT_DATE         LATEST_POT_COMMIT_DATE
-        OUT_COMMIT_HASH         LATEST_POT_COMMIT_HASH
-        OUT_COMMIT_TITLE        LATEST_POT_COMMIT_TITLE)
-    set_members_of_commit_json_object(
-        IN_MEMBER_DATE          "\"${LATEST_POT_COMMIT_DATE}\""
-        IN_MEMBER_HASH          "\"${LATEST_POT_COMMIT_HASH}\""
-        IN_MEMBER_TITLE         "\"${LATEST_POT_COMMIT_TITLE}\""
-        OUT_JSON_OBJECT         COMMIT_CNT)
-    set_members_of_reference_json_object(
-        IN_TYPE                 "branch"
-        IN_MEMBER_BRANCH        "\"${BRANCH_NAME}\""
-        IN_MEMBER_COMMIT        "${COMMIT_CNT}"
-        OUT_JSON_OBJECT         LATEST_POT_OBJECT)
-    set(CURRENT_POT_REFERENCE   "${CURRENT_POT_COMMIT_HASH}")
-    set(LATEST_POT_REFERENCE    "${LATEST_POT_COMMIT_HASH}")
-else()
-    get_json_value_by_dot_notation(
-        IN_JSON_OBJECT          "${CURRENT_POT_OBJECT}"
-        IN_DOT_NOTATION         ".tag"
-        OUT_JSON_VALUE          CURRENT_POT_TAG)
-    get_git_latest_tag_on_tag_pattern(
-        IN_REPO_PATH            "${PROJ_OUT_REPO_DIR}"
-        IN_SOURCE_TYPE          "local"
-        IN_TAG_PATTERN          "${TAG_PATTERN}"
-        IN_TAG_SUFFIX           "${TAG_SUFFIX}"
-        OUT_TAG                 LATEST_POT_TAG)
-    set_members_of_reference_json_object(
-        IN_TYPE                 "tag"
-        IN_MEMBER_TAG           "\"${LATEST_POT_TAG}\""
-        OUT_JSON_OBJECT         LATEST_POT_OBJECT)
-    set(CURRENT_POT_REFERENCE   "${CURRENT_POT_TAG}")
-    set(LATEST_POT_REFERENCE    "${LATEST_POT_TAG}")
-endif()
+get_reference_of_latest_and_current_from_json(
+    IN_JSON_CNT                     "${REFERENCES_JSON_CNT}"
+    IN_REPO_PATH                    "${PROJ_OUT_REPO_DIR}"
+    IN_VERSION_TYPE                 "${VERSION_TYPE}"
+    IN_BRANCH_NAME                  "${BRANCH_NAME}"
+    IN_TAG_PATTERN                  "${TAG_PATTERN}"
+    IN_TAG_SUFFIX                   "${TAG_SUFFIX}"
+    IN_DOT_NOTATION                 ".pot"
+    OUT_LATEST_OBJECT               LATEST_POT_OBJECT
+    OUT_LATEST_REFERENCE            LATEST_POT_REFERENCE
+    OUT_CURRENT_OBJECT              CURRENT_POT_OBJECT
+    OUT_CURRENT_REFERENCE           CURRENT_POT_REFERENCE)
 if(MODE_OF_UPDATE STREQUAL "COMPARE")
     if(NOT CURRENT_POT_REFERENCE STREQUAL LATEST_POT_REFERENCE)
-        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
+        set(SWITCH_POT_REFERENCE    "${LATEST_POT_REFERENCE}")
     else()
-        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
+        set(SWITCH_POT_REFERENCE    "${CURRENT_POT_REFERENCE}")
     endif()
 elseif(MODE_OF_UPDATE STREQUAL "ALWAYS")
-    set(SWITCH_REFERENCE        "${LATEST_POT_REFERENCE}")
+    set(SWITCH_POT_REFERENCE        "${LATEST_POT_REFERENCE}")
 elseif(MODE_OF_UPDATE STREQUAL "NEVER")
     if(NOT CURRENT_POT_REFERENCE)
-        set(SWITCH_REFERENCE    "${LATEST_POT_REFERENCE}")
+        set(SWITCH_POT_REFERENCE    "${LATEST_POT_REFERENCE}")
     else()
-        set(SWITCH_REFERENCE    "${CURRENT_POT_REFERENCE}")
+        set(SWITCH_POT_REFERENCE    "${CURRENT_POT_REFERENCE}")
     endif()
 else()
     message(FATAL_ERROR "Invalid UNPDATE_MODE value. (${MODE_OF_UPDATE})")
@@ -88,74 +54,19 @@ message(".pot = ${CURRENT_POT_OBJECT}")
 message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
-message("SWITCH_REFERENCE       = ${SWITCH_REFERENCE}")
+message("SWITCH_POT_REFERENCE   = ${SWITCH_POT_REFERENCE}")
 message("")
 restore_cmake_message_indent()
 
 
-message(STATUS "Switching to the reference '${SWITCH_REFERENCE}' on the local branch 'current'...")
+message(STATUS "Switching to the reference '${SWITCH_POT_REFERENCE}' on the local branch 'current'...")
 remove_cmake_message_indent()
 message("")
-if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule deinit --all --force
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        COMMAND ${CMAKE_COMMAND} -E rm -rf .git/modules
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("Remove directory '.git/modules'")
-    message("")
-endif()
-execute_process(
-    COMMAND ${Git_EXECUTABLE} checkout -B current
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
+switch_to_git_reference_on_branch(
+    IN_REPO_PATH    "${PROJ_OUT_REPO_DIR}"
+    IN_REFERENCE    "${SWITCH_POT_REFERENCE}"
+    IN_BRANCH       "current")
 message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} fetch origin
-            ${SWITCH_REFERENCE}
-            --depth=1
-            --verbose
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} reset --hard FETCH_HEAD
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-    ECHO_OUTPUT_VARIABLE
-    ECHO_ERROR_VARIABLE
-    COMMAND_ERROR_IS_FATAL ANY)
-message("")
-if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule sync
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} submodule update
-                --init
-                --recursive
-                --depth=1
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
-        ECHO_OUTPUT_VARIABLE
-        ECHO_ERROR_VARIABLE
-        COMMAND_ERROR_IS_FATAL ANY)
-    message("")
-endif()
 restore_cmake_message_indent()
 
 
@@ -167,7 +78,7 @@ restore_cmake_message_indent()
 
 
 message(STATUS "Determining whether to install the requirements...")
-set(CURRENT_REFERENCE "${SWITCH_REFERENCE}")
+set(CURRENT_REFERENCE "${SWITCH_POT_REFERENCE}")
 if(EXISTS "${PREV_REFERENCE_TXT_PATH}")
     file(READ "${PREV_REFERENCE_TXT_PATH}" PREVIOUS_REFERENCE)
 else()
@@ -175,12 +86,12 @@ else()
 endif()
 if(MODE_OF_INSTALL STREQUAL "COMPARE")
     if(NOT CURRENT_REFERENCE STREQUAL PREVIOUS_REFERENCE)
-        set(INSTALL_REQUIRED ON)
+        set(INSTALL_REQUIRED    ON)
     else()
-        set(INSTALL_REQUIRED OFF)
+        set(INSTALL_REQUIRED    OFF)
     endif()
 elseif(MODE_OF_INSTALL STREQUAL "ALWAYS")
-    set(INSTALL_REQUIRED ON)
+    set(INSTALL_REQUIRED        ON)
 else()
     message(FATAL_ERROR "Invalid MODE_OF_INSTALL value. (${MODE_OF_INSTALL})")
 endif()
