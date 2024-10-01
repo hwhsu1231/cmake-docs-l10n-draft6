@@ -3379,12 +3379,12 @@ msgstr ""
 
 #: sphinx/themes/basic/search.html:42
 msgid "search"
-msgstr "搜尋"
+msgstr ""
 
 #: sphinx/themes/basic/search.html:48
 #: sphinx/themes/basic/static/searchtools.js:105
 msgid "Search Results"
-msgstr "搜尋結果"
+msgstr ""
 
 #: sphinx/themes/basic/search.html:50
 #: sphinx/themes/basic/static/searchtools.js:107
