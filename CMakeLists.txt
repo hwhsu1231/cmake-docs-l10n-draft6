@@ -184,8 +184,8 @@ endif()
   Validate the MODE_OF_UPDATE cache variable.
 #]===========================================]
 
-if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND 
-    NOT MODE_OF_UPDATE STREQUAL "ALWAYS" AND 
+if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND
+    NOT MODE_OF_UPDATE STREQUAL "ALWAYS" AND
     NOT MODE_OF_UPDATE STREQUAL "NEVER")
     message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
 endif()
@@ -194,7 +194,7 @@ endif()
   Validate the MODE_OF_INSTALL cache variable.
 #]============================================]
 
-if (NOT MODE_OF_INSTALL STREQUAL "COMPARE" AND 
+if (NOT MODE_OF_INSTALL STREQUAL "COMPARE" AND
     NOT MODE_OF_INSTALL STREQUAL "ALWAYS")
     message(FATAL_ERROR "Invalid MODE_OF_INSTALL value. (${MODE_OF_INSTALL})")
 endif()
