@@ -36,11 +36,11 @@ set(AUTO_DEPEND ON
 set(REMOVE_REDUNDANT ON
     CACHE BOOL "Removing redundant files after building documentation.")
 
-set(GIT_REMOTE_URL_OF_L10N "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
-    CACHE STRING "Remote URL of the l10n Git repository.")
+set(REMOTE_URL_OF_L10N "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
+    CACHE STRING "Remote URL of the 'l10n' repository.")
 
-set(GIT_REMOTE_URL_OF_DOCS "https://github.com/Kitware/CMake.git"
-    CACHE STRING "Remote URL of the docs Git repository.")
+set(REMOTE_URL_OF_DOCS "https://github.com/Kitware/CMake.git"
+    CACHE STRING "Remote URL of the 'docs' repository.")
     # Possible values are:
     # - https://github.com/Kitware/CMake.git
     # - https://gitlab.kitware.com/cmake/cmake.git
@@ -246,160 +246,10 @@ find_package(Crowdin  MODULE QUIET)
   Create Git Worktree for 'l10n' branch in ${PROJ_L10N_DIR}.
 #]==========================================================]
 
-message(STATUS "Checking if the remote '${GIT_REMOTE_URL_OF_L10N}' exists...")
-execute_process(
-    COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N}
-    RESULT_VARIABLE RES_VAR
-    OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-if(NOT RES_VAR EQUAL 0)
-    remove_cmake_message_indent()
-    message("")
-    message("The remote '${GIT_REMOTE_URL_OF_L10N}' doesn't exist.")
-    message("")
-    restore_cmake_message_indent()
-else()
-    remove_cmake_message_indent()
-    message("")
-    message("The remote '${GIT_REMOTE_URL_OF_L10N}' exists.")
-    message("")
-    restore_cmake_message_indent()
-    message(STATUS "Checking if the branch 'l10n' exists in the remote...")
-    execute_process(
-        COMMAND ${Git_EXECUTABLE} ls-remote --heads --exit-code ${GIT_REMOTE_URL_OF_L10N} l10n
-        RESULT_VARIABLE RES_VAR
-        OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-    if(NOT RES_VAR EQUAL 0)
-        remove_cmake_message_indent()
-        message("")
-        message("The branch 'l10n' doesn't exist in the remote.")
-        message("")
-        restore_cmake_message_indent()
-    else()
-        remove_cmake_message_indent()
-        message("")
-        message("The branch 'l10n' exist in the remote.")
-        message("")
-        restore_cmake_message_indent()
-        message(STATUS "Checking if the git worktree exists in '${PROJ_L10N_DIR}'...")
-        if(EXISTS "${PROJ_L10N_DIR}/.git")
-            remove_cmake_message_indent()
-            message("")
-            message("The git worktree exists in '${PROJ_L10N_DIR}'.")
-            message("")
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} status
-                WORKING_DIRECTORY ${PROJ_L10N_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            message("")
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} show --no-patch --format=full
-                WORKING_DIRECTORY ${PROJ_L10N_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            message("")
-            restore_cmake_message_indent()
-        else()
-            remove_cmake_message_indent()
-            message("")
-            message("The git worktree doesn't exist in '${PROJ_L10N_DIR}'.")
-            message("")
-            restore_cmake_message_indent()
-            message(STATUS "Prepare to create a git worktree.")
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} remote
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                RESULT_VARIABLE RES_VAR
-                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-            if(RES_VAR EQUAL 0)
-                set(REMOTE_NAME "${OUT_VAR}")
-            else()
-                message(FATAL_ERROR "${ERR_VAR}")
-            endif()
-            message(STATUS "Adding fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n'...")
-            remove_cmake_message_indent()
-            message("")
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} config --get-all
-                        remote.${REMOTE_NAME}.fetch
-                        refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                RESULT_VARIABLE RES_VAR
-                OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
-                ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
-            if(RES_VAR EQUAL 0)
-                # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' already exists.
-            elseif(RES_VAR EQUAL 1)
-                # Fetch refspec 'refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n' doesn't exist.
-                execute_process(
-                    COMMAND ${Git_EXECUTABLE} config --add
-                            remote.${REMOTE_NAME}.fetch 
-                            +refs/heads/l10n:refs/remotes/${REMOTE_NAME}/l10n
-                    WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                    ECHO_OUTPUT_VARIABLE
-                    ECHO_ERROR_VARIABLE
-                    COMMAND_ERROR_IS_FATAL ANY)
-            else()
-                message(FATAL_ERROR "${ERR_VAR}")
-            endif()
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} config --get-all
-                        remote.${REMOTE_NAME}.fetch
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            message("")
-            restore_cmake_message_indent()
-            message(STATUS "Fetching/Tracking the remote branch 'l10n' to the local branch 'l10n'...")
-            remove_cmake_message_indent()
-            message("")
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} fetch ${REMOTE_NAME} l10n:l10n --verbose --update-head-ok
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} branch --set-upstream-to=${REMOTE_NAME}/l10n l10n
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            message("")
-            restore_cmake_message_indent()
-            message(STATUS "Creating a git worktree for 'l10n' branch in ${PROJ_L10N_DIR}...")
-            remove_cmake_message_indent()
-            message("")
-            execute_process(
-                COMMAND ${CMAKE_COMMAND} -E rm -rf ${PROJ_L10N_DIR}
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} worktree prune
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            execute_process(
-                COMMAND ${Git_EXECUTABLE} worktree add ${PROJ_L10N_DIR} l10n
-                WORKING_DIRECTORY ${PROJ_SOURCE_DIR}
-                ECHO_OUTPUT_VARIABLE
-                ECHO_ERROR_VARIABLE
-                COMMAND_ERROR_IS_FATAL ANY)
-            message("")
-            restore_cmake_message_indent()
-            unset(REMOTE_NAME)
-        endif()
-    endif()
-endif()
+create_git_worktree_for_l10n_branch(
+    IN_REMOTE_URL       "${REMOTE_URL_OF_L10N}"
+    IN_REPO_PATH        "${PROJ_SOURCE_DIR}"
+    IN_WORKTREE_PATH    "${PROJ_L10N_DIR}")
 
 #[==============================================================[
   Initialize a references.json file in ${PROJ_L10N_VERSION_DIR}.
@@ -432,8 +282,8 @@ message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
 message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "MODE_OF_UPDATE                = ${MODE_OF_UPDATE}")
 message(STATUS "MODE_OF_INSTALL               = ${MODE_OF_INSTALL}")
-message(STATUS "GIT_REMOTE_URL_OF_L10N        = ${GIT_REMOTE_URL_OF_L10N}")
-message(STATUS "GIT_REMOTE_URL_OF_DOCS        = ${GIT_REMOTE_URL_OF_DOCS}")
+message(STATUS "REMOTE_URL_OF_L10N            = ${REMOTE_URL_OF_L10N}")
+message(STATUS "REMOTE_URL_OF_DOCS            = ${REMOTE_URL_OF_DOCS}")
 message(STATUS "BASEURL_HREF                  = ${BASEURL_HREF}")
 message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
 message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON} (CACHE: $CACHE{VERSION_OF_PYTHON})")
@@ -518,8 +368,8 @@ set(SCRIPT_MODE_CACHE
     -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D MODE_OF_UPDATE=${MODE_OF_UPDATE}
     -D MODE_OF_INSTALL=${MODE_OF_INSTALL}
-    -D GIT_REMOTE_URL_OF_L10N=${GIT_REMOTE_URL_OF_L10N}
-    -D GIT_REMOTE_URL_OF_DOCS=${GIT_REMOTE_URL_OF_DOCS}
+    -D REMOTE_URL_OF_L10N=${REMOTE_URL_OF_L10N}
+    -D REMOTE_URL_OF_DOCS=${REMOTE_URL_OF_DOCS}
     -D BASEURL_HREF=${BASEURL_HREF}
     -D VERSION_COMPENDIUM=${VERSION_COMPENDIUM}
     -D VERSION_OF_PYTHON=${VERSION_OF_PYTHON}

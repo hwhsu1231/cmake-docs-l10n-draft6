@@ -22,7 +22,7 @@ include(LogUtils)
 
 message(STATUS "Determining whether it is required to update .pot files...")
 file(READ "${REFERENCES_JSON_PATH}" REFERENCES_JSON_CNT)
-get_reference_of_latest_and_current_from_json(
+get_reference_of_latest_from_repo_and_current_from_json(
     IN_JSON_CNT                     "${REFERENCES_JSON_CNT}"
     IN_REPO_PATH                    "${PROJ_OUT_REPO_DIR}"
     IN_VERSION_TYPE                 "${VERSION_TYPE}"
@@ -82,7 +82,7 @@ execute_process(
 message("")
 restore_cmake_message_indent()
 message(STATUS "Copying the configuration file 'conf.py'...")
-file(COPY_FILE 
+file(COPY_FILE
     "${PROJ_OUT_REPO_SPHINX_DIR}/build/conf.py"
     "${PROJ_OUT_REPO_DOCS_CONFIG_DIR}/conf.py")
 remove_cmake_message_indent()
@@ -218,7 +218,7 @@ else()
     message("  [inputfile]    ${DEFAULT_SPHINX_POT_PATH}")
     execute_process(
         COMMAND ${Gettext_MSGCAT_EXECUTABLE}
-                --width ${GETTEXT_WRAP_WIDTH} 
+                --width ${GETTEXT_WRAP_WIDTH}
                 --output-file ${PACKAGE_SPHINX_POT_PATH}
                 ${DEFAULT_SPHINX_POT_PATH}
         RESULT_VARIABLE RES_VAR
@@ -266,7 +266,7 @@ foreach(SRC_POT_FILE ${SRC_POT_FILES})
         message("  [ref.pot]    ${SRC_POT_FILE}")
         execute_process(
             COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
-                    --width ${GETTEXT_WRAP_WIDTH} 
+                    --width ${GETTEXT_WRAP_WIDTH}
                     --backup off
                     --update
                     --force-po

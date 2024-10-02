@@ -20,27 +20,27 @@ if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
 foreach(_LANGUAGE ${LANGUAGE_LIST})
-    message(STATUS "Determining whether it is required to update .pot files...")
+    message(STATUS "Determining whether it is required to update .po files...")
     get_reference_of_pot_and_po_from_json(
-        IN_JSON_CNT             "${REFERENCES_JSON_CNT}"
-        IN_VERSION_TYPE         "${VERSION_TYPE}"
-        OUT_POT_OBJECT          CURRENT_POT_OBJECT
-        OUT_POT_REFERENCE       CURRENT_POT_REFERENCE
-        OUT_PO_OBJECT           CURRENT_PO_OBJECT
-        OUT_PO_REFERENCE        CURRENT_PO_REFERENCE)
+        IN_JSON_CNT                     "${REFERENCES_JSON_CNT}"
+        IN_VERSION_TYPE                 "${VERSION_TYPE}"
+        OUT_POT_OBJECT                  CURRENT_POT_OBJECT
+        OUT_POT_REFERENCE               CURRENT_POT_REFERENCE
+        OUT_PO_OBJECT                   CURRENT_PO_OBJECT
+        OUT_PO_REFERENCE                CURRENT_PO_REFERENCE)
     if(MODE_OF_UPDATE STREQUAL "COMPARE")
         if(NOT CURRENT_POT_REFERENCE STREQUAL CURRENT_PO_REFERENCE)
-            set(UPDATE_PO_REQUIRED  ON)
+            set(UPDATE_PO_REQUIRED      ON)
         else()
-            set(UPDATE_PO_REQUIRED  OFF)
+            set(UPDATE_PO_REQUIRED      OFF)
         endif()
     elseif(MODE_OF_UPDATE STREQUAL "ALWAYS")
         set(UPDATE_PO_REQUIRED ON)
     elseif(MODE_OF_UPDATE STREQUAL "NEVER")
         if(NOT CURRENT_PO_REFERENCE)
-            set(UPDATE_PO_REQUIRED  ON)
+            set(UPDATE_PO_REQUIRED      ON)
         else()
-            set(UPDATE_PO_REQUIRED  OFF)
+            set(UPDATE_PO_REQUIRED      OFF)
         endif()
     else()
         message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")

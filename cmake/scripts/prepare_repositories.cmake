@@ -26,7 +26,7 @@ if(NOT EXISTS "${PROJ_OUT_REPO_DIR}/.git")
                 --single-branch
                 --recurse-submodules
                 --shallow-submodules
-                ${GIT_REMOTE_URL_OF_DOCS}
+                ${REMOTE_URL_OF_DOCS}
                 ${PROJ_OUT_REPO_DIR}
         WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
         ECHO_OUTPUT_VARIABLE
@@ -65,8 +65,8 @@ execute_process(
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     COMMAND_ERROR_IS_FATAL ANY)
-message("")
 if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
+    message("")
     execute_process(
         COMMAND ${Git_EXECUTABLE} submodule foreach --recursive
                 ${Git_EXECUTABLE} clean -xfdf
@@ -74,8 +74,8 @@ if(EXISTS "${PROJ_OUT_REPO_DIR}/.gitmodules")
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         COMMAND_ERROR_IS_FATAL ANY)
-    message("")
 endif()
+message("")
 restore_cmake_message_indent()
 
 
