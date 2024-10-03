@@ -17,12 +17,12 @@ message(STATUS "Running 'crowdin upload sources' command to upload .pot files...
 remove_cmake_message_indent()
 message("")
 execute_process(
-    COMMAND ${Crowdin_EXECUTABLE} upload sources 
+    COMMAND ${Crowdin_EXECUTABLE} upload sources
             --branch ${VERSION}
             --config ${CROWDIN_YML_PATH}
             --no-progress
             --verbose
-    WORKING_DIRECTORY "${PROJ_L10N_VERSION_DIR}"
+    WORKING_DIRECTORY ${PROJ_L10N_VERSION_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     COMMAND_ERROR_IS_FATAL ANY)

@@ -239,8 +239,8 @@ restore_cmake_message_indent()
 
 
 message(STATUS "Running 'msgmerge/msgcat' command to update .pot files...")
-set(SRC_POT_DIR "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot/LC_MESSAGES")
-set(DST_POT_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/pot/LC_MESSAGES")
+set(SRC_POT_DIR "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot")
+set(DST_POT_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/pot")
 file(GLOB_RECURSE SRC_POT_FILES "${SRC_POT_DIR}/*.pot")
 remove_cmake_message_indent()
 message("")

@@ -15,7 +15,7 @@ include(LogUtils)
 
 if(CMAKE_HOST_WIN32)
     execute_process(
-        COMMAND net session 
+        COMMAND net session
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)

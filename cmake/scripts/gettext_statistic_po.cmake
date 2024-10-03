@@ -25,7 +25,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     set(NUM_OF_PO_TOTAL 0)          # Number     of total       po    files
     set(PCT_OF_PO_COMPLETED 0)      # Percentage of completed   po    files
     set(NUM_OF_MSGID_TRANSLATED 0)  # Number     of translated  msgid entries
-    set(NUM_OF_MSGID_FUZZY 0)       # Number     of fuzzy       msgid entries 
+    set(NUM_OF_MSGID_FUZZY 0)       # Number     of fuzzy       msgid entries
     set(NUM_OF_MSGID_TOTAL 0)       # Number     of total       msgid entries
     set(PCT_OF_MSGID_TRANSLATED 0)  # Percentage of translated  msgid entries
 

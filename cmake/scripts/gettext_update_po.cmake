@@ -66,8 +66,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
 
 
     message(STATUS "Running 'msgmerge/msgcat' command to update .po files for '${_LANGUAGE}' language...")
-    set(POT_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/pot/LC_MESSAGES")
-    set(PO_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}/LC_MESSAGES")
+    set(POT_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/pot")
+    set(PO_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
     remove_cmake_message_indent()
     message("")
     message("From: ${POT_DIR}/")

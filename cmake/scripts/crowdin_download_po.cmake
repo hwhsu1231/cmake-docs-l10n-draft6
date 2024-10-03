@@ -46,9 +46,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
 
 
     message(STATUS "Running 'msgmerge' command to sync translations from crowdin to local...")
-    set(CROWDIN_PO_DIR  "${PROJ_L10N_VERSION_CROWDIN_DIR}/${_LANGUAGE}/LC_MESSAGES")
-    set(LOCALE_PO_DIR   "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}/LC_MESSAGES")
-    set(LOCALE_POT_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/pot/LC_MESSAGES")
+    set(CROWDIN_PO_DIR  "${PROJ_L10N_VERSION_CROWDIN_DIR}/${_LANGUAGE}")
+    set(LOCALE_PO_DIR   "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
+    set(LOCALE_POT_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/pot")
     remove_cmake_message_indent()
     message("")
     message("CROWDIN_PO_DIR = ${CROWDIN_PO_DIR}")
