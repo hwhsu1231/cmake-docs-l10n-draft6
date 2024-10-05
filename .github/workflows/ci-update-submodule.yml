@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: ci-update-submodules
+name: ci-update-submodule
 
 on:
   schedule:
@@ -74,7 +74,7 @@ jobs:
       matrix: 
         SUBMODULE: ${{ fromJSON(needs.get-matrix.outputs.SUBMODULE_LIST) }}
       fail-fast: false
-    uses: ./.github/workflows/use-update-submodules.yml
+    uses: ./.github/workflows/use-update-submodule.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}

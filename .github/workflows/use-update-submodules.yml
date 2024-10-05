@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: use-update-submodules
+name: use-update-submodule
 
 on:
   workflow_call:
@@ -35,7 +35,7 @@ on:
         required: true
 
 jobs:
-  update-submodules:
+  update-submodule:
     runs-on: ${{ inputs.RUNNER }}
     steps:
       - name: Check Contexts, Inputs, and Secrets
