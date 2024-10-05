@@ -5,7 +5,7 @@ name: ci-crowdin-document
 
 on:
   push:
-    branches: 
+    branches:
       - 'source'
     paths:
       - 'docs/ACKNOWLEDGEMENTS.md'

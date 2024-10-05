@@ -127,7 +127,7 @@ jobs:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
       cancel-in-progress: true
     strategy:
-      matrix: 
+      matrix:
         VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false

@@ -5,7 +5,7 @@ name: ci-check-pr-status
 
 on:
   pull_request:
-    types: 
+    types:
       - opened
       - synchronize
       - reopened

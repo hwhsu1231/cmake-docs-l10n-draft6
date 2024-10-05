@@ -65,7 +65,7 @@ jobs:
         with:
           cwd: '.'
           add: '.'
-          pull: '--rebase --autostash'  # 
+          pull: '--rebase --autostash'  #
           author_name: docs-l10n[bot]
           author_email: 157310748+docs-l10n[bot]@users.noreply.github.com
           message: |

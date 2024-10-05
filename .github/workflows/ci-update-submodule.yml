@@ -71,7 +71,7 @@ jobs:
       group: ${{ github.workflow }}-${{ matrix.SUBMODULE }}
       cancel-in-progress: true
     strategy:
-      matrix: 
+      matrix:
         SUBMODULE: ${{ fromJSON(needs.get-matrix.outputs.SUBMODULE_LIST) }}
       fail-fast: false
     uses: ./.github/workflows/use-update-submodule.yml

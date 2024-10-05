@@ -113,7 +113,7 @@ jobs:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}
       cancel-in-progress: true
     strategy:
-      matrix: 
+      matrix:
         VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
       fail-fast: false
     uses: ./.github/workflows/use-deploy-po-version.yml

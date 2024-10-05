@@ -131,13 +131,13 @@ jobs:
   matrix:
     needs: [ 'precondition', 'get-matrix' ]
     if: inputs.DEPLOY_ONLY == 'false' &&
-        ( ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) || 
+        ( ( github.event_name == 'workflow_dispatch' && inputs.TYPE == 'matrix' ) ||
           ( github.event_name == 'schedule' ) )
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.VERSION }}-${{ matrix.LANGUAGE }}
       cancel-in-progress: true
     strategy:
-      matrix: 
+      matrix:
         VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
         LANGUAGE: [ 'all' ]
       fail-fast: false
