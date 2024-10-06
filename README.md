@@ -29,21 +29,29 @@ Localization of CMake Documentation
 Table of Contents
 </h2>
 
-- <a href="#introduction">Introduction</a>
-- <a href="#progress-of-translations">Progress of Translations</a>
-- <a href="#preview-translations">Preview Translations</a>
-  - <a href="#preview-in-local-build">Preview in Local Build</a>
-  - <a href="#preview-in-gh-pages">Preview in GitHub Pages</a>
-- <a href="#licenses">Licenses</a>
-- <a href="#translation-disclaimer">Translation Disclaimer</a>
-- <a href="#about-author">Maintainers List</a>
-- <a href="#support-this-project">Support This Project</a>
-- <a href="#sponsorship">Sponsorship</a>
-- <a href="#contributors-list">Contributors List</a>
-  - <a href="#code-contributors">Code Contributors</a>
-  - <a href="#translation-contributors">Translation Contributors</a>
-  - <a href="#financial-contributors">Financial Contributors</a>
-- <a href="#acknowledgements">Acknowledgements</a>
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#progress-of-translations">Progress of Translations</a></li>
+  <li><a href="#preview-translations">Preview Translations</a>
+    <ul>
+      <li><a href="#preview-in-local-build">Preview in Local Build</a></li>
+      <li><a href="#preview-in-gh-pages">Preview in GitHub Pages</a></li>
+    </ul>
+  </li>
+  <li><a href="#licenses">Licenses</a></li>
+  <li><a href="#translation-disclaimer">Translation Disclaimer</a></li>
+  <li><a href="#about-author">Maintainers List</a></li>
+  <li><a href="#support-this-project">Support This Project</a></li>
+  <li><a href="#sponsorship">Sponsorship</a></li>
+  <li><a href="#contributors-list">Contributors List</a>
+    <ul>
+      <li><a href="#code-contributors">Code Contributors</a></li>
+      <li><a href="#translation-contributors">Translation Contributors</a></li>
+      <li><a href="#financial-contributors">Financial Contributors</a></li>
+    </ul>
+  </li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ul>
 
 <h2 id="introduction"><a href="#table-of-contents">
 Introduction
