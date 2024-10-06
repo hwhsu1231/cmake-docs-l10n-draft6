@@ -202,6 +202,8 @@ jobs:
           message: |
             pot(${{ inputs.VERSION }}): update pot from Sphinx
 
+            Update .pot files from Sphinx.
+
             Before: ${{ steps.pot-before.outputs.VERSION_REF }}
             After: ${{ steps.pot-after.outputs.VERSION_REF }}
 

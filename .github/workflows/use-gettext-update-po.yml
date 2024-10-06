@@ -156,6 +156,8 @@ jobs:
           message: |
             po(${{ inputs.VERSION }}): update po from Gettext
 
+            Update .po files from Gettext.
+
             Before: ${{ steps.po-before.outputs.VERSION_REF }}
             After: ${{ steps.po-after.outputs.VERSION_REF }}
 
