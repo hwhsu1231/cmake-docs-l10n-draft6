@@ -28,21 +28,29 @@ CMake 文件的在地化
 Table of Contents
 </h2>
 
-- <a href="#introduction">介紹</a>
-- <a href="#progress-of-translations">翻譯進度</a>
-- <a href="#preview-translations">預覽翻譯</a>
-  - <a href="#preview-in-local-build">在本機中預覽</a>
-  - <a href="#preview-in-gh-pages">在 GitHub 頁面中預覽</a>
-- <a href="#licenses">授權條款</a>
-- <a href="#translation-disclaimer">Translation Disclaimer</a>
-- <a href="#about-author">維護者列表</a>
-- <a href="#support-this-project">支援這個專案</a>
-- <a href="#sponsorship">贊助</a>
-- <a href="#contributors-list">貢獻者列表</a>
-  - <a href="#code-contributors">程式碼貢獻者</a>
-  - <a href="#translation-contributors">翻譯貢獻者</a>
-  - <a href="#financial-contributors">財務貢獻者</a>
-- <a href="#acknowledgements">Acknowledgements</a>
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#progress-of-translations">Progress of Translations</a></li>
+  <li><a href="#preview-translations">Preview Translations</a>
+    <ul>
+      <li><a href="#preview-in-local-build">Preview in Local Build</a></li>
+      <li><a href="#preview-in-gh-pages">Preview in GitHub Pages</a></li>
+    </ul>
+  </li>
+  <li><a href="#licenses">Licenses</a></li>
+  <li><a href="#translation-disclaimer">Translation Disclaimer</a></li>
+  <li><a href="#about-author">Maintainers List</a></li>
+  <li><a href="#support-this-project">Support This Project</a></li>
+  <li><a href="#sponsorship">Sponsorship</a></li>
+  <li><a href="#contributors-list">Contributors List</a>
+    <ul>
+      <li><a href="#code-contributors">Code Contributors</a></li>
+      <li><a href="#translation-contributors">Translation Contributors</a></li>
+      <li><a href="#financial-contributors">Financial Contributors</a></li>
+    </ul>
+  </li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ul>
 
 <h2 id="introduction"><a href="#table-of-contents">
 介紹
