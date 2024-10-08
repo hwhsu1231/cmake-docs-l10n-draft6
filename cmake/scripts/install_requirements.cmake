@@ -179,8 +179,8 @@ message("")
 restore_cmake_message_indent()
 
 
-set(Python_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Python   MODULE REQUIRED)
+set(Python_ROOT_DIR     "${PROJ_VENV_DIR}")
+find_package(Python     MODULE REQUIRED)
 message(STATUS "Running 'python -c \"import sys; print('\\n'.join(sys.path))\"' command to check python system paths...")
 remove_cmake_message_indent()
 message("")
@@ -190,8 +190,10 @@ execute_process(
     ECHO_ERROR_VARIABLE)
 message("")
 restore_cmake_message_indent()
-set(Sphinx_ROOT_DIR "${PROJ_VENV_DIR}")
-find_package(Sphinx   MODULE REQUIRED)
+
+
+set(Sphinx_ROOT_DIR     "${PROJ_VENV_DIR}")
+find_package(Sphinx     MODULE REQUIRED)
 
 
 file(WRITE "${PREV_REFERENCE_TXT_PATH}" "${CURRENT_REFERENCE}")

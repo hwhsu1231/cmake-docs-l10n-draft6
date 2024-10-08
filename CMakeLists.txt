@@ -4,9 +4,9 @@
 cmake_minimum_required(VERSION 3.25)
 project(cmake-docs-l10n NONE)
 
-#[================[
+#[============================================================[
   Cache Variables.
-#]================]
+#]============================================================]
 
 set(LANGUAGE "all"
     CACHE STRING "Language Code for the Sphinx documentation system.")
@@ -84,9 +84,9 @@ set(GETTEXT_ADDITIONAL_TARGETS "index,literal-block"
     # A comma-separated list
     # See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-gettext_additional_targets for details.
 
-#[============================[
+#[============================================================[
   Directory-Related Variables.
-#]============================]
+#]============================================================]
 
 set(PROJ_SOURCE_DIR                 "${PROJECT_SOURCE_DIR}")
 set(PROJ_BINARY_DIR                 "${PROJECT_BINARY_DIR}")
@@ -106,9 +106,9 @@ set(PROJ_L10N_VERSION_DIR           "${PROJ_L10N_DIR}/${VERSION}")
 set(PROJ_L10N_VERSION_LOCALE_DIR    "${PROJ_L10N_VERSION_DIR}/locale")
 set(PROJ_L10N_VERSION_CROWDIN_DIR   "${PROJ_L10N_VERSION_DIR}/.crowdin")
 
-#[====================[
+#[============================================================[
   Configuration Files.
-#]====================]
+#]============================================================]
 
 set(LANGUAGES_JSON_PATH             "${PROJ_SOURCE_DIR}/languages.json")
 set(PREV_PACKAGES_TXT_PATH          "${PROJ_VENV_DIR}/prev/packages.txt")
@@ -117,20 +117,20 @@ set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/references.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
 
-set(CMAKE_MODULE_PATH "${PROJ_CMAKE_MODULES_DIR}")
+set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
 include(JsonUtils)
 include(LogUtils)
 
-#[=======================================[
+#[============================================================[
   Read LANGUAGE_LIST from languages.json.
-#]=======================================]
+#]============================================================]
 
 file(READ "${LANGUAGES_JSON_PATH}"  LANGUAGES_JSON_CNT)
 get_members_of_json_object(
     IN_JSON_OBJECT      "${LANGUAGES_JSON_CNT}"
     OUT_MEMBER_NAMES    LANGUAGE_LIST)
 
-#[====================================[
+#[============================================================[
   Validate the VERSION cache variable.
   - For "git-master":
     - Set VERSION_TYPE    to "branch"
@@ -139,11 +139,11 @@ get_members_of_json_object(
     - Set VERSION_TYPE    to "tag"
     - Set TAG_PATTERN     to "^v([0-9]+)\\.([0-9]+)\\.([0-9]+)(-rc[1-9][0-9]*)?$"
     - Set TAG_SUFFIX      to "-rc"
-  - For "v3.x":
+  - For "vX.Y":
     - Set VERSION_TYPE    to "tag"
-    - Set TAG_PATTERN     to "^v3\\.x\\.([0-9]+)(-rc[1-9][0-9]*)?$"
+    - Set TAG_PATTERN     to "^vX\\.Y\\.([0-9]+)(-rc[1-9][0-9]*)?$"
     - Set TAG_SUFFIX      to "-rc"
-#]====================================]
+#]============================================================]
 
 if (VERSION MATCHES     "^git-master$")
     set(VERSION_TYPE    "branch")
@@ -161,9 +161,9 @@ else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
 endif()
 
-#[=====================================[
+#[============================================================[
   Validate the LANGUAGE cache variable.
-#]=====================================]
+#]============================================================]
 
 set(LANGUAGE_IS_VALID FALSE)
 if(LANGUAGE STREQUAL "all")
@@ -180,9 +180,9 @@ if(NOT LANGUAGE_IS_VALID)
     message(FATAL_ERROR "Invalid LANGUAGE value. (${LANGUAGE})")
 endif()
 
-#[===========================================[
+#[============================================================[
   Validate the MODE_OF_UPDATE cache variable.
-#]===========================================]
+#]============================================================]
 
 if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND
     NOT MODE_OF_UPDATE STREQUAL "ALWAYS" AND
@@ -190,19 +190,19 @@ if (NOT MODE_OF_UPDATE STREQUAL "COMPARE" AND
     message(FATAL_ERROR "Invalid MODE_OF_UPDATE value. (${MODE_OF_UPDATE})")
 endif()
 
-#[============================================[
+#[============================================================[
   Validate the MODE_OF_INSTALL cache variable.
-#]============================================]
+#]============================================================]
 
 if (NOT MODE_OF_INSTALL STREQUAL "COMPARE" AND
     NOT MODE_OF_INSTALL STREQUAL "ALWAYS")
     message(FATAL_ERROR "Invalid MODE_OF_INSTALL value. (${MODE_OF_INSTALL})")
 endif()
 
-#[====================================================================[
+#[============================================================[
   Initialize VERSION_OF_XXX if CACHE{VERSION_OF_XXX} is "[default]".
   Set VERSION_OF_XXX to $CACHE{VERSION_OF_XX} if it's not "[default]".
-#]====================================================================]
+#]============================================================]
 
 if (VERSION MATCHES "^git-master$")
     set(VERSION_OF_PYTHON "3.10")
@@ -233,47 +233,47 @@ if(NOT "$CACHE{VERSION_OF_SPHINX}" STREQUAL "[default]")
     set(VERSION_OF_SPHINX "$CACHE{VERSION_OF_SPHINX}")
 endif()
 
-#[====================[
+#[============================================================[
   Check prerequisites.
-#]====================]
+#]============================================================]
 
-find_package(Git      MODULE QUIET)
-find_package(Conda    MODULE QUIET)
-find_package(Gettext  MODULE QUIET)
-find_package(Crowdin  MODULE QUIET)
+find_package(Git        MODULE QUIET)
+find_package(Conda      MODULE QUIET)
+find_package(Gettext    MODULE QUIET)
+find_package(Crowdin    MODULE QUIET)
 
-#[==========================================================[
+#[============================================================[
   Create Git Worktree for 'l10n' branch in ${PROJ_L10N_DIR}.
-#]==========================================================]
+#]============================================================]
 
 create_git_worktree_for_l10n_branch(
     IN_REMOTE_URL       "${REMOTE_URL_OF_L10N}"
     IN_REPO_PATH        "${PROJ_SOURCE_DIR}"
     IN_WORKTREE_PATH    "${PROJ_L10N_DIR}")
 
-#[==============================================================[
+#[============================================================[
   Initialize a references.json file in ${PROJ_L10N_VERSION_DIR}.
-#]==============================================================]
+#]============================================================]
 
 init_references_json_file(
-    IN_FILEPATH     "${REFERENCES_JSON_PATH}"
-    IN_VERSION      "${VERSION}"
-    IN_TYPE         "${VERSION_TYPE}"
-    IN_MODE         "language"
-    IN_LANGUAGE     "${LANGUAGE_LIST}")
+    IN_FILEPATH         "${REFERENCES_JSON_PATH}"
+    IN_VERSION          "${VERSION}"
+    IN_TYPE             "${VERSION_TYPE}"
+    IN_MODE             "language"
+    IN_LANGUAGE         "${LANGUAGE_LIST}")
 
-#[=========================================================[
+#[============================================================[
   Configure a crowdin.yml file in ${PROJ_L10N_VERSION_DIR}.
-#]=========================================================]
+#]============================================================]
 
 configure_file(
     "${PROJ_CMAKE_TEMPLATES_DIR}/crowdin.yml.in"
     "${CROWDIN_YML_PATH}"
     COPYONLY)
 
-#[==================[
+#[============================================================[
   Print Information.
-#]==================]
+#]============================================================]
 
 message(STATUS "---------- Cache Variables ----------")
 message(STATUS "VERSION                       = ${VERSION}")
@@ -289,9 +289,9 @@ message(STATUS "VERSION_COMPENDIUM            = ${VERSION_COMPENDIUM}")
 message(STATUS "VERSION_OF_PYTHON             = ${VERSION_OF_PYTHON} (CACHE: $CACHE{VERSION_OF_PYTHON})")
 message(STATUS "VERSION_OF_SPHINX             = ${VERSION_OF_SPHINX} (CACHE: $CACHE{VERSION_OF_SPHINX})")
 message(STATUS "SPHINX_BUILDER                = ${SPHINX_BUILDER}")
-message(STATUS "SPHINX_CONSOLE_LOCALE         = ${SPHINX_CONSOLE_LOCALE}")
-message(STATUS "SPHINX_VERBOSE_LEVEL          = ${SPHINX_VERBOSE_LEVEL}")
 message(STATUS "SPHINX_JOB_NUMBER             = ${SPHINX_JOB_NUMBER}")
+message(STATUS "SPHINX_VERBOSE_LEVEL          = ${SPHINX_VERBOSE_LEVEL}")
+message(STATUS "SPHINX_CONSOLE_LOCALE         = ${SPHINX_CONSOLE_LOCALE}")
 message(STATUS "GETTEXT_WRAP_WIDTH            = ${GETTEXT_WRAP_WIDTH}")
 message(STATUS "GETTEXT_ADDITIONAL_TARGETS    = ${GETTEXT_ADDITIONAL_TARGETS}")
 message(STATUS "---------- Directory-Related Variables ----------")
@@ -343,22 +343,22 @@ message(STATUS "Crowdin_VERSION               = ${Crowdin_VERSION}")
 message(STATUS "Crowdin_EXECUTABLE            = ${Crowdin_EXECUTABLE}")
 message(STATUS "----------------------------------------")
 
-#[=========================================[
+#[============================================================[
   Escape ';' characters for list variables.
-#]=========================================]
+#]============================================================]
 
 string(REPLACE ";" "\\\\;" LANGUAGE_LIST "${LANGUAGE_LIST}")
 
-#[============================================[
+#[============================================================[
   Environment variables passed to script mode.
-#]============================================]
+#]============================================================]
 
 set(SCRIPT_MODE_ENV
     PYTHONNOUSERSITE=1)
 
-#[======================================[
+#[============================================================[
   Cache variables passed to script mode.
-#]======================================]
+#]============================================================]
 
 set(SCRIPT_MODE_CACHE
     # [Cache Variables]
@@ -375,9 +375,9 @@ set(SCRIPT_MODE_CACHE
     -D VERSION_OF_PYTHON=${VERSION_OF_PYTHON}
     -D VERSION_OF_SPHINX=${VERSION_OF_SPHINX}
     -D SPHINX_BUILDER=${SPHINX_BUILDER}
-    -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
-    -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}
     -D SPHINX_JOB_NUMBER=${SPHINX_JOB_NUMBER}
+    -D SPHINX_VERBOSE_LEVEL=${SPHINX_VERBOSE_LEVEL}
+    -D SPHINX_CONSOLE_LOCALE=${SPHINX_CONSOLE_LOCALE}
     -D GETTEXT_WRAP_WIDTH=${GETTEXT_WRAP_WIDTH}
     -D GETTEXT_ADDITIONAL_TARGETS=${GETTEXT_ADDITIONAL_TARGETS}
     # [Directory-Related Variables]
@@ -412,9 +412,9 @@ set(SCRIPT_MODE_CACHE
     -D TAG_PATTERN=${TAG_PATTERN}
     -D TAG_SUFFIX=${TAG_SUFFIX})
 
-#[====================[
+#[============================================================[
   Fundamental targets.
-#]====================]
+#]============================================================]
 
 add_custom_target(prepare_repositories
     COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
@@ -446,9 +446,9 @@ add_custom_target(sphinx_build_docs
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/sphinx_build_docs.cmake
     VERBATIM)
 
-#[=================[
+#[============================================================[
   Optional targets.
-#]=================]
+#]============================================================]
 
 add_custom_target(gettext_statistic_po
     COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}

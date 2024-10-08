@@ -194,4 +194,5 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
 endforeach()
 unset(_LANGUAGE)
 
+
 file(WRITE "${STATISTIC_TXT_PATH}" "${STATISTIC_TXT_CNT}")
