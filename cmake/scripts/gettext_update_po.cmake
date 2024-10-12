@@ -95,9 +95,9 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             message("  [ref.pot]    ${POT_FILE}")
             execute_process(
                 COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
-                        --lang ${_LANGUAGE}
-                        --width ${GETTEXT_WRAP_WIDTH}
-                        --backup off
+                        --lang=${_LANGUAGE}
+                        --width=${GETTEXT_WRAP_WIDTH}
+                        --backup=off
                         --update
                         --force-po
                         --no-fuzzy-matching
