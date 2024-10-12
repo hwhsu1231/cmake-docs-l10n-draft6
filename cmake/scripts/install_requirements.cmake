@@ -50,7 +50,7 @@ endif()
 remove_cmake_message_indent()
 message("")
 message(".latest.pot = ${LATEST_POT_OBJECT}")
-message(".pot = ${CURRENT_POT_OBJECT}")
+message(".current.pot = ${CURRENT_POT_OBJECT}")
 message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
@@ -68,13 +68,6 @@ switch_to_git_reference_on_branch(
     IN_BRANCH       "current")
 message("")
 restore_cmake_message_indent()
-
-
-#[======================================================================[
-  1. Determining whether to install the requirements.
-  2. Run 'conda install' command to intall dependencies.
-  3. Run 'pip install' command to install the requirements.
-#]======================================================================]
 
 
 message(STATUS "Determining whether to install the requirements...")

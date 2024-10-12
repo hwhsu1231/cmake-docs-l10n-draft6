@@ -54,7 +54,7 @@ endif()
 remove_cmake_message_indent()
 message("")
 message(".latest.pot = ${LATEST_POT_OBJECT}")
-message(".pot = ${CURRENT_POT_OBJECT}")
+message(".current.pot = ${CURRENT_POT_OBJECT}")
 message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
@@ -115,10 +115,10 @@ endif()
 
 
 message(STATUS "Running 'sphinx-build' command with 'gettext' builder to generate .pot files...")
-remove_cmake_message_indent()
-message("")
 set(ENV_LANG                "${SPHINX_CONSOLE_LOCALE}")
 set(ENV_KEY_VALUE_LIST      LANG=${ENV_LANG})
+remove_cmake_message_indent()
+message("")
 execute_process(
     COMMAND ${CMAKE_COMMAND} -E env ${ENV_KEY_VALUE_LIST}
             ${Sphinx_BUILD_EXECUTABLE}
