@@ -182,7 +182,13 @@ jobs:
 
   deploy:
     needs: [ 'matrix', 'single' ]
-    if: always()
+    # if: always()
+    if: always() && (
+          (needs.matrix.result == 'skipped' && needs.single.result == 'skipped') ||
+          (needs.matrix.result == 'success' || needs.single.result == 'success')
+        ) && (
+          needs.matrix.result != 'failure' && needs.single.result != 'failure'
+        )
     runs-on: ubuntu-latest
     # https://stackoverflow.com/questions/75319573/failing-to-deploy-github-pages-because-of-write-permission
     permissions:
