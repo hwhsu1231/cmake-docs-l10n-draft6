@@ -184,8 +184,8 @@ jobs:
     needs: [ 'matrix', 'single' ]
     # if: always()
     if: always() && (
-          (needs.matrix.result == 'skipped' && needs.single.result == 'skipped') ||
-          (needs.matrix.result == 'success' || needs.single.result == 'success')
+          ( needs.matrix.result == 'skipped' && needs.single.result == 'skipped' ) ||
+          ( needs.matrix.result == 'success' || needs.single.result == 'success' )
         ) && (
           needs.matrix.result != 'failure' && needs.single.result != 'failure'
         )
