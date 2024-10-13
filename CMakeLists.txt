@@ -117,9 +117,29 @@ set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/references.json")
 set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
 
+#[============================================================[
+
+#]============================================================]
+
 set(CMAKE_MODULE_PATH   "${PROJ_CMAKE_MODULES_DIR}")
 include(JsonUtils)
 include(LogUtils)
+
+#[============================================================[
+
+#]============================================================]
+
+if(SPHINX_VERBOSE_LEVEL GREATER 0)
+    set(SPHINX_VERBOSE_ARGS "-")
+    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
+    foreach(INDEX RANGE ${REPEAT_COUNT})
+        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
+    endforeach()
+    unset(INDEX)
+    unset(REPEAT_COUNT)
+else()
+    set(SPHINX_VERBOSE_ARGS "")
+endif()
 
 #[============================================================[
   Read LANGUAGE_LIST from languages.json.
@@ -276,8 +296,8 @@ configure_file(
 #]============================================================]
 
 message(STATUS "---------- Cache Variables ----------")
-message(STATUS "VERSION                       = ${VERSION}")
 message(STATUS "LANGUAGE                      = ${LANGUAGE}")
+message(STATUS "VERSION                       = ${VERSION}")
 message(STATUS "AUTO_DEPEND                   = ${AUTO_DEPEND}")
 message(STATUS "REMOVE_REDUNDANT              = ${REMOVE_REDUNDANT}")
 message(STATUS "MODE_OF_UPDATE                = ${MODE_OF_UPDATE}")
@@ -320,6 +340,7 @@ message(STATUS "REFERENCES_JSON_PATH          = ${REFERENCES_JSON_PATH}")
 message(STATUS "CROWDIN_YML_PATH              = ${CROWDIN_YML_PATH}")
 message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
 message(STATUS "---------- Other Variables ----------")
+message(STATUS "SPHINX_VERBOSE_ARGS           = ${SPHINX_VERBOSE_ARGS}")
 message(STATUS "LANGUAGE_LIST                 = ${LANGUAGE_LIST}")
 message(STATUS "VERSION_TYPE                  = ${VERSION_TYPE}")
 message(STATUS "BRANCH_NAME                   = ${BRANCH_NAME}")
@@ -406,6 +427,7 @@ set(SCRIPT_MODE_CACHE
     -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
     -D STATISTIC_TXT_PATH=${STATISTIC_TXT_PATH}
     # [Other Variables]
+    -D SPHINX_VERBOSE_ARGS=${SPHINX_VERBOSE_ARGS}
     -D LANGUAGE_LIST=${LANGUAGE_LIST}
     -D VERSION_TYPE=${VERSION_TYPE}
     -D BRANCH_NAME=${BRANCH_NAME}

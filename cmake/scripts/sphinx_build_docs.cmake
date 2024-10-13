@@ -49,19 +49,6 @@ file(RELATIVE_PATH LOCALE_TO_SOURCE_DIR
     "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
 
 
-if(SPHINX_VERBOSE_LEVEL GREATER 0)
-    set(SPHINX_VERBOSE_ARGS "-")
-    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
-    foreach(INDEX RANGE ${REPEAT_COUNT})
-        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
-    endforeach()
-    unset(INDEX)
-    unset(REPEAT_COUNT)
-else()
-    set(SPHINX_VERBOSE_ARGS "")
-endif()
-
-
 if(NOT LANGUAGE STREQUAL "all")
     set(LANGUAGE_LIST "${LANGUAGE}")
 endif()
@@ -162,3 +149,10 @@ unset(_LANGUAGE)
 
 
 message(STATUS "The '${SPHINX_BUILDER}' documentation is built succesfully!")
+remove_cmake_message_indent()
+message("")
+foreach(_LANGUAGE ${LANGUAGE_LIST})
+    message("${_LANGUAGE} : ${PROJ_OUT_BUILDER_DIR}/${_LANGUAGE}/${VERSION}/index.html")
+endforeach()
+message("")
+restore_cmake_message_indent()

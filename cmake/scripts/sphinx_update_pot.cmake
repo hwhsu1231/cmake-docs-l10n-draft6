@@ -101,19 +101,6 @@ else()
 endif()
 
 
-if(SPHINX_VERBOSE_LEVEL GREATER 0)
-    set(SPHINX_VERBOSE_ARGS "-")
-    math(EXPR REPEAT_COUNT "${SPHINX_VERBOSE_LEVEL} - 1")
-    foreach(INDEX RANGE ${REPEAT_COUNT})
-        set(SPHINX_VERBOSE_ARGS "${SPHINX_VERBOSE_ARGS}v")
-    endforeach()
-    unset(INDEX)
-    unset(REPEAT_COUNT)
-else()
-    set(SPHINX_VERBOSE_ARGS "")
-endif()
-
-
 message(STATUS "Running 'sphinx-build' command with 'gettext' builder to generate .pot files...")
 set(ENV_LANG                "${SPHINX_CONSOLE_LOCALE}")
 set(ENV_KEY_VALUE_LIST      LANG=${ENV_LANG})
