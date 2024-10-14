@@ -9,12 +9,12 @@ project(cmake-docs-l10n NONE)
 #]============================================================]
 
 set(LANGUAGE "all"
-    CACHE STRING "Language Code for the Sphinx documentation system.")
+    CACHE STRING "Language Code for the documentation.")
     # Possible values are "all" and languages listed in languages.json.
     # See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language for details.
 
 set(VERSION "git-master"
-    CACHE STRING "Current version for the CMake documentation.")
+    CACHE STRING "Current version for the documentation.")
     # Possible values are "git-master", "latest", and "v3.x".
 
 set(MODE_OF_UPDATE "NEVER"
