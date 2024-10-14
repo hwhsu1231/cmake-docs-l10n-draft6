@@ -18,7 +18,9 @@ set(PADDING_LENGTH 3)
 set(STATISTIC_TXT_CNT "")
 foreach(_LANGUAGE ${LANGUAGE_LIST})
     message(STATUS "Counting the percentage for '${_LANGUAGE}' language...")
-
+    #
+    # Initialize the statistical infomation.
+    #
     set(NUM_OF_PO_COMPLETED 0)      # Number     of completed   po    files
     set(NUM_OF_PO_PROGRESSING 0)    # Number     of progressing po    files
     set(NUM_OF_PO_UNSTARTED 0)      # Number     of unstarted   po    files

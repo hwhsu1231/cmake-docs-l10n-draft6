@@ -20,7 +20,7 @@ if(CMAKE_HOST_WIN32)
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if(RES_VAR EQUAL 0)
-        # It's adiministrator privileges
+        # It's adiministrator privileges.
     else()
         find_program(SUDO_COMMAND gsudo)
         if(NOT SUDO_COMMAND)
