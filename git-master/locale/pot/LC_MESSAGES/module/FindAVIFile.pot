@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,18 +22,19 @@ msgid "FindAVIFile"
 msgstr ""
 
 #: ../../../../Modules/FindAVIFile.cmake:8
-msgid "Locate AVIFILE library and include paths"
-msgstr ""
-
-#: ../../../../Modules/FindAVIFile.cmake:10
 msgid ""
-"AVIFILE (https://avifile.sourceforge.net/) is a set of libraries for i386 "
-"machines to use various AVI codecs.  Support is limited beyond Linux.  "
-"Windows provides native AVI support, and so doesn't need this library.  This "
-"module defines"
+"Locate `AVIFILE <https://avifile.sourceforge.net/>`_ library and include "
+"paths."
 msgstr ""
 
-#: ../../../../Modules/FindAVIFile.cmake:17
+#: ../../../../Modules/FindAVIFile.cmake:11
+msgid ""
+"AVIFILE is a set of libraries for i386 machines to use various AVI codecs.  "
+"Support is limited beyond Linux.  Windows provides native AVI support, and "
+"so doesn't need this library.  This module defines"
+msgstr ""
+
+#: ../../../../Modules/FindAVIFile.cmake:18
 msgid ""
 "AVIFILE_INCLUDE_DIR, where to find avifile.h , etc.\n"
 "AVIFILE_LIBRARIES, the libraries to link against\n"

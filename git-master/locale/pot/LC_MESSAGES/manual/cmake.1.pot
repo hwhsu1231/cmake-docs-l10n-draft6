@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 11:42+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgid ""
 " cmake --find-package [<options>]\n"
 "\n"
 "`Run a Workflow Preset`_\n"
-" cmake --workflow [<options>]\n"
+" cmake --workflow <options>\n"
 "\n"
 "`View Help`_\n"
 " cmake --help[-<topic>]"
@@ -2074,7 +2074,7 @@ msgid ""
 msgstr ""
 
 #: ../../../manual/cmake.1.rst:1395
-msgid "cmake --workflow [<options>]"
+msgid "cmake --workflow <options>"
 msgstr ""
 
 #: ../../../manual/cmake.1.rst:1399
@@ -2093,31 +2093,42 @@ msgid ""
 "more details."
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1416
+#: ../../../manual/cmake.1.rst:1414
+msgid ""
+"When following immediately after the ``--workflow`` option, the ``--preset`` "
+"argument can be omitted and just the ``<preset>`` name can be given.  This "
+"means the following syntax is valid:"
+msgstr ""
+
+#: ../../../manual/cmake.1.rst:1419
+msgid "$ cmake --workflow my-preset"
+msgstr ""
+
+#: ../../../manual/cmake.1.rst:1425
 msgid ""
 "Lists the available workflow presets. The current working directory must "
 "contain CMake preset files."
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1421
+#: ../../../manual/cmake.1.rst:1430
 msgid ""
 "Perform a fresh configuration of the build tree, which has the same effect "
 "as :option:`cmake --fresh`."
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1425
+#: ../../../manual/cmake.1.rst:1434
 msgid "View Help"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1429
+#: ../../../manual/cmake.1.rst:1438
 msgid "To print selected pages from the CMake documentation, use"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1431
+#: ../../../manual/cmake.1.rst:1440
 msgid "cmake --help[-<topic>]"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1435
+#: ../../../manual/cmake.1.rst:1444
 msgid "with one of the following options:"
 msgstr ""
 
@@ -2329,31 +2340,31 @@ msgid ""
 "format. |file|"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1439
+#: ../../../manual/cmake.1.rst:1448
 msgid "To view the presets available for a project, use"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1441
+#: ../../../manual/cmake.1.rst:1450
 msgid "cmake <source-dir> --list-presets"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1449
+#: ../../../manual/cmake.1.rst:1458
 msgid "Return Value (Exit Code)"
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1451
+#: ../../../manual/cmake.1.rst:1460
 msgid ""
 "Upon regular termination, the :program:`cmake` executable returns the exit "
 "code ``0``."
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1453
+#: ../../../manual/cmake.1.rst:1462
 msgid ""
 "If termination is caused by the command :command:`message(FATAL_ERROR)`, or "
 "another error condition, then a non-zero exit code is returned."
 msgstr ""
 
-#: ../../../manual/cmake.1.rst:1458
+#: ../../../manual/cmake.1.rst:1467
 msgid "See Also"
 msgstr ""
 

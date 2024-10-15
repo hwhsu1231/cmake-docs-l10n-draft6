@@ -12,17 +12,26 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../variable/CTEST_RUN_CURRENT_SCRIPT.rst:2
-msgid "CTEST_RUN_CURRENT_SCRIPT"
+#: ../../../variable/CMAKE_HOST_EXECUTABLE_SUFFIX.rst:2
+msgid "CMAKE_HOST_EXECUTABLE_SUFFIX"
 msgstr ""
 
-#: ../../../variable/CTEST_RUN_CURRENT_SCRIPT.rst:4
+#: ../../../variable/CMAKE_HOST_EXECUTABLE_SUFFIX.rst:6
 msgid ""
-"Removed.  This variable once supported an undocumented feature that has "
-"since been removed."
+"The suffix for executables on the host platform.  This may differ from the "
+"suffix for the target platform, :variable:`CMAKE_EXECUTABLE_SUFFIX`."
+msgstr ""
+
+#: ../../../variable/CMAKE_HOST_EXECUTABLE_SUFFIX.rst:9
+msgid ""
+"The suffix to use for the end of an executable filename if any, ``.exe`` on "
+"Windows."
+msgstr ""
+
+#: ../../../variable/CMAKE_HOST_EXECUTABLE_SUFFIX.rst:12
+msgid "See also :variable:`CMAKE_EXECUTABLE_SUFFIX`."
 msgstr ""

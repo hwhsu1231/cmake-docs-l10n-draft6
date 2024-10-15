@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -550,4 +550,35 @@ msgid ""
 "default will consider one name at a time and search every directory for it.  "
 "The ``NAMES_PER_DIR`` option tells this command to consider one directory at "
 "a time and search for all names in it."
+msgstr ""
+
+#: ../../../command/find_program.rst:45
+msgid "The set of files considered to be programs is platform-specific:"
+msgstr ""
+
+#: ../../../command/find_program.rst:47
+msgid ""
+"On Windows, filename suffixes are considered in order ``.com``, ``.exe``, "
+"and no suffix."
+msgstr ""
+
+#: ../../../command/find_program.rst:50
+msgid ""
+"On non-Windows systems, no filename suffix is considered, but files must "
+"have execute permission (see policy :policy:`CMP0109`)."
+msgstr ""
+
+#: ../../../command/find_program.rst:53
+msgid "To search for scripts, specify an extension explicitly:"
+msgstr ""
+
+#: ../../../command/find_program.rst:55
+msgid ""
+"if(WIN32)\n"
+"  set(_script_suffix .bat)\n"
+"else()\n"
+"  set(_script_suffix .sh)\n"
+"endif()\n"
+"\n"
+"find_program(MY_SCRIPT NAMES my_script${_script_suffix})"
 msgstr ""

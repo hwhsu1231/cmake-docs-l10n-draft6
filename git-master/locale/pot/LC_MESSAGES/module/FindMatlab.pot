@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 15:17+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -798,12 +798,12 @@ msgid ""
 msgstr ""
 
 #: ../../../../Modules/FindMatlab.cmake:948
-#: ../../../../Modules/FindMatlab.cmake:1061
+#: ../../../../Modules/FindMatlab.cmake:1065
 msgid "Function Parameters:"
 msgstr ""
 
 #: ../../../../Modules/FindMatlab.cmake:950
-#: ../../../../Modules/FindMatlab.cmake:1063
+#: ../../../../Modules/FindMatlab.cmake:1067
 msgid "``NAME``"
 msgstr ""
 
@@ -904,7 +904,7 @@ msgid ""
 "used as the working directory and the log location."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1039
+#: ../../../../Modules/FindMatlab.cmake:1043
 msgid ""
 "Adds a Matlab MEX target. This commands compiles the given sources with the "
 "current tool-chain in order to produce a MEX file. The final name of the "
@@ -913,7 +913,7 @@ msgid ""
 "passed to the :command:`add_library` or :command:`add_executable` command."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1046
+#: ../../../../Modules/FindMatlab.cmake:1050
 msgid ""
 "matlab_add_mex(\n"
 "    NAME <name>\n"
@@ -929,44 +929,44 @@ msgid ""
 ")"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1064
+#: ../../../../Modules/FindMatlab.cmake:1068
 msgid "name of the target."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1065
+#: ../../../../Modules/FindMatlab.cmake:1069
 msgid "``SRC``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1066
+#: ../../../../Modules/FindMatlab.cmake:1070
 msgid "list of source files."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1069
+#: ../../../../Modules/FindMatlab.cmake:1073
 msgid "``LINK_TO``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1068
+#: ../../../../Modules/FindMatlab.cmake:1072
 msgid ""
 "a list of additional link dependencies.  The target links to ``libmex`` and "
 "``libmx`` by default, unless the ``NO_IMPLICIT_LINK_TO_MATLAB_LIBRARIES`` "
 "option is passed."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1073
+#: ../../../../Modules/FindMatlab.cmake:1077
 msgid "``OUTPUT_NAME``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1072
+#: ../../../../Modules/FindMatlab.cmake:1076
 msgid ""
 "if given, overrides the default name. The default name is the name of the "
 "target without any prefix and with ``Matlab_MEX_EXTENSION`` suffix."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1079
+#: ../../../../Modules/FindMatlab.cmake:1083
 msgid "``DOCUMENTATION``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1076
+#: ../../../../Modules/FindMatlab.cmake:1080
 msgid ""
 "if given, the file ``file.txt`` will be considered as being the "
 "documentation file for the MEX file. This file is copied into the same "
@@ -975,11 +975,11 @@ msgid ""
 "the documentation contained in this file."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1089
+#: ../../../../Modules/FindMatlab.cmake:1093
 msgid "``R2017b`` or ``R2018a``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1084
+#: ../../../../Modules/FindMatlab.cmake:1088
 msgid ""
 "May be given to specify the version of the C API to use: ``R2017b`` "
 "specifies the traditional (separate complex) C API, and corresponds to the "
@@ -989,52 +989,52 @@ msgid ""
 "``R2017b``."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1095
+#: ../../../../Modules/FindMatlab.cmake:1099
 msgid "``MODULE`` or ``SHARED``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1094
+#: ../../../../Modules/FindMatlab.cmake:1098
 msgid "May be given to specify the type of library to be created."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1100
+#: ../../../../Modules/FindMatlab.cmake:1104
 msgid "``EXECUTABLE``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1100
+#: ../../../../Modules/FindMatlab.cmake:1104
 msgid ""
 "May be given to create an executable instead of a library. If no type is "
 "given explicitly, the type is ``SHARED``."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1104
+#: ../../../../Modules/FindMatlab.cmake:1108
 msgid "``EXCLUDE_FROM_ALL``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1103
+#: ../../../../Modules/FindMatlab.cmake:1107
 msgid ""
 "This option has the same meaning as for :prop_tgt:`EXCLUDE_FROM_ALL` and is "
 "forwarded to :command:`add_library` or :command:`add_executable` commands."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1111
+#: ../../../../Modules/FindMatlab.cmake:1115
 msgid "``NO_IMPLICIT_LINK_TO_MATLAB_LIBRARIES``"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1109
+#: ../../../../Modules/FindMatlab.cmake:1113
 msgid ""
 "This option permits to disable the automatic linking of MATLAB libraries, so "
 "that only the libraries that are actually required can be linked via the "
 "``LINK_TO`` option."
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1113
+#: ../../../../Modules/FindMatlab.cmake:1117
 msgid ""
 "The documentation file is not processed and should be in the following "
 "format:"
 msgstr ""
 
-#: ../../../../Modules/FindMatlab.cmake:1118
+#: ../../../../Modules/FindMatlab.cmake:1122
 msgid ""
 "% This is the documentation\n"
 "function ret = mex_target_output_name(input1)"
