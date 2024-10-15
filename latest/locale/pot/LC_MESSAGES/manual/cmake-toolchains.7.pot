@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -990,6 +990,10 @@ msgstr ""
 msgid "Simulator SDK"
 msgstr ""
 
+#: ../../../manual/cmake-toolchains.7.rst:595
+msgid "Catalyst SDK"
+msgstr ""
+
 #: ../../../manual/cmake-toolchains.7.rst:597
 msgid "iOS"
 msgstr ""
@@ -1002,6 +1006,10 @@ msgstr ""
 msgid "iphonesimulator"
 msgstr ""
 
+#: ../../../manual/cmake-toolchains.7.rst:597
+msgid "macosx"
+msgstr ""
+
 #: ../../../manual/cmake-toolchains.7.rst:598
 msgid "tvOS"
 msgstr ""
@@ -1012,6 +1020,12 @@ msgstr ""
 
 #: ../../../manual/cmake-toolchains.7.rst:598
 msgid "appletvsimulator"
+msgstr ""
+
+#: ../../../manual/cmake-toolchains.7.rst:598
+#: ../../../manual/cmake-toolchains.7.rst:599
+#: ../../../manual/cmake-toolchains.7.rst:600
+msgid "N/A"
 msgstr ""
 
 #: ../../../manual/cmake-toolchains.7.rst:599

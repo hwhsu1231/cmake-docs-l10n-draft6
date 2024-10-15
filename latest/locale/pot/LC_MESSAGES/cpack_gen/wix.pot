@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -685,7 +685,7 @@ msgid ""
 "installer:"
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:462
+#: ../../../cpack_gen/wix.rst:461
 msgid "``perMachine``"
 msgstr ""
 
@@ -697,35 +697,32 @@ msgid ""
 msgstr ""
 
 #: ../../../cpack_gen/wix.rst:461
-msgid ""
-"This is the default if :variable:`CPACK_WIX_VERSION` is set to any value "
-"other than ``3``."
+msgid "This is the default.  See policy :policy:`CMP0172`."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:465
+#: ../../../cpack_gen/wix.rst:464
 msgid "``perUser``"
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:465
+#: ../../../cpack_gen/wix.rst:464
 msgid "Not yet supported. This is reserved for future use."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:489
+#: ../../../cpack_gen/wix.rst:487
 msgid "``NONE``"
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:468
+#: ../../../cpack_gen/wix.rst:467
 msgid "Create an installer without any ``InstallScope`` attribute."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:470
+#: ../../../cpack_gen/wix.rst:469
 msgid ""
-"If :variable:`CPACK_WIX_VERSION` is not set, or is set to ``3``, this value "
-"is the default to preserve compatibility with 3.28 and lower. Otherwise, "
-"this value is not supported."
+"This is supported only if :variable:`CPACK_WIX_VERSION` is not set, or is "
+"set to ``3``."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:476
+#: ../../../cpack_gen/wix.rst:474
 msgid ""
 "This value is only for compatibility with the inconsistent behavior used by "
 "CPack 3.28 and older.  The resulting installer requires administrative "
@@ -734,7 +731,7 @@ msgid ""
 "current user."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:484
+#: ../../../cpack_gen/wix.rst:482
 msgid ""
 "An installation performed by an installer created without any "
 "``InstallScope`` cannot be cleanly updated or replaced by an installer with "
@@ -743,6 +740,6 @@ msgid ""
 "instructions to first manually uninstall any older version."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:491
+#: ../../../cpack_gen/wix.rst:489
 msgid "See https://wixtoolset.org/docs/v3/xsd/wix/package/"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,16 +88,16 @@ msgstr ""
 
 #: ../../../cpack_gen/deb.rst:37 ../../../cpack_gen/deb.rst:105
 #: ../../../cpack_gen/deb.rst:137 ../../../cpack_gen/deb.rst:163
-#: ../../../cpack_gen/deb.rst:198 ../../../cpack_gen/deb.rst:319
-#: ../../../cpack_gen/deb.rst:336 ../../../cpack_gen/deb.rst:370
-#: ../../../cpack_gen/deb.rst:384 ../../../cpack_gen/deb.rst:396
-#: ../../../cpack_gen/deb.rst:416 ../../../cpack_gen/deb.rst:439
-#: ../../../cpack_gen/deb.rst:459 ../../../cpack_gen/deb.rst:486
-#: ../../../cpack_gen/deb.rst:505 ../../../cpack_gen/deb.rst:524
-#: ../../../cpack_gen/deb.rst:542 ../../../cpack_gen/deb.rst:558
-#: ../../../cpack_gen/deb.rst:576 ../../../cpack_gen/deb.rst:591
-#: ../../../cpack_gen/deb.rst:612 ../../../cpack_gen/deb.rst:643
-#: ../../../cpack_gen/deb.rst:671
+#: ../../../cpack_gen/deb.rst:209 ../../../cpack_gen/deb.rst:330
+#: ../../../cpack_gen/deb.rst:347 ../../../cpack_gen/deb.rst:381
+#: ../../../cpack_gen/deb.rst:395 ../../../cpack_gen/deb.rst:407
+#: ../../../cpack_gen/deb.rst:427 ../../../cpack_gen/deb.rst:450
+#: ../../../cpack_gen/deb.rst:470 ../../../cpack_gen/deb.rst:497
+#: ../../../cpack_gen/deb.rst:516 ../../../cpack_gen/deb.rst:535
+#: ../../../cpack_gen/deb.rst:553 ../../../cpack_gen/deb.rst:569
+#: ../../../cpack_gen/deb.rst:587 ../../../cpack_gen/deb.rst:602
+#: ../../../cpack_gen/deb.rst:623 ../../../cpack_gen/deb.rst:654
+#: ../../../cpack_gen/deb.rst:676 ../../../cpack_gen/deb.rst:707
 msgid "No"
 msgstr ""
 
@@ -105,8 +105,8 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:38 ../../../cpack_gen/deb.rst:340
-#: ../../../cpack_gen/deb.rst:559 ../../../cpack_gen/deb.rst:672
+#: ../../../cpack_gen/deb.rst:38 ../../../cpack_gen/deb.rst:351
+#: ../../../cpack_gen/deb.rst:570 ../../../cpack_gen/deb.rst:708
 msgid "``OFF``"
 msgstr ""
 
@@ -124,9 +124,9 @@ msgstr ""
 
 #: ../../../cpack_gen/deb.rst:49 ../../../cpack_gen/deb.rst:69
 #: ../../../cpack_gen/deb.rst:115 ../../../cpack_gen/deb.rst:151
-#: ../../../cpack_gen/deb.rst:205 ../../../cpack_gen/deb.rst:213
-#: ../../../cpack_gen/deb.rst:242 ../../../cpack_gen/deb.rst:258
-#: ../../../cpack_gen/deb.rst:276 ../../../cpack_gen/deb.rst:305
+#: ../../../cpack_gen/deb.rst:216 ../../../cpack_gen/deb.rst:224
+#: ../../../cpack_gen/deb.rst:253 ../../../cpack_gen/deb.rst:269
+#: ../../../cpack_gen/deb.rst:287 ../../../cpack_gen/deb.rst:316
 msgid "Yes"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_NAME` variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:60 ../../../cpack_gen/deb.rst:650
+#: ../../../cpack_gen/deb.rst:60 ../../../cpack_gen/deb.rst:661
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-source"
 msgstr ""
@@ -214,8 +214,8 @@ msgid "The Debian package epoch"
 msgstr ""
 
 #: ../../../cpack_gen/deb.rst:106 ../../../cpack_gen/deb.rst:138
-#: ../../../cpack_gen/deb.rst:199 ../../../cpack_gen/deb.rst:371
-#: ../../../cpack_gen/deb.rst:385 ../../../cpack_gen/deb.rst:592
+#: ../../../cpack_gen/deb.rst:210 ../../../cpack_gen/deb.rst:382
+#: ../../../cpack_gen/deb.rst:396 ../../../cpack_gen/deb.rst:603
 msgid "None"
 msgstr ""
 
@@ -282,11 +282,12 @@ msgstr ""
 msgid "Sets the Debian dependencies of this package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:166 ../../../cpack_gen/deb.rst:399
-#: ../../../cpack_gen/deb.rst:419 ../../../cpack_gen/deb.rst:442
-#: ../../../cpack_gen/deb.rst:462 ../../../cpack_gen/deb.rst:489
-#: ../../../cpack_gen/deb.rst:508 ../../../cpack_gen/deb.rst:527
-#: ../../../cpack_gen/deb.rst:545 ../../../cpack_gen/deb.rst:646
+#: ../../../cpack_gen/deb.rst:166 ../../../cpack_gen/deb.rst:410
+#: ../../../cpack_gen/deb.rst:430 ../../../cpack_gen/deb.rst:453
+#: ../../../cpack_gen/deb.rst:473 ../../../cpack_gen/deb.rst:500
+#: ../../../cpack_gen/deb.rst:519 ../../../cpack_gen/deb.rst:538
+#: ../../../cpack_gen/deb.rst:556 ../../../cpack_gen/deb.rst:657
+#: ../../../cpack_gen/deb.rst:679
 msgid "An empty string for non-component based installations"
 msgstr ""
 
@@ -312,51 +313,63 @@ msgid ""
 "automatically discovered dependencies will be set for this component."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:185
-msgid "Example:"
-msgstr ""
-
 #: ../../../cpack_gen/deb.rst:187
-msgid "set(CPACK_DEBIAN_PACKAGE_DEPENDS \"libc6 (>= 2.3.1-6), libc6 (< 2.4)\")"
+msgid ""
+"The variable is always expanded as a list. Before it was expanded only if "
+"used in cooperation with :variable:`CPACK_DEB_COMPONENT_INSTALL`, :variable:"
+"`CPACK_DEBIAN_PACKAGE_SHLIBDEPS` or :variable:"
+"`CPACK_DEBIAN_<COMPONENT>_PACKAGE_SHLIBDEPS`. This meant that if a component "
+"had no shared libraries discovered (e.g. a package composed only of scripts) "
+"you had to join the list by yourself to obtain a valid Depends field."
 msgstr ""
 
 #: ../../../cpack_gen/deb.rst:195
+msgid "Example:"
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:197
+msgid ""
+"set(CPACK_DEBIAN_PACKAGE_DEPENDS \"libc6 (>= 2.3.1-6), libc6 (< 2.4)\")\n"
+"list(APPEND CPACK_DEBIAN_PACKAGE_DEPENDS cmake)"
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:206
 msgid ""
 "Sets inter-component dependencies if listed with :variable:"
 "`CPACK_COMPONENT_<compName>_DEPENDS` variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:203
+#: ../../../cpack_gen/deb.rst:214
 msgid "The Debian package maintainer"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:206
+#: ../../../cpack_gen/deb.rst:217
 msgid ":variable:`!CPACK_PACKAGE_CONTACT`"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:211
+#: ../../../cpack_gen/deb.rst:222
 msgid "The Debian package description"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:216
+#: ../../../cpack_gen/deb.rst:227
 msgid ""
 ":variable:`CPACK_DEBIAN_<COMPONENT>_DESCRIPTION` (component based installers "
 "only) if set, or :variable:`CPACK_DEBIAN_PACKAGE_DESCRIPTION` if set, or"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:218
+#: ../../../cpack_gen/deb.rst:229
 msgid ""
 ":variable:`CPACK_COMPONENT_<compName>_DESCRIPTION` (component based "
 "installers only) if set, or :variable:`CPACK_PACKAGE_DESCRIPTION` if set, or"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:220
+#: ../../../cpack_gen/deb.rst:231
 msgid ""
 "content of the file specified in :variable:`CPACK_PACKAGE_DESCRIPTION_FILE` "
 "if set"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:222
+#: ../../../cpack_gen/deb.rst:233
 msgid ""
 "If after that description is not set, :variable:"
 "`CPACK_PACKAGE_DESCRIPTION_SUMMARY` going to be used if set. Otherwise, :"
@@ -364,159 +377,159 @@ msgid ""
 "of description as defined in `Debian Policy Manual`_."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:226
+#: ../../../cpack_gen/deb.rst:237
 msgid ""
 "Per-component :variable:`!CPACK_COMPONENT_<compName>_DESCRIPTION` variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:229
+#: ../../../cpack_gen/deb.rst:240
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_DESCRIPTION` variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:232
+#: ../../../cpack_gen/deb.rst:243
 msgid "The :variable:`!CPACK_PACKAGE_DESCRIPTION_FILE` variable."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:240
+#: ../../../cpack_gen/deb.rst:251
 msgid "Set Section control field e.g. admin, devel, doc, ..."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:243
+#: ../../../cpack_gen/deb.rst:254
 msgid "``devel``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:245
+#: ../../../cpack_gen/deb.rst:256
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_SECTION` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:248
+#: ../../../cpack_gen/deb.rst:259
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:256
+#: ../../../cpack_gen/deb.rst:267
 msgid "The archive format used for creating the Debian package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:259
+#: ../../../cpack_gen/deb.rst:270
 msgid "``gnutar``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:261
+#: ../../../cpack_gen/deb.rst:272
 msgid "Possible value is: ``gnutar``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:265
+#: ../../../cpack_gen/deb.rst:276
 msgid ""
 "This variable previously defaulted to the ``paxr`` value, but ``dpkg`` has "
 "never supported that tar format. For backwards compatibility the ``paxr`` "
 "value will be mapped to ``gnutar`` and a deprecation message will be emitted."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:274
+#: ../../../cpack_gen/deb.rst:285
 msgid "The compression used for creating the Debian package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:277 ../../../cpack_gen/deb.rst:291
+#: ../../../cpack_gen/deb.rst:288 ../../../cpack_gen/deb.rst:302
 msgid "``gzip``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:279
+#: ../../../cpack_gen/deb.rst:290
 msgid "Possible values are:"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:282
+#: ../../../cpack_gen/deb.rst:293
 msgid "``lzma``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:282
+#: ../../../cpack_gen/deb.rst:293
 msgid "Lempel–Ziv–Markov chain algorithm"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:285
+#: ../../../cpack_gen/deb.rst:296
 msgid "``xz``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:285
+#: ../../../cpack_gen/deb.rst:296
 msgid "XZ Utils compression"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:288
+#: ../../../cpack_gen/deb.rst:299
 msgid "``bzip2``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:288
+#: ../../../cpack_gen/deb.rst:299
 msgid "bzip2 Burrows–Wheeler algorithm"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:291
+#: ../../../cpack_gen/deb.rst:302
 msgid "GNU Gzip compression"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:295
+#: ../../../cpack_gen/deb.rst:306
 msgid "``zstd``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:296
+#: ../../../cpack_gen/deb.rst:307
 msgid "Zstandard compression"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:302
+#: ../../../cpack_gen/deb.rst:313
 msgid ""
 "Set Priority control field e.g. required, important, standard, optional, "
 "extra"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:306
+#: ../../../cpack_gen/deb.rst:317
 msgid "``optional``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:308
+#: ../../../cpack_gen/deb.rst:319
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_PRIORITY` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:311
+#: ../../../cpack_gen/deb.rst:322
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-archive.html#s-priorities"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:315
+#: ../../../cpack_gen/deb.rst:326
 msgid ""
 "The URL of the web site for this package, preferably (when applicable) the "
 "site from which the original source can be obtained and any additional "
 "upstream documentation or information may be found."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:320
+#: ../../../cpack_gen/deb.rst:331
 msgid ":variable:`CMAKE_PROJECT_HOMEPAGE_URL`"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:322
+#: ../../../cpack_gen/deb.rst:333
 msgid "The :variable:`!CMAKE_PROJECT_HOMEPAGE_URL` variable."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:327
+#: ../../../cpack_gen/deb.rst:338
 msgid ""
 "The content of this field is a simple URL without any surrounding characters "
 "such as <>."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:333
+#: ../../../cpack_gen/deb.rst:344
 msgid ""
 "May be set to ON in order to use ``dpkg-shlibdeps`` to generate better "
 "package dependency list."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:339
+#: ../../../cpack_gen/deb.rst:350
 msgid ":variable:`CPACK_DEBIAN_PACKAGE_SHLIBDEPS` if set or"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:344
+#: ../../../cpack_gen/deb.rst:355
 msgid ""
 "You may need set :variable:`CMAKE_INSTALL_RPATH` to an appropriate value if "
 "you use this feature, because if you don't ``dpkg-shlibdeps`` may fail to "
@@ -524,7 +537,7 @@ msgid ""
 "wikis/doc/cmake/RPATH-handling"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:351
+#: ../../../cpack_gen/deb.rst:362
 msgid ""
 "You can also set :variable:`CPACK_DEBIAN_PACKAGE_SHLIBDEPS_PRIVATE_DIRS` to "
 "an appropriate value if you use this feature, in order to please ``dpkg-"
@@ -532,37 +545,37 @@ msgid ""
 "that could not get resolved otherwise."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:356
+#: ../../../cpack_gen/deb.rst:367
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_SHLIBDEPS` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:359
+#: ../../../cpack_gen/deb.rst:370
 msgid "Correct handling of ``$ORIGIN`` in :variable:`CMAKE_INSTALL_RPATH`."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:366
+#: ../../../cpack_gen/deb.rst:377
 msgid ""
 "May be set to a list of directories that will be given to ``dpkg-shlibdeps`` "
 "via its ``-l`` option. These will be searched by ``dpkg-shlibdeps`` in order "
 "to find private shared library dependencies."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:375
+#: ../../../cpack_gen/deb.rst:386
 msgid ""
 "You should prefer to set :variable:`CMAKE_INSTALL_RPATH` to an appropriate "
 "value if you use ``dpkg-shlibdeps``. The current option is really only "
 "needed for private shared library dependencies."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:381
+#: ../../../cpack_gen/deb.rst:392
 msgid ""
 "May be set when invoking cpack in order to trace debug information during "
 "the CPack DEB generator run."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:390
+#: ../../../cpack_gen/deb.rst:401
 msgid ""
 "Sets the `Pre-Depends` field of the Debian package. Like :variable:`Depends "
 "<CPACK_DEBIAN_PACKAGE_DEPENDS>`, except that it also forces ``dpkg`` to "
@@ -570,27 +583,27 @@ msgid ""
 "installation of the package which declares the pre-dependency."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:400
+#: ../../../cpack_gen/deb.rst:411
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_PREDEPENDS` for component-based "
 "installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:403
+#: ../../../cpack_gen/deb.rst:414
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_PREDEPENDS` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:406 ../../../cpack_gen/deb.rst:426
-#: ../../../cpack_gen/deb.rst:515 ../../../cpack_gen/deb.rst:534
-#: ../../../cpack_gen/deb.rst:552
+#: ../../../cpack_gen/deb.rst:417 ../../../cpack_gen/deb.rst:437
+#: ../../../cpack_gen/deb.rst:526 ../../../cpack_gen/deb.rst:545
+#: ../../../cpack_gen/deb.rst:563
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-relationships.html#s-"
 "binarydeps"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:411
+#: ../../../cpack_gen/deb.rst:422
 msgid ""
 "Sets the ``Enhances`` field of the Debian package. Similar to :variable:"
 "`Suggests <CPACK_DEBIAN_PACKAGE_SUGGESTS>` but works in the opposite "
@@ -598,18 +611,18 @@ msgid ""
 "package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:420
+#: ../../../cpack_gen/deb.rst:431
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_ENHANCES` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:423
+#: ../../../cpack_gen/deb.rst:434
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_ENHANCES` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:431
+#: ../../../cpack_gen/deb.rst:442
 msgid ""
 "Sets the ``Breaks`` field of the Debian package. When a binary package (P) "
 "declares that it breaks other packages (B), ``dpkg`` will not allow the "
@@ -619,46 +632,46 @@ msgid ""
 "reconfigured again."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:443
+#: ../../../cpack_gen/deb.rst:454
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_BREAKS` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:446
+#: ../../../cpack_gen/deb.rst:457
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_BREAKS` variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:449
+#: ../../../cpack_gen/deb.rst:460
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-relationships.html#s-breaks"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:454
+#: ../../../cpack_gen/deb.rst:465
 msgid ""
 "Sets the `Conflicts` field of the Debian package. When one binary package "
 "declares a conflict with another using a `Conflicts` field, ``dpkg`` will "
 "not allow them to be unpacked on the system at the same time."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:463
+#: ../../../cpack_gen/deb.rst:474
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_CONFLICTS` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:466
+#: ../../../cpack_gen/deb.rst:477
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_CONFLICTS` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:469
+#: ../../../cpack_gen/deb.rst:480
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-relationships.html#s-"
 "conflicts"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:473
+#: ../../../cpack_gen/deb.rst:484
 msgid ""
 "This is a stronger restriction than :variable:`Breaks "
 "<CPACK_DEBIAN_PACKAGE_BREAKS>`, which prevents the broken package from being "
@@ -666,166 +679,166 @@ msgid ""
 "allows both packages to be unpacked at the same time."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:482
+#: ../../../cpack_gen/deb.rst:493
 msgid ""
 "Sets the `Provides` field of the Debian package. A virtual package is one "
 "which appears in the `Provides` control field of another package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:490
+#: ../../../cpack_gen/deb.rst:501
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_PROVIDES` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:493
+#: ../../../cpack_gen/deb.rst:504
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_PROVIDES` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:496
+#: ../../../cpack_gen/deb.rst:507
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-relationships.html#s-virtual"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:501
+#: ../../../cpack_gen/deb.rst:512
 msgid ""
 "Sets the `Replaces` field of the Debian package. Packages can declare in "
 "their control file that they should overwrite files in certain other "
 "packages, or completely replace other packages."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:509
+#: ../../../cpack_gen/deb.rst:520
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_REPLACES` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:512
+#: ../../../cpack_gen/deb.rst:523
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_REPLACES` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:520
+#: ../../../cpack_gen/deb.rst:531
 msgid ""
 "Sets the ``Recommends`` field of the Debian package. Allows packages to "
 "declare a strong, but not absolute, dependency on other packages."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:528
+#: ../../../cpack_gen/deb.rst:539
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_RECOMMENDS` for component-based "
 "installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:531
+#: ../../../cpack_gen/deb.rst:542
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_RECOMMENDS` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:539
+#: ../../../cpack_gen/deb.rst:550
 msgid ""
 "Sets the `Suggests` field of the Debian package. Allows packages to declare "
 "a suggested package install grouping."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:546
+#: ../../../cpack_gen/deb.rst:557
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_SUGGESTS` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:549
+#: ../../../cpack_gen/deb.rst:560
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_SUGGESTS` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:561
+#: ../../../cpack_gen/deb.rst:572
 msgid ""
 "Allows to generate shlibs control file automatically. Compatibility is "
 "defined by :variable:`CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS_POLICY` variable "
 "value."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:566
+#: ../../../cpack_gen/deb.rst:577
 msgid ""
 "Libraries are only considered if they have both library name and version "
 "set. This can be done by setting SOVERSION property with :command:"
 "`set_target_properties` command."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:574
+#: ../../../cpack_gen/deb.rst:585
 msgid "Compatibility policy for auto-generated shlibs control file."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:577
+#: ../../../cpack_gen/deb.rst:588
 msgid "``=``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:579
+#: ../../../cpack_gen/deb.rst:590
 msgid ""
 "Defines compatibility policy for auto-generated shlibs control file. "
 "Possible values: ``=``, ``>=``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:582
+#: ../../../cpack_gen/deb.rst:593
 msgid ""
 "See https://www.debian.org/doc/debian-policy/ch-sharedlibs.html#s-sharedlibs-"
 "shlibdeps"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:587
+#: ../../../cpack_gen/deb.rst:598
 msgid ""
 "This variable allow advanced user to add custom script to the control.tar."
 "gz. Typical usage is for conffiles, postinst, postrm, prerm."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:594 ../../../cpack_gen/deb.rst:615
+#: ../../../cpack_gen/deb.rst:605 ../../../cpack_gen/deb.rst:626
 msgid "Usage:"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:596
+#: ../../../cpack_gen/deb.rst:607
 msgid ""
 "set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA\n"
 "    \"${CMAKE_CURRENT_SOURCE_DIR}/prerm;${CMAKE_CURRENT_SOURCE_DIR}/postrm\")"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:601
+#: ../../../cpack_gen/deb.rst:612
 msgid ""
 "Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_CONTROL_EXTRA` "
 "variables."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:609
+#: ../../../cpack_gen/deb.rst:620
 msgid ""
 "This variable indicates if the Debian policy on control files should be "
 "strictly followed."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:613
+#: ../../../cpack_gen/deb.rst:624
 msgid "``FALSE``"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:617
+#: ../../../cpack_gen/deb.rst:628
 msgid "set(CPACK_DEBIAN_PACKAGE_CONTROL_STRICT_PERMISSION TRUE)"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:621
+#: ../../../cpack_gen/deb.rst:632
 msgid ""
 "This overrides the permissions on the original files, following the rules "
 "set by Debian policy https://www.debian.org/doc/debian-policy/ch-files."
 "html#s-permissions-owners"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:627
+#: ../../../cpack_gen/deb.rst:638
 msgid ""
 "The original permissions of the files will be used in the final package "
 "unless this variable is set to ``TRUE``. In particular, the scripts should "
 "have the proper executable flag prior to the generation of the package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:637
+#: ../../../cpack_gen/deb.rst:648
 msgid ""
 "Sets the ``Source`` field of the binary Debian package. When the binary "
 "package name is not the same as the source package name (in particular when "
@@ -834,46 +847,74 @@ msgid ""
 "``Source``."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:647
+#: ../../../cpack_gen/deb.rst:658
 msgid ""
 ":variable:`CPACK_DEBIAN_PACKAGE_SOURCE` for component-based installations."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:654
+#: ../../../cpack_gen/deb.rst:665
 msgid ""
 "This value is not interpreted. It is possible to pass an optional revision "
 "number of the referenced source package as well."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:658
+#: ../../../cpack_gen/deb.rst:671
+msgid ""
+"Sets the `Multi-Arch` field of the Debian package. Packages can declare in "
+"their control file how they should handle situations, where packages for "
+"different architectures are being installed on the same machine."
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:680
+msgid ""
+":variable:`CPACK_DEBIAN_PACKAGE_MULTIARCH` for component-based installations."
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:683
+msgid ""
+"Per-component :variable:`!CPACK_DEBIAN_<COMPONENT>_PACKAGE_MULTIARCH` "
+"variables."
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:686
+msgid "See https://wiki.debian.org/MultiArch/Hints"
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:690
+msgid ""
+"This value is validated. It must be one of the following values: ``same``, "
+"``foreign``, ``allowed``."
+msgstr ""
+
+#: ../../../cpack_gen/deb.rst:694
 msgid "Packaging of debug information"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:662
+#: ../../../cpack_gen/deb.rst:698
 msgid "Dbgsym packages contain debug symbols for debugging packaged binaries."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:664
+#: ../../../cpack_gen/deb.rst:700
 msgid "Dbgsym packaging has its own set of variables:"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:669
+#: ../../../cpack_gen/deb.rst:705
 msgid "Enable generation of dbgsym .ddeb package(s)."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:676
+#: ../../../cpack_gen/deb.rst:712
 msgid ""
 "Setting this also strips the ELF files in the generated non-dbgsym package, "
 "which results in debuginfo only being available in the dbgsym package."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:681
+#: ../../../cpack_gen/deb.rst:717
 msgid ""
 "Binaries must contain debug symbols before packaging so use either ``Debug`` "
 "or ``RelWithDebInfo`` for :variable:`CMAKE_BUILD_TYPE` variable value."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:684
+#: ../../../cpack_gen/deb.rst:720
 msgid ""
 "Additionally, if :variable:`CPACK_STRIP_FILES` is set, the files will be "
 "stripped before they get to the DEB generator, so will not contain debug "
@@ -881,27 +922,27 @@ msgid ""
 "`CPACK_STRIP_FILES`."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:689
+#: ../../../cpack_gen/deb.rst:725
 msgid "Building Debian packages on Windows"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:693
+#: ../../../cpack_gen/deb.rst:729
 msgid ""
 "To communicate UNIX file permissions from the install stage to the CPack DEB "
 "generator the ``cmake_mode_t`` NTFS alternate data stream (ADT) is used."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:697
+#: ../../../cpack_gen/deb.rst:733
 msgid ""
 "When a filesystem without ADT support is used only owner read/write "
 "permissions can be preserved."
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:701
+#: ../../../cpack_gen/deb.rst:737
 msgid "Reproducible packages"
 msgstr ""
 
-#: ../../../cpack_gen/deb.rst:705
+#: ../../../cpack_gen/deb.rst:741
 msgid ""
 "The environment variable :envvar:`!SOURCE_DATE_EPOCH` may be set to a UNIX "
 "timestamp, defined as the number of seconds, excluding leap seconds, since "

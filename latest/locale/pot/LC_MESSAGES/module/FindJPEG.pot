@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "If false, do not try to use JPEG."
 msgstr ""
 
-#: ../../../../Modules/FindJPEG.cmake:27 ../../../../Modules/FindJPEG.cmake:40
+#: ../../../../Modules/FindJPEG.cmake:27
 msgid "``JPEG_INCLUDE_DIRS``"
 msgstr ""
 
@@ -89,6 +89,10 @@ msgstr ""
 msgid "The following cache variables may also be set:"
 msgstr ""
 
+#: ../../../../Modules/FindJPEG.cmake:40
+msgid "``JPEG_INCLUDE_DIR``"
+msgstr ""
+
 #: ../../../../Modules/FindJPEG.cmake:42
 msgid "``JPEG_LIBRARY_RELEASE``"
 msgstr ""
@@ -113,18 +117,10 @@ msgstr ""
 msgid "Obsolete variables"
 msgstr ""
 
-#: ../../../../Modules/FindJPEG.cmake:53
-msgid "``JPEG_INCLUDE_DIR``"
-msgstr ""
-
-#: ../../../../Modules/FindJPEG.cmake:54
-msgid "where to find jpeglib.h, etc. (same as JPEG_INCLUDE_DIRS)"
-msgstr ""
-
-#: ../../../../Modules/FindJPEG.cmake:147
+#: ../../../../Modules/FindJPEG.cmake:145
 msgid "``JPEG_LIBRARY``"
 msgstr ""
 
-#: ../../../../Modules/FindJPEG.cmake:56
+#: ../../../../Modules/FindJPEG.cmake:54
 msgid "where to find the JPEG library."
 msgstr ""

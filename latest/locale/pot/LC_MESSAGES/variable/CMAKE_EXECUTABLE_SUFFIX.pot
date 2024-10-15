@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "CMAKE_EXECUTABLE_SUFFIX"
 msgstr ""
 
 #: ../../../variable/CMAKE_EXECUTABLE_SUFFIX.rst:4
-msgid "The suffix for executables on this platform."
+msgid "The suffix for executables on the target platform."
 msgstr ""
 
 #: ../../../variable/CMAKE_EXECUTABLE_SUFFIX.rst:6
@@ -35,4 +35,10 @@ msgstr ""
 msgid ""
 ":variable:`CMAKE_EXECUTABLE_SUFFIX_<LANG>` overrides this for language "
 "``<LANG>``."
+msgstr ""
+
+#: ../../../variable/CMAKE_EXECUTABLE_SUFFIX.rst:13
+msgid ""
+"See the :variable:`CMAKE_HOST_EXECUTABLE_SUFFIX` variable for the executable "
+"suffix on the host platform."
 msgstr ""

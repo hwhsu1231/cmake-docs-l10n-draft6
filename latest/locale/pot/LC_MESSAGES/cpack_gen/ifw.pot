@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -317,12 +317,19 @@ msgid ""
 "be absolute paths and the images must be in PNG format."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:276 ../../../cpack_gen/ifw.rst:287
-#: ../../../cpack_gen/ifw.rst:296 ../../../cpack_gen/ifw.rst:307
+#: ../../../cpack_gen/ifw.rst:276 ../../../cpack_gen/ifw.rst:286
+#: ../../../cpack_gen/ifw.rst:297 ../../../cpack_gen/ifw.rst:306
+#: ../../../cpack_gen/ifw.rst:317
 msgid "This feature is available for QtIFW 4.0.0 and later."
 msgstr ""
 
 #: ../../../cpack_gen/ifw.rst:282
+msgid ""
+"A list of URLs associated with the ProductImages. Only used if  "
+"``CPACK_IFW_PACKAGE_PRODUCT_IMAGES`` is defined and it has the same size."
+msgstr ""
+
+#: ../../../cpack_gen/ifw.rst:292
 msgid ""
 "Command executed after the installer is finished, if the user accepts the "
 "action. Provide the full path to the application, as found when installed. "
@@ -330,13 +337,13 @@ msgid ""
 "variable ``@TargetDir@``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:293
+#: ../../../cpack_gen/ifw.rst:303
 msgid ""
 "List of arguments passed to the program specified in :variable:"
 "`CPACK_IFW_PACKAGE_RUN_PROGRAM`."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:302
+#: ../../../cpack_gen/ifw.rst:312
 msgid ""
 "Text shown next to the check box for running the program after the "
 "installation. If :variable:`CPACK_IFW_PACKAGE_RUN_PROGRAM` is set but no "
@@ -344,195 +351,195 @@ msgid ""
 "now``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:313
+#: ../../../cpack_gen/ifw.rst:323
 msgid ""
 "Allows specifying a code signing identity to be used for signing the "
 "generated app bundle. Only available on macOS, ignored on other platforms."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:320
+#: ../../../cpack_gen/ifw.rst:330
 msgid ""
 "Set the format used when packaging new component data archives. If you omit "
 "this option, the ``7z`` format will be used as a default. Supported formats:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:323
+#: ../../../cpack_gen/ifw.rst:333
 msgid "7z"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:324
+#: ../../../cpack_gen/ifw.rst:334
 msgid "zip"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:325
+#: ../../../cpack_gen/ifw.rst:335
 msgid "tar.gz"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:326
+#: ../../../cpack_gen/ifw.rst:336
 msgid "tar.bz2"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:327
+#: ../../../cpack_gen/ifw.rst:337
 msgid "tar.xz"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:331
+#: ../../../cpack_gen/ifw.rst:341
 msgid ""
 "If the Qt Installer Framework tools were built without libarchive support, "
 "only ``7z`` format is supported."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:334 ../../../cpack_gen/ifw.rst:357
+#: ../../../cpack_gen/ifw.rst:344 ../../../cpack_gen/ifw.rst:367
 msgid "This feature is available for QtIFW 4.2.0 and later."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:340
+#: ../../../cpack_gen/ifw.rst:350
 msgid "Archive compression level. The allowable values are:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:342
+#: ../../../cpack_gen/ifw.rst:352
 msgid "0 (*No compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:343
+#: ../../../cpack_gen/ifw.rst:353
 msgid "1 (*Fastest compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:344
+#: ../../../cpack_gen/ifw.rst:354
 msgid "3 (*Fast compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:345
+#: ../../../cpack_gen/ifw.rst:355
 msgid "5 (*Normal compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:346
+#: ../../../cpack_gen/ifw.rst:356
 msgid "7 (*Maximum compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:347
+#: ../../../cpack_gen/ifw.rst:357
 msgid "9 (*Ultra compression*)"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:349
+#: ../../../cpack_gen/ifw.rst:359
 msgid ""
 "If this variable is not set, QtIFW will use a default compression level, "
 "which will typically be 5 (*Normal compression*)."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:354
+#: ../../../cpack_gen/ifw.rst:364
 msgid ""
 "Some formats do not support all the possible values. For example ``zip`` "
 "compression only supports values from 1 to 7."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:360
+#: ../../../cpack_gen/ifw.rst:370
 msgid "Components"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:364
+#: ../../../cpack_gen/ifw.rst:374
 msgid "Resolve duplicate names when installing components with groups."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:368
+#: ../../../cpack_gen/ifw.rst:378
 msgid ""
 "Additional prepared packages directories that will be used to resolve "
 "dependent components."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:375
+#: ../../../cpack_gen/ifw.rst:385
 msgid ""
 "Additional prepared repository directories that will be used to resolve and "
 "repack dependent components."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:378
+#: ../../../cpack_gen/ifw.rst:388
 msgid "This feature is available for QtIFW 3.1 and later."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:381
+#: ../../../cpack_gen/ifw.rst:391
 msgid "QtIFW Tools"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:387
+#: ../../../cpack_gen/ifw.rst:397
 msgid ""
 "The version of the QtIFW tools that will be used. This variable is set by "
 "the :module:`CPackIFW` module."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:390
+#: ../../../cpack_gen/ifw.rst:400
 msgid ""
 "The following variables provide the locations of the QtIFW command-line "
 "tools as discovered by the :module:`CPackIFW` module. These variables are "
 "cached, and may be configured if needed."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:398
+#: ../../../cpack_gen/ifw.rst:408
 msgid "The path to ``archivegen``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:402
+#: ../../../cpack_gen/ifw.rst:412
 msgid "The path to ``binarycreator``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:406
+#: ../../../cpack_gen/ifw.rst:416
 msgid "The path to ``repogen``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:410
+#: ../../../cpack_gen/ifw.rst:420
 msgid "The path to ``installerbase``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:414
+#: ../../../cpack_gen/ifw.rst:424
 msgid "The path to ``devtool``."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:417
+#: ../../../cpack_gen/ifw.rst:427
 msgid "Hints for Finding QtIFW"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:419
+#: ../../../cpack_gen/ifw.rst:429
 msgid ""
 "Generally, the CPack ``IFW`` generator automatically finds QtIFW tools. The "
 "following (in order of precedence) can also be set to augment the locations "
 "normally searched by :command:`find_program`:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:427 ../../../cpack_gen/ifw.rst:437
+#: ../../../cpack_gen/ifw.rst:437 ../../../cpack_gen/ifw.rst:447
 msgid "CMake variable"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:433 ../../../cpack_gen/ifw.rst:441
+#: ../../../cpack_gen/ifw.rst:443 ../../../cpack_gen/ifw.rst:451
 msgid "Environment variable"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:444
+#: ../../../cpack_gen/ifw.rst:454
 msgid ""
 "The specified path should not contain ``bin`` at the end (for example: ``D:\\"
 "\\DevTools\\\\QtIFW2.0.5``)."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:448
+#: ../../../cpack_gen/ifw.rst:458
 msgid "Other Settings"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:451
+#: ../../../cpack_gen/ifw.rst:461
 msgid "Online installer"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:453
+#: ../../../cpack_gen/ifw.rst:463
 msgid ""
 "By default, this generator generates an *offline installer*. This means that "
 "all packaged files are fully contained in the installer executable."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:456
+#: ../../../cpack_gen/ifw.rst:466
 msgid ""
 "In contrast, an *online installer* will download some or all components from "
 "a remote server."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:459
+#: ../../../cpack_gen/ifw.rst:469
 msgid ""
 "The ``DOWNLOADED`` option in the :command:`cpack_add_component` command "
 "specifies that a component is to be downloaded. Alternatively, the ``ALL`` "
@@ -540,13 +547,13 @@ msgid ""
 "`all` components are to be be downloaded."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:464
+#: ../../../cpack_gen/ifw.rst:474
 msgid ""
 "The :command:`cpack_ifw_add_repository` command and the :variable:"
 "`CPACK_IFW_DOWNLOAD_ALL` variable allow for more specific configuration."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:468
+#: ../../../cpack_gen/ifw.rst:478
 msgid ""
 "When there are online components, CPack will write them to archive files. "
 "The help page of the :module:`CPackComponent` module, especially the section "
@@ -554,41 +561,41 @@ msgid ""
 "these files accessible from a download URL."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:474
+#: ../../../cpack_gen/ifw.rst:484
 msgid "Internationalization"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:478
+#: ../../../cpack_gen/ifw.rst:488
 msgid ""
 "Some variables and command arguments support internationalization via CMake "
 "script. This is an optional feature."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:481
+#: ../../../cpack_gen/ifw.rst:491
 msgid ""
 "Installers created by QtIFW tools have built-in support for "
 "internationalization and many phrases are localized to many languages, but "
 "this does not apply to the description of your components and groups."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:485
+#: ../../../cpack_gen/ifw.rst:495
 msgid ""
 "Localization of the description of your components and groups is useful for "
 "users of your installers."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:488
+#: ../../../cpack_gen/ifw.rst:498
 msgid ""
 "A localized variable or argument can contain a single default value, and "
 "after that a set of pairs with the name of the locale and the localized "
 "value."
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:491
+#: ../../../cpack_gen/ifw.rst:501
 msgid "For example:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:493
+#: ../../../cpack_gen/ifw.rst:503
 msgid ""
 "set(LOCALIZABLE_VARIABLE \"Default value\"\n"
 "  en \"English value\"\n"
@@ -597,38 +604,38 @@ msgid ""
 "  )"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:502
+#: ../../../cpack_gen/ifw.rst:512
 msgid "See Also"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:504
+#: ../../../cpack_gen/ifw.rst:514
 msgid "Qt Installer Framework Manual:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:506
+#: ../../../cpack_gen/ifw.rst:516
 msgid "Index page: https://doc.qt.io/qtinstallerframework/index.html"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:509
+#: ../../../cpack_gen/ifw.rst:519
 msgid ""
 "Component Scripting: https://doc.qt.io/qtinstallerframework/scripting.html"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:512
+#: ../../../cpack_gen/ifw.rst:522
 msgid ""
 "Predefined Variables: https://doc.qt.io/qtinstallerframework/scripting."
 "html#predefined-variables"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:515
+#: ../../../cpack_gen/ifw.rst:525
 msgid ""
 "Promoting Updates: https://doc.qt.io/qtinstallerframework/ifw-updates.html"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:518
+#: ../../../cpack_gen/ifw.rst:528
 msgid "Download Qt Installer Framework for your platform from Qt site:"
 msgstr ""
 
-#: ../../../cpack_gen/ifw.rst:519
+#: ../../../cpack_gen/ifw.rst:529
 msgid "https://download.qt.io/official_releases/qt-installer-framework"
 msgstr ""

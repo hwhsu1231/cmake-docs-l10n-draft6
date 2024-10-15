@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,44 +77,43 @@ msgstr ""
 #: ../../../variable/CMAKE_MAKE_PROGRAM.rst:32
 msgid ""
 "The :ref:`Visual Studio Generators` set this to the full path to ``MSBuild."
-"exe`` (VS >= 10), ``devenv.com`` (VS 7,8,9), or ``VCExpress.exe`` (VS "
-"Express 8,9). (See also variables :variable:`CMAKE_VS_MSBUILD_COMMAND` and :"
-"variable:`CMAKE_VS_DEVENV_COMMAND`."
+"exe`` or ``devenv.com``. (See also variables :variable:"
+"`CMAKE_VS_MSBUILD_COMMAND` and :variable:`CMAKE_VS_DEVENV_COMMAND`."
 msgstr ""
 
-#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:39
+#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:38
 msgid ""
 "These generators prefer to lookup the build tool at build time rather than "
 "to store ``CMAKE_MAKE_PROGRAM`` in the CMake cache ahead of time.  This is "
-"because the tools are version-specific and can be located using the Windows "
-"Registry.  It is also necessary because the proper build tool may depend on "
-"the project content (e.g. the Intel Fortran plugin to VS 10 and 11 requires "
-"``devenv.com`` to build its ``.vfproj`` project files even though ``MSBuild."
-"exe`` is normally preferred to support the :variable:"
+"because the tools are version-specific and can be located using the Visual "
+"Studio Installer.  It is also necessary because the proper build tool may "
+"depend on the project content (e.g. the Intel Fortran plugin to Visual "
+"Studio requires ``devenv.com`` to build its ``.vfproj`` project files even "
+"though ``MSBuild.exe`` is normally preferred to support the :variable:"
 "`CMAKE_GENERATOR_TOOLSET`)."
 msgstr ""
 
-#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:49
+#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:48
 msgid ""
 "For compatibility with versions of CMake prior to 3.0, if a user or project "
 "explicitly adds ``CMAKE_MAKE_PROGRAM`` to the CMake cache then CMake will "
 "use the specified value if possible."
 msgstr ""
 
-#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:54
+#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:53
 msgid ""
 "The :generator:`Green Hills MULTI` generator sets this to the full path to "
 "``gbuild.exe(Windows)`` or ``gbuild(Linux)`` based upon the toolset being "
 "used."
 msgstr ""
 
-#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:58
+#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:57
 msgid ""
 "Once the generator has initialized a particular value for this variable, "
 "changing the value has undefined behavior."
 msgstr ""
 
-#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:61
+#: ../../../variable/CMAKE_MAKE_PROGRAM.rst:60
 msgid ""
 "The ``CMAKE_MAKE_PROGRAM`` variable is set for use by project code. The "
 "value is also used by the :option:`cmake --build` and :option:`ctest --build-"

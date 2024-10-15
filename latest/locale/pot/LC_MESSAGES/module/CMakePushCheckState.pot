@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,15 +28,16 @@ msgid ""
 "can be used to save, restore and reset (i.e., clear contents) the state of "
 "the variables ``CMAKE_REQUIRED_FLAGS``, ``CMAKE_REQUIRED_DEFINITIONS``, "
 "``CMAKE_REQUIRED_LINK_OPTIONS``, ``CMAKE_REQUIRED_LIBRARIES``, "
-"``CMAKE_REQUIRED_INCLUDES`` and ``CMAKE_EXTRA_INCLUDE_FILES`` used by the "
-"various Check-files coming with CMake, like e.g. ``check_function_exists()`` "
-"etc. The variable contents are pushed on a stack, pushing multiple times is "
-"supported.  This is useful e.g.  when executing such tests in a Find-module, "
-"where they have to be set, but after the Find-module has been executed they "
-"should have the same value as they had before."
+"``CMAKE_REQUIRED_LINK_DIRECTORIES``, ``CMAKE_REQUIRED_INCLUDES`` and "
+"``CMAKE_EXTRA_INCLUDE_FILES`` used by the various Check-files coming with "
+"CMake, like e.g. ``check_function_exists()`` etc. The variable contents are "
+"pushed on a stack, pushing multiple times is supported.  This is useful e."
+"g.  when executing such tests in a Find-module, where they have to be set, "
+"but after the Find-module has been executed they should have the same value "
+"as they had before."
 msgstr ""
 
-#: ../../../../Modules/CMakePushCheckState.cmake:23
+#: ../../../../Modules/CMakePushCheckState.cmake:24
 msgid ""
 "``CMAKE_PUSH_CHECK_STATE()`` macro receives optional argument ``RESET``. "
 "Whether it's specified, ``CMAKE_PUSH_CHECK_STATE()`` will set all "
@@ -44,11 +45,11 @@ msgid ""
 "``CMAKE_RESET_CHECK_STATE()`` call will do."
 msgstr ""
 
-#: ../../../../Modules/CMakePushCheckState.cmake:28
+#: ../../../../Modules/CMakePushCheckState.cmake:29
 msgid "Usage:"
 msgstr ""
 
-#: ../../../../Modules/CMakePushCheckState.cmake:30
+#: ../../../../Modules/CMakePushCheckState.cmake:31
 msgid ""
 "cmake_push_check_state(RESET)\n"
 "set(CMAKE_REQUIRED_DEFINITIONS -DSOME_MORE_DEF)\n"

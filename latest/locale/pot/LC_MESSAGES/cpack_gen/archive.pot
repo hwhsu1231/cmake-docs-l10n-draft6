@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,22 +168,17 @@ msgid "The number of threads to use when performing the compression."
 msgstr ""
 
 #: ../../../cpack_gen/archive.rst:94
-msgid "``1``"
+msgid "value of :variable:`CPACK_THREADS`"
 msgstr ""
 
 #: ../../../cpack_gen/archive.rst:96
 msgid ""
 "If set to ``0``, the number of available cores on the machine will be used "
-"instead. The default is ``1`` which limits compression to a single thread. "
-"Note that not all compression modes support threading in all environments. "
-"Currently, only the XZ compression may support it."
+"instead. Note that not all compression modes support threading in all "
+"environments."
 msgstr ""
 
 #: ../../../cpack_gen/archive.rst:101
-msgid "See also the :variable:`CPACK_THREADS` variable."
-msgstr ""
-
-#: ../../../cpack_gen/archive.rst:105
 msgid ""
 "Official CMake binaries available on ``cmake.org`` now ship with a "
 "``liblzma`` that supports parallel compression. Older versions did not."

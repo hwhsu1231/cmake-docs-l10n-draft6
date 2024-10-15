@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2000-2024 Kitware, Inc. and Contributors
+# This file is distributed under the same license as the CMake package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CMake latest\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:2
+msgid "CMAKE_LINK_LIBRARIES_STRATEGY"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:6
+msgid ""
+"Specify a strategy for ordering targets' direct link dependencies on linker "
+"command lines."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:9
+msgid ""
+"The value of this variable initializes the :prop_tgt:"
+"`LINK_LIBRARIES_STRATEGY` target property of targets as they are created.  "
+"Set that property directly to specify a strategy for a single target."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:13
+msgid ""
+"CMake generates a target's link line using its :ref:`Target Link "
+"Properties`. In particular, the :prop_tgt:`LINK_LIBRARIES` target property "
+"records the target's direct link dependencies, typically populated by calls "
+"to :command:`target_link_libraries`.  Indirect link dependencies are "
+"propagated from those entries of :prop_tgt:`LINK_LIBRARIES` that name "
+"library targets by following the transitive closure of their :prop_tgt:"
+"`INTERFACE_LINK_LIBRARIES` properties.  CMake supports multiple strategies "
+"for passing direct and indirect link dependencies to the linker."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:22
+msgid "Consider this example for the strategies below:"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:24
+msgid ""
+"add_library(A STATIC ...)\n"
+"add_library(B STATIC ...)\n"
+"add_library(C STATIC ...)\n"
+"add_executable(main ...)\n"
+"target_link_libraries(B PRIVATE A)\n"
+"target_link_libraries(C PRIVATE A)\n"
+"target_link_libraries(main PRIVATE A B C)"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:34
+msgid "The supported strategies are:"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:51
+msgid "``PRESERVE_ORDER``"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:37
+msgid ""
+"Entries of :prop_tgt:`LINK_LIBRARIES` always appear first and in their "
+"original order.  Indirect link dependencies not satisfied by the original "
+"entries may be reordered and de-duplicated with respect to one another, but "
+"are always appended after the original entries. This may result in less "
+"efficient link lines, but gives projects control of ordering among "
+"independent entries.  Such control may be important when intermixing link "
+"flags with libraries, or when multiple libraries provide a given symbol."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:46
+msgid "This is the default."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:48
+msgid ""
+"In the above example, this strategy computes a link line for ``main`` by "
+"starting with its original entries ``A B C``, and then appends another ``A`` "
+"to satisfy the dependencies of ``B`` and ``C`` on ``A``. The final order is "
+"``A B C A``."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:62
+msgid "``REORDER``"
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:54
+msgid ""
+"Entries of :prop_tgt:`LINK_LIBRARIES` may be reordered, de-duplicated, and "
+"intermixed with indirect link dependencies.  This may result in more "
+"efficient link lines, but does not give projects any control of ordering "
+"among independent entries."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:59
+msgid ""
+"In the above example, this strategy computes a link line for ``main`` by re-"
+"ordering its original entries ``A B C`` to satisfy the dependencies of ``B`` "
+"and ``C`` on ``A``. The final order is ``B C A``."
+msgstr ""
+
+#: ../../../variable/CMAKE_LINK_LIBRARIES_STRATEGY.rst:66
+msgid ""
+"Regardless of the strategy used, the actual linker invocation for some "
+"platforms may de-duplicate entries based on linker capabilities. See "
+"policies :policy:`CMP0156` and :policy:`CMP0179`."
+msgstr ""
