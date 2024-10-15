@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "True if the Git command-line client was found."
 msgstr ""
 
-#: ../../../../Modules/FindGit.cmake:14
+#: ../../../../Modules/FindGit.cmake:15
 msgid "``GIT_VERSION_STRING``"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgid ""
 "`CMAKE_ROLE` is ``PROJECT``):"
 msgstr ""
 
-#: ../../../../Modules/FindGit.cmake:21
+#: ../../../../Modules/FindGit.cmake:22
 msgid "``Git::Git``"
 msgstr ""
 

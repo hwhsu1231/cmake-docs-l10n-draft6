@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "The allowed values are:"
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:1
+#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:2
 msgid "``MultiThreaded``"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgid ""
 "statically-linked runtime library."
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:4
+#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:5
 msgid "``MultiThreadedDLL``"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgid ""
 "dynamically-linked runtime library."
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:7
+#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:8
 msgid "``MultiThreadedDebug``"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgid ""
 "statically-linked runtime library."
 msgstr ""
 
-#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:10
+#: ../../../prop_tgt/MSVC_RUNTIME_LIBRARY-VALUES.txt:12
 msgid "``MultiThreadedDebugDLL``"
 msgstr ""
 

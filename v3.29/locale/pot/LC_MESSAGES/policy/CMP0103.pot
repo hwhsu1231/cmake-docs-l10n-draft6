@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid ""
 "occurrence is taken into account during the generation."
 msgstr ""
 
-#: ../../../policy/CMP0103.rst:13
+#: ../../../policy/CMP0103.rst:14
 msgid ""
 "The ``OLD`` behavior for this policy is to ignore the multiple occurrences of"
 msgstr ""

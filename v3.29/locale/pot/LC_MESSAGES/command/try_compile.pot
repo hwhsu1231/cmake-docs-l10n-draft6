@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,7 +198,7 @@ msgstr ""
 msgid "The options for the above signatures are:"
 msgstr ""
 
-#: ../../../command/try_compile.rst:155
+#: ../../../command/try_compile.rst:160
 msgid "``CMAKE_FLAGS <flags>...``"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgid ""
 "``LINK_DIRECTORIES``, and ``LINK_LIBRARIES`` are used."
 msgstr ""
 
-#: ../../../command/try_compile.rst:162
+#: ../../../command/try_compile.rst:164
 msgid "``COMPILE_DEFINITIONS <defs>...``"
 msgstr ""
 
@@ -220,7 +220,7 @@ msgid ""
 "the generated test project."
 msgstr ""
 
-#: ../../../command/try_compile.rst:166
+#: ../../../command/try_compile.rst:167
 msgid "``COPY_FILE <fileName>``"
 msgstr ""
 
@@ -229,7 +229,7 @@ msgid ""
 "Copy the built executable or static library to the given ``<fileName>``."
 msgstr ""
 
-#: ../../../command/try_compile.rst:169
+#: ../../../command/try_compile.rst:171
 msgid "``COPY_FILE_ERROR <var>``"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgid ""
 "encountered while trying to copy the file."
 msgstr ""
 
-#: ../../../command/try_compile.rst:173
+#: ../../../command/try_compile.rst:182
 msgid "``LINK_LIBRARIES <libs>...``"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Alias targets to imported libraries are also supported."
 msgstr ""
 
-#: ../../../command/try_compile.rst:184
+#: ../../../command/try_compile.rst:189
 msgid "``LINK_OPTIONS <options>...``"
 msgstr ""
 
@@ -271,7 +271,7 @@ msgid ""
 "project, depending on the :variable:`CMAKE_TRY_COMPILE_TARGET_TYPE` variable."
 msgstr ""
 
-#: ../../../command/try_compile.rst:191
+#: ../../../command/try_compile.rst:197
 msgid "``LINKER_LANGUAGE <lang>``"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgid ""
 "e.g., ``main``."
 msgstr ""
 
-#: ../../../command/try_compile.rst:199
+#: ../../../command/try_compile.rst:203
 msgid "``LOG_DESCRIPTION <text>``"
 msgstr ""
 
@@ -293,7 +293,7 @@ msgid ""
 "recorded in the :manual:`cmake-configure-log(7)` entry."
 msgstr ""
 
-#: ../../../command/try_compile.rst:205
+#: ../../../command/try_compile.rst:223
 msgid "``NO_CACHE``"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgid ""
 "avoid leaking the intermediate result variable into the cache."
 msgstr ""
 
-#: ../../../command/try_compile.rst:225
+#: ../../../command/try_compile.rst:228
 msgid "``NO_LOG``"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Do not record a :manual:`cmake-configure-log(7)` entry for this call."
 msgstr ""
 
-#: ../../../command/try_compile.rst:230
+#: ../../../command/try_compile.rst:231
 msgid "``OUTPUT_VARIABLE <var>``"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 msgid "Store the output from the build process in the given variable."
 msgstr ""
 
-#: ../../../command/try_compile.rst:233
+#: ../../../command/try_compile.rst:241
 msgid "``SOURCE_FROM_CONTENT <name> <content>``"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr ""
 msgid "``SOURCE_FROM_CONTENT`` may be specified multiple times."
 msgstr ""
 
-#: ../../../command/try_compile.rst:243
+#: ../../../command/try_compile.rst:251
 msgid "``SOURCE_FROM_FILE <name> <path>``"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgid ""
 "specified ``<name>`` is not allowed to contain path components."
 msgstr ""
 
-#: ../../../command/try_compile.rst:253
+#: ../../../command/try_compile.rst:263
 msgid "``SOURCE_FROM_VAR <name> <var>``"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "``SOURCE_FROM_VAR`` may be specified multiple times."
 msgstr ""
 
-#: ../../../command/try_compile.rst:265
+#: ../../../command/try_compile.rst:281
 msgid "``SOURCES_TYPE <type>``"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgid ""
 "until another ``SOURCES_TYPE`` is given. Available types are:"
 msgstr ""
 
-#: ../../../command/try_compile.rst:272
+#: ../../../command/try_compile.rst:273
 msgid "``NORMAL``"
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 msgid "Sources are not added to any ``FILE_SET`` in the generated project."
 msgstr ""
 
-#: ../../../command/try_compile.rst:275
+#: ../../../command/try_compile.rst:279
 msgid "``CXX_MODULE``"
 msgstr ""
 
@@ -421,7 +421,7 @@ msgstr ""
 msgid "The default type of sources is ``NORMAL``."
 msgstr ""
 
-#: ../../../command/try_compile.rst:283
+#: ../../../command/try_compile.rst:288
 msgid "``<LANG>_STANDARD <std>``"
 msgstr ""
 
@@ -432,7 +432,7 @@ msgid ""
 "target property of the generated project."
 msgstr ""
 
-#: ../../../command/try_compile.rst:290
+#: ../../../command/try_compile.rst:296
 msgid "``<LANG>_STANDARD_REQUIRED <bool>``"
 msgstr ""
 
@@ -444,7 +444,7 @@ msgid ""
 "property of the generated project."
 msgstr ""
 
-#: ../../../command/try_compile.rst:298
+#: ../../../command/try_compile.rst:303
 msgid "``<LANG>_EXTENSIONS <bool>``"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgid ""
 "only for:"
 msgstr ""
 
-#: ../../../generator/Visual Studio 9 2008.rst:34
+#: ../../../generator/Visual Studio 9 2008.rst:35
 msgid "``Visual Studio 9 2008 Win64``"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Specify target platform ``x64``."
 msgstr ""
 
-#: ../../../generator/Visual Studio 9 2008.rst:37
+#: ../../../generator/Visual Studio 9 2008.rst:38
 msgid "``Visual Studio 9 2008 IA64``"
 msgstr ""
 

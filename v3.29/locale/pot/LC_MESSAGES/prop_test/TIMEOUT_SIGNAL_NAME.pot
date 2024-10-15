@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "The name must be one of the following:"
 msgstr ""
 
-#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:12
+#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:13
 msgid "``SIGINT``"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Interrupt."
 msgstr ""
 
-#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:15
+#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:16
 msgid "``SIGQUIT``"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Quit."
 msgstr ""
 
-#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:18
+#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:19
 msgid "``SIGTERM``"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Terminate."
 msgstr ""
 
-#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:21
+#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:22
 msgid "``SIGUSR1``"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "User defined signal 1."
 msgstr ""
 
-#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:24
+#: ../../../prop_test/TIMEOUT_SIGNAL_NAME.rst:25
 msgid "``SIGUSR2``"
 msgstr ""
 

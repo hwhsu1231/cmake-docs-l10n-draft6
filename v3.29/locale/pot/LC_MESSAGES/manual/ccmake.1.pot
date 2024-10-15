@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,7 +258,7 @@ msgid ""
 "Treat CMake warnings as errors. ``<what>`` must be one of the following:"
 msgstr ""
 
-#: ../../../manual/OPTIONS_BUILD.txt:153 ../../../manual/OPTIONS_BUILD.txt:169
+#: ../../../manual/OPTIONS_BUILD.txt:157 ../../../manual/OPTIONS_BUILD.txt:171
 msgid "``dev``"
 msgstr ""
 
@@ -272,7 +272,7 @@ msgid ""
 "errors. By default this will also turn on deprecated warnings as errors."
 msgstr ""
 
-#: ../../../manual/OPTIONS_BUILD.txt:159 ../../../manual/OPTIONS_BUILD.txt:173
+#: ../../../manual/OPTIONS_BUILD.txt:162 ../../../manual/OPTIONS_BUILD.txt:174
 msgid "``deprecated``"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr ""
 msgid "The following resources are available to get help using CMake:"
 msgstr ""
 
-#: ../../../manual/LINKS.txt:3
+#: ../../../manual/LINKS.txt:6
 msgid "Home Page"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr ""
 msgid "The primary starting point for learning about CMake."
 msgstr ""
 
-#: ../../../manual/LINKS.txt:8
+#: ../../../manual/LINKS.txt:12
 msgid "Online Documentation and Community Resources"
 msgstr ""
 
@@ -546,7 +546,7 @@ msgid ""
 "this web page."
 msgstr ""
 
-#: ../../../manual/LINKS.txt:14
+#: ../../../manual/LINKS.txt:17
 msgid "Discourse Forum"
 msgstr ""
 

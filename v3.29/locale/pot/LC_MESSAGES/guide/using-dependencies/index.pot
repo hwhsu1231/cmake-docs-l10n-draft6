@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgid ""
 "out the search:"
 msgstr ""
 
-#: ../../../guide/using-dependencies/index.rst:59
+#: ../../../guide/using-dependencies/index.rst:62
 msgid "**Config mode**"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgid ""
 "package details should always be in sync with the package."
 msgstr ""
 
-#: ../../../guide/using-dependencies/index.rst:64
+#: ../../../guide/using-dependencies/index.rst:72
 msgid "**Module mode**"
 msgstr ""
 

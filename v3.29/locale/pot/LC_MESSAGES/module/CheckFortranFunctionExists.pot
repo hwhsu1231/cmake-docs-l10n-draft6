@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgid ""
 "way the check is run:"
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:32
+#: ../../../../Modules/CheckFortranFunctionExists.cmake:35
 msgid "``CMAKE_REQUIRED_LINK_OPTIONS``"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgid ""
 "(see :command:`try_compile` for further details)."
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:37
+#: ../../../../Modules/CheckFortranFunctionExists.cmake:83
 msgid "``CMAKE_REQUIRED_LIBRARIES``"
 msgstr ""
 

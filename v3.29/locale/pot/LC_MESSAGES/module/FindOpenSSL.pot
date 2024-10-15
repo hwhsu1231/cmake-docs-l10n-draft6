@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgstr ""
 msgid "The OpenSSL ``crypto`` library, if found."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:39
+#: ../../../../Modules/FindOpenSSL.cmake:47
 msgid "``OpenSSL::applink``"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 msgid "This module will set the following variables in your project:"
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:68
+#: ../../../../Modules/FindOpenSSL.cmake:69
 msgid "``OPENSSL_FOUND``"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "This is set to ``$major.$minor.$revision$patch`` (e.g. ``0.9.8s``)."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:85
+#: ../../../../Modules/FindOpenSSL.cmake:88
 msgid "``OPENSSL_APPLINK_SOURCE``"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "The following variables may be set to control search behavior:"
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:95
+#: ../../../../Modules/FindOpenSSL.cmake:96
 msgid "``OPENSSL_ROOT_DIR``"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Set to the root directory of an OpenSSL installation."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:98
+#: ../../../../Modules/FindOpenSSL.cmake:101
 msgid "``OPENSSL_USE_STATIC_LIBS``"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgstr ""
 msgid "Set to ``TRUE`` to look for static libraries."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:103
+#: ../../../../Modules/FindOpenSSL.cmake:106
 msgid "``OPENSSL_MSVC_STATIC_RT``"
 msgstr ""
 
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Set to ``TRUE`` to choose the MT version of the lib."
 msgstr ""
 
-#: ../../../../Modules/FindOpenSSL.cmake:108
+#: ../../../../Modules/FindOpenSSL.cmake:798
 msgid "``ENV{PKG_CONFIG_PATH}``"
 msgstr ""
 

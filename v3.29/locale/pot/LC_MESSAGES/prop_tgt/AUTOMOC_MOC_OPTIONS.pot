@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgid ""
 "option when generating the moc file for ``object.cpp``."
 msgstr ""
 
-#: ../../../prop_tgt/AUTOMOC_MOC_OPTIONS.rst:25
+#: ../../../prop_tgt/AUTOMOC_MOC_OPTIONS.rst:32
 msgid "``CMakeLists.txt``"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid ""
 "target_link_libraries(mocOptions Qt6::Core)"
 msgstr ""
 
-#: ../../../prop_tgt/AUTOMOC_MOC_OPTIONS.rst:34
+#: ../../../prop_tgt/AUTOMOC_MOC_OPTIONS.rst:52
 msgid "``object.hpp``"
 msgstr ""
 
