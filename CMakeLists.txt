@@ -17,6 +17,12 @@ set(VERSION "git-master"
     CACHE STRING "Current version for the documentation.")
     # Possible values are "git-master", "latest", and "v3.x".
 
+set(AUTO_DEPEND ON
+    CACHE BOOL "Enable automatic dependency management for specific build targets.")
+
+set(REMOVE_REDUNDANT ON
+    CACHE BOOL "Removing redundant files after building documentation.")
+
 set(MODE_OF_UPDATE "NEVER"
     CACHE STRING "Mode of updating .pot/.po files.")
     # Possible values are "NEVER", "COMPARE", and "ALWAYS".
@@ -29,12 +35,6 @@ set(MODE_OF_INSTALL "COMPARE"
     # Possible values are "COMPARE" and "ALWAYS".
     # 1) COMPARE: Install the requirements only if the current reference is different than the previous one.
     # 2) ALWAYS:  Install the requirements even if the current reference is the same as    the previous one.
-
-set(AUTO_DEPEND ON
-    CACHE BOOL "Enable automatic dependency management for specific build targets.")
-
-set(REMOVE_REDUNDANT ON
-    CACHE BOOL "Removing redundant files after building documentation.")
 
 set(REMOTE_URL_OF_L10N "https://github.com/hwhsu1231/cmake-docs-l10n-draft6.git"
     CACHE STRING "Remote URL of the 'l10n' repository.")
@@ -96,10 +96,11 @@ set(PROJ_CMAKE_TEMPLATES_DIR        "${PROJ_SOURCE_DIR}/cmake/templates")
 set(PROJ_VENV_DIR                   "${PROJ_SOURCE_DIR}/.venv")
 set(PROJ_OUT_DIR                    "${PROJ_SOURCE_DIR}/out")
 set(PROJ_OUT_REPO_DIR               "${PROJ_OUT_DIR}/repo")
+set(PROJ_OUT_REPO_DOCS_DIR          "${PROJ_OUT_REPO_DIR}/Help")
+set(PROJ_OUT_REPO_DOCS_CONFIG_DIR   "${PROJ_OUT_REPO_DOCS_DIR}")
+set(PROJ_OUT_REPO_DOCS_SOURCE_DIR   "${PROJ_OUT_REPO_DOCS_DIR}")
+set(PROJ_OUT_REPO_DOCS_LOCALE_DIR   "${PROJ_OUT_REPO_DOCS_DIR}/locale")
 set(PROJ_OUT_REPO_SPHINX_DIR        "${PROJ_OUT_REPO_DIR}/Utilities/Sphinx")
-set(PROJ_OUT_REPO_DOCS_CONFIG_DIR   "${PROJ_OUT_REPO_DIR}/Help")
-set(PROJ_OUT_REPO_DOCS_SOURCE_DIR   "${PROJ_OUT_REPO_DIR}/Help")
-set(PROJ_OUT_REPO_DOCS_LOCALE_DIR   "${PROJ_OUT_REPO_DIR}/Help/locale")
 set(PROJ_OUT_BUILDER_DIR            "${PROJ_OUT_DIR}/${SPHINX_BUILDER}")
 set(PROJ_L10N_DIR                   "${PROJ_SOURCE_DIR}/l10n")
 set(PROJ_L10N_VERSION_DIR           "${PROJ_L10N_DIR}/${VERSION}")
@@ -323,10 +324,11 @@ message(STATUS "PROJ_CMAKE_TEMPLATES_DIR      = ${PROJ_CMAKE_TEMPLATES_DIR}")
 message(STATUS "PROJ_VENV_DIR                 = ${PROJ_VENV_DIR}")
 message(STATUS "PROJ_OUT_DIR                  = ${PROJ_OUT_DIR}")
 message(STATUS "PROJ_OUT_REPO_DIR             = ${PROJ_OUT_REPO_DIR}")
-message(STATUS "PROJ_OUT_REPO_SPHINX_DIR      = ${PROJ_OUT_REPO_SPHINX_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_DIR        = ${PROJ_OUT_REPO_DOCS_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_CONFIG_DIR = ${PROJ_OUT_REPO_DOCS_CONFIG_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_SOURCE_DIR = ${PROJ_OUT_REPO_DOCS_SOURCE_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_LOCALE_DIR = ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
+message(STATUS "PROJ_OUT_REPO_SPHINX_DIR      = ${PROJ_OUT_REPO_SPHINX_DIR}")
 message(STATUS "PROJ_OUT_BUILDER_DIR          = ${PROJ_OUT_BUILDER_DIR}")
 message(STATUS "PROJ_L10N_DIR                 = ${PROJ_L10N_DIR}")
 message(STATUS "PROJ_L10N_VERSION_DIR         = ${PROJ_L10N_VERSION_DIR}")
@@ -410,10 +412,11 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_VENV_DIR=${PROJ_VENV_DIR}
     -D PROJ_OUT_DIR=${PROJ_OUT_DIR}
     -D PROJ_OUT_REPO_DIR=${PROJ_OUT_REPO_DIR}
-    -D PROJ_OUT_REPO_SPHINX_DIR=${PROJ_OUT_REPO_SPHINX_DIR}
+    -D PROJ_OUT_REPO_DOCS_DIR=${PROJ_OUT_REPO_DOCS_DIR}
     -D PROJ_OUT_REPO_DOCS_CONFIG_DIR=${PROJ_OUT_REPO_DOCS_CONFIG_DIR}
     -D PROJ_OUT_REPO_DOCS_SOURCE_DIR=${PROJ_OUT_REPO_DOCS_SOURCE_DIR}
     -D PROJ_OUT_REPO_DOCS_LOCALE_DIR=${PROJ_OUT_REPO_DOCS_LOCALE_DIR}
+    -D PROJ_OUT_REPO_SPHINX_DIR=${PROJ_OUT_REPO_SPHINX_DIR}
     -D PROJ_OUT_BUILDER_DIR=${PROJ_OUT_BUILDER_DIR}
     -D PROJ_L10N_DIR=${PROJ_L10N_DIR}
     -D PROJ_L10N_VERSION_DIR=${PROJ_L10N_VERSION_DIR}
@@ -501,6 +504,10 @@ add_custom_target(readthedocs_symlinks
             ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/readthedocs_symlinks.cmake
     VERBATIM)
+
+#[============================================================[
+  Add dependencies for targets.
+#]============================================================]
 
 if(AUTO_DEPEND)
     add_dependencies(install_requirements   prepare_repositories)
