@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -456,13 +456,21 @@ msgid ""
 "Generate a ``compile_commands.json`` file for use with clang-based tools"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:305
+#: ../../../guide/user-interaction/index.rst:303
+msgid ":variable:`CMAKE_EXPORT_BUILD_DATABASE`"
+msgstr ""
+
+#: ../../../guide/user-interaction/index.rst:303
+msgid "Generate a ``build_database.json`` file for use with clang-based tools"
+msgstr ""
+
+#: ../../../guide/user-interaction/index.rst:307
 msgid ""
 "Other project-specific variables may be available to control builds, such as "
 "enabling or disabling components of the project."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:309
+#: ../../../guide/user-interaction/index.rst:311
 msgid ""
 "There is no convention provided by CMake for how such variables are named "
 "between different provided buildsystems, except that variables with the "
@@ -473,52 +481,52 @@ msgid ""
 "they use a self-consistent prefix."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:322
+#: ../../../guide/user-interaction/index.rst:324
 msgid "Setting variables on the command line"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:324
+#: ../../../guide/user-interaction/index.rst:326
 msgid ""
 "CMake variables can be set on the command line either when creating the "
 "initial build:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:327
+#: ../../../guide/user-interaction/index.rst:329
 msgid ""
 "$ mkdir build\n"
 "$ cd build\n"
 "$ cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Debug"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:333
+#: ../../../guide/user-interaction/index.rst:335
 msgid "or later on a subsequent invocation of :manual:`cmake(1)`:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:336
+#: ../../../guide/user-interaction/index.rst:338
 msgid ""
 "$ cd build\n"
 "$ cmake . -DCMAKE_BUILD_TYPE=Debug"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:341
+#: ../../../guide/user-interaction/index.rst:343
 msgid ""
 "The :option:`-U <cmake -U>` flag may be used to unset variables on the :"
 "manual:`cmake(1)` command line:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:344
+#: ../../../guide/user-interaction/index.rst:346
 msgid ""
 "$ cd build\n"
 "$ cmake . -UMyPackage_DIR"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:349
+#: ../../../guide/user-interaction/index.rst:351
 msgid ""
 "A CMake buildsystem which was initially created on the command line can be "
 "modified using the :manual:`cmake-gui(1)` and vice-versa."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:353
+#: ../../../guide/user-interaction/index.rst:355
 msgid ""
 "The :manual:`cmake(1)` tool allows specifying a file to use to populate the "
 "initial cache using the :option:`-C <cmake -C>` option.  This can be useful "
@@ -526,11 +534,11 @@ msgid ""
 "entries."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:360
+#: ../../../guide/user-interaction/index.rst:362
 msgid "Setting variables with cmake-gui"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:362
+#: ../../../guide/user-interaction/index.rst:364
 msgid ""
 "Variables may be set in the cmake-gui using the \"Add Entry\" button.  This "
 "triggers a new dialog to set the value of the variable."
@@ -540,17 +548,17 @@ msgstr ""
 msgid "Editing a cache entry"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:369
+#: ../../../guide/user-interaction/index.rst:371
 msgid ""
 "The main view of the :manual:`cmake-gui(1)` user interface can be used to "
 "edit existing variables."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:373
+#: ../../../guide/user-interaction/index.rst:375
 msgid "The CMake Cache"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:375
+#: ../../../guide/user-interaction/index.rst:377
 msgid ""
 "When CMake is executed, it needs to find the locations of compilers, tools "
 "and dependencies.  It also needs to be able to consistently re-generate a "
@@ -559,7 +567,7 @@ msgid ""
 "they are paths and options specific to the users system."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:383
+#: ../../../guide/user-interaction/index.rst:385
 msgid ""
 "When it is first executed, CMake generates a ``CMakeCache.txt`` file in the "
 "build directory containing key-value pairs for such artifacts.  The cache "
@@ -571,7 +579,7 @@ msgid ""
 "tools."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:394
+#: ../../../guide/user-interaction/index.rst:396
 msgid ""
 "The cache entries may also have a type to signify how it should be presented "
 "in the user interface.  For example, a cache entry of type ``BOOL`` can be "
@@ -583,7 +591,7 @@ msgid ""
 "interface (see the :prop_cache:`STRINGS` cache property)."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:406
+#: ../../../guide/user-interaction/index.rst:408
 msgid ""
 "The CMake files shipped with a software package may also define boolean "
 "toggle options using the :command:`option` command.  The command creates a "
@@ -593,11 +601,11 @@ msgid ""
 "with exceptions enabled etc."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:416
+#: ../../../guide/user-interaction/index.rst:418
 msgid "Presets"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:418
+#: ../../../guide/user-interaction/index.rst:420
 msgid ""
 "CMake understands a file, ``CMakePresets.json``, and its user-specific "
 "counterpart, ``CMakeUserPresets.json``, for saving presets for commonly-used "
@@ -608,11 +616,11 @@ msgid ""
 "manual."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:428
+#: ../../../guide/user-interaction/index.rst:430
 msgid "Using presets on the command-line"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:430
+#: ../../../guide/user-interaction/index.rst:432
 msgid ""
 "When using the :manual:`cmake(1)` command line tool, a preset can be invoked "
 "by using the :option:`--preset <cmake --preset>` option. If :option:`--"
@@ -621,7 +629,7 @@ msgid ""
 "have the following ``CMakePresets.json`` file:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:437
+#: ../../../guide/user-interaction/index.rst:439
 msgid ""
 "{\n"
 "  \"version\": 1,\n"
@@ -638,41 +646,41 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:453
+#: ../../../guide/user-interaction/index.rst:455
 msgid "and you run the following:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:455
+#: ../../../guide/user-interaction/index.rst:457
 msgid "cmake -S /path/to/source --preset=ninja-release"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:459
+#: ../../../guide/user-interaction/index.rst:461
 msgid ""
 "This will generate a build directory in ``/path/to/source/build/ninja-"
 "release`` with the :generator:`Ninja` generator, and with :variable:"
 "`CMAKE_BUILD_TYPE` set to ``Release``."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:464
+#: ../../../guide/user-interaction/index.rst:466
 msgid "If you want to see the list of available presets, you can run:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:467
+#: ../../../guide/user-interaction/index.rst:469
 msgid "cmake -S /path/to/source --list-presets"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:471
+#: ../../../guide/user-interaction/index.rst:473
 msgid ""
 "This will list the presets available in ``/path/to/source/CMakePresets."
 "json`` and ``/path/to/source/CMakeUsersPresets.json`` without generating a "
 "build tree."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:477
+#: ../../../guide/user-interaction/index.rst:479
 msgid "Using presets in cmake-gui"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:479
+#: ../../../guide/user-interaction/index.rst:481
 msgid ""
 "If a project has presets available, either through ``CMakePresets.json`` or "
 "``CMakeUserPresets.json``, the list of presets will appear in a drop-down "
@@ -682,29 +690,29 @@ msgid ""
 "overridden after a preset is selected."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:489
+#: ../../../guide/user-interaction/index.rst:491
 msgid "Invoking the Buildsystem"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:491
+#: ../../../guide/user-interaction/index.rst:493
 msgid ""
 "After generating the buildsystem, the software can be built by invoking the "
 "particular build tool.  In the case of the IDE generators, this can involve "
 "loading the generated project file into the IDE to invoke the build."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:497
+#: ../../../guide/user-interaction/index.rst:499
 msgid ""
 "CMake is aware of the specific build tool needed to invoke a build so in "
 "general, to build a buildsystem or project from the command line after "
 "generating, the following command may be invoked in the build directory:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:502
+#: ../../../guide/user-interaction/index.rst:504
 msgid "$ cmake --build ."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:506
+#: ../../../guide/user-interaction/index.rst:508
 msgid ""
 "The :option:`--build <cmake --build>` flag enables a particular mode of "
 "operation for the :manual:`cmake(1)` tool.  It invokes the  :variable:"
@@ -712,7 +720,7 @@ msgid ""
 "generators(7)>`, or the build tool configured by the user."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:513
+#: ../../../guide/user-interaction/index.rst:515
 msgid ""
 "The :option:`--build <cmake --build>` mode also accepts the parameter :"
 "option:`--target <cmake--build --target>` to specify a particular target to "
@@ -720,40 +728,40 @@ msgid ""
 "particular special target like ``install``:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:519
+#: ../../../guide/user-interaction/index.rst:521
 msgid "$ cmake --build . --target myexe"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:523
+#: ../../../guide/user-interaction/index.rst:525
 msgid ""
 "The :option:`--build <cmake --build>` mode also accepts a :option:`--config "
 "<cmake--build --config>` parameter in the case of multi-config generators to "
 "specify which particular configuration to build:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:528
+#: ../../../guide/user-interaction/index.rst:530
 msgid "$ cmake --build . --target myexe --config Release"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:532
+#: ../../../guide/user-interaction/index.rst:534
 msgid ""
 "The :option:`--config <cmake--build --config>` option has no effect if the "
 "generator generates a buildsystem specific to a configuration which is "
 "chosen when invoking cmake with the :variable:`CMAKE_BUILD_TYPE` variable."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:537
+#: ../../../guide/user-interaction/index.rst:539
 msgid ""
 "Some buildsystems omit details of command lines invoked during the build.  "
 "The :option:`--verbose <cmake--build --verbose>` flag can be used to cause "
 "those command lines to be shown:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:541
+#: ../../../guide/user-interaction/index.rst:543
 msgid "$ cmake --build . --target myexe --verbose"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:545
+#: ../../../guide/user-interaction/index.rst:547
 msgid ""
 "The :option:`--build <cmake --build>` mode can also pass particular command "
 "line options to the underlying build tool by listing them after ``--``.  "
@@ -762,7 +770,7 @@ msgid ""
 "interface."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:552
+#: ../../../guide/user-interaction/index.rst:554
 msgid ""
 "For all generators, it is possible to run the underlying build tool after "
 "invoking CMake.  For example, ``make`` may be executed after generating with "
@@ -772,28 +780,28 @@ msgid ""
 "which can also be invoked."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:562
+#: ../../../guide/user-interaction/index.rst:564
 msgid "Selecting a Target"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:564
+#: ../../../guide/user-interaction/index.rst:566
 msgid ""
 "Each executable and library described in the CMake files is a build target, "
 "and the buildsystem may describe custom targets, either for internal use, or "
 "for user consumption, for example to create documentation."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:569
+#: ../../../guide/user-interaction/index.rst:571
 msgid ""
 "CMake provides some built-in targets for all buildsystems providing CMake "
 "files."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:578
+#: ../../../guide/user-interaction/index.rst:580
 msgid "``all``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:573
+#: ../../../guide/user-interaction/index.rst:575
 msgid ""
 "The default target used by ``Makefile`` and ``Ninja`` generators.  Builds "
 "all targets in the buildsystem, except those which are excluded by their :"
@@ -802,22 +810,22 @@ msgid ""
 "Xcode and Visual Studio generators."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:583
+#: ../../../guide/user-interaction/index.rst:585
 msgid "``help``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:581
+#: ../../../guide/user-interaction/index.rst:583
 msgid ""
 "Lists the targets available for build.  This target is available when using "
 "the :generator:`Unix Makefiles` or :generator:`Ninja` generator, and the "
 "exact output is tool-specific."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:589
+#: ../../../guide/user-interaction/index.rst:591
 msgid "``clean``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:586
+#: ../../../guide/user-interaction/index.rst:588
 msgid ""
 "Delete built object files and other output files.  The ``Makefile`` based "
 "generators create a ``clean`` target per directory, so that an individual "
@@ -825,48 +833,48 @@ msgid ""
 "clean`` system."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:593
+#: ../../../guide/user-interaction/index.rst:595
 msgid "``test``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:592
+#: ../../../guide/user-interaction/index.rst:594
 msgid ""
 "Runs tests.  This target is only automatically available if the CMake files "
 "provide CTest-based tests.  See also `Running Tests`_."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:598
+#: ../../../guide/user-interaction/index.rst:600
 msgid "``install``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:596
+#: ../../../guide/user-interaction/index.rst:598
 msgid ""
 "Installs the software.  This target is only automatically available if the "
 "software defines install rules with the :command:`install` command.  See "
 "also `Software Installation`_."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:602
+#: ../../../guide/user-interaction/index.rst:604
 msgid "``package``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:601
+#: ../../../guide/user-interaction/index.rst:603
 msgid ""
 "Creates a binary package.  This target is only automatically available if "
 "the CMake files provide CPack-based packages."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:607
+#: ../../../guide/user-interaction/index.rst:609
 msgid "``package_source``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:605
+#: ../../../guide/user-interaction/index.rst:607
 msgid ""
 "Creates a source package.  This target is only automatically available if "
 "the CMake files provide CPack-based packages."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:609
+#: ../../../guide/user-interaction/index.rst:611
 msgid ""
 "For ``Makefile`` based systems, ``/fast`` variants of binary build targets "
 "are provided. The ``/fast`` variants are used to build the specified target "
@@ -876,134 +884,134 @@ msgid ""
 "for that generator."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:617
+#: ../../../guide/user-interaction/index.rst:619
 msgid ""
 "``Makefile`` based systems also provide build-targets to preprocess, "
 "assemble and compile individual files in a particular directory."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:621
+#: ../../../guide/user-interaction/index.rst:623
 msgid ""
 "$ make foo.cpp.i\n"
 "$ make foo.cpp.s\n"
 "$ make foo.cpp.o"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:627
+#: ../../../guide/user-interaction/index.rst:629
 msgid ""
 "The file extension is built into the name of the target because another file "
 "with the same name but a different extension may exist.  However, build-"
 "targets without the file extension are also provided."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:632
+#: ../../../guide/user-interaction/index.rst:634
 msgid ""
 "$ make foo.i\n"
 "$ make foo.s\n"
 "$ make foo.o"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:638
+#: ../../../guide/user-interaction/index.rst:640
 msgid ""
 "In buildsystems which contain ``foo.c`` and ``foo.cpp``, building the ``foo."
 "i`` target will preprocess both files."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:642
+#: ../../../guide/user-interaction/index.rst:644
 msgid "Specifying a Build Program"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:644
+#: ../../../guide/user-interaction/index.rst:646
 msgid ""
 "The program invoked by the :option:`--build <cmake --build>` mode is "
 "determined by the :variable:`CMAKE_MAKE_PROGRAM` variable. For most "
 "generators, the particular program does not need to be configured."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:650
+#: ../../../guide/user-interaction/index.rst:652
 msgid "Generator"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:650
+#: ../../../guide/user-interaction/index.rst:652
 msgid "Default make program"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:650
+#: ../../../guide/user-interaction/index.rst:652
 msgid "Alternatives"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:652
+#: ../../../guide/user-interaction/index.rst:654
 msgid "XCode"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:652
+#: ../../../guide/user-interaction/index.rst:654
 msgid "``xcodebuild``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:653
+#: ../../../guide/user-interaction/index.rst:655
 msgid "Unix Makefiles"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:653
-#: ../../../guide/user-interaction/index.rst:657
+#: ../../../guide/user-interaction/index.rst:655
+#: ../../../guide/user-interaction/index.rst:659
 msgid "``make``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:654
+#: ../../../guide/user-interaction/index.rst:656
 msgid "NMake Makefiles"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:654
-#: ../../../guide/user-interaction/index.rst:655
+#: ../../../guide/user-interaction/index.rst:656
+#: ../../../guide/user-interaction/index.rst:657
 msgid "``nmake``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:654
-#: ../../../guide/user-interaction/index.rst:655
+#: ../../../guide/user-interaction/index.rst:656
+#: ../../../guide/user-interaction/index.rst:657
 msgid "``jom``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:655
+#: ../../../guide/user-interaction/index.rst:657
 msgid "NMake Makefiles JOM"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:656
+#: ../../../guide/user-interaction/index.rst:658
 msgid "MinGW Makefiles"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:656
+#: ../../../guide/user-interaction/index.rst:658
 msgid "``mingw32-make``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:657
+#: ../../../guide/user-interaction/index.rst:659
 msgid "MSYS Makefiles"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:658
+#: ../../../guide/user-interaction/index.rst:660
 msgid "Ninja"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:658
+#: ../../../guide/user-interaction/index.rst:660
 msgid "``ninja``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:659
+#: ../../../guide/user-interaction/index.rst:661
 msgid "Visual Studio"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:659
+#: ../../../guide/user-interaction/index.rst:661
 msgid "``msbuild``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:660
+#: ../../../guide/user-interaction/index.rst:662
 msgid "Watcom WMake"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:660
+#: ../../../guide/user-interaction/index.rst:662
 msgid "``wmake``"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:663
+#: ../../../guide/user-interaction/index.rst:665
 msgid ""
 "The ``jom`` tool is capable of reading makefiles of the ``NMake`` flavor and "
 "building in parallel, while the ``nmake`` tool always builds serially.  "
@@ -1018,11 +1026,11 @@ msgid ""
 "generator, but doing so would be a pessimization."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:681
+#: ../../../guide/user-interaction/index.rst:683
 msgid "Software Installation"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:683
+#: ../../../guide/user-interaction/index.rst:685
 msgid ""
 "The :variable:`CMAKE_INSTALL_PREFIX` variable can be set in the CMake cache "
 "to specify where to install the provided software.  If the provided software "
@@ -1033,13 +1041,13 @@ msgid ""
 "installation location."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:693
+#: ../../../guide/user-interaction/index.rst:695
 msgid ""
 "The :variable:`CMAKE_INSTALL_PREFIX` variable always refers to the "
 "installation prefix on the target filesystem."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:697
+#: ../../../guide/user-interaction/index.rst:699
 msgid ""
 "In cross-compiling or packaging scenarios where the sysroot is read-only or "
 "where the sysroot should otherwise remain pristine, the :variable:"
@@ -1047,11 +1055,11 @@ msgid ""
 "the files."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:703
+#: ../../../guide/user-interaction/index.rst:705
 msgid "The commands:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:705
+#: ../../../guide/user-interaction/index.rst:707
 msgid ""
 "$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local \\\n"
 "  -DCMAKE_SYSROOT=$HOME/root \\\n"
@@ -1060,24 +1068,24 @@ msgid ""
 "$ cmake --build . --target install"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:713
+#: ../../../guide/user-interaction/index.rst:715
 msgid ""
 "result in files being installed to paths such as ``/tmp/package/lib/libfoo."
 "so`` on the host machine. The ``/usr/local`` location on the host machine is "
 "not affected."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:718
+#: ../../../guide/user-interaction/index.rst:720
 msgid ""
 "Some provided software may specify ``uninstall`` rules, but CMake does not "
 "generate such rules by default itself."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:722
+#: ../../../guide/user-interaction/index.rst:724
 msgid "Running Tests"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:724
+#: ../../../guide/user-interaction/index.rst:726
 msgid ""
 "The :manual:`ctest(1)` tool is shipped with the CMake distribution to "
 "execute provided tests and report results.  The ``test`` build-target is "
@@ -1087,47 +1095,47 @@ msgid ""
 "to running the ``test`` target:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:733
+#: ../../../guide/user-interaction/index.rst:735
 msgid "$ ctest"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:737
+#: ../../../guide/user-interaction/index.rst:739
 msgid ""
 "A regular expression can be passed to run only tests which match the "
 "expression.  To run only tests with ``Qt`` in their name:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:741
+#: ../../../guide/user-interaction/index.rst:743
 msgid "$ ctest -R Qt"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:745
+#: ../../../guide/user-interaction/index.rst:747
 msgid ""
 "Tests can be excluded by regular expression too.  To run only tests without "
 "``Qt`` in their name:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:748
+#: ../../../guide/user-interaction/index.rst:750
 msgid "$ ctest -E Qt"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:752
+#: ../../../guide/user-interaction/index.rst:754
 msgid ""
 "Tests can be run in parallel by passing :option:`-j <ctest -j>` arguments "
 "to :manual:`ctest(1)`:"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:755
+#: ../../../guide/user-interaction/index.rst:757
 msgid "$ ctest -R Qt -j8"
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:759
+#: ../../../guide/user-interaction/index.rst:761
 msgid ""
 "The environment variable :envvar:`CTEST_PARALLEL_LEVEL` can alternatively be "
 "set to avoid the need to pass :option:`-j <ctest -j>`."
 msgstr ""
 
-#: ../../../guide/user-interaction/index.rst:763
+#: ../../../guide/user-interaction/index.rst:765
 msgid ""
 "By default :manual:`ctest(1)` does not print the output from the tests. The "
 "command line argument :option:`-V <ctest -V>` (or ``--verbose``) enables "

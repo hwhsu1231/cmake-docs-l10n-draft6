@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,19 +223,19 @@ msgstr ""
 msgid "Compile options of <component>."
 msgstr ""
 
-#: ../../../../Modules/FindImageMagick.cmake:97
+#: ../../../../Modules/FindImageMagick.cmake:99
 msgid "``ImageMagick_<component>_LIBRARIES``"
 msgstr ""
 
-#: ../../../../Modules/FindImageMagick.cmake:96
+#: ../../../../Modules/FindImageMagick.cmake:98
 msgid "Full path to <component> libraries."
 msgstr ""
 
-#: ../../../../Modules/FindImageMagick.cmake:100
+#: ../../../../Modules/FindImageMagick.cmake:102
 msgid "Example Usage"
 msgstr ""
 
-#: ../../../../Modules/FindImageMagick.cmake:102
+#: ../../../../Modules/FindImageMagick.cmake:104
 msgid ""
 "find_package(ImageMagick COMPONENTS Magick++)\n"
 "target_link_libraries(example PRIVATE ImageMagick::Magick++)"

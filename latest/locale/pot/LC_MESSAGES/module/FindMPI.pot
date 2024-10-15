@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -692,7 +692,7 @@ msgid ""
 "use ``MPI_<lang>_ADDITIONAL_INCLUDE_DIRS`` instead."
 msgstr ""
 
-#: ../../../../Modules/FindMPI.cmake:1911
+#: ../../../../Modules/FindMPI.cmake:1912
 msgid "``MPIEXEC``"
 msgstr ""
 

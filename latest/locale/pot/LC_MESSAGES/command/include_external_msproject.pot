@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,10 +22,12 @@ msgid "include_external_msproject"
 msgstr ""
 
 #: ../../../command/include_external_msproject.rst:4
-msgid "Include an external Microsoft project file in a workspace."
+msgid ""
+"Include an external Microsoft project file in the solution file produced by :"
+"ref:`Visual Studio Generators`. Ignored on other generators."
 msgstr ""
 
-#: ../../../command/include_external_msproject.rst:6
+#: ../../../command/include_external_msproject.rst:7
 msgid ""
 "include_external_msproject(projectname location\n"
 "                           [TYPE projectTypeGUID]\n"
@@ -34,15 +36,15 @@ msgid ""
 "                           dep1 dep2 ...)"
 msgstr ""
 
-#: ../../../command/include_external_msproject.rst:14
+#: ../../../command/include_external_msproject.rst:15
 msgid ""
-"Includes an external Microsoft project in the generated workspace file.  "
-"Currently does nothing on UNIX.  This will create a target named "
-"``[projectname]``.  This can be used in the :command:`add_dependencies` "
-"command to make things depend on the external project."
+"Includes an external Microsoft project in the generated solution file. This "
+"will create a target named ``[projectname]``. This can be used in the :"
+"command:`add_dependencies` command to make things depend on the external "
+"project."
 msgstr ""
 
-#: ../../../command/include_external_msproject.rst:19
+#: ../../../command/include_external_msproject.rst:20
 msgid ""
 "``TYPE``, ``GUID`` and ``PLATFORM`` are optional parameters that allow one "
 "to specify the type of project, id (``GUID``) of the project and the name of "
@@ -50,7 +52,7 @@ msgid ""
 "than the default (e.g.  WIX projects)."
 msgstr ""
 
-#: ../../../command/include_external_msproject.rst:24
+#: ../../../command/include_external_msproject.rst:25
 msgid ""
 "If the imported project has different configuration names than the current "
 "project, set the :prop_tgt:`MAP_IMPORTED_CONFIG_<CONFIG>` target property to "

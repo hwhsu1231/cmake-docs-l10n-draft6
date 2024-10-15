@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,24 +63,34 @@ msgid ""
 "way the check is run:"
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:35
+#: ../../../module/CMAKE_REQUIRED_LINK_OPTIONS.txt:5
 msgid "``CMAKE_REQUIRED_LINK_OPTIONS``"
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:33
+#: ../../../module/CMAKE_REQUIRED_LINK_OPTIONS.txt:4
 msgid ""
 "A :ref:`;-list <CMake Language Lists>` of options to add to the link command "
 "(see :command:`try_compile` for further details)."
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:83
+#: ../../../module/CMAKE_REQUIRED_LIBRARIES.txt:5
 msgid "``CMAKE_REQUIRED_LIBRARIES``"
 msgstr ""
 
-#: ../../../../Modules/CheckFortranFunctionExists.cmake:38
+#: ../../../module/CMAKE_REQUIRED_LIBRARIES.txt:2
 msgid ""
 "A :ref:`;-list <CMake Language Lists>` of libraries to add to the link "
 "command. These can be the name of system libraries or they can be :ref:"
 "`Imported Targets <Imported Targets>` (see :command:`try_compile` for "
 "further details)."
+msgstr ""
+
+#: ../../../module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt:5
+msgid "``CMAKE_REQUIRED_LINK_DIRECTORIES``"
+msgstr ""
+
+#: ../../../module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt:4
+msgid ""
+"A :ref:`;-list <CMake Language Lists>` of libraries search paths to pass to "
+"the linker (see :command:`try_compile` for further details)."
 msgstr ""

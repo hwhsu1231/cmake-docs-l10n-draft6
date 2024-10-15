@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-01 09:11+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -337,9 +337,9 @@ msgstr ""
 #: ../../../../Modules/FindCUDAToolkit.cmake:405
 #: ../../../../Modules/FindCUDAToolkit.cmake:422
 #: ../../../../Modules/FindCUDAToolkit.cmake:436
-#: ../../../../Modules/FindCUDAToolkit.cmake:449
-#: ../../../../Modules/FindCUDAToolkit.cmake:463
-#: ../../../../Modules/FindCUDAToolkit.cmake:489
+#: ../../../../Modules/FindCUDAToolkit.cmake:448
+#: ../../../../Modules/FindCUDAToolkit.cmake:466
+#: ../../../../Modules/FindCUDAToolkit.cmake:492
 msgid "Targets Created:"
 msgstr ""
 
@@ -845,68 +845,76 @@ msgstr ""
 #: ../../../../Modules/FindCUDAToolkit.cmake:446
 msgid ""
 "The `NVIDIA Management Library <https://developer.nvidia.com/management-"
-"library-nvml>`_. This is a shared library only."
+"library-nvml>`_."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:451
+#: ../../../../Modules/FindCUDAToolkit.cmake:450
 msgid "``CUDA::nvml``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:456
+#: ../../../../Modules/FindCUDAToolkit.cmake:451
+msgid "``CUDA::nvml_static`` starting in CUDA 12.4"
+msgstr ""
+
+#: ../../../../Modules/FindCUDAToolkit.cmake:453
+msgid "Added ``CUDA::nvml_static``."
+msgstr ""
+
+#: ../../../../Modules/FindCUDAToolkit.cmake:459
 msgid "nvToolsExt"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:458
+#: ../../../../Modules/FindCUDAToolkit.cmake:461
 msgid "With CUDA 10.0+, use :ref:`nvtx3 <cuda_toolkit_nvtx3>`."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:460
+#: ../../../../Modules/FindCUDAToolkit.cmake:463
 msgid ""
 "The `NVIDIA Tools Extension <https://docs.nvidia.com/nvtx/>`_. This is a "
 "shared library only."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:465
+#: ../../../../Modules/FindCUDAToolkit.cmake:468
 msgid "``CUDA::nvToolsExt``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:470
+#: ../../../../Modules/FindCUDAToolkit.cmake:473
 msgid "nvtx3"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:474
+#: ../../../../Modules/FindCUDAToolkit.cmake:477
 msgid ""
 "The header-only `NVIDIA Tools Extension Library <https://nvidia.github.io/"
 "NVTX/doxygen>`_. Introduced in CUDA 10.0."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:477
+#: ../../../../Modules/FindCUDAToolkit.cmake:480
 msgid "Targets created:"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:479
+#: ../../../../Modules/FindCUDAToolkit.cmake:482
 msgid "``CUDA::nvtx3``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:484
+#: ../../../../Modules/FindCUDAToolkit.cmake:487
 msgid "OpenCL"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:486
+#: ../../../../Modules/FindCUDAToolkit.cmake:489
 msgid ""
 "The `NVIDIA OpenCL Library <https://developer.nvidia.com/opencl>`_. This is "
 "a shared library only."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:491
+#: ../../../../Modules/FindCUDAToolkit.cmake:494
 msgid "``CUDA::OpenCL``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:496
+#: ../../../../Modules/FindCUDAToolkit.cmake:499
 msgid "cuLIBOS"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:498
+#: ../../../../Modules/FindCUDAToolkit.cmake:501
 msgid ""
 "The cuLIBOS library is a backend thread abstraction layer library which is "
 "static only.  The ``CUDA::cublas_static``, ``CUDA::cusparse_static``, "
@@ -914,121 +922,121 @@ msgid ""
 "libraries all automatically have this dependency linked."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:503
+#: ../../../../Modules/FindCUDAToolkit.cmake:506
 msgid "Target Created:"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:505
+#: ../../../../Modules/FindCUDAToolkit.cmake:508
 msgid "``CUDA::culibos``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:507
+#: ../../../../Modules/FindCUDAToolkit.cmake:510
 msgid ""
 "**Note**: direct usage of this target by consumers should not be necessary."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:514
+#: ../../../../Modules/FindCUDAToolkit.cmake:517
 msgid "Result variables"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:517
+#: ../../../../Modules/FindCUDAToolkit.cmake:520
 msgid "``CUDAToolkit_FOUND``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:517
+#: ../../../../Modules/FindCUDAToolkit.cmake:520
 msgid "A boolean specifying whether or not the CUDA Toolkit was found."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:521
+#: ../../../../Modules/FindCUDAToolkit.cmake:524
 msgid "``CUDAToolkit_VERSION``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:520
+#: ../../../../Modules/FindCUDAToolkit.cmake:523
 msgid ""
 "The exact version of the CUDA Toolkit found (as reported by ``nvcc --"
 "version``, ``version.txt``, or ``version.json``)."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:524
+#: ../../../../Modules/FindCUDAToolkit.cmake:527
 msgid "``CUDAToolkit_VERSION_MAJOR``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:524
+#: ../../../../Modules/FindCUDAToolkit.cmake:527
 msgid "The major version of the CUDA Toolkit."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:527
+#: ../../../../Modules/FindCUDAToolkit.cmake:530
 msgid "``CUDAToolkit_VERSION_MINOR``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:527
+#: ../../../../Modules/FindCUDAToolkit.cmake:530
 msgid "The minor version of the CUDA Toolkit."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:530
+#: ../../../../Modules/FindCUDAToolkit.cmake:533
 msgid "``CUDAToolkit_VERSION_PATCH``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:530
+#: ../../../../Modules/FindCUDAToolkit.cmake:533
 msgid "The patch version of the CUDA Toolkit."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:534
+#: ../../../../Modules/FindCUDAToolkit.cmake:537
 msgid "``CUDAToolkit_BIN_DIR``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:533
+#: ../../../../Modules/FindCUDAToolkit.cmake:536
 msgid ""
 "The path to the CUDA Toolkit library directory that contains the CUDA "
 "executable ``nvcc``."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:538
+#: ../../../../Modules/FindCUDAToolkit.cmake:541
 msgid "``CUDAToolkit_INCLUDE_DIRS``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:537
+#: ../../../../Modules/FindCUDAToolkit.cmake:540
 msgid ""
 "List of paths to all the CUDA Toolkit folders containing header files "
 "required to compile a project linking against CUDA."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:542
+#: ../../../../Modules/FindCUDAToolkit.cmake:545
 msgid "``CUDAToolkit_LIBRARY_DIR``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:541
+#: ../../../../Modules/FindCUDAToolkit.cmake:544
 msgid ""
 "The path to the CUDA Toolkit library directory that contains the CUDA "
 "Runtime library ``cudart``."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:548
+#: ../../../../Modules/FindCUDAToolkit.cmake:551
 msgid "``CUDAToolkit_LIBRARY_ROOT``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:547
+#: ../../../../Modules/FindCUDAToolkit.cmake:550
 msgid ""
 "The path to the CUDA Toolkit directory containing the nvvm directory and "
 "either version.txt or version.json."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:553
+#: ../../../../Modules/FindCUDAToolkit.cmake:556
 msgid "``CUDAToolkit_TARGET_DIR``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:551
+#: ../../../../Modules/FindCUDAToolkit.cmake:554
 msgid ""
 "The path to the CUDA Toolkit directory including the target architecture "
 "when cross-compiling. When not cross-compiling this will be equivalent to "
 "the parent directory of ``CUDAToolkit_BIN_DIR``."
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:1383
+#: ../../../../Modules/FindCUDAToolkit.cmake:1410
 msgid "``CUDAToolkit_NVCC_EXECUTABLE``"
 msgstr ""
 
-#: ../../../../Modules/FindCUDAToolkit.cmake:556
+#: ../../../../Modules/FindCUDAToolkit.cmake:559
 msgid ""
 "The path to the NVIDIA CUDA compiler ``nvcc``.  Note that this path may "
 "**not** be the same as :variable:`CMAKE_CUDA_COMPILER "
