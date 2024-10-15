@@ -19,7 +19,7 @@ message("")
 execute_process(
     COMMAND ${Crowdin_EXECUTABLE} upload sources
             --branch ${VERSION}
-            --config ${CROWDIN_YML_PATH}
+            --config ${TMS_CONFIG_FILE_PATH}
             --no-progress
             --verbose
     WORKING_DIRECTORY ${PROJ_L10N_VERSION_DIR}

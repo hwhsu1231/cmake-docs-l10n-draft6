@@ -105,7 +105,7 @@ set(PROJ_OUT_BUILDER_DIR            "${PROJ_OUT_DIR}/${SPHINX_BUILDER}")
 set(PROJ_L10N_DIR                   "${PROJ_SOURCE_DIR}/l10n")
 set(PROJ_L10N_VERSION_DIR           "${PROJ_L10N_DIR}/${VERSION}")
 set(PROJ_L10N_VERSION_LOCALE_DIR    "${PROJ_L10N_VERSION_DIR}/locale")
-set(PROJ_L10N_VERSION_CROWDIN_DIR   "${PROJ_L10N_VERSION_DIR}/.crowdin")
+set(PROJ_L10N_VERSION_TMSTMP_DIR    "${PROJ_L10N_VERSION_DIR}/.tmstmp")
 
 #[============================================================[
   Configuration Files.
@@ -115,7 +115,7 @@ set(LANGUAGES_JSON_PATH             "${PROJ_SOURCE_DIR}/languages.json")
 set(PREV_PACKAGES_TXT_PATH          "${PROJ_VENV_DIR}/prev/packages.txt")
 set(PREV_REFERENCE_TXT_PATH         "${PROJ_VENV_DIR}/prev/reference.txt")
 set(REFERENCES_JSON_PATH            "${PROJ_L10N_VERSION_DIR}/references.json")
-set(CROWDIN_YML_PATH                "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
+set(TMS_CONFIG_FILE_PATH            "${PROJ_L10N_VERSION_DIR}/crowdin.yml")
 set(STATISTIC_TXT_PATH              "${PROJ_L10N_VERSION_DIR}/statistic.txt")
 
 #[============================================================[
@@ -273,7 +273,7 @@ create_git_worktree_for_l10n_branch(
     IN_WORKTREE_PATH    "${PROJ_L10N_DIR}")
 
 #[============================================================[
-  Initialize a references.json file in ${PROJ_L10N_VERSION_DIR}.
+  Initialize ${REFERENCES_JSON_PATH}.
 #]============================================================]
 
 init_references_json_file(
@@ -284,12 +284,12 @@ init_references_json_file(
     IN_LANGUAGE         "${LANGUAGE_LIST}")
 
 #[============================================================[
-  Configure a crowdin.yml file in ${PROJ_L10N_VERSION_DIR}.
+  Configure ${TMS_CONFIG_FILE_PATH}.
 #]============================================================]
 
 configure_file(
     "${PROJ_CMAKE_TEMPLATES_DIR}/crowdin.yml.in"
-    "${CROWDIN_YML_PATH}"
+    "${TMS_CONFIG_FILE_PATH}"
     COPYONLY)
 
 #[============================================================[
@@ -333,13 +333,13 @@ message(STATUS "PROJ_OUT_BUILDER_DIR          = ${PROJ_OUT_BUILDER_DIR}")
 message(STATUS "PROJ_L10N_DIR                 = ${PROJ_L10N_DIR}")
 message(STATUS "PROJ_L10N_VERSION_DIR         = ${PROJ_L10N_VERSION_DIR}")
 message(STATUS "PROJ_L10N_VERSION_LOCALE_DIR  = ${PROJ_L10N_VERSION_LOCALE_DIR}")
-message(STATUS "PROJ_L10N_VERSION_CROWDIN_DIR = ${PROJ_L10N_VERSION_CROWDIN_DIR}")
+message(STATUS "PROJ_L10N_VERSION_TMSTMP_DIR  = ${PROJ_L10N_VERSION_TMSTMP_DIR}")
 message(STATUS "---------- Configuration Files ----------")
 message(STATUS "LANGUAGES_JSON_PATH           = ${LANGUAGES_JSON_PATH}")
 message(STATUS "PREV_PACKAGES_TXT_PATH        = ${PREV_PACKAGES_TXT_PATH}")
 message(STATUS "PREV_REFERENCE_TXT_PATH       = ${PREV_REFERENCE_TXT_PATH}")
 message(STATUS "REFERENCES_JSON_PATH          = ${REFERENCES_JSON_PATH}")
-message(STATUS "CROWDIN_YML_PATH              = ${CROWDIN_YML_PATH}")
+message(STATUS "TMS_CONFIG_FILE_PATH          = ${TMS_CONFIG_FILE_PATH}")
 message(STATUS "STATISTIC_TXT_PATH            = ${STATISTIC_TXT_PATH}")
 message(STATUS "---------- Other Variables ----------")
 message(STATUS "SPHINX_VERBOSE_ARGS           = ${SPHINX_VERBOSE_ARGS}")
@@ -421,13 +421,13 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_L10N_DIR=${PROJ_L10N_DIR}
     -D PROJ_L10N_VERSION_DIR=${PROJ_L10N_VERSION_DIR}
     -D PROJ_L10N_VERSION_LOCALE_DIR=${PROJ_L10N_VERSION_LOCALE_DIR}
-    -D PROJ_L10N_VERSION_CROWDIN_DIR=${PROJ_L10N_VERSION_CROWDIN_DIR}
+    -D PROJ_L10N_VERSION_TMSTMP_DIR=${PROJ_L10N_VERSION_TMSTMP_DIR}
     # [Configuration Files]
     -D LANGUAGES_JSON_PATH=${LANGUAGES_JSON_PATH}
     -D PREV_PACKAGES_TXT_PATH=${PREV_PACKAGES_TXT_PATH}
     -D PREV_REFERENCE_TXT_PATH=${PREV_REFERENCE_TXT_PATH}
     -D REFERENCES_JSON_PATH=${REFERENCES_JSON_PATH}
-    -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
+    -D TMS_CONFIG_FILE_PATH=${TMS_CONFIG_FILE_PATH}
     -D STATISTIC_TXT_PATH=${STATISTIC_TXT_PATH}
     # [Other Variables]
     -D SPHINX_VERBOSE_ARGS=${SPHINX_VERBOSE_ARGS}
@@ -481,16 +481,16 @@ add_custom_target(gettext_statistic_po
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_statistic_po.cmake
     VERBATIM)
 
-add_custom_target(crowdin_upload_pot
+add_custom_target(tms_upload_pot
     COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
             ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_upload_pot.cmake
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tms_upload_pot.cmake
     VERBATIM)
 
-add_custom_target(crowdin_download_po
+add_custom_target(tms_download_po
     COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
             ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/crowdin_download_po.cmake
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tms_download_po.cmake
     VERBATIM)
 
 add_custom_target(gettext_compend_po

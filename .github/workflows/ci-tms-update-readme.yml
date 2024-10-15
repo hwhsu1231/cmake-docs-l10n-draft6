@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: ci-crowdin-document
+name: ci-tms-update-readme
 
 on:
   push:
@@ -69,7 +69,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}
       cancel-in-progress: true
-    uses: ./.github/workflows/use-crowdin-document.yml
+    uses: ./.github/workflows/use-tms-update-readme.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}

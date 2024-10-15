@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: ci-crowdin-upload-pot
+name: ci-tms-upload-pot
 
 on:
   repository_dispatch:
@@ -105,7 +105,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.client_payload.VERSION }}
       cancel-in-progress: true
-    uses: ./.github/workflows/use-crowdin-upload-pot.yml
+    uses: ./.github/workflows/use-tms-upload-pot.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: 'refs/heads/source'
@@ -127,7 +127,7 @@ jobs:
       matrix:
         VERSION: ${{ fromJSON(needs.get-matrix.outputs.VERSION_LIST) }}
       fail-fast: false
-    uses: ./.github/workflows/use-crowdin-upload-pot.yml
+    uses: ./.github/workflows/use-tms-upload-pot.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}
@@ -145,7 +145,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ inputs.VERSION }}
       cancel-in-progress: true
-    uses: ./.github/workflows/use-crowdin-upload-pot.yml
+    uses: ./.github/workflows/use-tms-upload-pot.yml
     with:
       RUNNER: 'ubuntu-latest'
       CHECKOUT: ${{ github.ref }}

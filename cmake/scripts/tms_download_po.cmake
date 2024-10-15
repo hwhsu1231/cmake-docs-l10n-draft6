@@ -33,7 +33,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         COMMAND ${Crowdin_EXECUTABLE} download
                 --language ${_LANGUAGE_CROWDIN}
                 --branch ${VERSION}
-                --config ${CROWDIN_YML_PATH}
+                --config ${TMS_CONFIG_FILE_PATH}
                 --export-only-approved
                 --no-progress
                 --verbose
@@ -45,26 +45,26 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     restore_cmake_message_indent()
 
 
-    message(STATUS "Running 'msgmerge' command to sync translations from crowdin to locale...")
-    set(CROWDIN_PO_DIR  "${PROJ_L10N_VERSION_CROWDIN_DIR}/${_LANGUAGE}")
+    message(STATUS "Running 'msgmerge' command to sync translations from .tmstmp to locale...")
+    set(TMSTMP_PO_DIR   "${PROJ_L10N_VERSION_TMSTMP_DIR}/${_LANGUAGE}")
     set(LOCALE_PO_DIR   "${PROJ_L10N_VERSION_LOCALE_DIR}/${_LANGUAGE}")
     set(LOCALE_POT_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/pot")
     remove_cmake_message_indent()
     message("")
-    message("CROWDIN_PO_DIR = ${CROWDIN_PO_DIR}")
+    message("TMSTMP_PO_DIR  = ${TMSTMP_PO_DIR}")
     message("LOCALE_PO_DIR  = ${LOCALE_PO_DIR}")
     message("LOCALE_POT_DIR = ${LOCALE_POT_DIR}")
     message("")
-    file(GLOB_RECURSE CROWDIN_PO_FILES "${CROWDIN_PO_DIR}/*.po")
-    foreach(CROWDIN_PO_FILE ${CROWDIN_PO_FILES})
-        string(REPLACE "${CROWDIN_PO_DIR}/" "" CROWDIN_PO_FILE_RELATIVE "${CROWDIN_PO_FILE}")
-        set(LOCALE_PO_FILE "${LOCALE_PO_DIR}/${CROWDIN_PO_FILE_RELATIVE}")
-        string(REGEX REPLACE "\\.po$" ".pot" LOCALE_POT_FILE_RELATIVE "${CROWDIN_PO_FILE_RELATIVE}")
+    file(GLOB_RECURSE TMSTMP_PO_FILES "${TMSTMP_PO_DIR}/*.po")
+    foreach(TMSTMP_PO_FILE ${TMSTMP_PO_FILES})
+        string(REPLACE "${TMSTMP_PO_DIR}/" "" TMSTMP_PO_FILE_RELATIVE "${TMSTMP_PO_FILE}")
+        set(LOCALE_PO_FILE "${LOCALE_PO_DIR}/${TMSTMP_PO_FILE_RELATIVE}")
+        string(REGEX REPLACE "\\.po$" ".pot" LOCALE_POT_FILE_RELATIVE "${TMSTMP_PO_FILE_RELATIVE}")
         set(LOCALE_POT_FILE "${LOCALE_POT_DIR}/${LOCALE_POT_FILE_RELATIVE}")
         message("msgmerge:")
         message("  --lang         ${_LANGUAGE}")
         message("  --width        ${GETTEXT_WRAP_WIDTH}")
-        message("  --compendium   ${CROWDIN_PO_FILE}")
+        message("  --compendium   ${TMSTMP_PO_FILE}")
         message("  --output-file  ${LOCALE_PO_FILE}")
         message("  [def.po]       ${LOCALE_POT_FILE}")
         message("  [ref.pot]      ${LOCALE_POT_FILE}")
@@ -72,7 +72,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             COMMAND ${Gettext_MSGMERGE_EXECUTABLE}
                     --lang ${_LANGUAGE}
                     --width ${GETTEXT_WRAP_WIDTH}
-                    --compendium ${CROWDIN_PO_FILE}
+                    --compendium ${TMSTMP_PO_FILE}
                     --output-file ${LOCALE_PO_FILE}
                     ${LOCALE_POT_FILE}  # [def.po]
                     ${LOCALE_POT_FILE}  # [ref.pot]
@@ -89,7 +89,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
             message(FATAL_ERROR "${FAILURE_REASON}")
         endif()
     endforeach()
-    unset(CROWDIN_PO_FILE)
+    unset(TMSTMP_PO_FILE)
     message("")
     restore_cmake_message_indent()
 endforeach()

@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: use-crowdin-upload-pot
+name: use-tms-upload-pot
 
 on:
   workflow_call:
@@ -32,7 +32,7 @@ on:
         required: true
 
 jobs:
-  crowdin-upload-pot:
+  tms-upload-pot:
     if: inputs.ENABLE_JOB
     runs-on: ${{ inputs.RUNNER }}
     steps:
@@ -119,11 +119,11 @@ jobs:
           cache-version-of-doxygen: ${{ steps.gocv.outputs.VERSION_OF_DOXYGEN }}
           cache-version-of-proj: ${{ steps.gocv.outputs.VERSION_OF_PROJ }}
 
-      - name: Build the 'crowdin_upload_pot' target
+      - name: Build the 'tms_upload_pot' target
         uses: ./.github/actions/cmake-build-target
         with:
           source-directory: ${{ github.workspace }}
           preset: 'all'
-          target: 'crowdin_upload_pot'
+          target: 'tms_upload_pot'
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
