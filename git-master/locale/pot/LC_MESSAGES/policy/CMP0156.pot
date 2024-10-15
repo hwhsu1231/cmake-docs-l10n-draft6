@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake git-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,13 @@ msgid ""
 "not been updated to expect the latter behavior."
 msgstr ""
 
-#: ../../../policy/CMP0156.rst:37
+#: ../../../policy/CMP0156.rst:39
+msgid ""
+"When this policy is set to ``NEW``, the policy :policy:`CMP0179` controls "
+"which occurrence of the static libraries is kept when they are de-duplicated."
+msgstr ""
+
+#: ../../../policy/CMP0156.rst:42
 msgid ""
 "The ``OLD`` behavior for this policy is to always repeat static libraries as "
 "if using a traditional linker, and always de-duplicate shared libraries by "
