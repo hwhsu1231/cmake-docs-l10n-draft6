@@ -120,8 +120,8 @@ GitHub Worflows:
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-upload-pot.yml">
-          <img alt="ci-crowdin-upload-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-upload-pot.yml/badge.svg" >
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-upload-pot.yml">
+          <img alt="ci-tms-upload-pot" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-upload-pot.yml/badge.svg" >
         </a>
       </td>
       <td><strong>NONE</strong></td>
@@ -138,8 +138,8 @@ GitHub Worflows:
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-document.yml">
-          <img alt="ci-crowdin-document" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-document.yml/badge.svg" >
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-update-readme.yml">
+          <img alt="ci-tms-update-readme" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-update-readme.yml/badge.svg" >
         </a>
       </td>
       <td><strong>0 0 1,15 * *</strong></td>
@@ -150,8 +150,8 @@ GitHub Worflows:
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-download-po.yml">
-          <img alt="ci-crowdin-download-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-crowdin-download-po.yml/badge.svg" >
+        <a href="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-download-po.yml">
+          <img alt="ci-tms-download-po" src="https://github.com/hwhsu1231/cmake-docs-l10n-draft6/actions/workflows/ci-tms-download-po.yml/badge.svg" >
         </a>
       </td>
       <td><strong>0 0 1,15 * *</strong></td>
