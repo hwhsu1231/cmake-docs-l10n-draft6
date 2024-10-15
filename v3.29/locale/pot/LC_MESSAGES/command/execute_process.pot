@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Options:"
 msgstr ""
 
-#: ../../../command/execute_process.rst:42
+#: ../../../command/execute_process.rst:60
 msgid "``COMMAND``"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgid ""
 "``execute_process`` calls each with a single ``COMMAND`` argument."
 msgstr ""
 
-#: ../../../command/execute_process.rst:62
+#: ../../../command/execute_process.rst:64
 msgid "``WORKING_DIRECTORY``"
 msgstr ""
 
@@ -120,7 +120,7 @@ msgid ""
 "child processes."
 msgstr ""
 
-#: ../../../command/execute_process.rst:66
+#: ../../../command/execute_process.rst:69
 msgid "``TIMEOUT``"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgid ""
 "to a string mentioning the \"timeout\"."
 msgstr ""
 
-#: ../../../command/execute_process.rst:71
+#: ../../../command/execute_process.rst:74
 msgid "``RESULT_VARIABLE``"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgid ""
 "error condition."
 msgstr ""
 
-#: ../../../command/execute_process.rst:76
+#: ../../../command/execute_process.rst:82
 msgid "``RESULTS_VARIABLE <variable>``"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid ""
 "corresponding child or a string describing an error condition."
 msgstr ""
 
-#: ../../../command/execute_process.rst:84
+#: ../../../command/execute_process.rst:86
 msgid "``INPUT_FILE <file>``"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgid ""
 "process."
 msgstr ""
 
-#: ../../../command/execute_process.rst:88
+#: ../../../command/execute_process.rst:90
 msgid "``OUTPUT_FILE <file>``"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgid ""
 "process."
 msgstr ""
 
-#: ../../../command/execute_process.rst:92
+#: ../../../command/execute_process.rst:94
 msgid "``ERROR_FILE <file>``"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid ""
 "then it will be used for both standard output and standard error pipes."
 msgstr ""
 
-#: ../../../command/execute_process.rst:100
+#: ../../../command/execute_process.rst:103
 msgid "``OUTPUT_QUIET``, ``ERROR_QUIET``"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid ""
 "and ``ECHO_*_VARIABLE`` options are not affected."
 msgstr ""
 
-#: ../../../command/execute_process.rst:105
+#: ../../../command/execute_process.rst:108
 msgid "``OUTPUT_VARIABLE``, ``ERROR_VARIABLE``"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgid ""
 "pipes their output will be merged in the order produced."
 msgstr ""
 
-#: ../../../command/execute_process.rst:110
+#: ../../../command/execute_process.rst:117
 msgid "``ECHO_OUTPUT_VARIABLE``, ``ECHO_ERROR_VARIABLE``"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgid ""
 "the CMake process itself."
 msgstr ""
 
-#: ../../../command/execute_process.rst:125
+#: ../../../command/execute_process.rst:131
 msgid "``COMMAND_ECHO <where>``"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgid ""
 "default behavior when this option is not present."
 msgstr ""
 
-#: ../../../command/execute_process.rst:133
+#: ../../../command/execute_process.rst:156
 msgid "``ENCODING <name>``"
 msgstr ""
 
@@ -258,7 +258,7 @@ msgid ""
 "Ignored on other platforms. Valid encoding names are:"
 msgstr ""
 
-#: ../../../command/execute_process.rst:140
+#: ../../../command/execute_process.rst:142
 msgid "``NONE``"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgid ""
 "same way as CMake's internal encoding (UTF-8). This is the default."
 msgstr ""
 
-#: ../../../command/execute_process.rst:144
+#: ../../../command/execute_process.rst:145
 msgid "``AUTO``"
 msgstr ""
 
@@ -294,7 +294,7 @@ msgstr ""
 msgid "Use the original equipment manufacturer (OEM) code page."
 msgstr ""
 
-#: ../../../command/execute_process.rst:151
+#: ../../../command/execute_process.rst:156
 msgid "``UTF8`` or ``UTF-8``"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgid ""
 "ietf.org/rfc/rfc3629>`_ naming convention."
 msgstr ""
 
-#: ../../../command/execute_process.rst:158
+#: ../../../command/execute_process.rst:170
 msgid "``COMMAND_ERROR_IS_FATAL <ANY|LAST>``"
 msgstr ""
 

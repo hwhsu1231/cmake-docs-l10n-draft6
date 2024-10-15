@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "This module defines the following :prop_tgt:`IMPORTED` target:"
 msgstr ""
 
-#: ../../../../Modules/FindGIF.cmake:15
+#: ../../../../Modules/FindGIF.cmake:16
 msgid "``GIF::GIF``"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "the libraries needed to use GIF."
 msgstr ""
 
-#: ../../../../Modules/FindGIF.cmake:29
+#: ../../../../Modules/FindGIF.cmake:30
 msgid "``GIF_VERSION``"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "where to find the GIF headers."
 msgstr ""
 
-#: ../../../../Modules/FindGIF.cmake:39
+#: ../../../../Modules/FindGIF.cmake:40
 msgid "``GIF_LIBRARY``"
 msgstr ""
 

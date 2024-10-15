@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid ""
 "This module looks for Doxygen and some optional tools it supports:"
 msgstr ""
 
-#: ../../../../Modules/FindDoxygen.cmake:11
+#: ../../../../Modules/FindDoxygen.cmake:12
 msgid "``dot``"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgid ""
 "graphs."
 msgstr ""
 
-#: ../../../../Modules/FindDoxygen.cmake:14
+#: ../../../../Modules/FindDoxygen.cmake:15
 msgid "``mscgen``"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgid ""
 "by Doxygen's ``\\msc`` and ``\\mscfile`` commands."
 msgstr ""
 
-#: ../../../../Modules/FindDoxygen.cmake:17
+#: ../../../../Modules/FindDoxygen.cmake:19
 msgid "``dia``"
 msgstr ""
 

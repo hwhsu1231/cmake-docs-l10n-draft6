@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "system has BZip2"
 msgstr ""
 
-#: ../../../../Modules/FindBZip2.cmake:25
+#: ../../../../Modules/FindBZip2.cmake:26
 msgid "``BZIP2_INCLUDE_DIRS``"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "this is set if the functions are prefixed with ``BZ2_``"
 msgstr ""
 
-#: ../../../../Modules/FindBZip2.cmake:32
+#: ../../../../Modules/FindBZip2.cmake:36
 msgid "``BZIP2_VERSION``"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "The following cache variables may also be set:"
 msgstr ""
 
-#: ../../../../Modules/FindBZip2.cmake:43
+#: ../../../../Modules/FindBZip2.cmake:44
 msgid "``BZIP2_INCLUDE_DIR``"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "The following variables are provided for backward compatibility:"
 msgstr ""
 
-#: ../../../../Modules/FindBZip2.cmake:51
+#: ../../../../Modules/FindBZip2.cmake:122
 msgid "``BZIP2_VERSION_STRING``"
 msgstr ""
 

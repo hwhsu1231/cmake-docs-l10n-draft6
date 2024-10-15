@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,7 +494,7 @@ msgid ""
 "installer:"
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:349
+#: ../../../cpack_gen/wix.rst:352
 msgid "``perMachine``"
 msgstr ""
 
@@ -505,7 +505,7 @@ msgid ""
 "users."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:354
+#: ../../../cpack_gen/wix.rst:355
 msgid "``perUser``"
 msgstr ""
 
@@ -513,7 +513,7 @@ msgstr ""
 msgid "Not yet supported. This is reserved for future use."
 msgstr ""
 
-#: ../../../cpack_gen/wix.rst:357
+#: ../../../cpack_gen/wix.rst:377
 msgid "``NONE``"
 msgstr ""
 

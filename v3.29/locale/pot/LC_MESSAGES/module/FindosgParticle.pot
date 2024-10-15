@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "The osgParticle library"
 msgstr ""
 
-#: ../../../../Modules/FindosgParticle.cmake:31
+#: ../../../../Modules/FindosgParticle.cmake:32
 msgid "``OSGPARTICLE_LIBRARY_DEBUG``"
 msgstr ""
 

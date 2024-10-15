@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid ""
 "values:"
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_ROLE.rst:9
+#: ../../../prop_gbl/CMAKE_ROLE.rst:10
 msgid "``PROJECT``"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Running in project mode (processing a ``CMakeLists.txt`` file)."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_ROLE.rst:12
+#: ../../../prop_gbl/CMAKE_ROLE.rst:13
 msgid "``SCRIPT``"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgstr ""
 msgid "Running in ``-P`` script mode."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_ROLE.rst:15
+#: ../../../prop_gbl/CMAKE_ROLE.rst:16
 msgid "``FIND_PACKAGE``"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Running in ``--find-package`` mode."
 msgstr ""
 
-#: ../../../prop_gbl/CMAKE_ROLE.rst:18
+#: ../../../prop_gbl/CMAKE_ROLE.rst:19
 msgid "``CTEST``"
 msgstr ""
 

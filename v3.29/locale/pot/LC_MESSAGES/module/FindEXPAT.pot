@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMake v3.29\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 07:01+0000\n"
+"POT-Creation-Date: 2024-10-15 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "This module defines the following :prop_tgt:`IMPORTED` targets:"
 msgstr ""
 
-#: ../../../../Modules/FindEXPAT.cmake:18
+#: ../../../../Modules/FindEXPAT.cmake:19
 msgid "``EXPAT::EXPAT``"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "the libraries to link against to use Expat."
 msgstr ""
 
-#: ../../../../Modules/FindEXPAT.cmake:30
+#: ../../../../Modules/FindEXPAT.cmake:31
 msgid "``EXPAT_FOUND``"
 msgstr ""
 
