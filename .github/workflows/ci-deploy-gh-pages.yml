@@ -148,6 +148,7 @@ jobs:
       VERSION: ${{ matrix.VERSION }}
       LANGUAGE: ${{ matrix.LANGUAGE }}
       MODE_OF_UPDATE: 'NEVER'
+      BASEURL_HREF: 'https://hwhsu1231.github.io/cmake-docs-l10n-draft6'
       CALLER_JOB: 'matrix (${{ matrix.VERSION }}, ${{ matrix.LANGUAGE }})'
       ENABLE_JOB: true
       DEPLOY_HTML: true
@@ -171,6 +172,7 @@ jobs:
       VERSION: ${{ inputs.VERSION }}
       LANGUAGE: ${{ inputs.LANGUAGE }}
       MODE_OF_UPDATE: 'NEVER'
+      BASEURL_HREF: 'https://hwhsu1231.github.io/cmake-docs-l10n-draft6'
       CALLER_JOB: 'single'
       ENABLE_JOB: true
       DEPLOY_HTML: true

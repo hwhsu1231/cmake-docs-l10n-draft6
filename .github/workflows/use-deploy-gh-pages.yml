@@ -21,6 +21,9 @@ on:
       MODE_OF_UPDATE:
         type: string
         required: true
+      BASEURL_HREF:
+        type: string
+        required: true
       CALLER_JOB:
         type: string
         required: true
@@ -64,6 +67,7 @@ jobs:
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.LANGUAGE = ${{ inputs.LANGUAGE }}"
           echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
+          echo "inputs.BASEURL_HREF = ${{ inputs.BASEURL_HREF }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.DEPLOY_HTML = ${{ inputs.DEPLOY_HTML }}"
@@ -102,8 +106,9 @@ jobs:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
-          cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
           cache-auto-depend: 'OFF'
+          cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
+          cache-baseurl-href: ${{ inputs.BASEURL_HREF }}
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
           cache-version-of-python: ${{ steps.gocv.outputs.VERSION_OF_PYTHON }}
           cache-version-of-sphinx: ${{ steps.gocv.outputs.VERSION_OF_SPHINX }}

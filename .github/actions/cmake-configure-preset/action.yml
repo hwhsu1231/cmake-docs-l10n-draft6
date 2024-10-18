@@ -18,6 +18,14 @@ inputs:
     required: false
     description: 'Value passed to VERSION cache.'
     default: '[default]'
+  cache-auto-depend:
+    required: false
+    description: 'Value passed to AUTO_DEPEND cache.'
+    default: '[default]'
+  cache-remove-redundant:
+    required: false
+    description: 'Value passed to REMOVE_REDUNDANT cache.'
+    default: '[default]'
   cache-mode-of-update:
     required: false
     description: 'Value passed to MODE_OF_UPDATE cache.'
@@ -26,13 +34,9 @@ inputs:
     required: false
     description: 'Value passed to MODE_OF_INSTALL cache.'
     default: '[default]'
-  cache-auto-depend:
+  cache-baseurl-href:
     required: false
-    description: 'Value passed to AUTO_DEPEND cache.'
-    default: '[default]'
-  cache-remove-redundant:
-    required: false
-    description: 'Value passed to REMOVE_REDUNDANT cache.'
+    description: 'Value passed to BASEURL_HREF cache.'
     default: '[default]'
   cache-version-compendium:
     required: false
@@ -54,6 +58,22 @@ inputs:
     required: false
     description: 'Value passed to VERSION_OF_PROJ cache.'
     default: '[default]'
+  cache-sphinx-builder:
+    required: false
+    description: 'Value passed to SPHINX_BUILDER cache.'
+    default: '[default]'
+  cache-sphinx-job-number:
+    required: false
+    description: 'Value passed to GETTEXT_JOB_NUMBER cache.'
+    default: '[default]'
+  cache-sphinx-verbose-level:
+    required: false
+    description: 'Value passed to SPHINX_VERBOSE_LEVEL cache.'
+    default: '[default]'
+  cache-sphinx-console-locale:
+    required: false
+    description: 'Value passed to SPHINX_CONSOLE_LOCALE cache.'
+    default: '[default]'
   cache-gettext-wrap-width:
     required: false
     description: 'Value passed to GETTEXT_WRAP_WIDTH cache.'
@@ -61,22 +81,6 @@ inputs:
   cache-gettext-additional-targets:
     required: false
     description: 'Value passed to GETTEXT_ADDITIONAL_TARGETS cache.'
-    default: '[default]'
-  cache-sphinx-builder:
-    required: false
-    description: 'Value passed to SPHINX_BUILDER cache.'
-    default: '[default]'
-  cache-sphinx-console-locale:
-    required: false
-    description: 'Value passed to SPHINX_CONSOLE_LOCALE cache.'
-    default: '[default]'
-  cache-sphinx-verbose-level:
-    required: false
-    description: 'Value passed to SPHINX_VERBOSE_LEVEL cache.'
-    default: '[default]'
-  cache-sphinx-job-number:
-    required: false
-    description: 'Value passed to GETTEXT_JOB_NUMBER cache.'
     default: '[default]'
 
 runs:
