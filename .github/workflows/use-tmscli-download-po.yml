@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: use-tms-download-po
+name: use-tmscli-download-po
 
 on:
   workflow_call:
@@ -43,7 +43,7 @@ on:
         required: true
 
 jobs:
-  tms-download-po:
+  tmscli-download-po:
     if: inputs.ENABLE_JOB
     runs-on: ${{ inputs.RUNNER }}
     steps:

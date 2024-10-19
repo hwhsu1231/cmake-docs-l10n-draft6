@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: use-tms-update-readme
+name: use-tmscli-update-readme
 
 on:
   workflow_call:
@@ -40,7 +40,7 @@ on:
         required: true
 
 jobs:
-  tms-update-readme:
+  tmscli-update-readme:
     if: inputs.ENABLE_JOB
     runs-on: ${{ inputs.RUNNER }}
     steps:

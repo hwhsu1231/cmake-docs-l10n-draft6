@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.
 # See accompanying file LICENSE.txt for details.
 
-name: use-tms-upload-pot
+name: use-tmscli-upload-pot
 
 on:
   workflow_call:
@@ -32,7 +32,7 @@ on:
         required: true
 
 jobs:
-  tms-upload-pot:
+  tmscli-upload-pot:
     if: inputs.ENABLE_JOB
     runs-on: ${{ inputs.RUNNER }}
     steps:

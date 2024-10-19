@@ -481,22 +481,22 @@ add_custom_target(gettext_statistic_po
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_statistic_po.cmake
     VERBATIM)
 
-add_custom_target(tms_upload_pot
-    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
-            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tms_upload_pot.cmake
-    VERBATIM)
-
-add_custom_target(tms_download_po
-    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
-            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
-            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tms_download_po.cmake
-    VERBATIM)
-
 add_custom_target(gettext_compend_po
     COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
             ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
             -P ${PROJ_CMAKE_SCRIPTS_DIR}/gettext_compend_po.cmake
+    VERBATIM)
+
+add_custom_target(tmscli_upload_pot
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tmscli_upload_pot.cmake
+    VERBATIM)
+
+add_custom_target(tmscli_download_po
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
+            -P ${PROJ_CMAKE_SCRIPTS_DIR}/tmscli_download_po.cmake
     VERBATIM)
 
 add_custom_target(readthedocs_symlinks
