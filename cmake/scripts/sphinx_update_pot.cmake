@@ -58,7 +58,7 @@ message("CURRENT_POT_OBJECT     = ${CURRENT_POT_OBJECT}")
 message("LATEST_POT_REFERENCE   = ${LATEST_POT_REFERENCE}")
 message("CURRENT_POT_REFERENCE  = ${CURRENT_POT_REFERENCE}")
 message("MODE_OF_UPDATE         = ${MODE_OF_UPDATE}")
-message("SWITCH_POT_REFERENCE   = ${SWITCH_POT_REFERENCE}")
+message("UPDATE_POT_REQUIRED    = ${UPDATE_POT_REQUIRED}")
 message("")
 restore_cmake_message_indent()
 
